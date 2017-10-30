@@ -2,7 +2,6 @@ Android
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.UI.TextureSwitch
 70d9a5dfdd92296522528a98d2f5ed68 Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.PenCursor
 0189d52198025e02a31dab4f2f816848 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.TransformGesture
-26599a031f3f9f494b747da8aa2f6a57 Assembly-CSharp.dll:.CreateItem
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -114,6 +113,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 daa565a4bc00993781a7c9f74a405633 Assembly-CSharp.dll:TouchScript.Gestures.FlickGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.TouchManagerInstance
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DragNDrop
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredPinnedTransformGesture
 8fb521876dacf55cac64c8db63926595 Assembly-CSharp.dll:TouchScript.TouchManager
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -170,8 +170,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 6ec273a5fcd8b0a1a1b85b7bebb4a14a Assembly-CSharp.dll:TouchScript.Layers.UI.TouchScriptInputModule
 25cb51b79761cf69e146997ca3f33ce1 Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.MouseCursor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Behaviors.UI.OverHelper
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerControl
 2427cde986b9c1964687738f93a0f5bf Assembly-CSharp.dll:TouchScript.Gestures.TapGesture
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.World
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.PinnedTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.LayerManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GrowingLightEffect
+dfca2b0820b38c78111630cc715cec56 Assembly-CSharp.dll:.SelectItemObject

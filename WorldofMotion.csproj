@@ -486,11 +486,11 @@
     <Compile Include="Assets\OpenCVForUnity\org\opencv_contrib\xphoto\WhiteBalancer.cs" />
     <Compile Include="Assets\OpenCVForUnity\org\opencv_contrib\xphoto\Xphoto.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\CreateItem.cs" />
+    <Compile Include="Assets\Scripts\DragNDrop.cs" />
     <Compile Include="Assets\Scripts\DrawAxisLine.cs" />
-    <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\GrowingLightEffect.cs" />
+    <Compile Include="Assets\Scripts\SelectItemObject.cs" />
     <Compile Include="Assets\Scripts\UIManagerScript.cs" />
-    <Compile Include="Assets\Scripts\World.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\CursorManager.cs" />
     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\MouseCursor.cs" />
