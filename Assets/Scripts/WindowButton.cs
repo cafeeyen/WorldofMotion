@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
 
-public class MenuButton : MonoBehaviour
+public class WindowButton : MonoBehaviour
 {
     public Animator anim;
+    public UIController uiController;
     private TapGesture gesture;
 
     private void OnEnable()
@@ -22,6 +23,9 @@ public class MenuButton : MonoBehaviour
         if (anim.GetBool("IsDisplayed") == true)
             anim.SetBool("IsDisplayed", false);
         else
+        {
             anim.SetBool("IsDisplayed", true);
+            uiController.changeState(anim);
+        }
     }
 }

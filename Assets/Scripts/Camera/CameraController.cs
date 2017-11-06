@@ -9,10 +9,11 @@ public class CameraController : MonoBehaviour
     public Transform cam;
     public ScreenTransformGesture MoveGesture;
     public ScreenTransformGesture MultiTouchGesture;
+    public AxisTransition axisTransition;
 
-    public float moveSpeed = 0.1f;
-    public float rotateSpeed = 100f;
-    public float zoomSpeed = 50f;
+    private float moveSpeed = 0.1f;
+    private float rotateSpeed = 100f;
+    private float zoomSpeed = 50f;
 
     private void OnEnable()
     {
@@ -30,6 +31,7 @@ public class CameraController : MonoBehaviour
     {
         // Move camera
         pivot.localPosition += cam.rotation * MoveGesture.DeltaPosition * -moveSpeed;
+        getDistance();
     }
 
     private void multiTouchHandler(object sender, System.EventArgs e)
@@ -42,6 +44,18 @@ public class CameraController : MonoBehaviour
 
         // Zoom camera
         cam.localPosition += Vector3.forward * (MultiTouchGesture.DeltaScale - 1f) * zoomSpeed;
+        getDistance();
+    }
+
+    private void getDistance()
+    {
+        /* Not ready to use
+        // Get distance betweem camera and axis in world space
+        float zoom = Vector3.Distance(cam.position, axisTransition.transform.position);
+        Debug.Log(zoom);
+        if(axisTransition.isActiveAndEnabled)
+            axisTransition.updateScale(zoom);
+        */
     }
 
 }

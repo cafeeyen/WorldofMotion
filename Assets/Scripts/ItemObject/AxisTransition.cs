@@ -45,4 +45,16 @@ public class AxisTransition : MonoBehaviour
         transform.localPosition = pos;
         curPos = pos;
     }
+
+    public void updateScale(float zoom)
+    {
+        /* Not ready to use
+        axisX.transform.localScale = new Vector3(zoom / 10, zoom / 4, zoom / 10);
+        //axisX.transform.localPosition = new Vector3(10 + (zoom / 5), zoom, zoom / 5);
+
+        axisY.transform.localScale = new Vector3(zoom / 10, zoom / 4, zoom / 10);
+
+        //axisZ.transform.localScale = new Vector3(zoom / 10, zoom / 4, zoom / 10);
+        */
+    }
 }
