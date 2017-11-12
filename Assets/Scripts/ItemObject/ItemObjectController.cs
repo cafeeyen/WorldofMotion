@@ -3,6 +3,8 @@
 public class ItemObjectController : MonoBehaviour
 {
     public Material growMat;
+    public UIController UIcon;
+    public PropWindow propWin;
 
     private GameObject axisTransition;
     private GameObject selectedItemObject;
@@ -60,8 +62,11 @@ public class ItemObjectController : MonoBehaviour
             itemObject.GetComponent<DragNDrop>().enabled = true;
             itemObject.GetComponent<DragNDrop>().setAxisTransition(axisTransition);
             axisTransition.SetActive(true);
-            axisTransition.transform.localScale = itemObject.transform.localScale / 10;
+            /* Axis scale not ready yet*/
+            //axisTransition.transform.localScale = itemObject.transform.localScale / 10;
             axisTransition.GetComponent<AxisTransition>().setSelectedItemObject(itemObject);
+            UIcon.setSelectedItemObject(itemObject);
+            propWin.setSelectedItemObject(itemObject);
         }
     }
 }
