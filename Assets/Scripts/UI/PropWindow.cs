@@ -15,6 +15,7 @@ public class PropWindow : MonoBehaviour
 
     private GameObject selectedItemObject;
     private TapGesture gesture;
+    private bool changeState = false;
 
     private void OnEnable()
     {
@@ -65,6 +66,8 @@ public class PropWindow : MonoBehaviour
 
     public void setSelectedItemObject(GameObject itemObject)
     {
+        // Start change state so slider won't change ItemObject scale while set value from new ItemObject
+        changeState = true;
         selectedItemObject = itemObject;
         sliderX.value = itemObject.transform.localScale.x / 10;
         sliderY.value = itemObject.transform.localScale.y / 10;
@@ -74,11 +77,14 @@ public class PropWindow : MonoBehaviour
         gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
         breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
         player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
+        // Finish change, cancel change state
+        changeState = false;
     }
 
     private void changeSlideValue(float value)
     {
-        selectedItemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+        if(!changeState)
+            selectedItemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
         // Change scale text;
         scaleX.text = sliderX.value.ToString();
         scaleY.text = sliderY.value.ToString();
