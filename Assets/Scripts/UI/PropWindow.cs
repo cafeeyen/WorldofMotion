@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TouchScript.Gestures;
 
-public class PropWindow : MonoBehaviour
+public class PropWindow : Observer
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ;
     public Slider sliderX, sliderY, sliderZ;
@@ -12,14 +12,13 @@ public class PropWindow : MonoBehaviour
      For type properties(mass, friction, flexibility)
      */
     public Toggle gravity, gyro, breakable, player;
+    public TapGesture gesture;
 
-    private GameObject selectedItemObject;
-    private TapGesture gesture;
+    private GameObject ItemObject;
     private bool changeState = false;
 
     private void OnEnable()
     {
-        gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
         sliderX.onValueChanged.AddListener(changeSlideValue);
@@ -46,12 +45,12 @@ public class PropWindow : MonoBehaviour
 
     void Update ()
     {
-        if(selectedItemObject != null)
+        if(ItemObject != null)
         {
             // Change position text
-            posX.text = "X : " + selectedItemObject.transform.position.x;
-            posY.text = "Y : " + selectedItemObject.transform.position.y;
-            posZ.text = "Z : " + selectedItemObject.transform.position.z;
+            posX.text = "X : " + ItemObject.transform.position.x;
+            posY.text = "Y : " + ItemObject.transform.position.y;
+            posZ.text = "Z : " + ItemObject.transform.position.z;
         }
     }
 
@@ -64,11 +63,11 @@ public class PropWindow : MonoBehaviour
         }
     }
 
-    public void setSelectedItemObject(GameObject itemObject)
+    public override void selectedItemObject(GameObject itemObject)
     {
         // Start change state so slider won't change ItemObject scale while set value from new ItemObject
         changeState = true;
-        selectedItemObject = itemObject;
+        ItemObject = itemObject;
         sliderX.value = itemObject.transform.localScale.x / 10;
         sliderY.value = itemObject.transform.localScale.y / 10;
         sliderZ.value = itemObject.transform.localScale.z / 10;
@@ -84,7 +83,7 @@ public class PropWindow : MonoBehaviour
     private void changeSlideValue(float value)
     {
         if(!changeState)
-            selectedItemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+            ItemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
         // Change scale text;
         scaleX.text = sliderX.value.ToString();
         scaleY.text = sliderY.value.ToString();
@@ -92,10 +91,10 @@ public class PropWindow : MonoBehaviour
     }
 
     // Tapped send state before trigger
-    private void toggleGravity(bool state) { selectedItemObject.GetComponent<ItemObject>().IsGravity = state; }
-    private void toggleGyro(bool state) { selectedItemObject.GetComponent<ItemObject>().IsGyro = state; }
-    private void toggleBreakable(bool state) { selectedItemObject.GetComponent<ItemObject>().IsBreakable = state; }
-    private void togglePlayer(bool state) { selectedItemObject.GetComponent<ItemObject>().IsPlayer = state; }
+    private void toggleGravity(bool state) { ItemObject.GetComponent<ItemObject>().IsGravity = state; }
+    private void toggleGyro(bool state) { ItemObject.GetComponent<ItemObject>().IsGyro = state; }
+    private void toggleBreakable(bool state) { ItemObject.GetComponent<ItemObject>().IsBreakable = state; }
+    private void togglePlayer(bool state) { ItemObject.GetComponent<ItemObject>().IsPlayer = state; }
 
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
@@ -103,12 +102,11 @@ public class PropWindow : MonoBehaviour
         // 1 is Left, -1 is Right
         if(deg30.isOn)
         {
-            selectedItemObject.transform.Rotate(Vector3.up, 30 * dir);
+            ItemObject.transform.Rotate(Vector3.up, 30 * dir);
         }
         else // deg45.isOn
         {
-            selectedItemObject.transform.Rotate(Vector3.up, 45 * dir);
+            ItemObject.transform.Rotate(Vector3.up, 45 * dir);
         }
     }
-
 }

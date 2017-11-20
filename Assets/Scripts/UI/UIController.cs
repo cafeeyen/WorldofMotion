@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
+using System;
 
-public class UIController : MonoBehaviour
+public class UIController : Observer
 {
     public Animator menu, item, prop;
 
-    private GameObject selectedItemObject;
+    private GameObject ItemObject;
     private TapGesture gesture;
 
     private void OnEnable()
@@ -32,7 +33,7 @@ public class UIController : MonoBehaviour
         if (anim.GetBool("IsDisplayed") == true)
             anim.SetBool("IsDisplayed", false);
         // PropBar can open when some ItemObject has selected
-        else if(anim.name != "PropBar" || selectedItemObject != null)
+        else if(anim.name != "PropBar" || ItemObject != null)
         {
             anim.SetBool("IsDisplayed", true);
             changeState(anim);
@@ -58,8 +59,8 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void setSelectedItemObject(GameObject itemObject)
+    public override void selectedItemObject(GameObject itemObject)
     {
-        selectedItemObject = itemObject;
+        ItemObject = itemObject;
     }
 }
