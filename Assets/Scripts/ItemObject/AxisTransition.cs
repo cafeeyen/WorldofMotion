@@ -5,7 +5,7 @@ public class AxisTransition : MonoBehaviour
 {
     private TransformGesture axisX, axisY, axisZ;
     private Vector3 curPos;
-    private GameObject selectedItemObject;
+    private GameObject itemObject;
 
     private void OnEnable()
     {
@@ -25,17 +25,19 @@ public class AxisTransition : MonoBehaviour
         axisZ.Transformed -= transfromMoveHandler;
     }
 
+    private void Update() {}
+
     private void transfromMoveHandler(object sender, System.EventArgs e)
     {
 
         curPos += transform.rotation * new Vector3(axisX.DeltaPosition.x, axisY.DeltaPosition.y, axisZ.DeltaPosition.z);
         transform.localPosition = new Vector3(Mathf.Round(curPos.x / 10) * 10, Mathf.Round(curPos.y / 10) * 10, Mathf.Round(curPos.z / 10) * 10);
-        selectedItemObject.GetComponent<DragNDrop>().updatePosition(transform.localPosition);
+        itemObject.GetComponent<DragNDrop>().updatePosition(transform.localPosition);
     }
 
-    public void setSelectedItemObject(GameObject itemObject)
+    public void setItemObject(GameObject selectedItemObject)
     {
-        selectedItemObject = itemObject;
+        itemObject = selectedItemObject;
         updatePosition(itemObject.transform.localPosition);
     }
 
