@@ -1,0 +1,21 @@
+﻿using UnityEngine;
+
+public abstract class SurfaceType : ScriptableObject
+{
+    // Parameters
+    protected string typeName = "";
+    protected Material surMat;
+    protected PhysicMaterial phyMat;
+
+    // Methods
+    protected void setBaseValue()
+    {
+        surMat = (Material)Resources.Load("Materials/" + typeName + "Mat", typeof(Material));
+        phyMat = (PhysicMaterial)Resources.Load("PhysicMaterials/" + typeName + "Phy", typeof(PhysicMaterial));
+    }
+
+    public string getName() { return typeName; }
+    public float getDynamicFiction() { return phyMat.dynamicFriction; }
+    public float getStaticFiction() { return phyMat.staticFriction; }
+    public Material getSurMat() { return surMat; }
+}

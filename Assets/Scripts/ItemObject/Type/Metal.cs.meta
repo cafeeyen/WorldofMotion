@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a14b644162060b94a8bb5e4176b06e46
+timeCreated: 1511348465
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - surMat: {fileID: 2100000, guid: 91ac6bd69009b3a4185b747c41d6a0b0, type: 2}
+  - phyMat: {fileID: 13400000, guid: 7538a6cf27faf1b4989877a6eb465cc8, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
