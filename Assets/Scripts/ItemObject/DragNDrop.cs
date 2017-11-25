@@ -6,12 +6,14 @@ public class DragNDrop : MonoBehaviour
     private TransformGesture gesture;
     private Vector3 curPos;
     private GameObject axisTransition;
+    private Rigidbody rb;
 
     private void OnEnable()
     {
         gesture = GetComponent<TransformGesture>();
         curPos = transform.localPosition;
         gesture.Transformed += transfromMoveHandler;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnDisable()
@@ -22,8 +24,7 @@ public class DragNDrop : MonoBehaviour
     private void transfromMoveHandler(object sender, System.EventArgs e)
     {
         curPos += axisTransition.transform.rotation * gesture.DeltaPosition;
-        // Set block 1(app):10(Unity)
-        transform.localPosition = new Vector3(Mathf.Round(curPos.x / 10) * 10, Mathf.Round(curPos.y / 10) * 10, Mathf.Round(curPos.z / 10) * 10);
+        rb.MovePosition(new Vector3(Mathf.Round(curPos.x * 100) / 100, Mathf.Round(curPos.y * 100) / 100, Mathf.Round(curPos.z * 100) / 100));
         axisTransition.GetComponent<AxisTransition>().updatePosition(transform.localPosition);
     }
 
@@ -35,7 +36,7 @@ public class DragNDrop : MonoBehaviour
     public void updatePosition(Vector3 pos)
     {
         // Update position from axis
-        transform.localPosition = pos;
+        rb.MovePosition(pos);
         curPos = pos;
     }
 }

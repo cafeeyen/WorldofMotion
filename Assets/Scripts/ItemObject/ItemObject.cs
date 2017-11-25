@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
+using System.Collections.Generic;
 
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
     private ItemObjectController ItemCon;
     private SurfaceType surType;
     private int mass;
-    private bool gravity, gyro, breakable, player;
+    private bool gravity, gyro, breakable, player, overlapping;
     private Renderer baseRenderer;
     private Material baseMat;
     private TapGesture gesture;
+    private Rigidbody rb;
+    private Collider collide;
+    private List<Collider> collideList = new List<Collider>();
 
-    void Start ()
+    void Awake()
     {
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
         surType = ItemCon.getFactory().getSurType("Wood");
@@ -19,9 +23,14 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         gyro = false;
         player = false;
         breakable = false;
+        overlapping = false;
 
         baseRenderer = transform.GetComponent<Renderer>();
+        baseRenderer.material = surType.getSurMat();
         baseMat = baseRenderer.material;
+
+        rb = GetComponent<Rigidbody>();
+        collide = GetComponent<Collider>();
     }
 
     private void OnEnable()
@@ -39,9 +48,40 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         // Observe by ItemObjectController
         ItemCon.setItemObject(gameObject);
+        collide.isTrigger = true;
     }
 
-    public string getSurType() { return surType.getName(); }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "ItemObject")
+        {
+            if(!collideList.Contains(other))
+                collideList.Add(other);
+
+            if(!overlapping)
+            {
+                overlapping = true;
+                ItemCon.changeGrowColor();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "ItemObject")
+        {
+            if (collideList.Contains(other))
+                collideList.Remove(other);
+
+            if(collideList.Count == 0)
+            {
+                overlapping = false;
+                ItemCon.changeGrowColor();
+            }
+        }
+    }
+
+    public SurfaceType getSurType() { return surType; }
     public void setSurType(string st_name)
     {
         surType = ItemCon.getFactory().getSurType(st_name);
@@ -54,4 +94,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     public bool IsPlayer { get { return player; } set { player = value; } }
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
+    public bool IsOverlap { get { return overlapping; } }
+    public Collider Collider { get { return collide; } }
+    public float Mass { get { return rb.mass; } }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PropWindow : MonoBehaviour
 {
-    public Text posX, posY, posZ, scaleX, scaleY, scaleZ;
+    public Text posX, posY, posZ, scaleX, scaleY, scaleZ, mass, staticfic, dynamicfic;
     public Slider sliderX, sliderY, sliderZ;
 
     private GameObject itemObject;
@@ -21,7 +21,6 @@ public class PropWindow : MonoBehaviour
     {
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
-        //selectedType = type.ActiveToggles().GetEnumerator();
 
         sliderX.onValueChanged.AddListener(changeSlideValue);
         sliderY.onValueChanged.AddListener(changeSlideValue);
@@ -76,6 +75,7 @@ public class PropWindow : MonoBehaviour
             if (selectedType != currentType && !changeState)
             {
                 itemObject.GetComponent<ItemObject>().setSurType(currentType);
+                changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
                 selectedType = currentType;
             }
         }
@@ -83,10 +83,13 @@ public class PropWindow : MonoBehaviour
 
     private void tapHandler(object sender, System.EventArgs e)
     {
-        switch(gesture.GetScreenPositionHitData().Target.name)
+        if(gesture.GetScreenPositionHitData().Target != null)
         {
-            case "RotateLeft": rotate(1); break;
-            case "RotateRight": rotate(-1); break;
+            switch (gesture.GetScreenPositionHitData().Target.name)
+            {
+                case "RotateLeft": rotate(1); break;
+                case "RotateRight": rotate(-1); break;
+            }
         }
     }
 
@@ -100,7 +103,8 @@ public class PropWindow : MonoBehaviour
         sliderY.value = itemObject.transform.localScale.y / 10;
         sliderZ.value = itemObject.transform.localScale.z / 10;
 
-        selectedType = itemObject.GetComponent<ItemObject>().getSurType().ToString();
+        ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
+        selectedType = itemObjectSc.getSurType().getName();
         switch(selectedType)
         {
             case "Wood": st_wood.isOn = true; break;
@@ -109,12 +113,21 @@ public class PropWindow : MonoBehaviour
             case "Rubber": st_rubber.isOn = true; break;
         }
 
+        mass.text = itemObjectSc.Mass.ToString();
+        changeFriction(itemObjectSc.getSurType());
+
         e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
         e_gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
         e_breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
         e_player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
         // Finish change, cancel change state
         changeState = false;
+    }
+
+    private void changeFriction(SurfaceType surType)
+    {
+        staticfic.text = surType.getStaticFiction().ToString();
+        dynamicfic.text = surType.getDynamicFiction().ToString();
     }
 
     private void changeSlideValue(float value)
@@ -141,7 +154,7 @@ public class PropWindow : MonoBehaviour
         {
             itemObject.transform.Rotate(Vector3.up, 30 * dir);
         }
-        else // r_deg45.isOn
+        else if(r_deg45.isOn)
         {
             itemObject.transform.Rotate(Vector3.up, 45 * dir);
         }
