@@ -31,7 +31,7 @@ public class AxisTransition : MonoBehaviour
     {
 
         curPos += transform.rotation * new Vector3(axisX.DeltaPosition.x, axisY.DeltaPosition.y, axisZ.DeltaPosition.z);
-        transform.localPosition = new Vector3(Mathf.Round(curPos.x / 10) * 10, Mathf.Round(curPos.y / 10) * 10, Mathf.Round(curPos.z / 10) * 10);
+        transform.localPosition = new Vector3(Mathf.Round(curPos.x * 100) / 100, Mathf.Round(curPos.y * 100) / 100, Mathf.Round(curPos.z * 100) / 100);
         itemObject.GetComponent<DragNDrop>().updatePosition(transform.localPosition);
     }
 

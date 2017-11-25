@@ -2,7 +2,6 @@
 
 public class ItemObjectController : MonoBehaviour
 {
-    public Material growMat;
     public GameObject axisTransition;
 
     // We control only one ItemObject at the same time
@@ -12,11 +11,15 @@ public class ItemObjectController : MonoBehaviour
     private PropWindow propWin;
     private UIController UICon;
     private static SurfaceTypeFactory surTypeFac;
+    private float emission;
+    private Color finalColor, growColor;
+    private Material growMat;
 
-    private void Start()
+    private void Awake()
     {
         propWin = GameObject.Find("PropWindow").GetComponent<PropWindow>();
         UICon = GameObject.Find("Canvas").GetComponent<UIController>();
+        growMat = (Material)Resources.Load("Materials/GrowMat", typeof(Material));
     }
 
     private void Update()
@@ -24,28 +27,30 @@ public class ItemObjectController : MonoBehaviour
         if(itemObject != null)
         {
             // Use base color as emission base color
-            float emission = Mathf.PingPong(Time.time, 1.0f);
-            Color finalColor = itemObjectSc.BaseMat.color * emission;
+            emission = Mathf.PingPong(Time.time, 1.0f);
+            finalColor = growColor * emission;
             growMat.SetColor("_EmissionColor", finalColor);
         }
     }
 
     public void setItemObject(GameObject selectedItemObject)
     {
-        // Make sure this is not duplicate tap to same object
-        if (itemObject != selectedItemObject)
+        // Make sure this is not duplicate tap to same object, and not overlap with another object
+        if (itemObject != selectedItemObject && (itemObjectSc == null || !itemObjectSc.IsOverlap))
         {
             // Reset old ItemObject to base material | disable drag and drop
             if (itemObject != null)
             {
                 itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
                 itemObject.GetComponent<DragNDrop>().enabled = false;
+                itemObjectSc.Collider.isTrigger = false;
             }
 
             itemObject = selectedItemObject;
             itemObjectSc = itemObject.GetComponent<ItemObject>();
 
             changeGrowMaterialTexture();
+            changeGrowColor();
 
             // Change material to grow material | enable drag and drop
             itemObjectSc.BaseRenderer.material = growMat;
@@ -85,5 +90,13 @@ public class ItemObjectController : MonoBehaviour
         // Get material from Itemobject and set color to grow material
         growMat.SetTexture("_MainTex", itemObjectSc.BaseMat.mainTexture);
         growMat.SetColor("_Color", new Color(itemObjectSc.BaseMat.color.r, itemObjectSc.BaseMat.color.g, itemObjectSc.BaseMat.color.b, itemObjectSc.BaseMat.color.a));
+    }
+
+    public void changeGrowColor()
+    {
+        if (itemObjectSc.IsOverlap)
+            growColor = Color.red;
+        else
+            growColor = itemObjectSc.BaseMat.color;
     }
 }

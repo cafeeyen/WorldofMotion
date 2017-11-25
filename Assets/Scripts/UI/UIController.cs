@@ -6,11 +6,14 @@ public class UIController : MonoBehaviour
     public Animator menu, item, prop;
     private TapGesture gesture;
     private GameObject itemObject;
+    private ItemObjectController itemCon;
 
     private void OnEnable()
     {
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
+
+        itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
     }
 
     private void OnDisable()
@@ -62,5 +65,19 @@ public class UIController : MonoBehaviour
     public void setItemObject(GameObject selectedItemObject)
     {
         itemObject = selectedItemObject;
+    }
+
+    public void createItemObject(GameObject prefeb)
+    {
+        // Can't create new one while current one is overlapping
+        if(itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
+        {
+            // Spawn at center of screen,  distance 80
+            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 80));
+            Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x / 10) * 10, Mathf.Round(screenPosition.y / 10) * 10, Mathf.Round(screenPosition.z / 10) * 10);
+            GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
+
+           itemCon.setItemObject(newItemObject);
+        }
     }
 }
