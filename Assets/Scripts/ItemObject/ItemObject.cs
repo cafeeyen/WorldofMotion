@@ -53,7 +53,8 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "ItemObject")
+        // Check when selected only
+        if (other.tag == "ItemObject" && ItemCon.getCurrentObject() == gameObject)
         {
             if(!collideList.Contains(other))
                 collideList.Add(other);

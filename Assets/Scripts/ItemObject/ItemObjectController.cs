@@ -3,6 +3,7 @@
 public class ItemObjectController : MonoBehaviour
 {
     public GameObject axisTransition;
+    public Animator propBar;
 
     // We control only one ItemObject at the same time
     // Share with PropWindow, UIController and AxisTransition
@@ -35,37 +36,44 @@ public class ItemObjectController : MonoBehaviour
 
     public void setItemObject(GameObject selectedItemObject)
     {
-        // Make sure this is not duplicate tap to same object, and not overlap with another object
-        if (itemObject != selectedItemObject && (itemObjectSc == null || !itemObjectSc.IsOverlap))
+        // Check if current object is not overlapping of no object is selected
+        if(itemObjectSc == null || !itemObjectSc.IsOverlap)
         {
-            // Reset old ItemObject to base material | disable drag and drop
-            if (itemObject != null)
+            // If tap new object -> select new object | tap old object -> cancle select this object
+            if (itemObject != selectedItemObject)
             {
-                itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
-                itemObject.GetComponent<DragNDrop>().enabled = false;
-                itemObjectSc.Collider.isTrigger = false;
+                // Reset old ItemObject to base material | disable drag and drop
+                if (itemObject != null)
+                    cancleSelectObject();
+
+                itemObject = selectedItemObject;
+                itemObjectSc = itemObject.GetComponent<ItemObject>();
+
+                changeGrowMaterialTexture();
+                changeGrowColor();
+
+                // Change material to grow material | enable drag and drop
+                itemObjectSc.BaseRenderer.material = growMat;
+                itemObject.GetComponent<DragNDrop>().enabled = true;
+                itemObject.GetComponent<DragNDrop>().setAxisTransition(axisTransition);
+
+                // Set active and update axis position
+                axisTransition.SetActive(true);
+                axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
+
+                // Trigger change state in PropWindow
+                propWin.setPropValue(itemObject);
+
+                // Send object to UI Controller
+                UICon.setItemObject(itemObject);
             }
-
-            itemObject = selectedItemObject;
-            itemObjectSc = itemObject.GetComponent<ItemObject>();
-
-            changeGrowMaterialTexture();
-            changeGrowColor();
-
-            // Change material to grow material | enable drag and drop
-            itemObjectSc.BaseRenderer.material = growMat;
-            itemObject.GetComponent<DragNDrop>().enabled = true;
-            itemObject.GetComponent<DragNDrop>().setAxisTransition(axisTransition);
-
-            // Set active and update axis position
-            axisTransition.SetActive(true);
-            axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
-
-            // Trigger change state in PropWindow
-            propWin.setPropValue(itemObject);
-
-            // Send object to UI Controller
-            UICon.setItemObject(itemObject);
+            else
+            {
+                cancleSelectObject();
+                UICon.setItemObject(null);
+                UICon.displayWindows(propBar);
+                itemObject = null;
+            }
         }
     }
 
@@ -73,9 +81,17 @@ public class ItemObjectController : MonoBehaviour
     {
         if (itemObject != null)
         {
-            axisTransition.SetActive(false);
+            cancleSelectObject();
             Destroy(itemObject);
         }
+    }
+
+    private void cancleSelectObject()
+    {
+        itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
+        itemObject.GetComponent<DragNDrop>().enabled = false;
+        itemObjectSc.Collider.isTrigger = false;
+        axisTransition.SetActive(false);
     }
 
     public SurfaceTypeFactory getFactory()
@@ -99,4 +115,6 @@ public class ItemObjectController : MonoBehaviour
         else
             growColor = itemObjectSc.BaseMat.color;
     }
+
+    public GameObject getCurrentObject() { return itemObject; }
 }
