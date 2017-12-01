@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
-using System.Collections.Generic;
+using System.Linq;
 
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
@@ -12,8 +12,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
-    private Collider collide;
-    private List<Collider> collideList = new List<Collider>();
 
     void Awake()
     {
@@ -30,7 +28,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         baseMat = baseRenderer.material;
 
         rb = GetComponent<Rigidbody>();
-        collide = GetComponent<Collider>();
     }
 
     private void OnEnable()
@@ -48,33 +45,23 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         // Observe by ItemObjectController
         ItemCon.setItemObject(gameObject);
-        collide.isTrigger = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void checkCollider()
     {
-        // Check when selected only
-        if (other.tag == "ItemObject" && ItemCon.getCurrentObject() == gameObject)
+        Collider[] colliders = Physics.OverlapBox(transform.localPosition, transform.localScale / 2, transform.localRotation);
+        Collider last = colliders.Last();
+        foreach (Collider col in colliders)
         {
-            if(!collideList.Contains(other))
-                collideList.Add(other);
-
-            if(!overlapping)
+            // OverlapBox detect self collider, check transfrom(position and etc.) to make sure this is not itself
+            if (col.CompareTag("ItemObject") && col.transform!=transform)
             {
                 overlapping = true;
                 ItemCon.changeGrowColor();
+                break;
             }
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "ItemObject")
-        {
-            if (collideList.Contains(other))
-                collideList.Remove(other);
-
-            if(collideList.Count == 0)
+            if(col == last)
             {
                 overlapping = false;
                 ItemCon.changeGrowColor();
@@ -96,6 +83,5 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
-    public Collider Collider { get { return collide; } }
     public float Mass { get { return rb.mass; } }
 }

@@ -66,9 +66,9 @@ public class PropWindow : MonoBehaviour
         if(itemObject != null)
         {
             // Change position text
-            posX.text = "X : " + itemObject.transform.position.x;
-            posY.text = "Y : " + itemObject.transform.position.y;
-            posZ.text = "Z : " + itemObject.transform.position.z;
+            posX.text = "X : " + Mathf.Round(itemObject.transform.position.x * 100) / 100;
+            posY.text = "Y : " + Mathf.Round(itemObject.transform.position.y * 100) / 100;
+            posZ.text = "Z : " + Mathf.Round(itemObject.transform.position.z * 100) / 100;
 
             // Check type toggle
             currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
@@ -96,32 +96,34 @@ public class PropWindow : MonoBehaviour
     public void setPropValue(GameObject selectedItemObject)
     {
         itemObject = selectedItemObject;
-
-        // Start change state so slider won't change itemObject scale while set value from new itemObject
-        changeState = true;
-        sliderX.value = itemObject.transform.localScale.x / 10;
-        sliderY.value = itemObject.transform.localScale.y / 10;
-        sliderZ.value = itemObject.transform.localScale.z / 10;
-
-        ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
-        selectedType = itemObjectSc.getSurType().getName();
-        switch(selectedType)
+        if(itemObject != null)
         {
-            case "Wood": st_wood.isOn = true; break;
-            case "Metal": st_metal.isOn = true; break;
-            case "Ice": st_ice.isOn = true; break;
-            case "Rubber": st_rubber.isOn = true; break;
+            // Start change state so slider won't change itemObject scale while set value from new itemObject
+            changeState = true;
+            sliderX.value = itemObject.transform.localScale.x / 10;
+            sliderY.value = itemObject.transform.localScale.y / 10;
+            sliderZ.value = itemObject.transform.localScale.z / 10;
+
+            ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
+            selectedType = itemObjectSc.getSurType().getName();
+            switch (selectedType)
+            {
+                case "Wood": st_wood.isOn = true; break;
+                case "Metal": st_metal.isOn = true; break;
+                case "Ice": st_ice.isOn = true; break;
+                case "Rubber": st_rubber.isOn = true; break;
+            }
+
+            mass.text = itemObjectSc.Mass.ToString();
+            changeFriction(itemObjectSc.getSurType());
+
+            e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
+            e_gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
+            e_breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
+            e_player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
+            // Finish change, cancel change state
+            changeState = false;
         }
-
-        mass.text = itemObjectSc.Mass.ToString();
-        changeFriction(itemObjectSc.getSurType());
-
-        e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
-        e_gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
-        e_breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
-        e_player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
-        // Finish change, cancel change state
-        changeState = false;
     }
 
     private void changeFriction(SurfaceType surType)

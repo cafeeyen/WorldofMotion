@@ -24,8 +24,9 @@ public class DragNDrop : MonoBehaviour
     private void transfromMoveHandler(object sender, System.EventArgs e)
     {
         curPos += axisTransition.transform.rotation * gesture.DeltaPosition;
-        rb.MovePosition(new Vector3(Mathf.Round(curPos.x * 100) / 100, Mathf.Round(curPos.y * 100) / 100, Mathf.Round(curPos.z * 100) / 100));
+        transform.localPosition = new Vector3(Mathf.Round(curPos.x * 100) / 100, Mathf.Round(curPos.y * 100) / 100, Mathf.Round(curPos.z * 100) / 100);
         axisTransition.GetComponent<AxisTransition>().updatePosition(transform.localPosition);
+        triggerColliderCheck();
     }
 
     public void setAxisTransition(GameObject axis)
@@ -36,7 +37,13 @@ public class DragNDrop : MonoBehaviour
     public void updatePosition(Vector3 pos)
     {
         // Update position from axis
-        rb.MovePosition(pos);
+        transform.localPosition = pos;
         curPos = pos;
+        triggerColliderCheck();
+    }
+
+    private void triggerColliderCheck()
+    {
+        gameObject.GetComponent<ItemObject>().checkCollider();
     }
 }
