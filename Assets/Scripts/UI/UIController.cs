@@ -3,6 +3,14 @@ using TouchScript.Gestures;
 
 public class UIController : MonoBehaviour
 {
+    public mode state;
+    public enum mode
+    {
+        Play,
+        Edit,
+        Pause
+    }
+
     public Animator menu, item, prop;
     private TapGesture gesture;
     private GameObject itemObject;
@@ -10,6 +18,9 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
+        Time.timeScale = 0;
+        state = mode.Edit;
+
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
@@ -21,13 +32,11 @@ public class UIController : MonoBehaviour
         gesture.Tapped -= tapHandler;
     }
 
-    private void Update() {}
-
     private void tapHandler(object sender, System.EventArgs e)
     {
         string tapped = gesture.GetScreenPositionHitData().Target.name;
         if(tapped == "MenuButton" || tapped == "MenuArrow") displayWindows(menu);
-        else if(tapped == "ItemButton" || tapped == "ItemArrow") displayWindows(item);
+        else if((tapped == "ItemButton" || tapped == "ItemArrow") && state == mode.Edit) displayWindows(item);
         else if(tapped == "PropButton" || tapped == "PropArrow") displayWindows(prop);
     }
 
@@ -77,7 +86,40 @@ public class UIController : MonoBehaviour
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x / 10) * 10, Mathf.Round(screenPosition.y / 10) * 10, Mathf.Round(screenPosition.z / 10) * 10);
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
 
-           itemCon.setItemObject(newItemObject);
+            itemCon.setItemObject(newItemObject);
+        }
+    }
+
+    // Menu bar buttons
+    public void startButton()
+    {
+        if (state == mode.Edit)
+        {
+            Time.timeScale = 1;
+            state = mode.Play;
+            itemCon.setItemObject(itemObject);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            state = mode.Edit;
+            /*
+             * reset.. but how?
+             */
+        }
+    }
+
+    public void pauseButton()
+    {
+        if (state == mode.Play)
+        {
+            Time.timeScale = 0;
+            state = mode.Pause;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            state = mode.Play;
         }
     }
 }
