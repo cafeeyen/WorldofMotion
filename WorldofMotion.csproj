@@ -497,6 +497,7 @@
     <Compile Include="Assets\Scripts\ItemObject\Type\SurfaceType.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\SurfaceTypeFactory.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\Wood.cs" />
+    <Compile Include="Assets\Scripts\ItemObject\WorldObject.cs" />
     <Compile Include="Assets\Scripts\UI\PropWindow.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
