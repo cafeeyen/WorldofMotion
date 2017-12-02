@@ -138,7 +138,11 @@ public class PropWindow : MonoBehaviour
         if(UICon.state == UIController.mode.Edit)
         {
             if (!changeState)
+            {
                 itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+                itemObject.GetComponent<ItemObject>().checkCollider();
+            }
+                
             // Change scale text;
             scaleX.text = sliderX.value.ToString();
             scaleY.text = sliderY.value.ToString();
@@ -179,6 +183,8 @@ public class PropWindow : MonoBehaviour
 
             else if (r_deg45.isOn)
                 itemObject.transform.Rotate(Vector3.up, 45 * dir);
+
+            itemObject.GetComponent<ItemObject>().checkCollider();
         }
     }
 }
