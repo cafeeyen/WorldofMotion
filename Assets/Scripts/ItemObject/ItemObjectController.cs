@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ItemObjectController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ItemObjectController : MonoBehaviour
     private float emission;
     private Color finalColor, growColor;
     private Material growMat;
+    private List<GameObject> itemList;
 
     private void Awake()
     {
@@ -67,12 +69,16 @@ public class ItemObjectController : MonoBehaviour
             // If tap new object -> select new object | tap old object -> cancle select this object
             if (itemObject != selectedItemObject)
             {
-                // Reset old ItemObject to base material | disable drag and drop
+                // Choose new item
                 if (itemObject != null)
                     cancleSelectObject();
 
                 itemObject = selectedItemObject;
                 itemObjectSc = itemObject.GetComponent<ItemObject>();
+
+                // If this is new create object, add to list
+                if (!itemList.Contains(itemObject))
+                    itemList.Add(itemObject);
 
                 if (UICon.state == UIController.mode.Edit)
                 {
@@ -85,23 +91,23 @@ public class ItemObjectController : MonoBehaviour
                     // Set active and update axis position
                     axisTransition.SetActive(true);
                     axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
-
-                    // Trigger change state in PropWindow
-                    propWin.setPropValue(itemObject);
-
-                    // Send object to UI Controller
-                    UICon.setItemObject(itemObject);
                 }
+
+                // Trigger change state in PropWindow
+                propWin.setPropValue(itemObject);
+                // Send object to UI Controller
+                UICon.setItemObject(itemObject);
+
                 changeGrowMaterialTexture();
                 changeGrowColor();
                 itemObjectSc.BaseRenderer.material = growMat;
             }
-            else
+            else // Just cancle
             {
                 cancleSelectObject();
-                UICon.setItemObject(null);
-                UICon.displayWindows(propBar);
                 itemObject = null;
+                UICon.setItemObject(itemObject);
+                UICon.displayWindows(propBar);
             }
         }
     }
@@ -110,6 +116,8 @@ public class ItemObjectController : MonoBehaviour
     {
         if (itemObject != null)
         {
+            // Remove item from list
+            itemList.Remove(itemObject);
             cancleSelectObject();
             Destroy(itemObject);
         }
@@ -145,4 +153,9 @@ public class ItemObjectController : MonoBehaviour
     }
 
     public GameObject getCurrentObject() { return itemObject; }
+
+    public void setList(List<GameObject> itemWorldList)
+    {
+        itemList = itemWorldList;
+    }
 }

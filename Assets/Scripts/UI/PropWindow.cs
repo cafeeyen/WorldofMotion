@@ -7,6 +7,7 @@ public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, mass, staticfic, dynamicfic;
     public Slider sliderX, sliderY, sliderZ;
+    public UIController UICon;
 
     private GameObject itemObject;
     private TapGesture gesture;
@@ -134,31 +135,50 @@ public class PropWindow : MonoBehaviour
 
     private void changeSlideValue(float value)
     {
-        if(!changeState)
-            itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
-        // Change scale text;
-        scaleX.text = sliderX.value.ToString();
-        scaleY.text = sliderY.value.ToString();
-        scaleZ.text = sliderZ.value.ToString();
+        if(UICon.state == UIController.mode.Edit)
+        {
+            if (!changeState)
+                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+            // Change scale text;
+            scaleX.text = sliderX.value.ToString();
+            scaleY.text = sliderY.value.ToString();
+            scaleZ.text = sliderZ.value.ToString();
+        }
     }
 
     // Tapped send state before trigger
-    private void toggleGravity(bool state) { itemObject.GetComponent<ItemObject>().IsGravity = state; }
-    private void toggleGyro(bool state) { itemObject.GetComponent<ItemObject>().IsGyro = state; }
-    private void toggleBreakable(bool state) { itemObject.GetComponent<ItemObject>().IsBreakable = state; }
-    private void togglePlayer(bool state) { itemObject.GetComponent<ItemObject>().IsPlayer = state; }
+    private void toggleGravity(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGravity = state;
+    }
+    private void toggleGyro(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGyro = state;
+    }
+    private void toggleBreakable(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsBreakable = state;
+    }
+    private void togglePlayer(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsPlayer = state;
+    }
 
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
     {
-        // 1 is Left, -1 is Right
-        if(r_deg30.isOn)
+        if (UICon.state == UIController.mode.Edit)
         {
-            itemObject.transform.Rotate(Vector3.up, 30 * dir);
-        }
-        else if(r_deg45.isOn)
-        {
-            itemObject.transform.Rotate(Vector3.up, 45 * dir);
+            // 1 is Left, -1 is Right
+            if (r_deg30.isOn)
+                itemObject.transform.Rotate(Vector3.up, 30 * dir);
+
+            else if (r_deg45.isOn)
+                itemObject.transform.Rotate(Vector3.up, 45 * dir);
         }
     }
 }

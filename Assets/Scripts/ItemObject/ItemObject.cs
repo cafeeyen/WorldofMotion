@@ -13,6 +13,10 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private TapGesture gesture;
     private Rigidbody rb;
 
+    // Data
+    private Vector3 pos, velocity, angularVelocity;
+    private Quaternion rot;
+
     void Awake()
     {
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
@@ -26,7 +30,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         baseRenderer = transform.GetComponent<Renderer>();
         baseRenderer.material = surType.getSurMat();
         baseMat = baseRenderer.material;
-
         rb = GetComponent<Rigidbody>();
     }
 
@@ -67,6 +70,22 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
                 ItemCon.changeGrowColor();
             }
         }
+    }
+
+    public void saveCurrentState()
+    {
+        pos = transform.localPosition;
+        rot = transform.localRotation;
+        velocity = rb.velocity;
+        angularVelocity = rb.angularVelocity;
+    }
+
+    public void returnState()
+    {
+        transform.localPosition = pos;
+        transform.localRotation = rot;
+        rb.velocity = velocity;
+        rb.angularVelocity = angularVelocity;
     }
 
     public SurfaceType getSurType() { return surType; }
