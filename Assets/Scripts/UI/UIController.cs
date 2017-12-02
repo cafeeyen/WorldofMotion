@@ -12,6 +12,9 @@ public class UIController : MonoBehaviour
     }
 
     public Animator menu, item, prop;
+    public PropWindow propWindow;
+    public GameObject deleteBtt;
+
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
     private ItemObjectController itemCon;
@@ -105,11 +108,12 @@ public class UIController : MonoBehaviour
             // Don't do this ;_;
             //ExperimentWorld = Instantiate(WorldObject, Vector3.zero, Quaternion.identity);
             //WorldObject.SetActive(false);
-
+            
             worldSc.saveState();
-
+            deleteBtt.SetActive(false);
             Time.timeScale = 1;
             state = mode.Play;
+            propWindow.setToggleLock();
         }
         else
         {
@@ -119,8 +123,9 @@ public class UIController : MonoBehaviour
 
             Time.timeScale = 0;
             state = mode.Edit;
-
+            deleteBtt.SetActive(true);
             worldSc.loadState();
+            propWindow.setToggleLock();
         }
     }
 

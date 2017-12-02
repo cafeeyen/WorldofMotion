@@ -72,12 +72,16 @@ public class PropWindow : MonoBehaviour
             posZ.text = "Z : " + Mathf.Round(itemObject.transform.position.z * 100) / 100;
 
             // Check type toggle
-            currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
-            if (selectedType != currentType && !changeState)
+            if(UICon.state == UIController.mode.Edit)
             {
-                itemObject.GetComponent<ItemObject>().setSurType(currentType);
-                changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
-                selectedType = currentType;
+                currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
+                if (selectedType != currentType && !changeState)
+                {
+                    Debug.Log("nya");
+                    itemObject.GetComponent<ItemObject>().setSurType(currentType);
+                    changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
+                    selectedType = currentType;
+                }
             }
         }
     }
@@ -107,13 +111,10 @@ public class PropWindow : MonoBehaviour
 
             ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
             selectedType = itemObjectSc.getSurType().getName();
-            switch (selectedType)
-            {
-                case "Wood": st_wood.isOn = true; break;
-                case "Metal": st_metal.isOn = true; break;
-                case "Ice": st_ice.isOn = true; break;
-                case "Rubber": st_rubber.isOn = true; break;
-            }
+            st_wood.isOn = selectedType == "Wood";
+            st_metal.isOn = selectedType == "Metal";
+            st_ice.isOn = selectedType == "Ice";
+            st_rubber.isOn = selectedType == "Rubber";
 
             mass.text = itemObjectSc.Mass.ToString();
             changeFriction(itemObjectSc.getSurType());
@@ -185,6 +186,33 @@ public class PropWindow : MonoBehaviour
                 itemObject.transform.Rotate(Vector3.up, 45 * dir);
 
             itemObject.GetComponent<ItemObject>().checkCollider();
+        }
+    }
+
+    public void setToggleLock()
+    {
+        if(UICon.state == UIController.mode.Edit)
+        {
+           
+            st_wood.enabled = true;
+            st_ice.enabled = true;
+            st_metal.enabled = true;
+            st_rubber.enabled = true;
+            e_gravity.enabled = true;
+            e_gyro.enabled = true;
+            e_breakable.enabled = true;
+            e_player.enabled = true;
+        }
+        else
+        {
+            st_wood.enabled = false;
+            st_ice.enabled = false;
+            st_metal.enabled = false;
+            st_rubber.enabled = false;
+            e_gravity.enabled = false;
+            e_gyro.enabled = false;
+            e_breakable.enabled = false;
+            e_player.enabled = false;
         }
     }
 }
