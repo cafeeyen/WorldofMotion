@@ -7,6 +7,7 @@ public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, mass, staticfic, dynamicfic;
     public Slider sliderX, sliderY, sliderZ;
+    public UIController UICon;
 
     private GameObject itemObject;
     private TapGesture gesture;
@@ -66,17 +67,21 @@ public class PropWindow : MonoBehaviour
         if(itemObject != null)
         {
             // Change position text
-            posX.text = "X : " + itemObject.transform.position.x;
-            posY.text = "Y : " + itemObject.transform.position.y;
-            posZ.text = "Z : " + itemObject.transform.position.z;
+            posX.text = "X : " + Mathf.Round(itemObject.transform.position.x * 100) / 100;
+            posY.text = "Y : " + Mathf.Round(itemObject.transform.position.y * 100) / 100;
+            posZ.text = "Z : " + Mathf.Round(itemObject.transform.position.z * 100) / 100;
 
             // Check type toggle
-            currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
-            if (selectedType != currentType && !changeState)
+            if(UICon.state == UIController.mode.Edit)
             {
-                itemObject.GetComponent<ItemObject>().setSurType(currentType);
-                changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
-                selectedType = currentType;
+                currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
+                if (selectedType != currentType && !changeState)
+                {
+                    Debug.Log("nya");
+                    itemObject.GetComponent<ItemObject>().setSurType(currentType);
+                    changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
+                    selectedType = currentType;
+                }
             }
         }
     }
@@ -96,32 +101,31 @@ public class PropWindow : MonoBehaviour
     public void setPropValue(GameObject selectedItemObject)
     {
         itemObject = selectedItemObject;
-
-        // Start change state so slider won't change itemObject scale while set value from new itemObject
-        changeState = true;
-        sliderX.value = itemObject.transform.localScale.x / 10;
-        sliderY.value = itemObject.transform.localScale.y / 10;
-        sliderZ.value = itemObject.transform.localScale.z / 10;
-
-        ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
-        selectedType = itemObjectSc.getSurType().getName();
-        switch(selectedType)
+        if(itemObject != null)
         {
-            case "Wood": st_wood.isOn = true; break;
-            case "Metal": st_metal.isOn = true; break;
-            case "Ice": st_ice.isOn = true; break;
-            case "Rubber": st_rubber.isOn = true; break;
+            // Start change state so slider won't change itemObject scale while set value from new itemObject
+            changeState = true;
+            sliderX.value = itemObject.transform.localScale.x / 10;
+            sliderY.value = itemObject.transform.localScale.y / 10;
+            sliderZ.value = itemObject.transform.localScale.z / 10;
+
+            ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
+            selectedType = itemObjectSc.getSurType().getName();
+            st_wood.isOn = selectedType == "Wood";
+            st_metal.isOn = selectedType == "Metal";
+            st_ice.isOn = selectedType == "Ice";
+            st_rubber.isOn = selectedType == "Rubber";
+
+            mass.text = itemObjectSc.Mass.ToString();
+            changeFriction(itemObjectSc.getSurType());
+
+            e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
+            e_gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
+            e_breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
+            e_player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
+            // Finish change, cancel change state
+            changeState = false;
         }
-
-        mass.text = itemObjectSc.Mass.ToString();
-        changeFriction(itemObjectSc.getSurType());
-
-        e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
-        e_gyro.isOn = itemObject.GetComponent<ItemObject>().IsGyro;
-        e_breakable.isOn = itemObject.GetComponent<ItemObject>().IsBreakable;
-        e_player.isOn = itemObject.GetComponent<ItemObject>().IsPlayer;
-        // Finish change, cancel change state
-        changeState = false;
     }
 
     private void changeFriction(SurfaceType surType)
@@ -132,31 +136,83 @@ public class PropWindow : MonoBehaviour
 
     private void changeSlideValue(float value)
     {
-        if(!changeState)
-            itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
-        // Change scale text;
-        scaleX.text = sliderX.value.ToString();
-        scaleY.text = sliderY.value.ToString();
-        scaleZ.text = sliderZ.value.ToString();
+        if(UICon.state == UIController.mode.Edit)
+        {
+            if (!changeState)
+            {
+                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+                itemObject.GetComponent<ItemObject>().checkCollider();
+            }
+                
+            // Change scale text;
+            scaleX.text = sliderX.value.ToString();
+            scaleY.text = sliderY.value.ToString();
+            scaleZ.text = sliderZ.value.ToString();
+        }
     }
 
     // Tapped send state before trigger
-    private void toggleGravity(bool state) { itemObject.GetComponent<ItemObject>().IsGravity = state; }
-    private void toggleGyro(bool state) { itemObject.GetComponent<ItemObject>().IsGyro = state; }
-    private void toggleBreakable(bool state) { itemObject.GetComponent<ItemObject>().IsBreakable = state; }
-    private void togglePlayer(bool state) { itemObject.GetComponent<ItemObject>().IsPlayer = state; }
+    private void toggleGravity(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGravity = state;
+    }
+    private void toggleGyro(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGyro = state;
+    }
+    private void toggleBreakable(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsBreakable = state;
+    }
+    private void togglePlayer(bool state)
+    {
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsPlayer = state;
+    }
 
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
     {
-        // 1 is Left, -1 is Right
-        if(r_deg30.isOn)
+        if (UICon.state == UIController.mode.Edit)
         {
-            itemObject.transform.Rotate(Vector3.up, 30 * dir);
+            // 1 is Left, -1 is Right
+            if (r_deg30.isOn)
+                itemObject.transform.Rotate(Vector3.up, 30 * dir);
+
+            else if (r_deg45.isOn)
+                itemObject.transform.Rotate(Vector3.up, 45 * dir);
+
+            itemObject.GetComponent<ItemObject>().checkCollider();
         }
-        else if(r_deg45.isOn)
+    }
+
+    public void setToggleLock()
+    {
+        if(UICon.state == UIController.mode.Edit)
         {
-            itemObject.transform.Rotate(Vector3.up, 45 * dir);
+           
+            st_wood.enabled = true;
+            st_ice.enabled = true;
+            st_metal.enabled = true;
+            st_rubber.enabled = true;
+            e_gravity.enabled = true;
+            e_gyro.enabled = true;
+            e_breakable.enabled = true;
+            e_player.enabled = true;
+        }
+        else
+        {
+            st_wood.enabled = false;
+            st_ice.enabled = false;
+            st_metal.enabled = false;
+            st_rubber.enabled = false;
+            e_gravity.enabled = false;
+            e_gyro.enabled = false;
+            e_breakable.enabled = false;
+            e_player.enabled = false;
         }
     }
 }
