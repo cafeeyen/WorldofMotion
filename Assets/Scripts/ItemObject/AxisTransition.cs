@@ -25,8 +25,6 @@ public class AxisTransition : MonoBehaviour
         axisZ.Transformed -= transfromMoveHandler;
     }
 
-    private void Update() {}
-
     private void transfromMoveHandler(object sender, System.EventArgs e)
     {
 

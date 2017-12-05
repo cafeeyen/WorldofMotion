@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ItemObjectController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ItemObjectController : MonoBehaviour
     private float emission;
     private Color finalColor, growColor;
     private Material growMat;
+    private List<GameObject> itemList;
 
     private void Awake()
     {
@@ -25,10 +27,10 @@ public class ItemObjectController : MonoBehaviour
 
     private void Update()
     {
-        if(itemObject != null)
+        if (itemObject != null)
         {
             // Use base color as emission base color
-            emission = Mathf.PingPong(Time.time, 1.0f);
+            emission = Mathf.PingPong(Time.unscaledTime, 1.0f);
             finalColor = growColor * emission;
             growMat.SetColor("_EmissionColor", finalColor);
         }
@@ -36,43 +38,76 @@ public class ItemObjectController : MonoBehaviour
 
     public void setItemObject(GameObject selectedItemObject)
     {
+        /*
+         * ----- Brief description -----
+         * 1. Check new item is not current item
+         *      1.1. Yes -> Go to 2.
+         *      1.2. No -> Don othing
+         *      
+         * 2. Check this item is current item?
+         *      2.1. Yes -> Go to 3.
+         *      2.2. No -> Cancle select this item
+         *      
+         * 3. Check we have current item?
+         *      3.1. Yes -> Reset current item to normal state, then go to 4.
+         *      3.2. No -> Do nothing
+         * 
+         * 4. Set new item to current item  
+         *      
+         * 5. Check app is in play mode?
+         *      5.1. Yes -> Skip to 7.
+         *      5.2. No -> Go to 6.
+         * 
+         * 6. Set current item to selected mode and notify propWin/UICon that we have new one
+         * 
+         * 7. Set item material to GrowMat, tell user that he/she select this one
+         */
+
         // Check if current object is not overlapping of no object is selected
-        if(itemObjectSc == null || !itemObjectSc.IsOverlap)
+        if (itemObjectSc == null || !itemObjectSc.IsOverlap)
         {
             // If tap new object -> select new object | tap old object -> cancle select this object
             if (itemObject != selectedItemObject)
             {
-                // Reset old ItemObject to base material | disable drag and drop
+                // Choose new item
                 if (itemObject != null)
                     cancleSelectObject();
 
                 itemObject = selectedItemObject;
                 itemObjectSc = itemObject.GetComponent<ItemObject>();
 
-                changeGrowMaterialTexture();
-                changeGrowColor();
+                // If this is new create object, add to list
+                if (!itemList.Contains(itemObject))
+                    itemList.Add(itemObject);
 
-                // Change material to grow material | enable drag and drop
-                itemObjectSc.BaseRenderer.material = growMat;
-                itemObject.GetComponent<DragNDrop>().enabled = true;
-                itemObject.GetComponent<DragNDrop>().setAxisTransition(axisTransition);
+                if (UICon.state == UIController.mode.Edit)
+                {
+                    itemObjectSc.checkCollider();
 
-                // Set active and update axis position
-                axisTransition.SetActive(true);
-                axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
+                    // Enable DragNDrop
+                    itemObject.GetComponent<DragNDrop>().enabled = true;
+                    itemObject.GetComponent<DragNDrop>().setAxisTransition(axisTransition);
+
+                    // Set active and update axis position
+                    axisTransition.SetActive(true);
+                    axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
+                }
 
                 // Trigger change state in PropWindow
                 propWin.setPropValue(itemObject);
-
                 // Send object to UI Controller
                 UICon.setItemObject(itemObject);
+
+                changeGrowMaterialTexture();
+                changeGrowColor();
+                itemObjectSc.BaseRenderer.material = growMat;
             }
-            else
+            else // Just cancle
             {
                 cancleSelectObject();
-                UICon.setItemObject(null);
-                UICon.displayWindows(propBar);
                 itemObject = null;
+                UICon.setItemObject(itemObject);
+                UICon.displayWindows(propBar);
             }
         }
     }
@@ -81,6 +116,8 @@ public class ItemObjectController : MonoBehaviour
     {
         if (itemObject != null)
         {
+            // Remove item from list
+            itemList.Remove(itemObject);
             cancleSelectObject();
             Destroy(itemObject);
         }
@@ -90,13 +127,12 @@ public class ItemObjectController : MonoBehaviour
     {
         itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
         itemObject.GetComponent<DragNDrop>().enabled = false;
-        itemObjectSc.Collider.isTrigger = false;
         axisTransition.SetActive(false);
     }
 
     public SurfaceTypeFactory getFactory()
     {
-        if(surTypeFac == null)
+        if (surTypeFac == null)
             surTypeFac = new SurfaceTypeFactory();
         return surTypeFac;
     }
@@ -117,4 +153,9 @@ public class ItemObjectController : MonoBehaviour
     }
 
     public GameObject getCurrentObject() { return itemObject; }
+
+    public void setList(List<GameObject> itemWorldList)
+    {
+        itemList = itemWorldList;
+    }
 }
