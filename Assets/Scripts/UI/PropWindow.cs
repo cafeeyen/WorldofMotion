@@ -77,7 +77,6 @@ public class PropWindow : MonoBehaviour
                 currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
                 if (selectedType != currentType && !changeState)
                 {
-                    Debug.Log("nya");
                     itemObject.GetComponent<ItemObject>().setSurType(currentType);
                     changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
                     selectedType = currentType;
