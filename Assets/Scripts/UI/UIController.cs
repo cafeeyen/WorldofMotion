@@ -86,8 +86,8 @@ public class UIController : MonoBehaviour
         // Can't create new one while current one is overlapping
         if(itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
         {
-            // Spawn at center of screen,  distance 80
-            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 80));
+            // Spawn at center of screen,  distance 10
+            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 10));
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x / 10) * 10, Mathf.Round(screenPosition.y / 10) * 10, Mathf.Round(screenPosition.z / 10) * 10);
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
