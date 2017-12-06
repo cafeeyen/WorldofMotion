@@ -77,7 +77,6 @@ public class PropWindow : MonoBehaviour
                 currentType = type.ActiveToggles().FirstOrDefault<Toggle>().name.ToString();
                 if (selectedType != currentType && !changeState)
                 {
-                    Debug.Log("nya");
                     itemObject.GetComponent<ItemObject>().setSurType(currentType);
                     changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
                     selectedType = currentType;
@@ -105,9 +104,9 @@ public class PropWindow : MonoBehaviour
         {
             // Start change state so slider won't change itemObject scale while set value from new itemObject
             changeState = true;
-            sliderX.value = itemObject.transform.localScale.x / 10;
-            sliderY.value = itemObject.transform.localScale.y / 10;
-            sliderZ.value = itemObject.transform.localScale.z / 10;
+            sliderX.value = itemObject.transform.localScale.x;
+            sliderY.value = itemObject.transform.localScale.y;
+            sliderZ.value = itemObject.transform.localScale.z;
 
             ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
             selectedType = itemObjectSc.getSurType().getName();
@@ -140,7 +139,7 @@ public class PropWindow : MonoBehaviour
         {
             if (!changeState)
             {
-                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value) * 10;
+                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
                 itemObject.GetComponent<ItemObject>().checkCollider();
             }
                 
