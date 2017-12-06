@@ -44,6 +44,11 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         gesture.Tapped -= Notify;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        AudioSource.PlayClipAtPoint(surType.getSound(), transform.position, 1f);
+    }
+
     private void Notify(object sender, System.EventArgs e)
     {
         // Observe by ItemObjectController
