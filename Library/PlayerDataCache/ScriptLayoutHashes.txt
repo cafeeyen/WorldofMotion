@@ -182,3 +182,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 2427cde986b9c1964687738f93a0f5bf Assembly-CSharp.dll:TouchScript.Gestures.TapGesture
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.PinnedTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.LayerManager
+60bc6c4069c79a97d066a78727738002 Assembly-CSharp.dll:.MainPage
