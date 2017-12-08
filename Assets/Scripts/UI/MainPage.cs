@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MainPage : MonoBehaviour
 {
-    public Animator mainBG, backBtt, pageSlide, title;
+    public Animator mainBG, backBtt, pageSlide, title, mainPage;
 
     private AudioSource audioSource;
     private AudioClip bttClk;
@@ -24,6 +24,7 @@ public class MainPage : MonoBehaviour
                     backBtt.SetBool("SlideExperiment", true);
                     pageSlide.SetBool("SlideExperiment", true);
                     title.SetBool("IsMainPage", false);
+                    mainPage.SetBool("IsMainPage", false);
                     break;
                 }
 
@@ -33,6 +34,7 @@ public class MainPage : MonoBehaviour
                     backBtt.SetBool("SlideGame", true);
                     pageSlide.SetBool("SlideGame", true);
                     title.SetBool("IsMainPage", false);
+                    mainPage.SetBool("IsMainPage", false);
                     break;
                 }
 
@@ -51,6 +53,7 @@ public class MainPage : MonoBehaviour
                         pageSlide.SetBool("SlideExperiment", false);
                     }
                     title.SetBool("IsMainPage", true);
+                    mainPage.SetBool("IsMainPage", true);
                     break;
                 }
         }
