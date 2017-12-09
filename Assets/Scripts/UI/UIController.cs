@@ -78,6 +78,7 @@ public class UIController : MonoBehaviour
             playSound("deny");
         }
     }
+
     private void changeState(Animator anim)
     {
         // Can open one window at the same time
@@ -111,7 +112,7 @@ public class UIController : MonoBehaviour
         {
             // Spawn at center of screen,  distance 10
             Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 10));
-            Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x / 10) * 10, Mathf.Round(screenPosition.y / 10) * 10, Mathf.Round(screenPosition.z / 10) * 10);
+            Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
 
