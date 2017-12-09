@@ -1,15 +1,19 @@
 ﻿using TouchScript.Gestures;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainPage : MonoBehaviour
 {
     public Animator mainBG, backBtt, pageSlide, title, mainPage;
 
+    private SceneLoader sl;
     private AudioSource audioSource;
     private AudioClip bttClk;
 
     private void Awake()
     {
+        Time.timeScale = 1;
+        sl = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/MenuButtonEcho", typeof(AudioClip));
     }
@@ -65,7 +69,8 @@ public class MainPage : MonoBehaviour
         switch (bttName)
         {
             case "Experiment": slidePage(bttName); break;
-            case "New": break;
+            case "New": sl.loadNewScene(1); break;
+            case "Load": break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
             case "CannonShooter": break;

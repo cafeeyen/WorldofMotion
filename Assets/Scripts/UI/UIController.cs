@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     private WorldObject worldSc;
     private AudioSource audioSource;
     private AudioClip bttClk, bttDeny;
+    private SceneLoader sl;
 
     private void OnEnable()
     {
@@ -35,6 +36,7 @@ public class UIController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
         bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
+        sl = GetComponent<SceneLoader>();
     }
 
     private void OnDisable()
@@ -164,6 +166,11 @@ public class UIController : MonoBehaviour
             state = mode.Play;
         }
         playSound("clk");
+    }
+
+    public void MainMenuButton()
+    {
+        sl.loadNewScene(0);
     }
 
     public void setWorld(WorldObject worldScript)
