@@ -498,9 +498,7 @@
     <Compile Include="Assets\Scripts\ItemObject\Type\SurfaceTypeFactory.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\Wood.cs" />
     <Compile Include="Assets\Scripts\ItemObject\WorldObject.cs" />
-    <Compile Include="Assets\Scripts\UI\MainPage.cs" />
     <Compile Include="Assets\Scripts\UI\PropWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\CursorManager.cs" />
@@ -602,6 +600,7 @@
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM1.xml" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM2.xml" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifier_erGrouping.xml" />
+    <None Include="Assets\Resources\Audios\อธิบาย.txt" />
     <None Include="Assets\TouchScript\Shaders\Cursor.shader" />
     <None Include="Assets\TouchScript\Shaders\DebugDepthTest.shader" />
     <None Include="Assets\TouchScript\Shaders\DebugMultiplyDepthTest.shader" />
