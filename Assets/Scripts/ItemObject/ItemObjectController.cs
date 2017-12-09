@@ -101,6 +101,7 @@ public class ItemObjectController : MonoBehaviour
                 changeGrowMaterialTexture();
                 changeGrowColor();
                 itemObjectSc.BaseRenderer.material = growMat;
+                UICon.displayWindows(propBar);
             }
             else // Just cancle
             {
