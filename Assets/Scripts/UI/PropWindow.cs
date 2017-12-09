@@ -116,7 +116,7 @@ public class PropWindow : MonoBehaviour
             st_ice.isOn = selectedType == "Ice";
             st_rubber.isOn = selectedType == "Rubber";
 
-            mass.text = itemObjectSc.Mass.ToString();
+            mass.text = itemObjectSc.Mass.ToString("F3");
             changeFriction(itemObjectSc.getSurType());
 
             e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
@@ -130,8 +130,8 @@ public class PropWindow : MonoBehaviour
 
     private void changeFriction(SurfaceType surType)
     {
-        staticfic.text = surType.getStaticFiction().ToString();
-        dynamicfic.text = surType.getDynamicFiction().ToString();
+        staticfic.text = surType.getStaticFiction().ToString("F3");
+        dynamicfic.text = surType.getDynamicFiction().ToString("F3");
     }
 
     private void changeSlideValue(float value)
