@@ -132,6 +132,7 @@ a2398cab0afec05bd8b6b70c007a516c Assembly-CSharp.dll:TouchScript.Behaviors.Curso
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Rubber
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.GestureManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.DebuggableMonoBehaviour
+153c514e01ee9cea242933cadbbe3390 Assembly-CSharp.dll:.SceneLoader
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Wood
 42bbd8dadc66de980ed7ab69a5fd1258 Assembly-CSharp.dll:TouchScript.Gestures.PressGesture
 0fd6aafde779927819d0d509e0bdfec9 Assembly-CSharp.dll:TouchScript.Gestures.MetaGesture
