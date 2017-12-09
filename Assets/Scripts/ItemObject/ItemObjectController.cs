@@ -101,13 +101,12 @@ public class ItemObjectController : MonoBehaviour
                 changeGrowMaterialTexture();
                 changeGrowColor();
                 itemObjectSc.BaseRenderer.material = growMat;
+                UICon.displayWindows(propBar);
             }
             else // Just cancle
             {
                 cancleSelectObject();
                 itemObject = null;
-                UICon.setItemObject(itemObject);
-                UICon.displayWindows(propBar);
             }
         }
     }
@@ -128,6 +127,8 @@ public class ItemObjectController : MonoBehaviour
         itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
         itemObject.GetComponent<DragNDrop>().enabled = false;
         axisTransition.SetActive(false);
+        UICon.setItemObject(null);
+        UICon.displayWindows(propBar, true);
     }
 
     public SurfaceTypeFactory getFactory()
