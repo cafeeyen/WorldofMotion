@@ -80,7 +80,6 @@ public class PropWindow : MonoBehaviour
                     itemObject.GetComponent<ItemObject>().setSurType(currentType);
                     changeFriction(itemObject.GetComponent<ItemObject>().getSurType());
                     selectedType = currentType;
-                    UICon.playSound("clk");
                 }
             }
         }
@@ -116,7 +115,7 @@ public class PropWindow : MonoBehaviour
             st_ice.isOn = selectedType == "Ice";
             st_rubber.isOn = selectedType == "Rubber";
 
-            mass.text = itemObjectSc.Mass.ToString("F3");
+            mass.text = itemObjectSc.Mass.ToString();
             changeFriction(itemObjectSc.getSurType());
 
             e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
@@ -130,8 +129,8 @@ public class PropWindow : MonoBehaviour
 
     private void changeFriction(SurfaceType surType)
     {
-        staticfic.text = surType.getStaticFiction().ToString("F3");
-        dynamicfic.text = surType.getDynamicFiction().ToString("F3");
+        staticfic.text = surType.getStaticFiction().ToString();
+        dynamicfic.text = surType.getDynamicFiction().ToString();
     }
 
     private void changeSlideValue(float value)
@@ -154,23 +153,23 @@ public class PropWindow : MonoBehaviour
     // Tapped send state before trigger
     private void toggleGravity(bool state)
     {
-        UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsGravity = state;
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGravity = state;
     }
     private void toggleGyro(bool state)
     {
-        UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsGyro = state;
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsGyro = state;
     }
     private void toggleBreakable(bool state)
     {
-        UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsBreakable = state;
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsBreakable = state;
     }
     private void togglePlayer(bool state)
     {
-        UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsPlayer = state;
+        if (UICon.state == UIController.mode.Edit)
+            itemObject.GetComponent<ItemObject>().IsPlayer = state;
     }
 
     // Call from OnClick() in Unity inspector
@@ -186,7 +185,6 @@ public class PropWindow : MonoBehaviour
                 itemObject.transform.Rotate(Vector3.up, 45 * dir);
 
             itemObject.GetComponent<ItemObject>().checkCollider();
-            UICon.playSound("clk");
         }
     }
 
@@ -194,9 +192,7 @@ public class PropWindow : MonoBehaviour
     {
         if(UICon.state == UIController.mode.Edit)
         {
-
-            r_deg30.enabled = true;
-            r_deg45.enabled = true;
+           
             st_wood.enabled = true;
             st_ice.enabled = true;
             st_metal.enabled = true;
@@ -208,8 +204,6 @@ public class PropWindow : MonoBehaviour
         }
         else
         {
-            r_deg30.enabled = false;
-            r_deg45.enabled = false;
             st_wood.enabled = false;
             st_ice.enabled = false;
             st_metal.enabled = false;
