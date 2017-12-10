@@ -182,8 +182,8 @@ public class UIController : MonoBehaviour
     public void playSound(string sound)
     {
         if (sound == "clk")
-            audioSource.PlayOneShot(bttClk, 1f);
+            audioSource.PlayOneShot(bttClk, 2f);
         else if (sound == "deny")
-            audioSource.PlayOneShot(bttDeny, 0.1f);
+            audioSource.PlayOneShot(bttDeny, 0.4f);
     }
 }

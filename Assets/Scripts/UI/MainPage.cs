@@ -15,7 +15,7 @@ public class MainPage : MonoBehaviour
         Time.timeScale = 1;
         sl = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
-        bttClk = (AudioClip)Resources.Load("Audios/MenuButtonEcho", typeof(AudioClip));
+        bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
     }
 
     private void slidePage(string bttName)
