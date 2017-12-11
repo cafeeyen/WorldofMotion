@@ -1,6 +1,4 @@
-﻿using TouchScript.Gestures;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class MainPage : MonoBehaviour
 {

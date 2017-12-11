@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     public Animator menu, item, prop;
     public PropWindow propWindow;
     public GameObject deleteBtt;
+    public GameObject TestFirstTime;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -37,6 +38,14 @@ public class UIController : MonoBehaviour
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
         bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
         sl = GetComponent<SceneLoader>();
+
+        // Check if this open for first time
+        if (PlayerPrefs.GetInt("EditorMode") == 0)
+        {
+            /* Tutorial */
+            TestFirstTime.SetActive(true);
+            PlayerPrefs.SetInt("EditorMode", 1);
+        }
     }
 
     private void OnDisable()
