@@ -71,8 +71,8 @@ public class MainPage : MonoBehaviour
             case "Load": break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
-            case "CannonShooter": break;
             case "BallRoller": sl.loadNewScene(2); break;
+            case "CannonShooter": sl.loadNewScene(3); break;
             case "Back": slidePage(bttName); break;
         }
     }

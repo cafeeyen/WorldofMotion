@@ -7,26 +7,30 @@ public class GyroPlayer : MonoBehaviour
     public Text speedText;
     public TapGesture acc, brk;
 
-    private float speed, maxSpeed=25f;
+    private float maxSpeed = 25f, holdTime;
     private Rigidbody rb;
-    private bool forward = false, backward = false;
 
     private void OnEnable()
     {
-        speed = 0f;
+        holdTime = 0f;
         rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate ()
     {
-        rb.AddForce(new Vector3(Input.acceleration.x * 1.5f, 0, 0));
+        rb.AddForce(new Vector3(Input.acceleration.x * 5f, 0, 0));
         speedText.text = rb.velocity.magnitude.ToString("F2") + " m/s";
 
-        if (acc.State == Gesture.GestureState.Possible)
-            rb.AddForce(new Vector3(0, 0, 3f));
+        holdTime += Time.deltaTime / 10;
 
-        if(brk.State == Gesture.GestureState.Possible)
-            rb.AddForce(new Vector3(0, 0, -3f));
+        if (acc.State == Gesture.GestureState.Possible)
+            rb.AddForce(new Vector3(0, 0, Mathf.Min(holdTime, 1) * 5f));
+        else if (brk.State == Gesture.GestureState.Possible)
+            rb.AddForce(new Vector3(0, 0, Mathf.Min(holdTime, 1) * - 5f));
+        else
+            holdTime = 0;
+
+        Debug.Log(holdTime);
 
         if (rb.velocity.magnitude > maxSpeed)
         {
