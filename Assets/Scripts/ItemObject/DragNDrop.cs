@@ -6,14 +6,12 @@ public class DragNDrop : MonoBehaviour
     private TransformGesture gesture;
     private Vector3 curPos;
     private GameObject axisTransition;
-    private Rigidbody rb;
 
     private void OnEnable()
     {
         gesture = GetComponent<TransformGesture>();
         curPos = transform.localPosition;
         gesture.Transformed += transfromMoveHandler;
-        rb = GetComponent<Rigidbody>();
     }
 
     private void OnDisable()
