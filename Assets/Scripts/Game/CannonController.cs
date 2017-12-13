@@ -8,7 +8,7 @@ public class CannonController : MonoBehaviour
     public Text angleText;
     public GameObject cannonBall;
 
-    private float rotX, maxHeight, power = 20f;
+    private float rotX, power = 20f;
 
     private void OnEnable()
     {
@@ -34,16 +34,6 @@ public class CannonController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
         angleText.text = string.Format("{0} \u00B0", Mathf.Round(-rotX));
-
-        if (cannonBall.transform.localEulerAngles != Vector3.zero && maxHeight > 0)
-        {
-            cannonBall.GetComponent<Rigidbody>().isKinematic = true;
-            Debug.Log("Max height : " + maxHeight.ToString());
-            maxHeight = 0;
-        }
-
-        if (cannonBall.transform.position.y > maxHeight && !cannonBall.GetComponent<Rigidbody>().isKinematic)
-            maxHeight = cannonBall.transform.position.y;
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
@@ -53,7 +43,6 @@ public class CannonController : MonoBehaviour
         cannonBall.transform.position = Vector3.zero;
         cannonBall.transform.localEulerAngles = Vector3.zero;
         cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        maxHeight = 0;
 
         // Shoot!!
         cannonBall.GetComponent<Rigidbody>().isKinematic = false;
