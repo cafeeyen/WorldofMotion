@@ -12,6 +12,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
+    private PhysicMaterial phyMat;
 
     // Data
     private Vector3 pos, velocity, angularVelocity;
@@ -31,6 +32,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         baseRenderer.material = surType.getSurMat();
         baseMat = baseRenderer.material;
         rb = GetComponent<Rigidbody>();
+        phyMat = GetComponent<Collider>().material;
     }
 
     private void OnEnable()
@@ -98,6 +100,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         surType = ItemCon.getFactory().getSurType(st_name);
         BaseMat = surType.getSurMat();
+        phyMat = surType.getPhyMat();
         ItemCon.changeGrowMaterialTexture();
     }
     public bool IsGravity { get { return gravity; } set { gravity = value; } }
