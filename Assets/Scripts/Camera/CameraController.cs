@@ -11,9 +11,9 @@ public class CameraController : MonoBehaviour
     public ScreenTransformGesture MultiTouchGesture;
     public AxisTransition axisTransition;
 
-    private float moveSpeed = 0.1f;
-    private float rotateSpeed = 100f;
-    private float zoomSpeed = 50f;
+    private float moveSpeed = 0.05f;
+    private float rotateSpeed = 50f;
+    private float zoomSpeed = 30f;
 
     private void OnEnable()
     {

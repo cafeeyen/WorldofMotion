@@ -19,6 +19,7 @@ public abstract class SurfaceType : ScriptableObject
     public string getName() { return typeName; }
     public float getDynamicFiction() { return phyMat.dynamicFriction; }
     public float getStaticFiction() { return phyMat.staticFriction; }
+    public PhysicMaterial getPhyMat() { return phyMat; }
     public Material getSurMat() { return surMat; }
     public AudioClip getSound() { return collideSound; }
 }
