@@ -12,7 +12,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
-    private PhysicMaterial phyMat;
 
     // Data
     private Vector3 pos, velocity, angularVelocity;
@@ -32,7 +31,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         baseRenderer.material = surType.getSurMat();
         baseMat = baseRenderer.material;
         rb = GetComponent<Rigidbody>();
-        phyMat = GetComponent<Collider>().material;
     }
 
     private void OnEnable()
@@ -100,7 +98,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         surType = ItemCon.getFactory().getSurType(st_name);
         BaseMat = surType.getSurMat();
-        phyMat = surType.getPhyMat();
+        PhyMat = surType.getPhyMat();
         ItemCon.changeGrowMaterialTexture();
     }
     public bool IsGravity { get { return gravity; } set { gravity = value; } }
@@ -108,6 +106,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     public bool IsBreakable { get { return breakable; } set { breakable = value; } }
     public bool IsPlayer { get { return player; } set { player = value; } }
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
+    public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
     public float Mass { get { return rb.mass; } }
