@@ -177,6 +177,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9dc41ecfefe71e0d0e207b5650949483 Assembly-CSharp.dll:TouchScript.Devices.Display.DisplayDevice
 99fb603e20780b52805fbdf92487e554 Assembly-CSharp.dll:TouchScript.Behaviors.Transformer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Timer
+5c4ce965eec876f7c3bd28e8670ca8c2 Assembly-CSharp.dll:.CannonController
 4f52fb13c8876d1fc6a0a4110faf10fc Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.ScreenTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.GestureManagerInstance
 24bb26e7da03092690ef38ebcd7ec1c0 Assembly-CSharp.dll:.CameraForPlayer
@@ -188,4 +189,3 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 2b5bd81c259c691324a17af9a3e97e85 Assembly-CSharp.dll:.SelectType
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.PinnedTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.LayerManager
-5c4ce965eec876f7c3bd28e8670ca8c2 Assembly-CSharp.dll:.CannonController
