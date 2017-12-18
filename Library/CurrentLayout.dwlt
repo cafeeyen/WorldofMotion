@@ -205,7 +205,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 38
+  controlID: 73
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -326,8 +326,8 @@ MonoBehaviour:
     y: 416
     width: 688
     height: 531
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 23}
@@ -492,9 +492,9 @@ MonoBehaviour:
     height: 591
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 6a89feff5a8afeffa88bfeffe28bfeff348cfeff7a8cfeffa6fbffff00000000
+    m_SelectedIDs: 142afdff
+    m_LastClickedID: -185836
+    m_ExpandedIDs: 142afdff42f5fdffa6fbffff000000001e2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -544,14 +544,14 @@ MonoBehaviour:
     width: 895
     height: 591
   m_SceneLighting: 1
-  lastFramingTime: 307.55586493302906
+  lastFramingTime: 4942.3410600762
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.0144768, y: 0.083434105, z: 5.2593126}
+    m_Target: {x: 2.8232512, y: 3.321107, z: 0.3514861}
     speed: 2
-    m_Value: {x: 3.0144768, y: 0.083434105, z: 5.2593126}
+    m_Value: {x: 2.8232512, y: 3.321107, z: 0.3514861}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -566,25 +566,25 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
-      speed: 2
-      m_Value: 1
-    zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
+    zGrid:
+      m_Target: 1
+      speed: 2
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: 0, y: -0, z: -0, w: -0.99999994}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 408.61798
+    m_Target: 538.18164
     speed: 2
-    m_Value: 408.61798
+    m_Value: 538.18164
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_ShowGlobalGrid: 1
   m_LastSceneViewRotation: {x: 0, y: 0.99999994, z: 0, w: 0}
   m_LastSceneViewOrtho: 1
@@ -688,19 +688,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Game
+    - Assets/Resources/Materials
   m_ViewMode: 1
   m_StartGridSize: 63
   m_LastFolders:
-  - Assets/Scripts/Game
+  - Assets/Resources/Materials
   m_LastFoldersGridSize: 63
   m_LastProjectPath: E:\IT\WorldofMotion
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: f42a0000
-    m_LastClickedID: 10996
-    m_ExpandedIDs: 000000009e2a0000aa2a0000c62a0000de2a0000e02a0000442b00004a2b0000902b0000f02b0000f22b0000222c0000822c0000ee2c0000fc2c00004c2d00005c2d0000662d00001e2f0000202f0000222f0000242f0000262f0000282f00002a2f00002c2f00002e2f0000302f0000ffffff7f
+    m_SelectedIDs: 202b0000
+    m_LastClickedID: 11040
+    m_ExpandedIDs: 000000009e2a0000aa2a0000c62a0000de2a0000e02a0000442b00004a2b0000902b0000f02b0000f22b0000222c0000822c0000ee2c0000fc2c00004c2d00005c2d0000662d0000122f0000142f0000162f0000182f00001a2f00001c2f00001e2f0000202f0000222f0000242f0000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -728,7 +728,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 60}
     m_SelectedIDs: ae43fdff
     m_LastClickedID: -179282
-    m_ExpandedIDs: 000000009e2a0000aa2a0000c62a0000de2a0000e02a0000442b00004a2b0000902b0000f02b0000f22b0000222c0000822c0000ee2c0000fc2c00004c2d00005c2d0000662d00001e2f0000202f0000222f0000242f0000262f0000282f00002a2f00002c2f00002e2f0000302f0000
+    m_ExpandedIDs: 000000009e2a0000aa2a0000c62a0000de2a0000e02a0000442b00004a2b0000902b0000f02b0000f22b0000222c0000822c0000ee2c0000fc2c00004c2d00005c2d0000662d0000122f0000142f0000162f0000182f00001a2f00001c2f00001e2f0000202f0000222f0000242f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
