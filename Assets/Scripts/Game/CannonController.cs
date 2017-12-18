@@ -8,7 +8,8 @@ public class CannonController : MonoBehaviour
     public Text angleText;
     public GameObject cannonBall;
 
-    private float rotX, power = 20f;
+    private float rotX, height = 0, maxHeight = 0, maxDist = 0, maxTime = 0, curDis, power = 20f;
+    private bool floating = false;
 
     private void OnEnable()
     {
@@ -34,18 +35,51 @@ public class CannonController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
         angleText.text = string.Format("{0} \u00B0", Mathf.Round(-rotX));
+
+        // Calculate ball position
+        if(floating)
+        {
+            if (curDis == maxDist)
+                floating = false;
+        }
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
     {
         // Reset current force and position(reuse ball)
-        cannonBall.GetComponent<Rigidbody>().isKinematic = true;
         cannonBall.transform.position = Vector3.zero;
-        cannonBall.transform.localEulerAngles = Vector3.zero;
-        cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        floating = true;
 
-        // Shoot!!
-        cannonBall.GetComponent<Rigidbody>().isKinematic = false;
-        cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
+        /* Don't care about air resistance
+         * Use G = 9.81 m/s^2
+         * Start point height is cannon
+         * End point height is target
+         * Lowest between two will be height for ground
+         * 
+         * -------------------------------------------------------------
+         * 
+         * *** Start point and end point have SAME height ***
+         * 
+         * Max height = (initial velocity^2 * sin^2(angle)) / 2g 
+         * Time of flight = 2initial velocity * sin(angle) / g
+         * Distance = (initial velocity^2 * sin2(angle)) / g
+         * 
+         * -------------------------------------------------------------
+         * 
+         * *** Start point and end point can be DIFFERENCE height *** <<< Use this one
+         * 
+         * Max height = y0 + (vy0 * Rise) - (0.5 * g * Rise^2)
+         * Time of flight = Rise(vy0 / g) + Fall(sqrt( 2Max height / g))
+         * Distance = vx0 * time
+         * 
+         * vx0 = V0 * Cos(angle)
+         * vy0 = V0 * Sin(angle)
+         * y0 = height difference between cannon and ground
+        */
+        var rise = power * Mathf.Sin(-rotX * Mathf.Deg2Rad) / 9.81f;
+        maxHeight = height + (power * Mathf.Sin(-rotX * Mathf.Deg2Rad) * rise) - (0.5f * 9.81f * Mathf.Pow(rise, 2));
+        var fall = Mathf.Sqrt(2 * maxHeight / 9.81f);
+        maxTime = rise + fall;
+        maxDist = power * Mathf.Cos(-rotX * Mathf.Deg2Rad) * maxTime;
     }
 }
