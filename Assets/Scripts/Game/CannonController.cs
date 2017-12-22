@@ -7,12 +7,25 @@ public class CannonController : MonoBehaviour
     public TapGesture angleUp, angleDown, cannon;
     public Text angleText;
     public GameObject cannonBall;
+    public Camera sideCam;
+    public LineRenderer arcLine, groundLine;
+    public RenderTexture sideCamRT;
+    public RawImage rawImage, miniRawImage;
 
-    private float rotX, height = 0, maxHeight = 0, maxDist = 0, maxTime = 0, curDis, power = 20f;
+    private float maxHeight = 0, maxDist = 0, maxTime = 0;
+    private float angle = 0, height = 0, curDis = 0, power = 0;
+    private float velocity, step;
     private bool floating = false;
 
     private void OnEnable()
     {
+        step = Time.fixedDeltaTime * 1f;
+        sideCamRT.width = (int)rawImage.rectTransform.rect.width;
+        sideCamRT.height = (int)rawImage.rectTransform.rect.height;
+
+        power = 20;
+        curDis = 0;
+        velocity = Mathf.Sqrt((power * power) + (power * power));
         cannon.Tapped += ShootCannon;
     }
 
@@ -21,33 +34,43 @@ public class CannonController : MonoBehaviour
         cannon.Tapped -= ShootCannon;
     }
 
-    void Update ()
+    void FixedUpdate()
     {
-        rotX = transform.eulerAngles.x;
-        rotX = rotX > 180 ? rotX - 360 : rotX;
+        angle = transform.eulerAngles.x;
+        angle = angle > 180 ? angle - 360 : angle;
 
-        if (angleUp.State == Gesture.GestureState.Possible && rotX > -90)
-            rotX -= 1;
-        else if (angleDown.State == Gesture.GestureState.Possible && rotX < 0)
-            rotX += 1;
+        if (angleUp.State == Gesture.GestureState.Possible && angle > -90)
+            angle -= 1;
+        else if (angleDown.State == Gesture.GestureState.Possible && angle < 0)
+            angle += 1;
 
-        rotX = Mathf.Clamp(rotX, -90, 0);
+        angle = Mathf.Clamp(angle, -90, 0);
 
-        transform.localRotation = Quaternion.Euler(rotX, 0, 0);
-        angleText.text = string.Format("{0} \u00B0", Mathf.Round(-rotX));
+        transform.localRotation = Quaternion.Euler(angle, 0, 0);
+        angleText.text = string.Format("{0} \u00B0", Mathf.Round(-angle));
 
         // Calculate ball position
-        if(floating)
+        if (floating)
         {
-            if (curDis == maxDist)
+            curDis = cannonBall.transform.position.z;
+            if (curDis >= maxDist)
+            {
                 floating = false;
+                //cannonBall.GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
     {
         // Reset current force and position(reuse ball)
+        cannonBall.GetComponent<Rigidbody>().isKinematic = true;
         cannonBall.transform.position = Vector3.zero;
+        cannonBall.transform.localEulerAngles = Vector3.zero;
+        cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        cannonBall.GetComponent<Rigidbody>().isKinematic = false;
+        cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
         floating = true;
 
         /* Don't care about air resistance
@@ -76,10 +99,52 @@ public class CannonController : MonoBehaviour
          * vy0 = V0 * Sin(angle)
          * y0 = height difference between cannon and ground
         */
-        var rise = power * Mathf.Sin(-rotX * Mathf.Deg2Rad) / 9.81f;
-        maxHeight = height + (power * Mathf.Sin(-rotX * Mathf.Deg2Rad) * rise) - (0.5f * 9.81f * Mathf.Pow(rise, 2));
+        var rise = power * Mathf.Sin(-angle * Mathf.Deg2Rad) / 9.81f;
+        maxHeight = height + (power * Mathf.Sin(-angle * Mathf.Deg2Rad) * rise) - (0.5f * 9.81f * Mathf.Pow(rise, 2));
         var fall = Mathf.Sqrt(2 * maxHeight / 9.81f);
         maxTime = rise + fall;
-        maxDist = power * Mathf.Cos(-rotX * Mathf.Deg2Rad) * maxTime;
+        maxDist = power * Mathf.Cos(-angle * Mathf.Deg2Rad) * maxTime;
+
+        if (-angle == 0)
+        {
+            sideCam.transform.position = new Vector3(-10, 0, 1);
+            sideCam.orthographicSize = 1;
+        }
+        else if (angle <= 65)
+        {
+            sideCam.transform.position = new Vector3(-10, maxHeight / 2, maxDist / 2);
+            sideCam.orthographicSize = maxDist / 3;
+        }
+        else // 66 - 90
+        {
+            sideCam.transform.position = new Vector3(-10, 0, maxDist / 2);
+            sideCam.orthographicSize = maxHeight;
+        }
+
+        drawCurve();
+    }
+
+    private void drawCurve()
+    {
+        if (!miniRawImage.enabled)
+            miniRawImage.enabled = true;
+
+        int maxIndex = Mathf.RoundToInt(maxTime / step);
+        arcLine.positionCount = maxIndex;
+        groundLine.positionCount = 2;
+
+        Vector3 curPos = Vector3.zero;
+        Vector3 curVel = transform.forward * power;
+
+        groundLine.SetPosition(0, Vector3.zero);
+        groundLine.SetPosition(1, new Vector3(0, 0, maxDist));
+
+        for (int i = 0; i < maxIndex; i++)
+        {
+            arcLine.SetPosition(i, curPos);
+
+            curVel += Physics.gravity * step;
+            curPos += curVel * step;
+        }
     }
 }
