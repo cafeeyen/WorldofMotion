@@ -506,6 +506,7 @@
     <Compile Include="Assets\Scripts\UI\MainPage.cs" />
     <Compile Include="Assets\Scripts\UI\PropWindow.cs" />
     <Compile Include="Assets\Scripts\UI\SceneLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\ShowBigImage.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
     <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\CursorManager.cs" />
