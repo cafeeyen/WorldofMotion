@@ -6,6 +6,10 @@ public class CannonController : MonoBehaviour
 {
     public TapGesture angleUp, angleDown, cannon;
     public Text angleText;
+    public Text heightText;
+    public Text timeText;
+    public Text disText;
+    public Text powerText;
     public GameObject cannonBall;
     public Camera sideCam;
     public LineRenderer arcLine, groundLine;
@@ -48,7 +52,9 @@ public class CannonController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(angle, 0, 0);
         angleText.text = string.Format("{0} \u00B0", Mathf.Round(-angle));
-
+        heightText.text = string.Format("Max height : {0} m.", System.Math.Round(maxHeight,2));
+        timeText.text = string.Format("Time of flight : {0} s.", System.Math.Round(maxTime,2));
+        disText.text = string.Format("Max distance : {0} m.", System.Math.Round(maxDist, 2));
         // Calculate ball position
         if (floating)
         {
@@ -59,6 +65,14 @@ public class CannonController : MonoBehaviour
                 //cannonBall.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
+        if (string.IsNullOrEmpty(powerText.text))
+        {
+            power = 0;
+        }
+        else
+        {
+            power = int.Parse(powerText.text);
+        }    
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
