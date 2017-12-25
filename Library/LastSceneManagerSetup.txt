@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MainPage.unity
+- path: Assets/Scenes/BallRoller.unity
   isLoaded: 1
   isActive: 1
