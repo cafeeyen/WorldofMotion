@@ -5,31 +5,24 @@ using TouchScript.Gestures;
 public class CannonController : MonoBehaviour
 {
     public TapGesture angleUp, angleDown, cannon;
-    public Text angleText;
-    public Text heightText;
-    public Text timeText;
-    public Text disText;
-    public Text powerText;
-    public GameObject cannonBall;
+    public Text angleText, heightText, timeText, disText;
+    public InputField powerText;
+    public GameObject cannonBall, bigImage, overlay;
     public Camera sideCam;
     public LineRenderer arcLine, groundLine;
     public RenderTexture sideCamRT;
     public RawImage rawImage, miniRawImage;
+    public SceneLoader sceneLoader;
 
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
-    private float angle = 0, height = 0, curDis = 0, power = 0;
-    private float velocity, step;
-    private bool floating = false;
+    private float angle = 0, height = 0, power = 0;
+    private float step;
 
     private void OnEnable()
     {
         step = Time.fixedDeltaTime * 1f;
         sideCamRT.width = (int)rawImage.rectTransform.rect.width;
         sideCamRT.height = (int)rawImage.rectTransform.rect.height;
-
-        power = 20;
-        curDis = 0;
-        velocity = Mathf.Sqrt((power * power) + (power * power));
         cannon.Tapped += ShootCannon;
     }
 
@@ -55,23 +48,20 @@ public class CannonController : MonoBehaviour
         heightText.text = string.Format("Max height : {0} m.", System.Math.Round(maxHeight,2));
         timeText.text = string.Format("Time of flight : {0} s.", System.Math.Round(maxTime,2));
         disText.text = string.Format("Max distance : {0} m.", System.Math.Round(maxDist, 2));
-        // Calculate ball position
-        if (floating)
-        {
-            curDis = cannonBall.transform.position.z;
-            if (curDis >= maxDist)
-            {
-                floating = false;
-                //cannonBall.GetComponent<Rigidbody>().isKinematic = true;
-            }
-        }
+
         if (string.IsNullOrEmpty(powerText.text))
         {
             power = 0;
         }
         else
         {
-            power = int.Parse(powerText.text);
+            try
+            {
+                var clamp = Mathf.Clamp(int.Parse(powerText.text), 0, 50);
+                power = int.Parse(powerText.text);
+                powerText.text = clamp.ToString();
+            }
+            catch { }
         }    
     }
 
@@ -85,7 +75,6 @@ public class CannonController : MonoBehaviour
 
         cannonBall.GetComponent<Rigidbody>().isKinematic = false;
         cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
-        floating = true;
 
         /* Don't care about air resistance
          * Use G = 9.81 m/s^2
@@ -160,5 +149,25 @@ public class CannonController : MonoBehaviour
             curVel += Physics.gravity * step;
             curPos += curVel * step;
         }
+    }
+
+    public void clickMini()
+    {
+        if(miniRawImage.enabled)
+        {
+            bigImage.SetActive(true);
+            overlay.SetActive(true);
+        }
+    }
+
+    public void clickImg()
+    {
+        bigImage.SetActive(false);
+        overlay.SetActive(false);
+    }
+
+    public void backToMainMenu()
+    {
+        sceneLoader.loadNewScene(0);
     }
 }
