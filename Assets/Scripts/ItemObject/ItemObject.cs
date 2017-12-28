@@ -98,6 +98,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         surType = ItemCon.getFactory().getSurType(st_name);
         BaseMat = surType.getSurMat();
+        PhyMat = surType.getPhyMat();
         ItemCon.changeGrowMaterialTexture();
     }
     public bool IsGravity { get { return gravity; } set { gravity = value; } }
@@ -105,6 +106,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     public bool IsBreakable { get { return breakable; } set { breakable = value; } }
     public bool IsPlayer { get { return player; } set { player = value; } }
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
+    public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
     public float Mass { get { return rb.mass; } }

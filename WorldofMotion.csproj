@@ -486,7 +486,12 @@
     <Compile Include="Assets\OpenCVForUnity\org\opencv_contrib\xphoto\WhiteBalancer.cs" />
     <Compile Include="Assets\OpenCVForUnity\org\opencv_contrib\xphoto\Xphoto.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraForPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\DrawAxisLine.cs" />
+    <Compile Include="Assets\Scripts\Game\CannonController.cs" />
+    <Compile Include="Assets\Scripts\Game\GyroPlayer.cs" />
+    <Compile Include="Assets\Scripts\Game\SelectType.cs" />
+    <Compile Include="Assets\Scripts\Game\Timer.cs" />
     <Compile Include="Assets\Scripts\ItemObject\AxisTransition.cs" />
     <Compile Include="Assets\Scripts\ItemObject\DragNDrop.cs" />
     <Compile Include="Assets\Scripts\ItemObject\ItemObject.cs" />

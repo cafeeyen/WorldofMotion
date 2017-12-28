@@ -1,19 +1,17 @@
-﻿using TouchScript.Gestures;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class MainPage : MonoBehaviour
 {
     public Animator mainBG, backBtt, pageSlide, title, mainPage;
 
-    private SceneLoader sl;
+    private SceneLoader sceneLoader;
     private AudioSource audioSource;
     private AudioClip bttClk;
 
     private void Awake()
     {
         Time.timeScale = 1;
-        sl = GetComponent<SceneLoader>();
+        sceneLoader = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
     }
@@ -69,12 +67,12 @@ public class MainPage : MonoBehaviour
         switch (bttName)
         {
             case "Experiment": slidePage(bttName); break;
-            case "New": sl.loadNewScene(1); break;
+            case "New": sceneLoader.loadNewScene(1); break;
             case "Load": break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
-            case "CannonShooter": break;
-            case "BallRoller": break;
+            case "BallRoller": sceneLoader.loadNewScene(2); break;
+            case "CannonShooter": sceneLoader.loadNewScene(3); break;
             case "Back": slidePage(bttName); break;
         }
     }
