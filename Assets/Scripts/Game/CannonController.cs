@@ -17,6 +17,7 @@ public class CannonController : MonoBehaviour
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
     private float step;
+    private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f);
 
     private void OnEnable()
     {
@@ -69,7 +70,7 @@ public class CannonController : MonoBehaviour
     {
         // Reset current force and position(reuse ball)
         cannonBall.GetComponent<Rigidbody>().isKinematic = true;
-        cannonBall.transform.position = Vector3.zero;
+        cannonBall.transform.position = cannonPos;
         cannonBall.transform.localEulerAngles = Vector3.zero;
         cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
@@ -108,19 +109,20 @@ public class CannonController : MonoBehaviour
         maxTime = rise + fall;
         maxDist = power * Mathf.Cos(-angle * Mathf.Deg2Rad) * maxTime;
 
+        // Y-1.8f and Z+5.5f from cannon offset
         if (-angle == 0)
         {
-            sideCam.transform.position = new Vector3(-10, 0, 1);
+            sideCam.transform.position = new Vector3(-10, -1.8f, 1 + 5.5f);
             sideCam.orthographicSize = 1;
         }
         else if (angle <= 65)
         {
-            sideCam.transform.position = new Vector3(-10, maxHeight / 2, maxDist / 2);
+            sideCam.transform.position = new Vector3(-10, maxHeight / 2 - 1.8f, maxDist / 2 + 5.5f);
             sideCam.orthographicSize = maxDist / 3;
         }
         else // 66 - 90
         {
-            sideCam.transform.position = new Vector3(-10, 0, maxDist / 2);
+            sideCam.transform.position = new Vector3(-10, -1.8f, maxDist / 2 + 5.5f);
             sideCam.orthographicSize = maxHeight;
         }
 
@@ -129,6 +131,7 @@ public class CannonController : MonoBehaviour
 
     private void drawCurve()
     {
+        // Y-1.8f and Z+5.5f from cannon offset
         if (!miniRawImage.enabled)
             miniRawImage.enabled = true;
 
@@ -136,11 +139,11 @@ public class CannonController : MonoBehaviour
         arcLine.positionCount = maxIndex;
         groundLine.positionCount = 2;
 
-        Vector3 curPos = Vector3.zero;
+        Vector3 curPos = cannonPos;
         Vector3 curVel = transform.forward * power;
 
-        groundLine.SetPosition(0, Vector3.zero);
-        groundLine.SetPosition(1, new Vector3(0, 0, maxDist));
+        groundLine.SetPosition(0, cannonPos);
+        groundLine.SetPosition(1, new Vector3(0, -1.8f, maxDist + 5.5f));
 
         for (int i = 0; i < maxIndex; i++)
         {
