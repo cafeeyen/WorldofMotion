@@ -7,7 +7,7 @@ public class CannonController : MonoBehaviour
     public TapGesture angleUp, angleDown, cannon;
     public Text angleText, heightText, timeText, disText;
     public InputField powerText;
-    public GameObject cannonBall, bigImage, overlay;
+    public GameObject cannonBall, bigImage, overlay, Target, shootedTarget;
     public Camera sideCam;
     public LineRenderer arcLine, groundLine;
     public RenderTexture sideCamRT;
@@ -58,7 +58,8 @@ public class CannonController : MonoBehaviour
         {
             try
             {
-                var clamp = Mathf.Clamp(int.Parse(powerText.text), 0, 50);
+                // Power min = 0, max = 30 (m/s)
+                var clamp = Mathf.Clamp(int.Parse(powerText.text), 0, 30);
                 power = int.Parse(powerText.text);
                 powerText.text = clamp.ToString();
             }
@@ -115,16 +116,19 @@ public class CannonController : MonoBehaviour
             sideCam.transform.position = new Vector3(-10, -1.8f, 1 + 5.5f);
             sideCam.orthographicSize = 1;
         }
-        else if (angle <= 65)
+        else if(maxHeight <= maxDist / 2)
         {
             sideCam.transform.position = new Vector3(-10, maxHeight / 2 - 1.8f, maxDist / 2 + 5.5f);
-            sideCam.orthographicSize = maxDist / 3;
+            sideCam.orthographicSize = Mathf.Max(1,  maxDist / 3);
         }
-        else // 66 - 90
+        else
         {
-            sideCam.transform.position = new Vector3(-10, -1.8f, maxDist / 2 + 5.5f);
-            sideCam.orthographicSize = maxHeight;
+            sideCam.transform.position = new Vector3(-10, maxHeight / 2 - 1.8f, maxDist / 2 + 5.5f);
+            sideCam.orthographicSize = Mathf.Max(1, maxHeight * 0.9f);
         }
+
+        if(Target.GetComponent<TargetDetail>().Detected)
+            shootedTarget.transform.position = Target.transform.position;
 
         drawCurve();
     }

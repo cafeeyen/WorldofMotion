@@ -2,9 +2,9 @@
 
 public class TargetController : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "CannonBall")
+        if (other.tag == "CannonBall")
         {
 
         }
