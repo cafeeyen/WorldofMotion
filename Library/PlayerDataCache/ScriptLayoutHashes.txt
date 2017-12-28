@@ -240,7 +240,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 69d7d01d14b2cb1bf7ea22ff94f3abfc Assembly-CSharp.dll:.DefaultSmartTerrainEventHandler
 99fb603e20780b52805fbdf92487e554 Assembly-CSharp.dll:TouchScript.Behaviors.Transformer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Timer
-9046969cdff61bccb4ea8fb60d3a34d8 Assembly-CSharp.dll:.CannonController
+04a207788d101d3dfeeff68b823539b5 Assembly-CSharp.dll:.CannonController
 4f52fb13c8876d1fc6a0a4110faf10fc Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.ScreenTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.GestureManagerInstance
 24bb26e7da03092690ef38ebcd7ec1c0 Assembly-CSharp.dll:.CameraForPlayer
