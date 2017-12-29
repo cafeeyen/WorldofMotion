@@ -9,6 +9,7 @@ public class CannonController : MonoBehaviour
     public InputField powerText;
     public GameObject cannonBall, bigImage, overlay, Target, shootedTarget;
     public Camera sideCam;
+    public Camera ballCam;
     public LineRenderer arcLine, groundLine;
     public RenderTexture sideCamRT;
     public RawImage rawImage, miniRawImage;
@@ -64,11 +65,30 @@ public class CannonController : MonoBehaviour
                 powerText.text = clamp.ToString();
             }
             catch { }
-        }    
+        }
+        
+        if (cannonBall.transform.position.z > Target.transform.position.z+2 || cannonBall.transform.position.y < -1.8)
+        {
+            //swap camera
+            ballCam.depth = -12;
+        }
+        if (Target.transform.position.z - cannonBall.transform.position.z < 2 && Target.transform.position.z - cannonBall.transform.position.z >= 0)
+        {
+            //slow down if close to the target and after pass target to normal speed
+            Time.timeScale = 0.08f;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = step;
+        }
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
     {
+        ballCam.depth = 1;
+        ballCam.enabled = true;
         // Reset current force and position(reuse ball)
         cannonBall.GetComponent<Rigidbody>().isKinematic = true;
         cannonBall.transform.position = cannonPos;
