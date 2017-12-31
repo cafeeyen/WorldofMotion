@@ -184,7 +184,10 @@ public class CannonController : MonoBehaviour
             shooted = true;
         }
         else
+        {
+            shootedTarget.transform.position = new Vector3(0, 0, -100);
             drawCurve();
+        }
     }
 
     private void resetBall()
