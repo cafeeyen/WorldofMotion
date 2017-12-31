@@ -20,7 +20,6 @@ public class CannonController : MonoBehaviour
     private float step;
     private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f);
     private bool shooted = false;
-    private AudioSource audioSource;
     private AudioClip ShootClk;
 
     private void OnEnable()
@@ -31,8 +30,6 @@ public class CannonController : MonoBehaviour
         cutCamRT.width = sideCamRT.width;
         cutCamRT.height = sideCamRT.height;
         cannon.Tapped += ShootCannon;
-
-        audioSource = GetComponent<AudioSource>();
         ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
     }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TargetController : MonoBehaviour
 {
@@ -8,15 +7,17 @@ public class TargetController : MonoBehaviour
     public Transform sparkle;
     public Transform hitWord;
 
-    private AudioSource audioSource;
     private AudioClip HitEffect;
+    private ParticleSystem.EmissionModule sparkEm, hitEm;
 
     private void OnEnable()
     {
-        audioSource = GetComponent<AudioSource>();
         HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
-        sparkle.GetComponent<ParticleSystem>().enableEmission = false;
-        hitWord.GetComponent<ParticleSystem>().enableEmission = false;
+        sparkEm = sparkle.GetComponent<ParticleSystem>().emission;
+        hitEm = hitWord.GetComponent<ParticleSystem>().emission;
+
+        sparkEm.enabled = false;
+        hitEm.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,9 +25,9 @@ public class TargetController : MonoBehaviour
         if (other.tag == "CannonBall" && target.GetComponent<TargetDetail>().Detected)
         {
             AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
-            hitWord.GetComponent<ParticleSystem>().enableEmission = true;
-            sparkle.GetComponent<ParticleSystem>().enableEmission = true;
-            
+            sparkEm.enabled = true;
+            hitEm.enabled = true;
+
             StartCoroutine(showHitText());
         }
     }
@@ -35,7 +36,7 @@ public class TargetController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         //set sparkle off
-        hitWord.GetComponent<ParticleSystem>().enableEmission = false;
-        sparkle.GetComponent<ParticleSystem>().enableEmission = false;
+        sparkEm.enabled = false;
+        hitEm.enabled = false;
     }
 }
