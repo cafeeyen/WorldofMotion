@@ -4,29 +4,38 @@ using UnityEngine.UI;
 
 public class TargetController : MonoBehaviour
 {
-    public Animator hitText;
+    public GameObject target;
+    public Transform sparkle;
+    public Transform hitWord;
+
+    private AudioSource audioSource;
+    private AudioClip HitEffect;
 
     private void OnEnable()
     {
-        hitText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, Screen.height/2);
+        audioSource = GetComponent<AudioSource>();
+        HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
+        sparkle.GetComponent<ParticleSystem>().enableEmission = false;
+        hitWord.GetComponent<ParticleSystem>().enableEmission = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CannonBall")
+        if (other.tag == "CannonBall" && target.GetComponent<TargetDetail>().Detected)
         {
+            AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
+            hitWord.GetComponent<ParticleSystem>().enableEmission = true;
+            sparkle.GetComponent<ParticleSystem>().enableEmission = true;
+            
             StartCoroutine(showHitText());
         }
     }
 
     IEnumerator showHitText()
     {
-        hitText.gameObject.GetComponent<Image>().enabled = true;
         yield return new WaitForSeconds(0.1f);
-        hitText.SetBool("Hit", true);
-        yield return new WaitForSeconds(1);
-        hitText.SetBool("Hit", false);
-        yield return new WaitForSeconds(0.2f);
-        hitText.gameObject.GetComponent<Image>().enabled = false;
+        //set sparkle off
+        hitWord.GetComponent<ParticleSystem>().enableEmission = false;
+        sparkle.GetComponent<ParticleSystem>().enableEmission = false;
     }
 }

@@ -14,11 +14,14 @@ public class CannonController : MonoBehaviour
     public RawImage rawImage, miniRawImage;
     public SceneLoader sceneLoader;
 
+
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
     private float step;
     private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f);
     private bool shooted = false;
+    private AudioSource audioSource;
+    private AudioClip ShootClk;
 
     private void OnEnable()
     {
@@ -28,6 +31,9 @@ public class CannonController : MonoBehaviour
         cutCamRT.width = sideCamRT.width;
         cutCamRT.height = sideCamRT.height;
         cannon.Tapped += ShootCannon;
+
+        audioSource = GetComponent<AudioSource>();
+        ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
     }
 
     private void OnDisable()
@@ -106,6 +112,8 @@ public class CannonController : MonoBehaviour
     {
         if (!miniRawImage.enabled)
             miniRawImage.enabled = true;
+
+        AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
 
         // Reset ball camera depth(cutsceneCam)
         ballCam.depth = -2;
