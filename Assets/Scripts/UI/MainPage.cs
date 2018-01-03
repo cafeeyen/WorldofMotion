@@ -2,7 +2,7 @@
 
 public class MainPage : MonoBehaviour
 {
-    public Animator mainBG, backBtt, pageSlide, title, mainPage;
+    public Animator mainBG, backBtt, title, mainPage, expPage, gamePage;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
@@ -16,6 +16,12 @@ public class MainPage : MonoBehaviour
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
+
     private void slidePage(string bttName)
     {
         switch(bttName)
@@ -24,7 +30,7 @@ public class MainPage : MonoBehaviour
                 {
                     mainBG.SetBool("SlideExperiment", true);
                     backBtt.SetBool("SlideExperiment", true);
-                    pageSlide.SetBool("SlideExperiment", true);
+                    expPage.SetBool("IsExpPage", true);
                     title.SetBool("IsMainPage", false);
                     mainPage.SetBool("IsMainPage", false);
                     break;
@@ -34,7 +40,7 @@ public class MainPage : MonoBehaviour
                 {
                     mainBG.SetBool("SlideGame", true);
                     backBtt.SetBool("SlideGame", true);
-                    pageSlide.SetBool("SlideGame", true);
+                    gamePage.SetBool("IsGamePage", true);
                     title.SetBool("IsMainPage", false);
                     mainPage.SetBool("IsMainPage", false);
                     break;
@@ -46,14 +52,15 @@ public class MainPage : MonoBehaviour
                     {
                         mainBG.SetBool("SlideGame", false);
                         backBtt.SetBool("SlideGame", false);
-                        pageSlide.SetBool("SlideGame", false);
+                        gamePage.SetBool("IsGamePage", false);
                     }
                     else
                     {
                         mainBG.SetBool("SlideExperiment", false);
                         backBtt.SetBool("SlideExperiment", false);
-                        pageSlide.SetBool("SlideExperiment", false);
+                        expPage.SetBool("IsExpPage", false);
                     }
+
                     title.SetBool("IsMainPage", true);
                     mainPage.SetBool("IsMainPage", true);
                     break;
