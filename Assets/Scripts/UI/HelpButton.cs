@@ -9,8 +9,18 @@ public class HelpButton : MonoBehaviour
     public Sprite colorDot; //store color dot image
     public Sprite blackDot; //store black dot image
     public Image displayImage; //The current image thats visible
-    private int i = 0;
-    private int j = 0;//check if it is nextpage or backpage
+    private int page = 0, oldPage = 0;
+
+    private void OnEnable()
+    {
+        // Check if this open for first time
+        if (PlayerPrefs.GetInt("CannonShooterMode") == 0)
+        {
+            /* Tutorial */
+            openHelp();
+            PlayerPrefs.SetInt("CannonShooterMode", 1);
+        }
+    }
 
     public void openHelp()
     {
@@ -24,40 +34,17 @@ public class HelpButton : MonoBehaviour
         helpSection.SetActive(false);
     }
 
-    public void nextImage()
+    public void changePage(bool nextPage)
     {
-        if (i + 1 < gallery.Length)
-        {
-            i++;
-            j = 0;
-        }
+        oldPage = page;
+        page = nextPage ? (page + 1) % gallery.Length : page - 1 < 0 ? gallery.Length - 1 : page - 1;
+        changeImage();
     }
-
-    public void PrevImage()
+    
+    private  void changeImage()
     {
-        if (i - 1 >= 0)
-        {
-            i--;
-            j = 1;
-        }
-    }
-
-    void Update()
-    {
-        displayImage.sprite = gallery[i];
-        if (i  >= 1 && j==0)
-        {
-            dot[i].sprite = colorDot ;
-            dot[i - 1].sprite = blackDot;
-        }
-        else if (i >= 0 && j==1)
-        {
-            dot[i].sprite = colorDot;
-            dot[i + 1].sprite = blackDot;
-        }
-        else
-        {
-            dot[i].sprite = colorDot;
-        }
+        displayImage.sprite = gallery[page];
+        dot[oldPage].sprite = blackDot;
+        dot[page].sprite = colorDot;  
     }
 }

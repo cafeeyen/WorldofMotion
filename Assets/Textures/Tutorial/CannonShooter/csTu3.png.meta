@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d9771425a09da2c4d8362f13130b87a4
-timeCreated: 1514904985
+timeCreated: 1514971064
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -91,10 +91,10 @@ TextureImporter:
       name: csTu3_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1535
-        height: 1062
+        x: 97
+        y: 33
+        width: 1339
+        height: 1017
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
