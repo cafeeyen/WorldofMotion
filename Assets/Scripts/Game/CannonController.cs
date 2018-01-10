@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TouchScript.Gestures;
+using UnityEngine.SceneManagement;
 
 public class CannonController : MonoBehaviour
 {
@@ -21,21 +22,32 @@ public class CannonController : MonoBehaviour
     private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f);
     private bool shooted = false;
     private AudioClip ShootClk;
+    private bool modeAR;
 
     private void OnEnable()
-    {
-        step = Time.fixedDeltaTime * 1f;
-        sideCamRT.width = (int)rawImage.rectTransform.rect.width;
-        sideCamRT.height = (int)rawImage.rectTransform.rect.height;
-        cutCamRT.width = sideCamRT.width;
-        cutCamRT.height = sideCamRT.height;
-        cannon.Tapped += ShootCannon;
-        ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
+    {        
+        cannon.Tapped += ShootCannon;   
     }
 
     private void OnDisable()
     {
         cannon.Tapped -= ShootCannon;
+    }
+
+    private void Awake()
+    {
+        step = Time.fixedDeltaTime * 1f;
+        ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
+        modeAR = SceneManager.GetActiveScene().buildIndex == 3;
+
+        // AR mode only
+        if (modeAR)
+        {
+            sideCamRT.width = (int)rawImage.rectTransform.rect.width;
+            sideCamRT.height = (int)rawImage.rectTransform.rect.height;
+            cutCamRT.width = sideCamRT.width;
+            cutCamRT.height = sideCamRT.height;
+        }
     }
 
     void FixedUpdate()
@@ -59,10 +71,8 @@ public class CannonController : MonoBehaviour
             disText.text = string.Format("Max distance : {0} m.", System.Math.Round(maxDist, 2));
 
             if (string.IsNullOrEmpty(powerText.text))
-            {
                 power = 0;
-            }
-            else
+            else if(modeAR)
             {
                 try
                 {
@@ -71,10 +81,10 @@ public class CannonController : MonoBehaviour
                     power = int.Parse(powerText.text);
                     powerText.text = clamp.ToString();
                 }
-                catch { }
+                catch { Debug.Log(""); }
             }
         }
-        else
+        else if(modeAR)
         {
             ballCam.transform.position = cannonBall.transform.position + ballCamOffset;
 
@@ -107,14 +117,8 @@ public class CannonController : MonoBehaviour
 
     private void ShootCannon(object sender, System.EventArgs e)
     {
-        if (!miniRawImage.enabled)
-            miniRawImage.enabled = true;
-
+        Debug.Log("BAKAAAAAA");
         AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
-
-        // Reset ball camera depth(cutsceneCam)
-        ballCam.depth = -2;
-        
         resetBall();
         cannonBall.GetComponent<Rigidbody>().isKinematic = false;
         cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
@@ -151,43 +155,34 @@ public class CannonController : MonoBehaviour
         maxTime = rise + fall;
         maxDist = power * Mathf.Cos(-angle * Mathf.Deg2Rad) * maxTime;
 
-        // Y-1.8f and Z+5.5f from cannon offset
-        if (-angle == 0)
+        if (modeAR)
         {
-            sideCam.transform.position = new Vector3(-10, -1.8f, 1 + 5.5f);
-            sideCam.orthographicSize = 1;
-        }
-        else if(maxHeight <= maxDist / 2)
-        {
-            sideCam.transform.position = new Vector3(-10, maxHeight / 2 - 1.8f, maxDist / 2 + 5.5f);
-            sideCam.orthographicSize = Mathf.Max(1,  maxDist / 3);
-        }
-        else
-        {
-            sideCam.transform.position = new Vector3(-10, maxHeight / 2 - 1.8f, maxDist / 2 + 5.5f);
-            sideCam.orthographicSize = Mathf.Max(1, maxHeight * 0.9f);
+            if (!miniRawImage.enabled)
+                miniRawImage.enabled = true;
+
+            // Reset ball camera depth(cutsceneCam)
+            ballCam.depth = -2;
+
+            if (target.GetComponent<TargetDetail>().Detected)
+            {
+                //Swap camera
+                ballCam.depth = 2;
+                ballCam.transform.position = ballCamOffset + cannonPos;
+                //ballCam.transform.LookAt(target.transform);
+
+                // Show shooted target in side camera
+                shootedTarget.transform.position = target.transform.position;
+
+                miniRawImage.texture = cutCamRT;
+                rawImage.texture = cutCamRT;
+
+                shooted = true;
+            }
+            else
+                shootedTarget.transform.position = new Vector3(0, 0, -100);
         }
 
-        if(target.GetComponent<TargetDetail>().Detected)
-        {
-            //Swap camera
-            ballCam.depth = 2;
-            ballCam.transform.position = ballCamOffset + cannonPos;
-            //ballCam.transform.LookAt(target.transform);
-
-            // Show shooted target in side camera
-            shootedTarget.transform.position = target.transform.position;
-
-            miniRawImage.texture = cutCamRT;
-            rawImage.texture = cutCamRT;
-
-            shooted = true;
-        }
-        else
-        {
-            shootedTarget.transform.position = new Vector3(0, 0, -100);
-            drawCurve();
-        }
+        drawCurve();
     }
 
     private void resetBall()
@@ -212,8 +207,8 @@ public class CannonController : MonoBehaviour
         Vector3 curPos = cannonPos;
         Vector3 curVel = transform.forward * power;
 
-        groundLine.SetPosition(0, cannonPos);
-        groundLine.SetPosition(1, new Vector3(0, -1.8f, maxDist + 5.5f));
+        groundLine.SetPosition(0, new Vector3(0, -1.8f, 0));
+        groundLine.SetPosition(1, new Vector3(0, -1.8f, 100));
 
         for (int i = 0; i < maxIndex; i++)
         {
