@@ -14,11 +14,11 @@ public class HelpButton : MonoBehaviour
     private void OnEnable()
     {
         // Check if this open for first time
-        if (PlayerPrefs.GetInt("CannonShooterMode") == 0)
+        if (PlayerPrefs.GetInt("CannonShooterARFirstTime") == 0)
         {
             /* Tutorial */
             openHelp();
-            PlayerPrefs.SetInt("CannonShooterMode", 1);
+            PlayerPrefs.SetInt("CannonShooterARFirstTime", 1);
         }
     }
 
