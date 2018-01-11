@@ -3,40 +3,50 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
-    public GameObject target;
-    public Transform sparkle;
-    public Transform hitWord;
+    public TargetDetail target;
+    public ParticleSystem sparkle;
 
     private AudioClip HitEffect;
-    private ParticleSystem.EmissionModule sparkEm, hitEm;
+    private SkinnedMeshRenderer meshRen;
+    private int step = 1;
 
     private void OnEnable()
     {
         HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
-        sparkEm = sparkle.GetComponent<ParticleSystem>().emission;
-        hitEm = hitWord.GetComponent<ParticleSystem>().emission;
-
-        sparkEm.enabled = false;
-        hitEm.enabled = false;
+        meshRen = GetComponentInChildren<SkinnedMeshRenderer>();
+        PlayerPrefs.SetInt("CannonShooterMode", 2);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CannonBall" && target.GetComponent<TargetDetail>().Detected)
+        Debug.Log(other.gameObject);
+        if (other.tag == "CannonBall" && target.Detected)
         {
             AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
-            sparkEm.enabled = true;
-            hitEm.enabled = true;
-
-            StartCoroutine(showHitText());
+            sparkle.Play();
+            meshRen.enabled = false;
+            step++;
+            StartCoroutine(setNewPosition());               
         }
     }
 
-    IEnumerator showHitText()
+    IEnumerator setNewPosition()
     {
-        yield return new WaitForSeconds(0.1f);
-        //set sparkle off
-        sparkEm.enabled = false;
-        hitEm.enabled = false;
+        yield return new WaitForSeconds(3);
+        var z = Random.Range(15, 95);
+        var y = Random.Range(-1.8f, 30 * (95 - z) / 95);
+        switch (PlayerPrefs.GetInt("CannonShooterMode"))
+        {
+            case 1:
+            case 2:
+                transform.position = new Vector3(0, -1.8f, z);
+                break;
+
+            case 3:
+            case 4:
+                transform.position = new Vector3(0, y, z);
+                break;
+        }
+        meshRen.enabled = true;
     }
 }
