@@ -2,7 +2,7 @@
 
 public class MainPage : MonoBehaviour
 {
-    public Animator mainBG, backBtt, title, mainPage, expPage, gamePage;
+    public Animator mainBG, backBtt, title, mainPage, expPage, gamePage, CSPage;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
@@ -45,6 +45,16 @@ public class MainPage : MonoBehaviour
                     mainPage.SetBool("IsMainPage", false);
                     break;
                 }
+            case "csLevel":
+                {
+                    mainBG.SetBool("SlideCS", true);
+                    mainBG.SetBool("SlideGame", false);
+                    CSPage.SetBool("IsCSPage", true);
+                    gamePage.SetBool("IsGamePage", false);
+                    title.SetBool("IsMainPage", false);
+                    mainPage.SetBool("IsMainPage", false);
+                    break;
+                }
 
             case "Back":
                 {
@@ -53,16 +63,30 @@ public class MainPage : MonoBehaviour
                         mainBG.SetBool("SlideGame", false);
                         backBtt.SetBool("SlideGame", false);
                         gamePage.SetBool("IsGamePage", false);
+                        title.SetBool("IsMainPage", true);
+                        mainPage.SetBool("IsMainPage", true);
+                    }
+                    else if(mainBG.GetBool("SlideCS"))
+                    {
+                        mainBG.SetBool("SlideCS", false);
+                        CSPage.SetBool("IsCSPage", false);
+                        backBtt.SetBool("SlideGame", false);
+
+                        mainBG.SetBool("SlideGame", true);
+                        backBtt.SetBool("SlideGame", true);
+                        gamePage.SetBool("IsGamePage", true);
                     }
                     else
                     {
                         mainBG.SetBool("SlideExperiment", false);
                         backBtt.SetBool("SlideExperiment", false);
                         expPage.SetBool("IsExpPage", false);
+                        title.SetBool("IsMainPage", true);
+                        mainPage.SetBool("IsMainPage", true);
                     }
 
-                    title.SetBool("IsMainPage", true);
-                    mainPage.SetBool("IsMainPage", true);
+                    //title.SetBool("IsMainPage", true);
+                    //mainPage.SetBool("IsMainPage", true);
                     break;
                 }
         }
@@ -80,6 +104,7 @@ public class MainPage : MonoBehaviour
             case "Game": slidePage(bttName); break;
             case "BallRoller": sceneLoader.loadNewScene(2); break;
             case "CannonShooter": sceneLoader.loadNewScene(3); break;
+            case "csLevel": slidePage(bttName); break;
             case "Back": slidePage(bttName); break;
         }
     }

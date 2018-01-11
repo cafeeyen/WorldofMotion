@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class CannonController : MonoBehaviour
 {
     public TapGesture angleUp, angleDown, cannon;
-    public Text angleText, heightText, timeText, disText;
+    public Text angleText, heightText, timeText, disText, countText;
     public InputField powerText;
     public GameObject cannonBall, target, shootedTarget, trail;
     public Camera sideCam, ballCam;
@@ -16,6 +16,7 @@ public class CannonController : MonoBehaviour
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
     private float step;
+    private int cntShoot = 0;
     private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f);
     private bool shooted = false;
     private AudioClip ShootClk;
@@ -57,6 +58,7 @@ public class CannonController : MonoBehaviour
             heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} เมตร", System.Math.Round(maxHeight, 2));
             disText.text = string.Format("ระยะทางในแนวราบ {0} เมตร", System.Math.Round(maxDist, 2));
             timeText.text = string.Format("เวลาที่ลงถึงพื้น {0} วินาที", System.Math.Round(maxTime, 2));
+            countText.text = string.Format("= {0}", cntShoot);
 
             if (string.IsNullOrEmpty(powerText.text))
                 power = 0;
@@ -106,6 +108,7 @@ public class CannonController : MonoBehaviour
     private void ShootCannon(object sender, System.EventArgs e)
     {
         AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
+        cntShoot++;
         resetBall();
         cannonBall.GetComponent<Rigidbody>().isKinematic = false;
         cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
