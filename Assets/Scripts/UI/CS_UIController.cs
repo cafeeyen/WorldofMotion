@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay;
+    public GameObject bigImage, overlay, canyon, ground;
     public RenderTexture sideCamRT, cutCamRT;
     public RawImage rawImage, miniRawImage;
     public Animator calTab;
@@ -13,12 +11,18 @@ public class CS_UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlayerPrefs.GetInt("CannonShooterMode") == 4)
+        switch(PlayerPrefs.GetInt("CannonShooterMode"))
         {
-            sideCamRT.width = (int)rawImage.rectTransform.rect.width;
-            sideCamRT.height = (int)rawImage.rectTransform.rect.height;
-            cutCamRT.width = sideCamRT.width;
-            cutCamRT.height = sideCamRT.height;
+            case 1:
+                canyon.SetActive(false);
+                ground.SetActive(true);
+                break;                
+            case 5:
+                sideCamRT.width = (int)rawImage.rectTransform.rect.width;
+                sideCamRT.height = (int)rawImage.rectTransform.rect.height;
+                cutCamRT.width = sideCamRT.width;
+                cutCamRT.height = sideCamRT.height;
+                break;
         }
     }
 
