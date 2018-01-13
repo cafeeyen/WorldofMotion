@@ -16,15 +16,25 @@ public class CannonController : MonoBehaviour
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
     private float step;
-    private int cntShoot = 0;
-    private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f);
+    private int shootCnt = 0;
+    private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), ballCamOffset = new Vector3(0, 2.8f, -5.5f), canyonPos = new Vector3(0, 27, 5.5f);
     private bool shooted = false;
     private AudioClip ShootClk;
     private bool modeAR;
 
+    /*
+     * CannonShooterMode
+     * 1 : Lv1
+     * 2 : Lv2
+     * 3 : Lv3
+     * 4 : Unlimited
+     * 5 : AR
+    */
+
     private void OnEnable()
     {        
-        cannon.Tapped += ShootCannon;   
+        cannon.Tapped += ShootCannon;
+        PlayerPrefs.SetInt("CannonShooterMode", 3);
     }
 
     private void OnDisable()
@@ -36,7 +46,13 @@ public class CannonController : MonoBehaviour
     {
         step = Time.fixedDeltaTime * 1f;
         ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
-        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 4;
+        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 5;
+
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 1 && !modeAR)
+        {
+            transform.position = canyonPos;
+            cannonBall.transform.position = canyonPos;
+        }
     }
 
     void FixedUpdate()
@@ -57,8 +73,8 @@ public class CannonController : MonoBehaviour
             angleText.text = string.Format("{0} \u00B0", Mathf.Round(-angle));
             heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} เมตร", System.Math.Round(maxHeight, 2));
             disText.text = string.Format("ระยะทางในแนวราบ {0} เมตร", System.Math.Round(maxDist, 2));
-            timeText.text = string.Format("เวลาที่ลงถึงพื้น {0} วินาที", System.Math.Round(maxTime, 2));
-            countText.text = string.Format("= {0}", cntShoot);
+            timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} วินาที", System.Math.Round(maxTime, 2));
+            countText.text = string.Format("= {0}", shootCnt);
 
             if (string.IsNullOrEmpty(powerText.text))
                 power = 0;
@@ -90,7 +106,6 @@ public class CannonController : MonoBehaviour
             }
             else if ((Time.timeScale == 0.08f || xDif > 5) || shootedTarget.transform.position.z - cannonBall.transform.position.z < -2 || cannonBall.transform.position.y < -1.8)
             {
-                shooted = false;
                 ballCam.depth = -2;
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = step;
@@ -99,86 +114,91 @@ public class CannonController : MonoBehaviour
         }
 
         cannonBall.transform.LookAt(-cannonBall.GetComponent<Rigidbody>().velocity);
-
-        if(cannonBall.transform.position.y <= -50)
+        if(cannonBall.transform.position.y < -10)
             // We don't want ball position to limitbreak~
             resetBall();
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
     {
-        AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
-        cntShoot++;
-        resetBall();
-        cannonBall.GetComponent<Rigidbody>().isKinematic = false;
-        cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
-        trail.SetActive(true);
-
-        /* Don't care about air resistance
-         * Use G = 9.81 m/s^2
-         * Start point height is cannon
-         * End point height is target
-         * Lowest between two will be height for ground
-         * 
-         * -------------------------------------------------------------
-         * 
-         * *** Start point and end point have SAME height ***
-         * 
-         * Max height = (initial velocity^2 * sin^2(angle)) / 2g 
-         * Time of flight = 2initial velocity * sin(angle) / g
-         * Distance = (initial velocity^2 * sin2(angle)) / g
-         * 
-         * -------------------------------------------------------------
-         * 
-         * *** Start point and end point can be DIFFERENCE height *** <<< Use this one
-         * 
-         * Max height = y0 + (vy0 * Rise) - (0.5 * g * Rise^2)
-         * Time of flight = Rise(vy0 / g) + Fall(sqrt( 2Max height / g))
-         * Distance = vx0 * time
-         * 
-         * vx0 = V0 * Cos(angle)
-         * vy0 = V0 * Sin(angle)
-         * y0 = height difference between cannon and ground
-        */
-        var rise = power * Mathf.Sin(-angle * Mathf.Deg2Rad) / 9.81f;
-        maxHeight = height + (power * Mathf.Sin(-angle * Mathf.Deg2Rad) * rise) - (0.5f * 9.81f * Mathf.Pow(rise, 2));
-        var fall = Mathf.Sqrt(2 * maxHeight / 9.81f);
-        maxTime = rise + fall;
-        maxDist = power * Mathf.Cos(-angle * Mathf.Deg2Rad) * maxTime;
-
-        if (modeAR)
+        if(power > 0 && !shooted)
         {
-            // Reset ball camera depth(cutsceneCam)
-            ballCam.depth = -2;
+            AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
+            shootCnt++;
+            resetBall();
+            cannonBall.GetComponent<Rigidbody>().isKinematic = false;
+            cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
+            shooted = true;
+            trail.SetActive(true);
 
-            if (target.GetComponent<TargetDetail>().Detected)
+            /* Don't care about air resistance
+             * Use G = 9.81 m/s^2
+             * Start point height is cannon
+             * End point height is target
+             * Lowest between two will be height for ground
+             * 
+             * -------------------------------------------------------------
+             * 
+             * *** Start point and end point have SAME height ***
+             * 
+             * Max height = (initial velocity^2 * sin^2(angle)) / 2g 
+             * Time of flight = 2initial velocity * sin(angle) / g
+             * Distance = (initial velocity^2 * sin2(angle)) / g
+             * 
+             * -------------------------------------------------------------
+             * 
+             * *** Start point and end point can be DIFFERENCE height *** <<< Use this one
+             * 
+             * Max height = h + (vy0 * Rise) - (0.5 * g * Rise^2)
+             * Time of flight = Rise(vy0 / g) + Fall(sqrt( 2Max height / g))
+             * Distance = vx0 * time
+             * 
+             * vx0 = V0 * Cos(angle)
+             * vy0 = V0 * Sin(angle)
+             * h = height difference between cannon and ground/target
+            */
+            var rise = power * Mathf.Sin(-angle * Mathf.Deg2Rad) / 9.81f;
+            maxHeight = height + (power * Mathf.Sin(-angle * Mathf.Deg2Rad) * rise) - (0.5f * 9.81f * Mathf.Pow(rise, 2));
+            var fall = Mathf.Sqrt(2 * maxHeight / 9.81f);
+            maxTime = rise + fall;
+            maxDist = power * Mathf.Cos(-angle * Mathf.Deg2Rad) * maxTime;
+            if (modeAR)
             {
-                //Swap camera
-                ballCam.depth = 2;
-                ballCam.transform.position = ballCamOffset + cannonPos;
-                csCon.viewToCutCam();
+                // Reset ball camera depth(cutsceneCam)
+                ballCam.depth = -2;
 
-                // Show shooted target in side camera
-                shootedTarget.transform.position = target.transform.position;
-                shooted = true;
+                if (target.GetComponent<TargetDetail>().Detected)
+                {
+                    //Swap camera
+                    ballCam.depth = 2;
+                    ballCam.transform.position = ballCamOffset + cannonPos;
+                    csCon.viewToCutCam();
+
+                    // Show shooted target in side camera
+                    shootedTarget.transform.position = target.transform.position;
+                }
+                else
+                {
+                    shootedTarget.transform.position = new Vector3(0, 0, -100);
+                    drawCurve();
+                }
             }
             else
-            {
-                shootedTarget.transform.position = new Vector3(0, 0, -100);
                 drawCurve();
-            }
         }
-        else
-            drawCurve();
     }
 
     private void resetBall()
     {
         // Reset current force and position(reuse ball)
         cannonBall.GetComponent<Rigidbody>().isKinematic = true;
-        cannonBall.transform.position = cannonPos;
         cannonBall.transform.localEulerAngles = Vector3.zero;
         cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        if (PlayerPrefs.GetInt("CannonShooterMode") == 2 || PlayerPrefs.GetInt("CannonShooterMode") == 3)
+            cannonBall.transform.position = canyonPos;
+        else
+            cannonBall.transform.position = cannonPos;
+        shooted = false;
         trail.SetActive(false);
     }
 
@@ -202,7 +222,12 @@ public class CannonController : MonoBehaviour
         int maxIndex = Mathf.RoundToInt(maxTime / step);
         arcLine.positionCount = maxIndex;
 
-        Vector3 curPos = cannonPos;
+        Vector3 curPos;
+        if (PlayerPrefs.GetInt("CannonShooterMode") == 2 || PlayerPrefs.GetInt("CannonShooterMode") == 3)
+            curPos = canyonPos;
+        else
+            curPos = cannonPos;
+
         Vector3 curVel = transform.forward * power;
 
         for (int i = 0; i < maxIndex; i++)
@@ -212,5 +237,10 @@ public class CannonController : MonoBehaviour
             curVel += Physics.gravity * step;
             curPos += curVel * step;
         }
+    }
+
+    public void setHeight(float h)
+    {
+        height = h;
     }
 }

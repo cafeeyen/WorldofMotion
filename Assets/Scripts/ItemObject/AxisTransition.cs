@@ -9,9 +9,9 @@ public class AxisTransition : MonoBehaviour
 
     private void OnEnable()
     {
-        axisX = transform.Find("Axis X").GetComponent<TransformGesture>();
-        axisY = transform.Find("Axis Y").GetComponent<TransformGesture>();
-        axisZ = transform.Find("Axis Z").GetComponent<TransformGesture>();
+        axisX = transform.Find("AxisArrow X").GetComponent<TransformGesture>();
+        axisY = transform.Find("AxisArrow Y").GetComponent<TransformGesture>();
+        axisZ = transform.Find("AxisArrow Z").GetComponent<TransformGesture>();
 
         axisX.Transformed += transfromMoveHandler;
         axisY.Transformed += transfromMoveHandler;

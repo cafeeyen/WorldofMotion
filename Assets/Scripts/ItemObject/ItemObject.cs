@@ -7,14 +7,14 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private ItemObjectController ItemCon;
     private SurfaceType surType;
     private int mass;
-    private bool gravity, gyro, breakable, player, overlapping;
+    private bool gravity, overlapping;
     private Renderer baseRenderer;
     private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
 
     // Data
-    private Vector3 pos, velocity, angularVelocity;
+    private Vector3 pos, velocity = Vector3.zero, angularVelocity;
     private Quaternion rot;
 
     void Awake()
@@ -22,9 +22,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
         surType = ItemCon.getFactory().getSurType("Wood");
         gravity = false;
-        gyro = false;
-        player = false;
-        breakable = false;
         overlapping = false;
 
         baseRenderer = transform.GetComponent<Renderer>();
@@ -102,12 +99,10 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         ItemCon.changeGrowMaterialTexture();
     }
     public bool IsGravity { get { return gravity; } set { gravity = value; } }
-    public bool IsGyro { get { return gyro; } set { gyro = value; } }
-    public bool IsBreakable { get { return breakable; } set { breakable = value; } }
-    public bool IsPlayer { get { return player; } set { player = value; } }
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
     public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
     public float Mass { get { return rb.mass; } }
+    public Vector3 Velocity { get { return velocity; } set { velocity = value; rb.velocity = velocity; } }
 }

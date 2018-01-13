@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainPage : MonoBehaviour
 {
     public Animator mainBG, backBtt, title, mainPage, expPage, gamePage, CSPage;
+    public Button csLv2, csLv3;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
@@ -14,6 +16,12 @@ public class MainPage : MonoBehaviour
         sceneLoader = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
+
+        // Unlock level
+        if (PlayerPrefs.GetInt("csLv2") == 1)
+            csLv2.interactable = true;
+        if (PlayerPrefs.GetInt("csLv3") == 1)
+            csLv3.interactable = true;
     }
 
     void Update()
@@ -45,7 +53,7 @@ public class MainPage : MonoBehaviour
                     mainPage.SetBool("IsMainPage", false);
                     break;
                 }
-            case "csLevel":
+            case "CannonShooter":
                 {
                     mainBG.SetBool("SlideCS", true);
                     mainBG.SetBool("SlideGame", false);
@@ -103,8 +111,11 @@ public class MainPage : MonoBehaviour
             case "Import": break;
             case "Game": slidePage(bttName); break;
             case "BallRoller": sceneLoader.loadNewScene(2); break;
-            case "CannonShooter": sceneLoader.loadNewScene(3); break;
-            case "csLevel": slidePage(bttName); break;
+            case "CannonShooter": slidePage(bttName); break;
+            case "CSLv1":
+                PlayerPrefs.SetInt("CannonShooterMode", 1);
+                sceneLoader.loadNewScene(3);
+                break;
             case "Back": slidePage(bttName); break;
         }
     }
