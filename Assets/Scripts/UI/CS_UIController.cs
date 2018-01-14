@@ -47,6 +47,13 @@ public class CS_UIController : MonoBehaviour
         sceneLoader.loadNewScene(0);
     }
 
+    public void backToSelectLv()
+    {
+        PlayerPrefs.SetInt("CannonShooterMode", 0);
+        PlayerPrefs.SetInt("CSLvSelect", 1);
+        sceneLoader.loadNewScene(0);
+    }
+
     public void displayCalTab()
     {
         calTab.SetBool("IsDisplayed", !calTab.GetBool("IsDisplayed"));
