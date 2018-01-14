@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class MainPage : MonoBehaviour
 {
     public Animator mainBG, backBtt, title, mainPage, expPage, gamePage, CSPage;
+    public Sprite[] frameGal;
+    public Image[] displayFrame;
     public Button csLv2, csLv3;
 
     private SceneLoader sceneLoader;
@@ -29,13 +31,13 @@ public class MainPage : MonoBehaviour
             switch(PlayerPrefs.GetInt("CsLv" + i + "Star"))
             {
                 case 1:
-                    // Bronze
+                    displayFrame[i - 1].sprite = frameGal[0];
                     break;
                 case 2:
-                    // Silver
+                    displayFrame[i - 1].sprite = frameGal[1];
                     break;
                 case 3:
-                    // Gold
+                    displayFrame[i - 1].sprite = frameGal[2];
                     break;
             }
         }
