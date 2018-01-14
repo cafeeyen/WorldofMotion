@@ -18,10 +18,34 @@ public class MainPage : MonoBehaviour
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
 
         // Unlock level
-        if (PlayerPrefs.GetInt("csLv2") == 1)
+        if (PlayerPrefs.GetInt("CSLv2") == 1)
             csLv2.interactable = true;
-        if (PlayerPrefs.GetInt("csLv3") == 1)
+        if (PlayerPrefs.GetInt("CSLv3") == 1)
             csLv3.interactable = true;
+
+        // Change border
+        for(int i=1;i<=3;i++)
+        {
+            switch(PlayerPrefs.GetInt("CsLv" + i + "Star"))
+            {
+                case 1:
+                    // Bronze
+                    break;
+                case 2:
+                    // Silver
+                    break;
+                case 3:
+                    // Gold
+                    break;
+            }
+        }
+
+        if(PlayerPrefs.GetInt("CSLvSelect") == 1)
+        {
+            slidePage("Game");
+            slidePage("CannonShooter");
+            PlayerPrefs.SetInt("CSLvSelect", 0);
+        }
     }
 
     void Update()
@@ -114,6 +138,14 @@ public class MainPage : MonoBehaviour
             case "CannonShooter": slidePage(bttName); break;
             case "CSLv1":
                 PlayerPrefs.SetInt("CannonShooterMode", 1);
+                sceneLoader.loadNewScene(3);
+                break;
+            case "CSLv2":
+                PlayerPrefs.SetInt("CannonShooterMode", 2);
+                sceneLoader.loadNewScene(3);
+                break;
+            case "CSLv3":
+                PlayerPrefs.SetInt("CannonShooterMode", 3);
                 sceneLoader.loadNewScene(3);
                 break;
             case "Back": slidePage(bttName); break;

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TouchScript.Gestures;
-using UnityEngine.SceneManagement;
 
 public class CannonController : MonoBehaviour
 {
@@ -34,7 +33,6 @@ public class CannonController : MonoBehaviour
     private void OnEnable()
     {        
         cannon.Tapped += ShootCannon;
-        PlayerPrefs.SetInt("CannonShooterMode", 3);
     }
 
     private void OnDisable()
@@ -239,8 +237,7 @@ public class CannonController : MonoBehaviour
         }
     }
 
-    public void setHeight(float h)
-    {
-        height = h;
-    }
+    public void setHeight(float h){ height = h; }
+
+    public int getShootCnt() { return shootCnt; }
 }

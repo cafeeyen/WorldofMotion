@@ -5,11 +5,12 @@ public class TargetController : MonoBehaviour
 {
     public TargetDetail target;
     public ParticleSystem sparkle;
-    public GameObject cannon;
+    public GameObject cannon, star1, star2, star3, overlay, particle;
 
     private AudioClip HitEffect;
     private SkinnedMeshRenderer meshRen;
     private int hit = 0;
+    private Animator star;
 
     private void OnEnable()
     {
@@ -29,12 +30,34 @@ public class TargetController : MonoBehaviour
             if (hit < 5)
                 StartCoroutine(setNewPosition());
             else
-                Debug.Log("Finish level");
-            /*
-             * Plan
-             * 1. Show score(star)
-             * 2. Send back to level selection
-            */    
+            {
+                cannon.SetActive(false);
+                PlayerPrefs.SetInt("CSLv" + (PlayerPrefs.GetInt("CannonShooterMode") + 1), 1);
+                var cnt = cannon.GetComponent<CannonController>().getShootCnt();
+                if (cnt == 5)
+                {
+                    star3.SetActive(true);
+                    star = star3.GetComponent<Animator>();
+                    PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 3);
+                }
+                else if (cnt <= 10)
+                {
+                    star2.SetActive(true);
+                    star = star2.GetComponent<Animator>();
+                    if(PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 2)
+                        PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 2);
+                }
+                else
+                {
+                    star1.SetActive(true);
+                    star = star1.GetComponent<Animator>();
+                    if (PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 1)
+                        PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 1);
+                }
+                overlay.SetActive(true);
+                star.SetBool("Show", true);
+                particle.SetActive(true);
+            }  
         }
     }
 
