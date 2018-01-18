@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HelpButton : MonoBehaviour
 {
-    public GameObject overlay, helpSection;
+    public GameObject overlay, helpSection, maewnam, cannon,cannonball,sparkle;
     public Sprite[] gallery; //store all tutorial image
     public Image[] dot; //store dot that apear on screen
     public Sprite colorDot; //store color dot image
@@ -26,12 +26,20 @@ public class HelpButton : MonoBehaviour
     {
         overlay.SetActive(true);
         helpSection.SetActive(true);
+        maewnam.SetActive(false);
+        cannon.SetActive(false);
+        cannonball.SetActive(false);
+        sparkle.SetActive(false);
     }
 
     public void closeHelp()
     {
         overlay.SetActive(false);
         helpSection.SetActive(false);
+        maewnam.SetActive(true);
+        cannon.SetActive(true);
+        cannonball.SetActive(true);
+        sparkle.SetActive(true);
     }
 
     public void changePage(bool nextPage)

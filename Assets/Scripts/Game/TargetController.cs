@@ -5,7 +5,7 @@ public class TargetController : MonoBehaviour
 {
     public TargetDetail target;
     public ParticleSystem sparkle;
-    public GameObject cannon, star1, star2, star3, overlay, particle;
+    public GameObject cannon, star1, star2, star3, overlay, particle,levelbtt, homebtt;
 
     private AudioClip HitEffect;
     private SkinnedMeshRenderer meshRen;
@@ -56,6 +56,8 @@ public class TargetController : MonoBehaviour
                 }
                 overlay.SetActive(true);
                 star.SetBool("Show", true);
+                levelbtt.SetActive(true);
+                homebtt.SetActive(true);
                 particle.SetActive(true);
             }  
         }
