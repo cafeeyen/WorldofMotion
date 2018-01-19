@@ -31,13 +31,13 @@ public class MainPage : MonoBehaviour
             switch(PlayerPrefs.GetInt("CsLv" + i + "Star"))
             {
                 case 1:
-                    displayFrame[i - 1].sprite = frameGal[0];
+                    displayFrame[i-1].sprite = frameGal[0];
                     break;
                 case 2:
-                    displayFrame[i - 1].sprite = frameGal[1];
+                    displayFrame[i-1].sprite = frameGal[1];
                     break;
                 case 3:
-                    displayFrame[i - 1].sprite = frameGal[2];
+                    displayFrame[i-1].sprite = frameGal[2];
                     break;
             }
         }
