@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, canyon, ground;
+    public GameObject bigImage, overlay, overlay2, canyon, ground, rule, cannon, maewnam, cannonball, sparkle;
     public RenderTexture sideCamRT, cutCamRT;
     public RawImage rawImage, miniRawImage;
     public Animator calTab;
@@ -16,6 +16,8 @@ public class CS_UIController : MonoBehaviour
             case 1:
                 canyon.SetActive(false);
                 ground.SetActive(true);
+
+                openRule();
                 break;                
             case 5:
                 sideCamRT.width = (int)rawImage.rectTransform.rect.width;
@@ -45,6 +47,35 @@ public class CS_UIController : MonoBehaviour
     {
         PlayerPrefs.SetInt("CannonShooterMode", 0);
         sceneLoader.loadNewScene(0);
+    }
+
+    public void openRule()
+    {
+        rule.SetActive(true);
+        overlay2.SetActive(true);
+        cannon.SetActive(false);
+        maewnam.SetActive(false);
+        cannonball.SetActive(false);
+        sparkle.SetActive(false);
+    }
+
+    public void closeRule(bool helpsection)
+    {
+        if (helpsection == true)
+        {
+            rule.SetActive(false);
+            overlay2.SetActive(false);
+        }
+        else
+        {
+            rule.SetActive(false);
+            overlay2.SetActive(false);
+            cannon.SetActive(true);
+            maewnam.SetActive(true);
+            cannonball.SetActive(true);
+            sparkle.SetActive(true);
+        }
+        
     }
 
     public void backToSelectLv()
