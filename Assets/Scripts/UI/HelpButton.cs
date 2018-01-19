@@ -14,11 +14,11 @@ public class HelpButton : MonoBehaviour
     private void OnEnable()
     {
         // Check if this open for first time
-        if (PlayerPrefs.GetInt("CannonShooterARFirstTime") == 0)
+        if (PlayerPrefs.GetInt("CannonShooter" + PlayerPrefs.GetInt("CannonShooterMode") + "FirstTime") == 0)
         {
             /* Tutorial */
-            openHelp();
-            PlayerPrefs.SetInt("CannonShooterARFirstTime", 1);
+            openCSHelp();
+            PlayerPrefs.SetInt("CannonShooter" + PlayerPrefs.GetInt("CannonShooterMode") + "FirstTime", 1);
         }
 
         if (PlayerPrefs.GetInt("CannonShooterMode") == 1)
@@ -41,8 +41,13 @@ public class HelpButton : MonoBehaviour
         }
     }
 
-    public void openHelp()
+    public void openCSHelp()
     {
+        maewnam.SetActive(false);
+        cannon.SetActive(false);
+        cannonball.SetActive(false);
+        sparkle.SetActive(false);
+
         overlay.SetActive(true);
         helpSection.SetActive(true);
         switch (PlayerPrefs.GetInt("CannonShooterMode"))
@@ -66,7 +71,7 @@ public class HelpButton : MonoBehaviour
         sparkle.SetActive(false);
     }
 
-    public void closeHelp()
+    public void closeCSHelp()
     {
         overlay.SetActive(false);
         helpSection.SetActive(false);
@@ -109,6 +114,7 @@ public class HelpButton : MonoBehaviour
                 break;
         }
     }
+
     public void exitTable()
     {
         table.SetActive(false);
@@ -133,7 +139,7 @@ public class HelpButton : MonoBehaviour
         if (PlayerPrefs.GetInt("CannonShooterMode") == 1)
         {
             oldPage = page;
-            page = nextPage ? (page + 1) % 11 : page - 1 < 0 ? 11 : page - 1;
+            page = nextPage ? (page + 1) % 12 : page - 1 < 0 ? 11 : page - 1;
             changeImage();
         }  
         else if (PlayerPrefs.GetInt("CannonShooterMode") == 2)
@@ -150,7 +156,7 @@ public class HelpButton : MonoBehaviour
         }
     }
     
-    private  void changeImage()
+    private void changeImage()
     {
         displayImage.sprite = gallery[page];
         dot[oldPage].sprite = blackDot;

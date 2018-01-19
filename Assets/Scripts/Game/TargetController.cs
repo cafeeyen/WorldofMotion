@@ -16,6 +16,8 @@ public class TargetController : MonoBehaviour
     {
         HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
         meshRen = GetComponentInChildren<SkinnedMeshRenderer>();
+        meshRen.enabled = false;
+        GetComponent<Collider>().enabled = false;
         StartCoroutine(setNewPosition());
     }
 
@@ -26,8 +28,9 @@ public class TargetController : MonoBehaviour
             AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
             sparkle.Play();
             meshRen.enabled = false;
+            GetComponent<Collider>().enabled = false;
             hit++;
-            if (hit < 5)
+            if (hit < 5 || PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") == 3)
                 StartCoroutine(setNewPosition());
             else
             {
@@ -85,6 +88,7 @@ public class TargetController : MonoBehaviour
                     break;
             }
             meshRen.enabled = true;
+            GetComponent<Collider>().enabled = true;
             cannon.GetComponent<CannonController>().setHeight(cannon.transform.position.y - transform.position.y);
         }
     }

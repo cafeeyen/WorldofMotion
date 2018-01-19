@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, overlay2, canyon, ground, rule, cannon, maewnam, cannonball, sparkle;
+    public GameObject bigImage, overlay, ruleOverlay, canyon, ground, rule, cannon, maewnam, cannonball, sparkle;
     public RenderTexture sideCamRT, cutCamRT;
     public RawImage rawImage, miniRawImage;
     public Animator calTab;
@@ -17,7 +17,8 @@ public class CS_UIController : MonoBehaviour
                 canyon.SetActive(false);
                 ground.SetActive(true);
 
-                openRule();
+                if(!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 3)
+                    openRule();
                 break;                
             case 5:
                 sideCamRT.width = (int)rawImage.rectTransform.rect.width;
@@ -52,30 +53,26 @@ public class CS_UIController : MonoBehaviour
     public void openRule()
     {
         rule.SetActive(true);
-        overlay2.SetActive(true);
+        ruleOverlay.SetActive(true);
+
         cannon.SetActive(false);
         maewnam.SetActive(false);
         cannonball.SetActive(false);
         sparkle.SetActive(false);
     }
 
-    public void closeRule(bool helpsection)
+    public void closeRule()
     {
-        if (helpsection == true)
+        rule.SetActive(false);
+        ruleOverlay.SetActive(false);
+
+        if (!overlay.activeSelf)
         {
-            rule.SetActive(false);
-            overlay2.SetActive(false);
-        }
-        else
-        {
-            rule.SetActive(false);
-            overlay2.SetActive(false);
             cannon.SetActive(true);
             maewnam.SetActive(true);
             cannonball.SetActive(true);
             sparkle.SetActive(true);
         }
-        
     }
 
     public void backToSelectLv()
