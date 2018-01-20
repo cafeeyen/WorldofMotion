@@ -69,9 +69,9 @@ public class CannonController : MonoBehaviour
             transform.localRotation = Quaternion.Euler(angle, 0, 0);
 
             angleText.text = string.Format("{0} \u00B0", Mathf.Round(-angle));
-            heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} เมตร", System.Math.Round(maxHeight, 2));
-            disText.text = string.Format("ระยะทางในแนวราบ {0} เมตร", System.Math.Round(maxDist, 2));
-            timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} วินาที", System.Math.Round(maxTime, 2));
+            heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} m.", System.Math.Round(maxHeight, 2));
+            disText.text = string.Format("ระยะทางในแนวราบ {0} m.", System.Math.Round(maxDist, 2));
+            timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} s.", System.Math.Round(maxTime, 2));
             countText.text = string.Format("= {0}", shootCnt);
 
             if (string.IsNullOrEmpty(powerText.text))
@@ -121,7 +121,7 @@ public class CannonController : MonoBehaviour
     {
         if(power > 0 && !shooted)
         {
-            AudioSource.PlayClipAtPoint(ShootClk, this.transform.position);
+            AudioSource.PlayClipAtPoint(ShootClk, Camera.main.transform.position);
             shootCnt++;
             resetBall();
             cannonBall.GetComponent<Rigidbody>().isKinematic = false;

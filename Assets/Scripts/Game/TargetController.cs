@@ -25,7 +25,10 @@ public class TargetController : MonoBehaviour
     {
         if (other.tag == "CannonBall" && target.Detected)
         {
-            AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
+            if(PlayerPrefs.GetInt("CannonShooterMode") != 4)
+                AudioSource.PlayClipAtPoint(HitEffect, Camera.main.transform.position);
+            else
+                AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
             sparkle.Play();
             meshRen.enabled = false;
             GetComponent<Collider>().enabled = false;
@@ -71,7 +74,7 @@ public class TargetController : MonoBehaviour
         yield return new WaitForSeconds(3);
         if(PlayerPrefs.GetInt("CannonShooterMode") != 5)
         {
-            var z = PlayerPrefs.GetInt("CannonShooterMode") == 2 ? 60 : Random.Range(15, 95);
+            var z = PlayerPrefs.GetInt("CannonShooterMode") == 2 ? 55.5f : Random.Range(15, 95);
             var y = PlayerPrefs.GetInt("CannonShooterMode") == 1 ? -1.8f : Random.Range(-1.8f, 25 * (95 - z) / 95);
 
             switch (PlayerPrefs.GetInt("CannonShooterMode"))
