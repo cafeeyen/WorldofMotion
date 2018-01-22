@@ -15,57 +15,65 @@ public class TargetController : MonoBehaviour
     private void OnEnable()
     {
         HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
-        meshRen = GetComponentInChildren<SkinnedMeshRenderer>();
-        meshRen.enabled = false;
-        GetComponent<Collider>().enabled = false;
-        StartCoroutine(setNewPosition());
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+        {
+            meshRen = GetComponentInChildren<SkinnedMeshRenderer>();
+            meshRen.enabled = false;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(setNewPosition());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CannonBall" && target.Detected)
+        if (other.tag == "CannonBall")
         {
-            if(PlayerPrefs.GetInt("CannonShooterMode") != 4)
-                AudioSource.PlayClipAtPoint(HitEffect, Camera.main.transform.position);
-            else
-                AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
-            sparkle.Play();
-            meshRen.enabled = false;
-            GetComponent<Collider>().enabled = false;
-            hit++;
-            if (hit < 5 || PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") == 3)
-                StartCoroutine(setNewPosition());
-            else
+            if(PlayerPrefs.GetInt("CannonShooterMode") != 4 && target.Detected)
             {
-                cannon.SetActive(false);
-                PlayerPrefs.SetInt("CSLv" + (PlayerPrefs.GetInt("CannonShooterMode") + 1), 1);
-                var cnt = cannon.GetComponent<CannonController>().getShootCnt();
-                if (cnt == 5)
-                {
-                    star3.SetActive(true);
-                    star = star3.GetComponent<Animator>();
-                    PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 3);
-                }
-                else if (cnt <= 10)
-                {
-                    star2.SetActive(true);
-                    star = star2.GetComponent<Animator>();
-                    if(PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 2)
-                        PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 2);
-                }
+                AudioSource.PlayClipAtPoint(HitEffect, Camera.main.transform.position);
+                sparkle.Play();
+                meshRen.enabled = false;
+                GetComponent<Collider>().enabled = false;
+                hit++;
+                if (hit < 5 || PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") == 3)
+                    StartCoroutine(setNewPosition());
                 else
                 {
-                    star1.SetActive(true);
-                    star = star1.GetComponent<Animator>();
-                    if (PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 1)
-                        PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 1);
+                    cannon.SetActive(false);
+                    PlayerPrefs.SetInt("CSLv" + (PlayerPrefs.GetInt("CannonShooterMode") + 1), 1);
+                    var cnt = cannon.GetComponent<CannonController>().getShootCnt();
+                    if (cnt == 5)
+                    {
+                        star3.SetActive(true);
+                        star = star3.GetComponent<Animator>();
+                        PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 3);
+                    }
+                    else if (cnt <= 10)
+                    {
+                        star2.SetActive(true);
+                        star = star2.GetComponent<Animator>();
+                        if (PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 2)
+                            PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 2);
+                    }
+                    else
+                    {
+                        star1.SetActive(true);
+                        star = star1.GetComponent<Animator>();
+                        if (PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 1)
+                            PlayerPrefs.SetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star", 1);
+                    }
+                    overlay.SetActive(true);
+                    star.SetBool("Show", true);
+                    levelbtt.SetActive(true);
+                    homebtt.SetActive(true);
+                    particle.SetActive(true);
                 }
-                overlay.SetActive(true);
-                star.SetBool("Show", true);
-                levelbtt.SetActive(true);
-                homebtt.SetActive(true);
-                particle.SetActive(true);
-            }  
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(HitEffect, this.transform.position);
+                sparkle.Play();
+            }
         }
     }
 

@@ -119,7 +119,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultInitializationErrorHandler
 daa565a4bc00993781a7c9f74a405633 Assembly-CSharp.dll:TouchScript.Gestures.FlickGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.TouchManagerInstance
-db47b7fe6f4635a7333ec0e3560c3298 Assembly-CSharp.dll:.MainPage
+6797a9356217eab4bb65679112108b00 Assembly-CSharp.dll:.MainPage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DragNDrop
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredPinnedTransformGesture
 8fb521876dacf55cac64c8db63926595 Assembly-CSharp.dll:TouchScript.TouchManager
@@ -196,8 +196,6 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.GestureManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.DebuggableMonoBehaviour
 153c514e01ee9cea242933cadbbe3390 Assembly-CSharp.dll:.SceneLoader
-05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Wood
 42bbd8dadc66de980ed7ab69a5fd1258 Assembly-CSharp.dll:TouchScript.Gestures.PressGesture
 0fd6aafde779927819d0d509e0bdfec9 Assembly-CSharp.dll:TouchScript.Gestures.MetaGesture

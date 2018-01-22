@@ -47,7 +47,7 @@ public class MainPage : MonoBehaviour
             }
         }
 
-        if(UnlockAR >= 7) //Check if condition to ARMode is met? >=7star to show
+        if(UnlockAR >= 7) // Unlock after get total 7 stars from any level
         {
             ARmode.SetActive(true);
         }
@@ -162,7 +162,9 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(3);
                 break;
             case "Back": slidePage(bttName); break;
-            case "ARmode": sceneLoader.loadNewScene(4); break;
+            case "ARmode":
+                PlayerPrefs.SetInt("CannonShooterMode", 4);
+                sceneLoader.loadNewScene(4); break;
 
         }
     }
