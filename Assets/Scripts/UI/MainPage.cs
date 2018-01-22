@@ -7,10 +7,12 @@ public class MainPage : MonoBehaviour
     public Sprite[] frameGal;
     public Image[] displayFrame;
     public Button csLv2, csLv3;
+    public GameObject ARmode;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
     private AudioClip bttClk;
+    private int UnlockAR;
 
     private void Awake()
     {
@@ -32,17 +34,26 @@ public class MainPage : MonoBehaviour
             {
                 case 1:
                     displayFrame[i-1].sprite = frameGal[0];
+                    UnlockAR += 1;
                     break;
                 case 2:
                     displayFrame[i-1].sprite = frameGal[1];
+                    UnlockAR += 2;
                     break;
                 case 3:
                     displayFrame[i-1].sprite = frameGal[2];
+                    UnlockAR += 3;
                     break;
             }
         }
 
-        if(PlayerPrefs.GetInt("CSLvSelect") == 1)
+        if(UnlockAR >= 7) //Check if condition to ARMode is met? >=7star to show
+        {
+            ARmode.SetActive(true);
+        }
+        UnlockAR = 0; //reset star count
+
+        if (PlayerPrefs.GetInt("CSLvSelect") == 1)
         {
             slidePage("Game");
             slidePage("CannonShooter");
@@ -151,6 +162,8 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(3);
                 break;
             case "Back": slidePage(bttName); break;
+            case "ARmode": sceneLoader.loadNewScene(4); break;
+
         }
     }
 }
