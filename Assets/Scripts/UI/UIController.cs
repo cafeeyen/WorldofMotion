@@ -124,6 +124,7 @@ public class UIController : MonoBehaviour
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
+            newItemObject.GetComponent<ItemObject>().ItemType = prefeb.name;
 
             itemCon.setItemObject(newItemObject);
             playSound("clk");
