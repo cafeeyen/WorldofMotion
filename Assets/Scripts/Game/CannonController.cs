@@ -53,7 +53,7 @@ public class CannonController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(!shooted)
         {

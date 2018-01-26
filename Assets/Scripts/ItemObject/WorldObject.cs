@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class WorldObject : MonoBehaviour
 {
     private UIController UICon;
@@ -39,6 +38,11 @@ public class WorldObject : MonoBehaviour
     public List<GameObject> getItemList()
     {
         return itemList;
+    }
+
+    public void setItemList(List<GameObject> list)
+    {
+        itemList = list;
     }
 
 }

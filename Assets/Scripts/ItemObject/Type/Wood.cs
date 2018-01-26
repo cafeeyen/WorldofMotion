@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class Wood : SurfaceType
+﻿public class Wood : SurfaceType
 {
     public Wood() { }
 

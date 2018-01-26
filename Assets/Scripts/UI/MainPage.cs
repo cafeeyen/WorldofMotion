@@ -7,7 +7,7 @@ public class MainPage : MonoBehaviour
     public Sprite[] frameGal;
     public Image[] displayFrame;
     public Button csLv2, csLv3;
-    public GameObject ARmode;
+    public GameObject ARmode, loadBtt;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
@@ -20,6 +20,10 @@ public class MainPage : MonoBehaviour
         sceneLoader = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
+
+        /*****************************
+         * Cannon Shooter
+        *****************************/
 
         // Unlock level
         if (PlayerPrefs.GetInt("CSLv2") == 1)
@@ -59,6 +63,14 @@ public class MainPage : MonoBehaviour
             slidePage("CannonShooter");
             PlayerPrefs.SetInt("CSLvSelect", 0);
         }
+
+        /*****************************
+         * Experiment
+        *****************************/
+        PlayerPrefs.SetInt("World", 0);
+
+        if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
+            loadBtt.SetActive(true);
     }
 
     void Update()
@@ -143,8 +155,14 @@ public class MainPage : MonoBehaviour
         switch (bttName)
         {
             case "Experiment": slidePage(bttName); break;
-            case "New": sceneLoader.loadNewScene(1); break;
-            case "Load": break;
+            case "New":
+                PlayerPrefs.SetInt("World", 0);
+                sceneLoader.loadNewScene(1);
+                break;
+            case "Load":
+                PlayerPrefs.SetInt("World", 1);
+                sceneLoader.loadNewScene(1);
+                break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
             case "BallRoller": sceneLoader.loadNewScene(2); break;

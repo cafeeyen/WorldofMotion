@@ -513,6 +513,7 @@
     <Compile Include="Assets\Scripts\UI\HelpButton.cs" />
     <Compile Include="Assets\Scripts\UI\MainPage.cs" />
     <Compile Include="Assets\Scripts\UI\PropWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\UI\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
@@ -636,6 +637,7 @@
     <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
     <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
+    <None Include="Assets\World1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
