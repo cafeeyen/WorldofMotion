@@ -19,16 +19,19 @@ public class SaveLoad : MonoBehaviour
     // the examples from the web page since they are fully described 
 
     // Set prefebs of each item type
-    public GameObject cube, sphere;
+    public GameObject cube, sphere, saveAlert, saveDeny;
     public GameObject WorldObject;
+    public ItemObjectController ItemCon;
+    public UIController UICon;
 
     private string _FileLocation, _FileName;
     private UserData myData;
     private string _data;
+    private GameObject itemObject;
 
     void Start()
     {
-        _FileLocation = Application.dataPath;
+        _FileLocation = Application.persistentDataPath;
         myData = new UserData();
 
         if (PlayerPrefs.GetInt("World") != 0)
@@ -63,6 +66,45 @@ public class SaveLoad : MonoBehaviour
         PlayerPrefs.SetInt("HaveWorldSaved", 1);
     }
 
+    public void saveChk()
+    {
+        itemObject = ItemCon.getCurrentObject();
+        if(itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
+        {
+            if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
+            {
+                UICon.playSound("clk");
+                saveAlert.SetActive(true);
+            }
+            else
+            {
+                UICon.playSound("clk");
+                SaveWorld();
+            }
+        }
+        else
+        {
+            UICon.playSound("deny");
+            saveDeny.SetActive(true);
+        }
+        
+    }
+
+    public void answerChk(bool ans)
+    {
+        if (ans)
+        {
+            SaveWorld();
+        }
+        UICon.playSound("clk");
+        saveAlert.SetActive(false);
+    }
+
+    public void closeDeny()
+    {
+        saveDeny.SetActive(false);
+    }
+
     public void LoadWorld()
     {
         // Load our UserData into myData 
@@ -95,7 +137,7 @@ public class SaveLoad : MonoBehaviour
                 }
                 itemObject.transform.parent = WorldObject.transform;
                 itemObject.transform.localScale = data.scale;
-                itemObject.GetComponent<Rigidbody>().velocity = data.velocity;
+                itemObject.GetComponent<ItemObject>().Velocity = data.velocity;
                 itemObject.GetComponent<ItemObject>().IsGravity = data.gravity;
                 itemObject.GetComponent<ItemObject>().ItemType = data.itemType;
                 itemCon.setItemObject(itemObject);
@@ -145,7 +187,7 @@ public class SaveLoad : MonoBehaviour
     void CreateXML()
     {
         StreamWriter writer;
-        FileInfo t = new FileInfo(_FileLocation + "\\" + _FileName);
+        FileInfo t = new FileInfo(_FileLocation + "/" + _FileName);
         if (!t.Exists)
         {
             writer = t.CreateText();
@@ -162,7 +204,7 @@ public class SaveLoad : MonoBehaviour
 
     void LoadXML()
     {
-        StreamReader r = File.OpenText(_FileLocation + "\\" + _FileName);
+        StreamReader r = File.OpenText(_FileLocation + "/" + _FileName);
         string _info = r.ReadToEnd();
         r.Close();
         _data = _info;
