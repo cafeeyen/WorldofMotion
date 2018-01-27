@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt;
-    public GameObject TestFirstTime;
+    public GameObject deleteBtt, saveAlert, saveDeny;
+    public Button saveBtt, exBtt, undoBtt;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -43,7 +44,6 @@ public class UIController : MonoBehaviour
         if (PlayerPrefs.GetInt("EditorMode") == 0)
         {
             /* Tutorial */
-            TestFirstTime.SetActive(true);
             PlayerPrefs.SetInt("EditorMode", 1);
         }
     }
@@ -149,6 +149,10 @@ public class UIController : MonoBehaviour
                 Time.timeScale = 1;
                 state = mode.Play;
                 propWindow.setToggleLock();
+
+                saveBtt.interactable = false;
+                exBtt.interactable = false;
+                undoBtt.interactable = false;
             }
             else
             {
@@ -157,6 +161,10 @@ public class UIController : MonoBehaviour
                 deleteBtt.SetActive(true);
                 worldSc.loadState();
                 propWindow.setToggleLock();
+
+                saveBtt.interactable = true;
+                exBtt.interactable = true;
+                undoBtt.interactable = true;
             }
             playSound("clk");
         }
@@ -196,4 +204,16 @@ public class UIController : MonoBehaviour
         else if (sound == "deny")
             audioSource.PlayOneShot(bttDeny, 0.4f);
     }
+
+    public void setDeny(bool active)
+    {
+        saveDeny.SetActive(active);
+    }
+
+    public void setAlert(bool active)
+    {
+        saveAlert.SetActive(active);
+    }
+
+
 }
