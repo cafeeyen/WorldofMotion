@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class WhiteBalancer
     //javadoc: WhiteBalancer
+
     public class WhiteBalancer : Algorithm
     {
 

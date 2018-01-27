@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ChiHistogramCostExtractor
     //javadoc: ChiHistogramCostExtractor
+
     public class ChiHistogramCostExtractor : HistogramCostExtractor
     {
 

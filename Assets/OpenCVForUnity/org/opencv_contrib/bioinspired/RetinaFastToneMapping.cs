@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class RetinaFastToneMapping
     //javadoc: RetinaFastToneMapping
+
     public class RetinaFastToneMapping : Algorithm
     {
 
@@ -32,6 +33,24 @@ base.Dispose (disposing);
         }
 
         protected internal RetinaFastToneMapping (IntPtr addr) : base (addr) { }
+
+
+        //
+        // C++: static Ptr_RetinaFastToneMapping create(Size inputSize)
+        //
+
+        //javadoc: RetinaFastToneMapping::create(inputSize)
+        public static RetinaFastToneMapping create (Size inputSize)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        RetinaFastToneMapping retVal = new RetinaFastToneMapping(bioinspired_RetinaFastToneMapping_create_10(inputSize.width, inputSize.height));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
 
 
         //
@@ -95,6 +114,10 @@ base.Dispose (disposing);
 #endif
 
 
+
+        // C++: static Ptr_RetinaFastToneMapping create(Size inputSize)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr bioinspired_RetinaFastToneMapping_create_10 (double inputSize_width, double inputSize_height);
 
         // C++:  void applyFastToneMapping(Mat inputImage, Mat& outputToneMappedImage)
         [DllImport (LIBNAME)]

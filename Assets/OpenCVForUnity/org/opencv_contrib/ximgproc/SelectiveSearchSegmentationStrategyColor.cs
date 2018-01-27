@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SelectiveSearchSegmentationStrategyColor
     //javadoc: SelectiveSearchSegmentationStrategyColor
+
     public class SelectiveSearchSegmentationStrategyColor : SelectiveSearchSegmentationStrategy
     {
 

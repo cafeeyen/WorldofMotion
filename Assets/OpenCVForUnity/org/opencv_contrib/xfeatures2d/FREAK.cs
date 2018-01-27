@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FREAK
     //javadoc: FREAK
+
     public class FREAK : Feature2D
     {
 

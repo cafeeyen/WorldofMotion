@@ -9,29 +9,33 @@ namespace OpenCVForUnity
 
     // C++: class ORB
     //javadoc: ORB
+
     public class ORB : Feature2D
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-try {
-if (disposing) {
-}
-if (IsEnabledDispose) {
-if (nativeObj != IntPtr.Zero)
-features2d_ORB_delete(nativeObj);
-nativeObj = IntPtr.Zero;
-}
-} finally {
-base.Dispose (disposing);
-}
+            try {
+                if (disposing) {
+                }
+                if (IsEnabledDispose) {
+                    if (nativeObj != IntPtr.Zero)
+                        features2d_ORB_delete (nativeObj);
+                    nativeObj = IntPtr.Zero;
+                }
+            } finally {
+                base.Dispose (disposing);
+            }
 #else
             return;
 #endif
         }
 
-        protected internal ORB (IntPtr addr) : base (addr) { }
+        protected internal ORB (IntPtr addr)
+            : base (addr)
+        {
+        }
 
 
         public const int kBytes = 32;
@@ -46,7 +50,7 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ORB retVal = new ORB(features2d_ORB_create_10(nfeatures, scaleFactor, nlevels, edgeThreshold, firstLevel, WTA_K, scoreType, patchSize, fastThreshold));
+            ORB retVal = new ORB (features2d_ORB_create_10 (nfeatures, scaleFactor, nlevels, edgeThreshold, firstLevel, WTA_K, scoreType, patchSize, fastThreshold));
         
 #else
             return null;
@@ -59,7 +63,26 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ORB retVal = new ORB(features2d_ORB_create_11());
+            ORB retVal = new ORB (features2d_ORB_create_11 ());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  String getDefaultName()
+        //
+
+        //javadoc: ORB::getDefaultName()
+        public override string getDefaultName ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            string retVal = Marshal.PtrToStringAnsi (features2d_ORB_getDefaultName_10 (nativeObj));
         
 #else
             return null;
@@ -78,7 +101,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        double retVal = features2d_ORB_getScaleFactor_10(nativeObj);
+            double retVal = features2d_ORB_getScaleFactor_10 (nativeObj);
         
 #else
             return -1;
@@ -97,7 +120,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getEdgeThreshold_10(nativeObj);
+            int retVal = features2d_ORB_getEdgeThreshold_10 (nativeObj);
         
 #else
             return -1;
@@ -116,7 +139,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getFastThreshold_10(nativeObj);
+            int retVal = features2d_ORB_getFastThreshold_10 (nativeObj);
         
 #else
             return -1;
@@ -135,7 +158,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getFirstLevel_10(nativeObj);
+            int retVal = features2d_ORB_getFirstLevel_10 (nativeObj);
         
 #else
             return -1;
@@ -154,7 +177,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getMaxFeatures_10(nativeObj);
+            int retVal = features2d_ORB_getMaxFeatures_10 (nativeObj);
         
 #else
             return -1;
@@ -173,7 +196,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getNLevels_10(nativeObj);
+            int retVal = features2d_ORB_getNLevels_10 (nativeObj);
         
 #else
             return -1;
@@ -192,7 +215,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getPatchSize_10(nativeObj);
+            int retVal = features2d_ORB_getPatchSize_10 (nativeObj);
         
 #else
             return -1;
@@ -211,7 +234,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getScoreType_10(nativeObj);
+            int retVal = features2d_ORB_getScoreType_10 (nativeObj);
         
 #else
             return -1;
@@ -230,7 +253,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_ORB_getWTA_1K_10(nativeObj);
+            int retVal = features2d_ORB_getWTA_1K_10 (nativeObj);
         
 #else
             return -1;
@@ -249,7 +272,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setEdgeThreshold_10(nativeObj, edgeThreshold);
+            features2d_ORB_setEdgeThreshold_10 (nativeObj, edgeThreshold);
         
 #else
             return;
@@ -268,7 +291,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setFastThreshold_10(nativeObj, fastThreshold);
+            features2d_ORB_setFastThreshold_10 (nativeObj, fastThreshold);
         
 #else
             return;
@@ -287,7 +310,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setFirstLevel_10(nativeObj, firstLevel);
+            features2d_ORB_setFirstLevel_10 (nativeObj, firstLevel);
         
 #else
             return;
@@ -306,7 +329,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setMaxFeatures_10(nativeObj, maxFeatures);
+            features2d_ORB_setMaxFeatures_10 (nativeObj, maxFeatures);
         
 #else
             return;
@@ -325,7 +348,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setNLevels_10(nativeObj, nlevels);
+            features2d_ORB_setNLevels_10 (nativeObj, nlevels);
         
 #else
             return;
@@ -344,7 +367,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setPatchSize_10(nativeObj, patchSize);
+            features2d_ORB_setPatchSize_10 (nativeObj, patchSize);
         
 #else
             return;
@@ -363,7 +386,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setScaleFactor_10(nativeObj, scaleFactor);
+            features2d_ORB_setScaleFactor_10 (nativeObj, scaleFactor);
         
 #else
             return;
@@ -382,7 +405,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setScoreType_10(nativeObj, scoreType);
+            features2d_ORB_setScoreType_10 (nativeObj, scoreType);
         
 #else
             return;
@@ -401,7 +424,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_ORB_setWTA_1K_10(nativeObj, wta_k);
+            features2d_ORB_setWTA_1K_10 (nativeObj, wta_k);
         
 #else
             return;
@@ -412,6 +435,7 @@ base.Dispose (disposing);
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -421,8 +445,13 @@ base.Dispose (disposing);
         // C++: static Ptr_ORB create(int nfeatures = 500, float scaleFactor = 1.2f, int nlevels = 8, int edgeThreshold = 31, int firstLevel = 0, int WTA_K = 2, int scoreType = ORB::HARRIS_SCORE, int patchSize = 31, int fastThreshold = 20)
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_ORB_create_10 (int nfeatures, float scaleFactor, int nlevels, int edgeThreshold, int firstLevel, int WTA_K, int scoreType, int patchSize, int fastThreshold);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_ORB_create_11 ();
+
+        // C++:  String getDefaultName()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_ORB_getDefaultName_10 (IntPtr nativeObj);
 
         // C++:  double getScaleFactor()
         [DllImport (LIBNAME)]

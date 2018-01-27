@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LBPHFaceRecognizer
     //javadoc: LBPHFaceRecognizer
+
     public class LBPHFaceRecognizer : FaceRecognizer
     {
 

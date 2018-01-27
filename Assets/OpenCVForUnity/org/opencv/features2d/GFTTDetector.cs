@@ -9,29 +9,64 @@ namespace OpenCVForUnity
 
     // C++: class GFTTDetector
     //javadoc: GFTTDetector
+
     public class GFTTDetector : Feature2D
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-try {
-if (disposing) {
-}
-if (IsEnabledDispose) {
-if (nativeObj != IntPtr.Zero)
-features2d_GFTTDetector_delete(nativeObj);
-nativeObj = IntPtr.Zero;
-}
-} finally {
-base.Dispose (disposing);
-}
+            try {
+                if (disposing) {
+                }
+                if (IsEnabledDispose) {
+                    if (nativeObj != IntPtr.Zero)
+                        features2d_GFTTDetector_delete (nativeObj);
+                    nativeObj = IntPtr.Zero;
+                }
+            } finally {
+                base.Dispose (disposing);
+            }
 #else
             return;
 #endif
         }
 
-        protected internal GFTTDetector (IntPtr addr) : base (addr) { }
+        protected internal GFTTDetector (IntPtr addr)
+            : base (addr)
+        {
+        }
+
+
+        //
+        // C++: static Ptr_GFTTDetector create(int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize, bool useHarrisDetector = false, double k = 0.04)
+        //
+
+        //javadoc: GFTTDetector::create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize, useHarrisDetector, k)
+        public static GFTTDetector create (int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize, bool useHarrisDetector, double k)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            GFTTDetector retVal = new GFTTDetector (features2d_GFTTDetector_create_10 (maxCorners, qualityLevel, minDistance, blockSize, gradiantSize, useHarrisDetector, k));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+        //javadoc: GFTTDetector::create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize)
+        public static GFTTDetector create (int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            GFTTDetector retVal = new GFTTDetector (features2d_GFTTDetector_create_11 (maxCorners, qualityLevel, minDistance, blockSize, gradiantSize));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
 
 
         //
@@ -43,7 +78,7 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        GFTTDetector retVal = new GFTTDetector(features2d_GFTTDetector_create_10(maxCorners, qualityLevel, minDistance, blockSize, useHarrisDetector, k));
+            GFTTDetector retVal = new GFTTDetector (features2d_GFTTDetector_create_12 (maxCorners, qualityLevel, minDistance, blockSize, useHarrisDetector, k));
         
 #else
             return null;
@@ -56,7 +91,26 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        GFTTDetector retVal = new GFTTDetector(features2d_GFTTDetector_create_11());
+            GFTTDetector retVal = new GFTTDetector (features2d_GFTTDetector_create_13 ());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  String getDefaultName()
+        //
+
+        //javadoc: GFTTDetector::getDefaultName()
+        public override string getDefaultName ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            string retVal = Marshal.PtrToStringAnsi (features2d_GFTTDetector_getDefaultName_10 (nativeObj));
         
 #else
             return null;
@@ -75,7 +129,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        bool retVal = features2d_GFTTDetector_getHarrisDetector_10(nativeObj);
+            bool retVal = features2d_GFTTDetector_getHarrisDetector_10 (nativeObj);
         
 #else
             return false;
@@ -94,7 +148,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        double retVal = features2d_GFTTDetector_getK_10(nativeObj);
+            double retVal = features2d_GFTTDetector_getK_10 (nativeObj);
         
 #else
             return -1;
@@ -113,7 +167,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        double retVal = features2d_GFTTDetector_getMinDistance_10(nativeObj);
+            double retVal = features2d_GFTTDetector_getMinDistance_10 (nativeObj);
         
 #else
             return -1;
@@ -132,7 +186,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        double retVal = features2d_GFTTDetector_getQualityLevel_10(nativeObj);
+            double retVal = features2d_GFTTDetector_getQualityLevel_10 (nativeObj);
         
 #else
             return -1;
@@ -151,7 +205,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_GFTTDetector_getBlockSize_10(nativeObj);
+            int retVal = features2d_GFTTDetector_getBlockSize_10 (nativeObj);
         
 #else
             return -1;
@@ -170,7 +224,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_GFTTDetector_getMaxFeatures_10(nativeObj);
+            int retVal = features2d_GFTTDetector_getMaxFeatures_10 (nativeObj);
         
 #else
             return -1;
@@ -189,7 +243,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setBlockSize_10(nativeObj, blockSize);
+            features2d_GFTTDetector_setBlockSize_10 (nativeObj, blockSize);
         
 #else
             return;
@@ -208,7 +262,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setHarrisDetector_10(nativeObj, val);
+            features2d_GFTTDetector_setHarrisDetector_10 (nativeObj, val);
         
 #else
             return;
@@ -227,7 +281,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setK_10(nativeObj, k);
+            features2d_GFTTDetector_setK_10 (nativeObj, k);
         
 #else
             return;
@@ -246,7 +300,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setMaxFeatures_10(nativeObj, maxFeatures);
+            features2d_GFTTDetector_setMaxFeatures_10 (nativeObj, maxFeatures);
         
 #else
             return;
@@ -265,7 +319,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setMinDistance_10(nativeObj, minDistance);
+            features2d_GFTTDetector_setMinDistance_10 (nativeObj, minDistance);
         
 #else
             return;
@@ -284,7 +338,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_GFTTDetector_setQualityLevel_10(nativeObj, qlevel);
+            features2d_GFTTDetector_setQualityLevel_10 (nativeObj, qlevel);
         
 #else
             return;
@@ -295,17 +349,30 @@ base.Dispose (disposing);
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
 
 
 
+        // C++: static Ptr_GFTTDetector create(int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize, bool useHarrisDetector = false, double k = 0.04)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_GFTTDetector_create_10 (int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize, bool useHarrisDetector, double k);
+
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_GFTTDetector_create_11 (int maxCorners, double qualityLevel, double minDistance, int blockSize, int gradiantSize);
+
         // C++: static Ptr_GFTTDetector create(int maxCorners = 1000, double qualityLevel = 0.01, double minDistance = 1, int blockSize = 3, bool useHarrisDetector = false, double k = 0.04)
         [DllImport (LIBNAME)]
-        private static extern IntPtr features2d_GFTTDetector_create_10 (int maxCorners, double qualityLevel, double minDistance, int blockSize, bool useHarrisDetector, double k);
+        private static extern IntPtr features2d_GFTTDetector_create_12 (int maxCorners, double qualityLevel, double minDistance, int blockSize, bool useHarrisDetector, double k);
+
         [DllImport (LIBNAME)]
-        private static extern IntPtr features2d_GFTTDetector_create_11 ();
+        private static extern IntPtr features2d_GFTTDetector_create_13 ();
+
+        // C++:  String getDefaultName()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_GFTTDetector_getDefaultName_10 (IntPtr nativeObj);
 
         // C++:  bool getHarrisDetector()
         [DllImport (LIBNAME)]

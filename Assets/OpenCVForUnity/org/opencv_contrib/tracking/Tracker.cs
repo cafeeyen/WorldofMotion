@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Tracker
     //javadoc: Tracker
+
     public class Tracker : Algorithm
     {
 

@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class KalmanFilter
     //javadoc: KalmanFilter
+
     public class KalmanFilter : DisposableOpenCVObject
     {
 

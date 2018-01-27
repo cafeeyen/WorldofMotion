@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Map
     //javadoc: Map
+
     public class Map : DisposableOpenCVObject
     {
 
@@ -148,6 +149,10 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif

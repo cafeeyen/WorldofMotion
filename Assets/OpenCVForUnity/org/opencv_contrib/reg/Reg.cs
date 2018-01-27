@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Reg
+    //javadoc: Reg
+
     public class Reg
     {
 

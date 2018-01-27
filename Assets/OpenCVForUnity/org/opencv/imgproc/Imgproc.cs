@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Imgproc
+    //javadoc: Imgproc
+
     public class Imgproc
     {
 
@@ -780,6 +783,48 @@ Rect retVal = new Rect (tmpArray);
         Mat points_mat = points;
         double[] tmpArray = new double[5];
 imgproc_Imgproc_fitEllipse_10(points_mat.nativeObj, tmpArray);
+RotatedRect retVal = new RotatedRect (tmpArray);
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  RotatedRect fitEllipseAMS(Mat points)
+        //
+
+        //javadoc: fitEllipseAMS(points)
+        public static RotatedRect fitEllipseAMS (Mat points)
+        {
+            if (points != null) points.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        double[] tmpArray = new double[5];
+imgproc_Imgproc_fitEllipseAMS_10(points.nativeObj, tmpArray);
+RotatedRect retVal = new RotatedRect (tmpArray);
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  RotatedRect fitEllipseDirect(Mat points)
+        //
+
+        //javadoc: fitEllipseDirect(points)
+        public static RotatedRect fitEllipseDirect (Mat points)
+        {
+            if (points != null) points.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        double[] tmpArray = new double[5];
+imgproc_Imgproc_fitEllipseDirect_10(points.nativeObj, tmpArray);
 RotatedRect retVal = new RotatedRect (tmpArray);
         
 #else
@@ -3186,6 +3231,43 @@ RotatedRect retVal = new RotatedRect (tmpArray);
 
 
         //
+        // C++:  void goodFeaturesToTrack(Mat image, vector_Point& corners, int maxCorners, double qualityLevel, double minDistance, Mat mask, int blockSize, int gradientSize, bool useHarrisDetector = false, double k = 0.04)
+        //
+
+        //javadoc: goodFeaturesToTrack(image, corners, maxCorners, qualityLevel, minDistance, mask, blockSize, gradientSize, useHarrisDetector, k)
+        public static void goodFeaturesToTrack (Mat image, MatOfPoint corners, int maxCorners, double qualityLevel, double minDistance, Mat mask, int blockSize, int gradientSize, bool useHarrisDetector, double k)
+        {
+            if (image != null) image.ThrowIfDisposed ();
+            if (corners != null) corners.ThrowIfDisposed ();
+            if (mask != null) mask.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        Mat corners_mat = corners;
+        imgproc_Imgproc_goodFeaturesToTrack_10(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance, mask.nativeObj, blockSize, gradientSize, useHarrisDetector, k);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+        //javadoc: goodFeaturesToTrack(image, corners, maxCorners, qualityLevel, minDistance, mask, blockSize, gradientSize)
+        public static void goodFeaturesToTrack (Mat image, MatOfPoint corners, int maxCorners, double qualityLevel, double minDistance, Mat mask, int blockSize, int gradientSize)
+        {
+            if (image != null) image.ThrowIfDisposed ();
+            if (corners != null) corners.ThrowIfDisposed ();
+            if (mask != null) mask.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        Mat corners_mat = corners;
+        imgproc_Imgproc_goodFeaturesToTrack_11(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance, mask.nativeObj, blockSize, gradientSize);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
         // C++:  void goodFeaturesToTrack(Mat image, vector_Point& corners, int maxCorners, double qualityLevel, double minDistance, Mat mask = Mat(), int blockSize = 3, bool useHarrisDetector = false, double k = 0.04)
         //
 
@@ -3197,7 +3279,7 @@ RotatedRect retVal = new RotatedRect (tmpArray);
             if (mask != null) mask.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         Mat corners_mat = corners;
-        imgproc_Imgproc_goodFeaturesToTrack_10(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance, mask.nativeObj, blockSize, useHarrisDetector, k);
+        imgproc_Imgproc_goodFeaturesToTrack_12(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance, mask.nativeObj, blockSize, useHarrisDetector, k);
         
 #else
             return;
@@ -3212,7 +3294,7 @@ RotatedRect retVal = new RotatedRect (tmpArray);
             if (corners != null) corners.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         Mat corners_mat = corners;
-        imgproc_Imgproc_goodFeaturesToTrack_11(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance);
+        imgproc_Imgproc_goodFeaturesToTrack_13(image.nativeObj, corners_mat.nativeObj, maxCorners, qualityLevel, minDistance);
         
 #else
             return;
@@ -4223,6 +4305,30 @@ RotatedRect retVal = new RotatedRect (tmpArray);
 
 
         //
+        // C++:  void undistortPoints(Mat src, Mat& dst, Mat cameraMatrix, Mat distCoeffs, Mat R, Mat P, TermCriteria criteria)
+        //
+
+        //javadoc: undistortPoints(src, dst, cameraMatrix, distCoeffs, R, P, criteria)
+        public static void undistortPointsIter (Mat src, Mat dst, Mat cameraMatrix, Mat distCoeffs, Mat R, Mat P, TermCriteria criteria)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (dst != null) dst.ThrowIfDisposed ();
+            if (cameraMatrix != null) cameraMatrix.ThrowIfDisposed ();
+            if (distCoeffs != null) distCoeffs.ThrowIfDisposed ();
+            if (R != null) R.ThrowIfDisposed ();
+            if (P != null) P.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        imgproc_Imgproc_undistortPointsIter_10(src.nativeObj, dst.nativeObj, cameraMatrix.nativeObj, distCoeffs.nativeObj, R.nativeObj, P.nativeObj, criteria.type, criteria.maxCount, criteria.epsilon);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
         // C++:  void undistortPoints(Mat src, Mat& dst, Mat cameraMatrix, Mat distCoeffs, Mat R = Mat(), Mat P = Mat())
         //
 
@@ -4482,6 +4588,14 @@ RotatedRect retVal = new RotatedRect (tmpArray);
         // C++:  RotatedRect fitEllipse(vector_Point2f points)
         [DllImport (LIBNAME)]
         private static extern void imgproc_Imgproc_fitEllipse_10 (IntPtr points_mat_nativeObj, double[] retVal);
+
+        // C++:  RotatedRect fitEllipseAMS(Mat points)
+        [DllImport (LIBNAME)]
+        private static extern void imgproc_Imgproc_fitEllipseAMS_10 (IntPtr points_nativeObj, double[] retVal);
+
+        // C++:  RotatedRect fitEllipseDirect(Mat points)
+        [DllImport (LIBNAME)]
+        private static extern void imgproc_Imgproc_fitEllipseDirect_10 (IntPtr points_nativeObj, double[] retVal);
 
         // C++:  RotatedRect minAreaRect(vector_Point2f points)
         [DllImport (LIBNAME)]
@@ -4893,11 +5007,17 @@ RotatedRect retVal = new RotatedRect (tmpArray);
         [DllImport (LIBNAME)]
         private static extern void imgproc_Imgproc_getRectSubPix_11 (IntPtr image_nativeObj, double patchSize_width, double patchSize_height, double center_x, double center_y, IntPtr patch_nativeObj);
 
+        // C++:  void goodFeaturesToTrack(Mat image, vector_Point& corners, int maxCorners, double qualityLevel, double minDistance, Mat mask, int blockSize, int gradientSize, bool useHarrisDetector = false, double k = 0.04)
+        [DllImport (LIBNAME)]
+        private static extern void imgproc_Imgproc_goodFeaturesToTrack_10 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance, IntPtr mask_nativeObj, int blockSize, int gradientSize, bool useHarrisDetector, double k);
+        [DllImport (LIBNAME)]
+        private static extern void imgproc_Imgproc_goodFeaturesToTrack_11 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance, IntPtr mask_nativeObj, int blockSize, int gradientSize);
+
         // C++:  void goodFeaturesToTrack(Mat image, vector_Point& corners, int maxCorners, double qualityLevel, double minDistance, Mat mask = Mat(), int blockSize = 3, bool useHarrisDetector = false, double k = 0.04)
         [DllImport (LIBNAME)]
-        private static extern void imgproc_Imgproc_goodFeaturesToTrack_10 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance, IntPtr mask_nativeObj, int blockSize, bool useHarrisDetector, double k);
+        private static extern void imgproc_Imgproc_goodFeaturesToTrack_12 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance, IntPtr mask_nativeObj, int blockSize, bool useHarrisDetector, double k);
         [DllImport (LIBNAME)]
-        private static extern void imgproc_Imgproc_goodFeaturesToTrack_11 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance);
+        private static extern void imgproc_Imgproc_goodFeaturesToTrack_13 (IntPtr image_nativeObj, IntPtr corners_mat_nativeObj, int maxCorners, double qualityLevel, double minDistance);
 
         // C++:  void grabCut(Mat img, Mat& mask, Rect rect, Mat& bgdModel, Mat& fgdModel, int iterCount, int mode = GC_EVAL)
         [DllImport (LIBNAME)]
@@ -5062,6 +5182,10 @@ RotatedRect retVal = new RotatedRect (tmpArray);
         private static extern void imgproc_Imgproc_undistort_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr newCameraMatrix_nativeObj);
         [DllImport (LIBNAME)]
         private static extern void imgproc_Imgproc_undistort_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj);
+
+        // C++:  void undistortPoints(Mat src, Mat& dst, Mat cameraMatrix, Mat distCoeffs, Mat R, Mat P, TermCriteria criteria)
+        [DllImport (LIBNAME)]
+        private static extern void imgproc_Imgproc_undistortPointsIter_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr R_nativeObj, IntPtr P_nativeObj, int criteria_type, int criteria_maxCount, double criteria_epsilon);
 
         // C++:  void undistortPoints(Mat src, Mat& dst, Mat cameraMatrix, Mat distCoeffs, Mat R = Mat(), Mat P = Mat())
         [DllImport (LIBNAME)]

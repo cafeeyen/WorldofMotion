@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SparseOpticalFlow
     //javadoc: SparseOpticalFlow
+
     public class SparseOpticalFlow : Algorithm
     {
 

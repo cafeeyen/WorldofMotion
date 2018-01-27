@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BackgroundSubtractorGMG
     //javadoc: BackgroundSubtractorGMG
+
     public class BackgroundSubtractorGMG : BackgroundSubtractor
     {
 

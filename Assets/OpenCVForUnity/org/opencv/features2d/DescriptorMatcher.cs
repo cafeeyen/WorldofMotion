@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DescriptorMatcher
     //javadoc: DescriptorMatcher
+
     public class DescriptorMatcher : Algorithm
     {
 
@@ -117,7 +118,7 @@ namespace OpenCVForUnity
         //
 
         //javadoc: DescriptorMatcher::empty()
-        public bool empty ()
+        public override bool empty ()
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
@@ -467,6 +468,13 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void read(FileNode arg1)
+        //
+
+        // Unknown type 'FileNode' (I), skipping the function
+
+
+        //
         // C++:  void read(String fileName)
         //
 
@@ -505,6 +513,13 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void write(Ptr_FileStorage fs, String name = String())
+        //
+
+        // Unknown type 'Ptr_FileStorage' (I), skipping the function
+
+
+        //
         // C++:  void write(String fileName)
         //
 
@@ -525,6 +540,8 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -534,6 +551,7 @@ namespace OpenCVForUnity
         // C++:  Ptr_DescriptorMatcher clone(bool emptyTrainData = false)
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_DescriptorMatcher_clone_10 (IntPtr nativeObj, bool emptyTrainData);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_DescriptorMatcher_clone_11 (IntPtr nativeObj);
 
@@ -568,36 +586,42 @@ namespace OpenCVForUnity
         // C++:  void knnMatch(Mat queryDescriptors, Mat trainDescriptors, vector_vector_DMatch& matches, int k, Mat mask = Mat(), bool compactResult = false)
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_knnMatch_10 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj, int k, IntPtr mask_nativeObj, bool compactResult);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_knnMatch_11 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj, int k);
 
         // C++:  void knnMatch(Mat queryDescriptors, vector_vector_DMatch& matches, int k, vector_Mat masks = vector_Mat(), bool compactResult = false)
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_knnMatch_12 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj, int k, IntPtr masks_mat_nativeObj, bool compactResult);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_knnMatch_13 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj, int k);
 
         // C++:  void match(Mat queryDescriptors, Mat trainDescriptors, vector_DMatch& matches, Mat mask = Mat())
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_match_10 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_match_11 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj);
 
         // C++:  void match(Mat queryDescriptors, vector_DMatch& matches, vector_Mat masks = vector_Mat())
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_match_12 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj, IntPtr masks_mat_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_match_13 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj);
 
         // C++:  void radiusMatch(Mat queryDescriptors, Mat trainDescriptors, vector_vector_DMatch& matches, float maxDistance, Mat mask = Mat(), bool compactResult = false)
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_radiusMatch_10 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj, float maxDistance, IntPtr mask_nativeObj, bool compactResult);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_radiusMatch_11 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr trainDescriptors_nativeObj, IntPtr matches_mat_nativeObj, float maxDistance);
 
         // C++:  void radiusMatch(Mat queryDescriptors, vector_vector_DMatch& matches, float maxDistance, vector_Mat masks = vector_Mat(), bool compactResult = false)
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_radiusMatch_12 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj, float maxDistance, IntPtr masks_mat_nativeObj, bool compactResult);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_DescriptorMatcher_radiusMatch_13 (IntPtr nativeObj, IntPtr queryDescriptors_nativeObj, IntPtr matches_mat_nativeObj, float maxDistance);
 

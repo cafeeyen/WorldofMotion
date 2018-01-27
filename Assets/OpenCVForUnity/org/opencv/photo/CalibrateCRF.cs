@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class CalibrateCRF
     //javadoc: CalibrateCRF
+
     public class CalibrateCRF : Algorithm
     {
 

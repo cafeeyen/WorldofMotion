@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Plot2d
     //javadoc: Plot2d
+
     public class Plot2d : Algorithm
     {
 
@@ -35,6 +36,45 @@ base.Dispose (disposing);
 
 
         //
+        // C++: static Ptr_Plot2d create(Mat data)
+        //
+
+        //javadoc: Plot2d::create(data)
+        public static Plot2d create (Mat data)
+        {
+            if (data != null) data.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        Plot2d retVal = new Plot2d(plot_Plot2d_create_10(data.nativeObj));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++: static Ptr_Plot2d create(Mat dataX, Mat dataY)
+        //
+
+        //javadoc: Plot2d::create(dataX, dataY)
+        public static Plot2d create (Mat dataX, Mat dataY)
+        {
+            if (dataX != null) dataX.ThrowIfDisposed ();
+            if (dataY != null) dataY.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        Plot2d retVal = new Plot2d(plot_Plot2d_create_11(dataX.nativeObj, dataY.nativeObj));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
         // C++:  void render(Mat& _plotResult)
         //
 
@@ -46,6 +86,44 @@ base.Dispose (disposing);
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         plot_Plot2d_render_10(nativeObj, _plotResult.nativeObj);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void setGridLinesNumber(int gridLinesNumber)
+        //
+
+        //javadoc: Plot2d::setGridLinesNumber(gridLinesNumber)
+        public void setGridLinesNumber (int gridLinesNumber)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        plot_Plot2d_setGridLinesNumber_10(nativeObj, gridLinesNumber);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void setInvertOrientation(bool _invertOrientation)
+        //
+
+        //javadoc: Plot2d::setInvertOrientation(_invertOrientation)
+        public void setInvertOrientation (bool _invertOrientation)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        plot_Plot2d_setInvertOrientation_10(nativeObj, _invertOrientation);
         
 #else
             return;
@@ -282,6 +360,63 @@ base.Dispose (disposing);
         }
 
 
+        //
+        // C++:  void setPointIdxToPrint(int pointIdx)
+        //
+
+        //javadoc: Plot2d::setPointIdxToPrint(pointIdx)
+        public void setPointIdxToPrint (int pointIdx)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        plot_Plot2d_setPointIdxToPrint_10(nativeObj, pointIdx);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void setShowGrid(bool needShowGrid)
+        //
+
+        //javadoc: Plot2d::setShowGrid(needShowGrid)
+        public void setShowGrid (bool needShowGrid)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        plot_Plot2d_setShowGrid_10(nativeObj, needShowGrid);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void setShowText(bool needShowText)
+        //
+
+        //javadoc: Plot2d::setShowText(needShowText)
+        public void setShowText (bool needShowText)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        plot_Plot2d_setShowText_10(nativeObj, needShowText);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
 #else
@@ -290,9 +425,25 @@ base.Dispose (disposing);
 
 
 
+        // C++: static Ptr_Plot2d create(Mat data)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr plot_Plot2d_create_10 (IntPtr data_nativeObj);
+
+        // C++: static Ptr_Plot2d create(Mat dataX, Mat dataY)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr plot_Plot2d_create_11 (IntPtr dataX_nativeObj, IntPtr dataY_nativeObj);
+
         // C++:  void render(Mat& _plotResult)
         [DllImport (LIBNAME)]
         private static extern void plot_Plot2d_render_10 (IntPtr nativeObj, IntPtr _plotResult_nativeObj);
+
+        // C++:  void setGridLinesNumber(int gridLinesNumber)
+        [DllImport (LIBNAME)]
+        private static extern void plot_Plot2d_setGridLinesNumber_10 (IntPtr nativeObj, int gridLinesNumber);
+
+        // C++:  void setInvertOrientation(bool _invertOrientation)
+        [DllImport (LIBNAME)]
+        private static extern void plot_Plot2d_setInvertOrientation_10 (IntPtr nativeObj, bool _invertOrientation);
 
         // C++:  void setMaxX(double _plotMaxX)
         [DllImport (LIBNAME)]
@@ -341,6 +492,18 @@ base.Dispose (disposing);
         // C++:  void setPlotTextColor(Scalar _plotTextColor)
         [DllImport (LIBNAME)]
         private static extern void plot_Plot2d_setPlotTextColor_10 (IntPtr nativeObj, double _plotTextColor_val0, double _plotTextColor_val1, double _plotTextColor_val2, double _plotTextColor_val3);
+
+        // C++:  void setPointIdxToPrint(int pointIdx)
+        [DllImport (LIBNAME)]
+        private static extern void plot_Plot2d_setPointIdxToPrint_10 (IntPtr nativeObj, int pointIdx);
+
+        // C++:  void setShowGrid(bool needShowGrid)
+        [DllImport (LIBNAME)]
+        private static extern void plot_Plot2d_setShowGrid_10 (IntPtr nativeObj, bool needShowGrid);
+
+        // C++:  void setShowText(bool needShowText)
+        [DllImport (LIBNAME)]
+        private static extern void plot_Plot2d_setShowText_10 (IntPtr nativeObj, bool needShowText);
 
         // native support for java finalize()
         [DllImport (LIBNAME)]

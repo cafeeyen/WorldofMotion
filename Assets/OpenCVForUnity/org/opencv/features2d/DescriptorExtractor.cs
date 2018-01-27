@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class javaDescriptorExtractor
     //javadoc: javaDescriptorExtractor
+    [Obsolete ("This method is deprecated.")]
     public class DescriptorExtractor : DisposableOpenCVObject
     {
 
@@ -42,19 +43,19 @@ namespace OpenCVForUnity
         }
 
         private const int OPPONENTEXTRACTOR = 1000;
-        //                    public const int SIFT = 1;
-        //                    public const int SURF = 2;
+        public const int SIFT = 1;
+        public const int SURF = 2;
         public const int ORB = 3;
-        //                    public const int BRIEF = 4;
+        public const int BRIEF = 4;
         public const int BRISK = 5;
-        //                    public const int FREAK = 6;
+        public const int FREAK = 6;
         public const int AKAZE = 7;
-        //                    public const int OPPONENT_SIFT = OPPONENTEXTRACTOR + SIFT;
-        //                    public const int OPPONENT_SURF = OPPONENTEXTRACTOR + SURF;
+        public const int OPPONENT_SIFT = OPPONENTEXTRACTOR + SIFT;
+        public const int OPPONENT_SURF = OPPONENTEXTRACTOR + SURF;
         public const int OPPONENT_ORB = OPPONENTEXTRACTOR + ORB;
-        //                    public const int OPPONENT_BRIEF = OPPONENTEXTRACTOR + BRIEF;
+        public const int OPPONENT_BRIEF = OPPONENTEXTRACTOR + BRIEF;
         public const int OPPONENT_BRISK = OPPONENTEXTRACTOR + BRISK;
-        //                    public const int OPPONENT_FREAK = OPPONENTEXTRACTOR + FREAK;
+        public const int OPPONENT_FREAK = OPPONENTEXTRACTOR + FREAK;
         public const int OPPONENT_AKAZE = OPPONENTEXTRACTOR + AKAZE;
         //
         // C++: static Ptr_javaDescriptorExtractor create(int extractorType)
@@ -221,6 +222,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif

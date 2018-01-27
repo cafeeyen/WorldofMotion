@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BoostDesc
     //javadoc: BoostDesc
+
     public class BoostDesc : Feature2D
     {
 

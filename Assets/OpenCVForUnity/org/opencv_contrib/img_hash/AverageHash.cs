@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class AverageHash
     //javadoc: AverageHash
+
     public class AverageHash : ImgHashBase
     {
 

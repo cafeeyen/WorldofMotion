@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GridBoard
     //javadoc: GridBoard
+
     public class GridBoard : Board
     {
 

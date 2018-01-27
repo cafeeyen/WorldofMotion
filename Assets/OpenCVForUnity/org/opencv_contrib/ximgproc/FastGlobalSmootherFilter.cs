@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FastGlobalSmootherFilter
     //javadoc: FastGlobalSmootherFilter
+
     public class FastGlobalSmootherFilter : Algorithm
     {
 

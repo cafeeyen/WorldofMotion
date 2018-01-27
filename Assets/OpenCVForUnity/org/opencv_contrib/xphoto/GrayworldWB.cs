@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GrayworldWB
     //javadoc: GrayworldWB
+
     public class GrayworldWB : WhiteBalancer
     {
 

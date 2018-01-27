@@ -9,32 +9,30 @@ namespace OpenCVForUnity
 
     // C++: class DTrees
     //javadoc: DTrees
+
     public class DTrees : StatModel
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            try {
-                if (disposing) {
-                }
-                if (IsEnabledDispose) {
-                    if (nativeObj != IntPtr.Zero)
-                        ml_DTrees_delete (nativeObj);
-                    nativeObj = IntPtr.Zero;
-                }
-            } finally {
-                base.Dispose (disposing);
-            }
+try {
+if (disposing) {
+}
+if (IsEnabledDispose) {
+if (nativeObj != IntPtr.Zero)
+ml_DTrees_delete(nativeObj);
+nativeObj = IntPtr.Zero;
+}
+} finally {
+base.Dispose (disposing);
+}
 #else
             return;
 #endif
         }
 
-        protected internal DTrees (IntPtr addr)
-            : base (addr)
-        {
-        }
+        protected internal DTrees (IntPtr addr) : base (addr) { }
 
 
         public const int PREDICT_AUTO = 0;
@@ -51,7 +49,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            Mat retVal = new Mat (ml_DTrees_getPriors_10 (nativeObj));
+        Mat retVal = new Mat(ml_DTrees_getPriors_10(nativeObj));
         
 #else
             return null;
@@ -69,7 +67,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            DTrees retVal = new DTrees (ml_DTrees_create_10 ());
+        DTrees retVal = new DTrees(ml_DTrees_create_10());
         
 #else
             return null;
@@ -87,7 +85,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            DTrees retVal = new DTrees (ml_DTrees_load_10 (filepath, nodeName));
+        DTrees retVal = new DTrees(ml_DTrees_load_10(filepath, nodeName));
         
 #else
             return null;
@@ -100,7 +98,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            DTrees retVal = new DTrees (ml_DTrees_load_11 (filepath));
+        DTrees retVal = new DTrees(ml_DTrees_load_11(filepath));
         
 #else
             return null;
@@ -119,7 +117,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            bool retVal = ml_DTrees_getTruncatePrunedTree_10 (nativeObj);
+        bool retVal = ml_DTrees_getTruncatePrunedTree_10(nativeObj);
         
 #else
             return false;
@@ -138,7 +136,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            bool retVal = ml_DTrees_getUse1SERule_10 (nativeObj);
+        bool retVal = ml_DTrees_getUse1SERule_10(nativeObj);
         
 #else
             return false;
@@ -157,7 +155,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            bool retVal = ml_DTrees_getUseSurrogates_10 (nativeObj);
+        bool retVal = ml_DTrees_getUseSurrogates_10(nativeObj);
         
 #else
             return false;
@@ -176,7 +174,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            float retVal = ml_DTrees_getRegressionAccuracy_10 (nativeObj);
+        float retVal = ml_DTrees_getRegressionAccuracy_10(nativeObj);
         
 #else
             return -1;
@@ -195,7 +193,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            int retVal = ml_DTrees_getCVFolds_10 (nativeObj);
+        int retVal = ml_DTrees_getCVFolds_10(nativeObj);
         
 #else
             return -1;
@@ -214,7 +212,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            int retVal = ml_DTrees_getMaxCategories_10 (nativeObj);
+        int retVal = ml_DTrees_getMaxCategories_10(nativeObj);
         
 #else
             return -1;
@@ -233,7 +231,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            int retVal = ml_DTrees_getMaxDepth_10 (nativeObj);
+        int retVal = ml_DTrees_getMaxDepth_10(nativeObj);
         
 #else
             return -1;
@@ -252,7 +250,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            int retVal = ml_DTrees_getMinSampleCount_10 (nativeObj);
+        int retVal = ml_DTrees_getMinSampleCount_10(nativeObj);
         
 #else
             return -1;
@@ -271,7 +269,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setCVFolds_10 (nativeObj, val);
+        ml_DTrees_setCVFolds_10(nativeObj, val);
         
 #else
             return;
@@ -290,7 +288,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setMaxCategories_10 (nativeObj, val);
+        ml_DTrees_setMaxCategories_10(nativeObj, val);
         
 #else
             return;
@@ -309,7 +307,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setMaxDepth_10 (nativeObj, val);
+        ml_DTrees_setMaxDepth_10(nativeObj, val);
         
 #else
             return;
@@ -328,7 +326,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setMinSampleCount_10 (nativeObj, val);
+        ml_DTrees_setMinSampleCount_10(nativeObj, val);
         
 #else
             return;
@@ -345,11 +343,10 @@ namespace OpenCVForUnity
         public void setPriors (Mat val)
         {
             ThrowIfDisposed ();
-            if (val != null)
-                val.ThrowIfDisposed ();
+            if (val != null) val.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setPriors_10 (nativeObj, val.nativeObj);
+        ml_DTrees_setPriors_10(nativeObj, val.nativeObj);
         
 #else
             return;
@@ -368,7 +365,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setRegressionAccuracy_10 (nativeObj, val);
+        ml_DTrees_setRegressionAccuracy_10(nativeObj, val);
         
 #else
             return;
@@ -387,7 +384,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setTruncatePrunedTree_10 (nativeObj, val);
+        ml_DTrees_setTruncatePrunedTree_10(nativeObj, val);
         
 #else
             return;
@@ -406,7 +403,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setUse1SERule_10 (nativeObj, val);
+        ml_DTrees_setUse1SERule_10(nativeObj, val);
         
 #else
             return;
@@ -425,7 +422,7 @@ namespace OpenCVForUnity
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-            ml_DTrees_setUseSurrogates_10 (nativeObj, val);
+        ml_DTrees_setUseSurrogates_10(nativeObj, val);
         
 #else
             return;

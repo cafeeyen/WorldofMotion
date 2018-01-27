@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Algorithm
     //javadoc: Algorithm
+
     public class Algorithm : DisposableOpenCVObject
     {
 
@@ -46,7 +47,7 @@ namespace OpenCVForUnity
         //
 
         //javadoc: Algorithm::getDefaultName()
-        public string getDefaultName ()
+        public virtual string getDefaultName ()
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
@@ -55,6 +56,25 @@ namespace OpenCVForUnity
         
 #else
             return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  bool empty()
+        //
+
+        //javadoc: Algorithm::empty()
+        public virtual bool empty ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            bool retVal = core_Algorithm_empty_10 (nativeObj);
+        
+#else
+            return false;
 #endif
             return retVal;
         }
@@ -80,11 +100,18 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void read(FileNode fn)
+        //
+
+        // Unknown type 'FileNode' (I), skipping the function
+
+
+        //
         // C++:  void save(String filename)
         //
 
         //javadoc: Algorithm::save(filename)
-        public virtual void save (string filename)
+        public void save (string filename)
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
@@ -98,8 +125,18 @@ namespace OpenCVForUnity
         }
 
 
+        //
+        // C++:  void write(Ptr_FileStorage fs, String name = String())
+        //
+
+        // Unknown type 'Ptr_FileStorage' (I), skipping the function
+
+
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -109,6 +146,10 @@ namespace OpenCVForUnity
         // C++:  String getDefaultName()
         [DllImport (LIBNAME)]
         private static extern IntPtr core_Algorithm_getDefaultName_10 (IntPtr nativeObj);
+
+        // C++:  bool empty()
+        [DllImport (LIBNAME)]
+        private static extern bool core_Algorithm_empty_10 (IntPtr nativeObj);
 
         // C++:  void clear()
         [DllImport (LIBNAME)]

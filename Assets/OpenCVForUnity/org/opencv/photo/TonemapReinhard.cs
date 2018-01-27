@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class TonemapReinhard
     //javadoc: TonemapReinhard
+
     public class TonemapReinhard : Tonemap
     {
 

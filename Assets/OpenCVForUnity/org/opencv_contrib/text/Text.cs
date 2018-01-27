@@ -1,4 +1,4 @@
-
+#if !UNITY_WEBGL && !UNITY_WSA_10_0
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Text
+    //javadoc: Text
+
     public class Text
     {
 
@@ -41,8 +44,8 @@ namespace OpenCVForUnity
         public static Mat createOCRHMMTransitionsTable (string vocabulary, List<string> lexicon)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat lexicon_mat = Converters.vector_String_to_Mat(lexicon);
-        Mat retVal = new Mat(text_Text_createOCRHMMTransitionsTable_10(vocabulary, lexicon_mat.nativeObj));
+            Mat lexicon_mat = Converters.vector_String_to_Mat (lexicon);
+            Mat retVal = new Mat (text_Text_createOCRHMMTransitionsTable_10 (vocabulary, lexicon_mat.nativeObj));
         
 #else
             return null;
@@ -67,7 +70,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ERFilter retVal = new ERFilter(text_Text_createERFilterNM1_10(filename, thresholdDelta, minArea, maxArea, minProbability, nonMaxSuppression, minProbabilityDiff));
+            ERFilter retVal = new ERFilter (text_Text_createERFilterNM1_10 (filename, thresholdDelta, minArea, maxArea, minProbability, nonMaxSuppression, minProbabilityDiff));
         
 #else
             return null;
@@ -80,7 +83,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ERFilter retVal = new ERFilter(text_Text_createERFilterNM1_11(filename));
+            ERFilter retVal = new ERFilter (text_Text_createERFilterNM1_11 (filename));
         
 #else
             return null;
@@ -105,7 +108,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ERFilter retVal = new ERFilter(text_Text_createERFilterNM2_10(filename, minProbability));
+            ERFilter retVal = new ERFilter (text_Text_createERFilterNM2_10 (filename, minProbability));
         
 #else
             return null;
@@ -118,7 +121,7 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        ERFilter retVal = new ERFilter(text_Text_createERFilterNM2_11(filename));
+            ERFilter retVal = new ERFilter (text_Text_createERFilterNM2_11 (filename));
         
 #else
             return null;
@@ -176,12 +179,13 @@ namespace OpenCVForUnity
         //javadoc: computeNMChannels(_src, _channels, _mode)
         public static void computeNMChannels (Mat _src, List<Mat> _channels, int _mode)
         {
-            if (_src != null) _src.ThrowIfDisposed ();
+            if (_src != null)
+                _src.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat _channels_mat = new Mat();
-        text_Text_computeNMChannels_10(_src.nativeObj, _channels_mat.nativeObj, _mode);
-        Converters.Mat_to_vector_Mat(_channels_mat, _channels);
-        _channels_mat.release();
+            Mat _channels_mat = new Mat ();
+            text_Text_computeNMChannels_10 (_src.nativeObj, _channels_mat.nativeObj, _mode);
+            Converters.Mat_to_vector_Mat (_channels_mat, _channels);
+            _channels_mat.release ();
 #else
             return;
 #endif
@@ -191,12 +195,13 @@ namespace OpenCVForUnity
         //javadoc: computeNMChannels(_src, _channels)
         public static void computeNMChannels (Mat _src, List<Mat> _channels)
         {
-            if (_src != null) _src.ThrowIfDisposed ();
+            if (_src != null)
+                _src.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat _channels_mat = new Mat();
-        text_Text_computeNMChannels_11(_src.nativeObj, _channels_mat.nativeObj);
-        Converters.Mat_to_vector_Mat(_channels_mat, _channels);
-        _channels_mat.release();
+            Mat _channels_mat = new Mat ();
+            text_Text_computeNMChannels_11 (_src.nativeObj, _channels_mat.nativeObj);
+            Converters.Mat_to_vector_Mat (_channels_mat, _channels);
+            _channels_mat.release ();
 #else
             return;
 #endif
@@ -211,13 +216,17 @@ namespace OpenCVForUnity
         //javadoc: detectRegions(image, er_filter1, er_filter2, groups_rects, method, filename, minProbability)
         public static void detectRegions (Mat image, ERFilter er_filter1, ERFilter er_filter2, MatOfRect groups_rects, int method, string filename, float minProbability)
         {
-            if (image != null) image.ThrowIfDisposed ();
-            if (er_filter1 != null) er_filter1.ThrowIfDisposed ();
-            if (er_filter2 != null) er_filter2.ThrowIfDisposed ();
-            if (groups_rects != null) groups_rects.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (er_filter1 != null)
+                er_filter1.ThrowIfDisposed ();
+            if (er_filter2 != null)
+                er_filter2.ThrowIfDisposed ();
+            if (groups_rects != null)
+                groups_rects.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat groups_rects_mat = groups_rects;
-        text_Text_detectRegions_10(image.nativeObj, er_filter1.getNativeObjAddr(), er_filter2.getNativeObjAddr(), groups_rects_mat.nativeObj, method, filename, minProbability);
+            Mat groups_rects_mat = groups_rects;
+            text_Text_detectRegions_10 (image.nativeObj, er_filter1.getNativeObjAddr (), er_filter2.getNativeObjAddr (), groups_rects_mat.nativeObj, method, filename, minProbability);
         
 #else
             return;
@@ -228,13 +237,17 @@ namespace OpenCVForUnity
         //javadoc: detectRegions(image, er_filter1, er_filter2, groups_rects)
         public static void detectRegions (Mat image, ERFilter er_filter1, ERFilter er_filter2, MatOfRect groups_rects)
         {
-            if (image != null) image.ThrowIfDisposed ();
-            if (er_filter1 != null) er_filter1.ThrowIfDisposed ();
-            if (er_filter2 != null) er_filter2.ThrowIfDisposed ();
-            if (groups_rects != null) groups_rects.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (er_filter1 != null)
+                er_filter1.ThrowIfDisposed ();
+            if (er_filter2 != null)
+                er_filter2.ThrowIfDisposed ();
+            if (groups_rects != null)
+                groups_rects.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat groups_rects_mat = groups_rects;
-        text_Text_detectRegions_11(image.nativeObj, er_filter1.getNativeObjAddr(), er_filter2.getNativeObjAddr(), groups_rects_mat.nativeObj);
+            Mat groups_rects_mat = groups_rects;
+            text_Text_detectRegions_11 (image.nativeObj, er_filter1.getNativeObjAddr (), er_filter2.getNativeObjAddr (), groups_rects_mat.nativeObj);
         
 #else
             return;
@@ -250,14 +263,17 @@ namespace OpenCVForUnity
         //javadoc: detectRegions(image, er_filter1, er_filter2, regions)
         public static void detectRegions (Mat image, ERFilter er_filter1, ERFilter er_filter2, List<MatOfPoint> regions)
         {
-            if (image != null) image.ThrowIfDisposed ();
-            if (er_filter1 != null) er_filter1.ThrowIfDisposed ();
-            if (er_filter2 != null) er_filter2.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (er_filter1 != null)
+                er_filter1.ThrowIfDisposed ();
+            if (er_filter2 != null)
+                er_filter2.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat regions_mat = new Mat();
-        text_Text_detectRegions_12(image.nativeObj, er_filter1.getNativeObjAddr(), er_filter2.getNativeObjAddr(), regions_mat.nativeObj);
-        Converters.Mat_to_vector_vector_Point(regions_mat, regions);
-        regions_mat.release();
+            Mat regions_mat = new Mat ();
+            text_Text_detectRegions_12 (image.nativeObj, er_filter1.getNativeObjAddr (), er_filter2.getNativeObjAddr (), regions_mat.nativeObj);
+            Converters.Mat_to_vector_vector_Point (regions_mat, regions);
+            regions_mat.release ();
 #else
             return;
 #endif
@@ -272,14 +288,17 @@ namespace OpenCVForUnity
         //javadoc: erGrouping(image, channel, regions, groups_rects, method, filename, minProbablity)
         public static void erGrouping (Mat image, Mat channel, List<MatOfPoint> regions, MatOfRect groups_rects, int method, string filename, float minProbablity)
         {
-            if (image != null) image.ThrowIfDisposed ();
-            if (channel != null) channel.ThrowIfDisposed ();
-            if (groups_rects != null) groups_rects.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (channel != null)
+                channel.ThrowIfDisposed ();
+            if (groups_rects != null)
+                groups_rects.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        List<Mat> regions_tmplm = new List<Mat>((regions != null) ? regions.Count : 0);
-        Mat regions_mat = Converters.vector_vector_Point_to_Mat(regions, regions_tmplm);
-        Mat groups_rects_mat = groups_rects;
-        text_Text_erGrouping_10(image.nativeObj, channel.nativeObj, regions_mat.nativeObj, groups_rects_mat.nativeObj, method, filename, minProbablity);
+            List<Mat> regions_tmplm = new List<Mat> ((regions != null) ? regions.Count : 0);
+            Mat regions_mat = Converters.vector_vector_Point_to_Mat (regions, regions_tmplm);
+            Mat groups_rects_mat = groups_rects;
+            text_Text_erGrouping_10 (image.nativeObj, channel.nativeObj, regions_mat.nativeObj, groups_rects_mat.nativeObj, method, filename, minProbablity);
         
 #else
             return;
@@ -290,14 +309,17 @@ namespace OpenCVForUnity
         //javadoc: erGrouping(image, channel, regions, groups_rects)
         public static void erGrouping (Mat image, Mat channel, List<MatOfPoint> regions, MatOfRect groups_rects)
         {
-            if (image != null) image.ThrowIfDisposed ();
-            if (channel != null) channel.ThrowIfDisposed ();
-            if (groups_rects != null) groups_rects.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (channel != null)
+                channel.ThrowIfDisposed ();
+            if (groups_rects != null)
+                groups_rects.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        List<Mat> regions_tmplm = new List<Mat>((regions != null) ? regions.Count : 0);
-        Mat regions_mat = Converters.vector_vector_Point_to_Mat(regions, regions_tmplm);
-        Mat groups_rects_mat = groups_rects;
-        text_Text_erGrouping_11(image.nativeObj, channel.nativeObj, regions_mat.nativeObj, groups_rects_mat.nativeObj);
+            List<Mat> regions_tmplm = new List<Mat> ((regions != null) ? regions.Count : 0);
+            Mat regions_mat = Converters.vector_vector_Point_to_Mat (regions, regions_tmplm);
+            Mat groups_rects_mat = groups_rects;
+            text_Text_erGrouping_11 (image.nativeObj, channel.nativeObj, regions_mat.nativeObj, groups_rects_mat.nativeObj);
         
 #else
             return;
@@ -308,6 +330,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -321,24 +344,28 @@ namespace OpenCVForUnity
         // C++:  Ptr_ERFilter createERFilterNM1(String filename, int thresholdDelta = 1, float minArea = (float)0.00025, float maxArea = (float)0.13, float minProbability = (float)0.4, bool nonMaxSuppression = true, float minProbabilityDiff = (float)0.1)
         [DllImport (LIBNAME)]
         private static extern IntPtr text_Text_createERFilterNM1_10 (string filename, int thresholdDelta, float minArea, float maxArea, float minProbability, bool nonMaxSuppression, float minProbabilityDiff);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr text_Text_createERFilterNM1_11 (string filename);
 
         // C++:  Ptr_ERFilter createERFilterNM2(String filename, float minProbability = (float)0.3)
         [DllImport (LIBNAME)]
         private static extern IntPtr text_Text_createERFilterNM2_10 (string filename, float minProbability);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr text_Text_createERFilterNM2_11 (string filename);
 
         // C++:  void computeNMChannels(Mat _src, vector_Mat& _channels, int _mode = ERFILTER_NM_RGBLGrad)
         [DllImport (LIBNAME)]
         private static extern void text_Text_computeNMChannels_10 (IntPtr _src_nativeObj, IntPtr _channels_mat_nativeObj, int _mode);
+
         [DllImport (LIBNAME)]
         private static extern void text_Text_computeNMChannels_11 (IntPtr _src_nativeObj, IntPtr _channels_mat_nativeObj);
 
         // C++:  void detectRegions(Mat image, Ptr_ERFilter er_filter1, Ptr_ERFilter er_filter2, vector_Rect& groups_rects, int method = ERGROUPING_ORIENTATION_HORIZ, String filename = String(), float minProbability = (float)0.5)
         [DllImport (LIBNAME)]
         private static extern void text_Text_detectRegions_10 (IntPtr image_nativeObj, IntPtr er_filter1_nativeObj, IntPtr er_filter2_nativeObj, IntPtr groups_rects_mat_nativeObj, int method, string filename, float minProbability);
+
         [DllImport (LIBNAME)]
         private static extern void text_Text_detectRegions_11 (IntPtr image_nativeObj, IntPtr er_filter1_nativeObj, IntPtr er_filter2_nativeObj, IntPtr groups_rects_mat_nativeObj);
 
@@ -349,8 +376,10 @@ namespace OpenCVForUnity
         // C++:  void erGrouping(Mat image, Mat channel, vector_vector_Point regions, vector_Rect& groups_rects, int method = ERGROUPING_ORIENTATION_HORIZ, String filename = String(), float minProbablity = (float)0.5)
         [DllImport (LIBNAME)]
         private static extern void text_Text_erGrouping_10 (IntPtr image_nativeObj, IntPtr channel_nativeObj, IntPtr regions_mat_nativeObj, IntPtr groups_rects_mat_nativeObj, int method, string filename, float minProbablity);
+
         [DllImport (LIBNAME)]
         private static extern void text_Text_erGrouping_11 (IntPtr image_nativeObj, IntPtr channel_nativeObj, IntPtr regions_mat_nativeObj, IntPtr groups_rects_mat_nativeObj);
 
     }
 }
+#endif

@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class VideoWriter
     //javadoc: VideoWriter
+
     public class VideoWriter : DisposableOpenCVObject
     {
 

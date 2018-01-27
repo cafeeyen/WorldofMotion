@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GPCTree
     //javadoc: GPCTree
+
     public class GPCTree : Algorithm
     {
 

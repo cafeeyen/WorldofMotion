@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SVM
     //javadoc: SVM
+
     public class SVM : StatModel
     {
 

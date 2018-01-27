@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BackgroundSubtractorCNT
     //javadoc: BackgroundSubtractorCNT
+
     public class BackgroundSubtractorCNT : BackgroundSubtractor
     {
 
@@ -253,6 +254,9 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -278,6 +282,7 @@ namespace OpenCVForUnity
         // C++:  void apply(Mat image, Mat& fgmask, double learningRate = -1)
         [DllImport (LIBNAME)]
         private static extern void bgsegm_BackgroundSubtractorCNT_apply_10 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr fgmask_nativeObj, double learningRate);
+
         [DllImport (LIBNAME)]
         private static extern void bgsegm_BackgroundSubtractorCNT_apply_11 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr fgmask_nativeObj);
 

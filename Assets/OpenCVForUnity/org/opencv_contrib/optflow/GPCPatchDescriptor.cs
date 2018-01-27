@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class GPCPatchDescriptor
     //javadoc: GPCPatchDescriptor
+
     public class GPCPatchDescriptor : DisposableOpenCVObject
     {
 

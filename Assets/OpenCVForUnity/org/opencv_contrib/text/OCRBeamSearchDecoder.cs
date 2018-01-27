@@ -1,4 +1,4 @@
-
+#if !UNITY_WEBGL && !UNITY_WSA_10_0
 
 using System;
 using System.Collections.Generic;
@@ -9,29 +9,33 @@ namespace OpenCVForUnity
 
     // C++: class OCRBeamSearchDecoder
     //javadoc: OCRBeamSearchDecoder
+
     public class OCRBeamSearchDecoder : BaseOCR
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-try {
-if (disposing) {
-}
-if (IsEnabledDispose) {
-if (nativeObj != IntPtr.Zero)
-text_OCRBeamSearchDecoder_delete(nativeObj);
-nativeObj = IntPtr.Zero;
-}
-} finally {
-base.Dispose (disposing);
-}
+            try {
+                if (disposing) {
+                }
+                if (IsEnabledDispose) {
+                    if (nativeObj != IntPtr.Zero)
+                        text_OCRBeamSearchDecoder_delete (nativeObj);
+                    nativeObj = IntPtr.Zero;
+                }
+            } finally {
+                base.Dispose (disposing);
+            }
 #else
             return;
 #endif
         }
 
-        protected internal OCRBeamSearchDecoder (IntPtr addr) : base (addr) { }
+        protected internal OCRBeamSearchDecoder (IntPtr addr)
+            : base (addr)
+        {
+        }
 
 
         //
@@ -48,11 +52,13 @@ base.Dispose (disposing);
         //javadoc: OCRBeamSearchDecoder::create(filename, vocabulary, transition_probabilities_table, emission_probabilities_table, mode, beam_size)
         public static OCRBeamSearchDecoder create (string filename, string vocabulary, Mat transition_probabilities_table, Mat emission_probabilities_table, int mode, int beam_size)
         {
-            if (transition_probabilities_table != null) transition_probabilities_table.ThrowIfDisposed ();
-            if (emission_probabilities_table != null) emission_probabilities_table.ThrowIfDisposed ();
+            if (transition_probabilities_table != null)
+                transition_probabilities_table.ThrowIfDisposed ();
+            if (emission_probabilities_table != null)
+                emission_probabilities_table.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        OCRBeamSearchDecoder retVal = new OCRBeamSearchDecoder(text_OCRBeamSearchDecoder_create_10(filename, vocabulary, transition_probabilities_table.nativeObj, emission_probabilities_table.nativeObj, mode, beam_size));
+            OCRBeamSearchDecoder retVal = new OCRBeamSearchDecoder (text_OCRBeamSearchDecoder_create_10 (filename, vocabulary, transition_probabilities_table.nativeObj, emission_probabilities_table.nativeObj, mode, beam_size));
         
 #else
             return null;
@@ -63,11 +69,13 @@ base.Dispose (disposing);
         //javadoc: OCRBeamSearchDecoder::create(filename, vocabulary, transition_probabilities_table, emission_probabilities_table)
         public static OCRBeamSearchDecoder create (string filename, string vocabulary, Mat transition_probabilities_table, Mat emission_probabilities_table)
         {
-            if (transition_probabilities_table != null) transition_probabilities_table.ThrowIfDisposed ();
-            if (emission_probabilities_table != null) emission_probabilities_table.ThrowIfDisposed ();
+            if (transition_probabilities_table != null)
+                transition_probabilities_table.ThrowIfDisposed ();
+            if (emission_probabilities_table != null)
+                emission_probabilities_table.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        OCRBeamSearchDecoder retVal = new OCRBeamSearchDecoder(text_OCRBeamSearchDecoder_create_11(filename, vocabulary, transition_probabilities_table.nativeObj, emission_probabilities_table.nativeObj));
+            OCRBeamSearchDecoder retVal = new OCRBeamSearchDecoder (text_OCRBeamSearchDecoder_create_11 (filename, vocabulary, transition_probabilities_table.nativeObj, emission_probabilities_table.nativeObj));
         
 #else
             return null;
@@ -84,11 +92,13 @@ base.Dispose (disposing);
         public string run (Mat image, Mat mask, int min_confidence, int component_level)
         {
             ThrowIfDisposed ();
-            if (image != null) image.ThrowIfDisposed ();
-            if (mask != null) mask.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (mask != null)
+                mask.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_10(nativeObj, image.nativeObj, mask.nativeObj, min_confidence, component_level));
+            string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_10 (nativeObj, image.nativeObj, mask.nativeObj, min_confidence, component_level));
         
 #else
             return null;
@@ -100,11 +110,13 @@ base.Dispose (disposing);
         public string run (Mat image, Mat mask, int min_confidence)
         {
             ThrowIfDisposed ();
-            if (image != null) image.ThrowIfDisposed ();
-            if (mask != null) mask.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
+            if (mask != null)
+                mask.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_11(nativeObj, image.nativeObj, mask.nativeObj, min_confidence));
+            string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_11 (nativeObj, image.nativeObj, mask.nativeObj, min_confidence));
         
 #else
             return null;
@@ -121,10 +133,11 @@ base.Dispose (disposing);
         public string run (Mat image, int min_confidence, int component_level)
         {
             ThrowIfDisposed ();
-            if (image != null) image.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_12(nativeObj, image.nativeObj, min_confidence, component_level));
+            string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_12 (nativeObj, image.nativeObj, min_confidence, component_level));
         
 #else
             return null;
@@ -136,10 +149,11 @@ base.Dispose (disposing);
         public string run (Mat image, int min_confidence)
         {
             ThrowIfDisposed ();
-            if (image != null) image.ThrowIfDisposed ();
+            if (image != null)
+                image.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_13(nativeObj, image.nativeObj, min_confidence));
+            string retVal = Marshal.PtrToStringAnsi (text_OCRBeamSearchDecoder_run_13 (nativeObj, image.nativeObj, min_confidence));
         
 #else
             return null;
@@ -150,6 +164,7 @@ base.Dispose (disposing);
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -159,18 +174,21 @@ base.Dispose (disposing);
         // C++: static Ptr_OCRBeamSearchDecoder create(String filename, String vocabulary, Mat transition_probabilities_table, Mat emission_probabilities_table, int mode = OCR_DECODER_VITERBI, int beam_size = 500)
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_create_10 (string filename, string vocabulary, IntPtr transition_probabilities_table_nativeObj, IntPtr emission_probabilities_table_nativeObj, int mode, int beam_size);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_create_11 (string filename, string vocabulary, IntPtr transition_probabilities_table_nativeObj, IntPtr emission_probabilities_table_nativeObj);
 
         // C++:  String run(Mat image, Mat mask, int min_confidence, int component_level = 0)
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_run_10 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr mask_nativeObj, int min_confidence, int component_level);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_run_11 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr mask_nativeObj, int min_confidence);
 
         // C++:  String run(Mat image, int min_confidence, int component_level = 0)
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_run_12 (IntPtr nativeObj, IntPtr image_nativeObj, int min_confidence, int component_level);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr text_OCRBeamSearchDecoder_run_13 (IntPtr nativeObj, IntPtr image_nativeObj, int min_confidence);
 
@@ -180,3 +198,4 @@ base.Dispose (disposing);
 
     }
 }
+#endif

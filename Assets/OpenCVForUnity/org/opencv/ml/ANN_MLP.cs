@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ANN_MLP
     //javadoc: ANN_MLP
+
     public class ANN_MLP : StatModel
     {
 
@@ -39,6 +40,8 @@ base.Dispose (disposing);
         public const int IDENTITY = 0;
         public const int SIGMOID_SYM = 1;
         public const int GAUSSIAN = 2;
+        public const int RELU = 3;
+        public const int LEAKYRELU = 4;
         public const int UPDATE_WEIGHTS = 1;
         public const int NO_INPUT_SCALE = 2;
         public const int NO_OUTPUT_SCALE = 4;

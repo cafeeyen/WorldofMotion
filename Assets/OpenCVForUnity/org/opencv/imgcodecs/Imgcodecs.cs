@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Imgcodecs
+    //javadoc: Imgcodecs
+
     public class Imgcodecs
     {
 
@@ -164,16 +167,17 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  bool imreadmulti(String filename, vector_Mat mats, int flags = IMREAD_ANYCOLOR)
+        // C++:  bool imreadmulti(String filename, vector_Mat& mats, int flags = IMREAD_ANYCOLOR)
         //
 
         //javadoc: imreadmulti(filename, mats, flags)
         public static bool imreadmulti (string filename, List<Mat> mats, int flags)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat mats_mat = Converters.vector_Mat_to_Mat(mats);
+        Mat mats_mat = new Mat();
         bool retVal = imgcodecs_Imgcodecs_imreadmulti_10(filename, mats_mat.nativeObj, flags);
-        
+        Converters.Mat_to_vector_Mat(mats_mat, mats);
+        mats_mat.release();
 #else
             return false;
 #endif
@@ -184,9 +188,10 @@ namespace OpenCVForUnity
         public static bool imreadmulti (string filename, List<Mat> mats)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        Mat mats_mat = Converters.vector_Mat_to_Mat(mats);
+        Mat mats_mat = new Mat();
         bool retVal = imgcodecs_Imgcodecs_imreadmulti_11(filename, mats_mat.nativeObj);
-        
+        Converters.Mat_to_vector_Mat(mats_mat, mats);
+        mats_mat.release();
 #else
             return false;
 #endif
@@ -252,7 +257,7 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern bool imgcodecs_Imgcodecs_imencode_11 (string ext, IntPtr img_nativeObj, IntPtr buf_mat_nativeObj);
 
-        // C++:  bool imreadmulti(String filename, vector_Mat mats, int flags = IMREAD_ANYCOLOR)
+        // C++:  bool imreadmulti(String filename, vector_Mat& mats, int flags = IMREAD_ANYCOLOR)
         [DllImport (LIBNAME)]
         private static extern bool imgcodecs_Imgcodecs_imreadmulti_10 (string filename, IntPtr mats_mat_nativeObj, int flags);
         [DllImport (LIBNAME)]

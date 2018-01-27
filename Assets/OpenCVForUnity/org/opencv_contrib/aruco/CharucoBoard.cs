@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class CharucoBoard
     //javadoc: CharucoBoard
+
     public class CharucoBoard : Board
     {
 

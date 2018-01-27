@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class DictValue
     //javadoc: DictValue
+
     public class DictValue : DisposableOpenCVObject
     {
 
@@ -251,13 +252,12 @@ namespace OpenCVForUnity
         }
 
 
-        #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
+#if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
-        
 
 #else
         const string LIBNAME = "opencvforunity";
-        #endif
+#endif
 
 
 

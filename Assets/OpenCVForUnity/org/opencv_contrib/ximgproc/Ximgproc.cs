@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Ximgproc
+    //javadoc: Ximgproc
+
     public class Ximgproc
     {
 
@@ -67,6 +70,37 @@ namespace OpenCVForUnity
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         AdaptiveManifoldFilter retVal = new AdaptiveManifoldFilter(ximgproc_Ximgproc_createAMFilter_11(sigma_s, sigma_r));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  Ptr_ContourFitting createContourFitting(int ctr = 1024, int fd = 16)
+        //
+
+        //javadoc: createContourFitting(ctr, fd)
+        public static ContourFitting createContourFitting (int ctr, int fd)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ContourFitting retVal = new ContourFitting(ximgproc_Ximgproc_createContourFitting_10(ctr, fd));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+        //javadoc: createContourFitting()
+        public static ContourFitting createContourFitting ()
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ContourFitting retVal = new ContourFitting(ximgproc_Ximgproc_createContourFitting_11());
         
 #else
             return null;
@@ -143,6 +177,37 @@ namespace OpenCVForUnity
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         EdgeAwareInterpolator retVal = new EdgeAwareInterpolator(ximgproc_Ximgproc_createEdgeAwareInterpolator_10());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  Ptr_EdgeBoxes createEdgeBoxes(float alpha = 0.65f, float beta = 0.75f, float eta = 1, float minScore = 0.01f, int maxBoxes = 10000, float edgeMinMag = 0.1f, float edgeMergeThr = 0.5f, float clusterMinMag = 0.5f, float maxAspectRatio = 3, float minBoxArea = 1000, float gamma = 2, float kappa = 1.5f)
+        //
+
+        //javadoc: createEdgeBoxes(alpha, beta, eta, minScore, maxBoxes, edgeMinMag, edgeMergeThr, clusterMinMag, maxAspectRatio, minBoxArea, gamma, kappa)
+        public static EdgeBoxes createEdgeBoxes (float alpha, float beta, float eta, float minScore, int maxBoxes, float edgeMinMag, float edgeMergeThr, float clusterMinMag, float maxAspectRatio, float minBoxArea, float gamma, float kappa)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        EdgeBoxes retVal = new EdgeBoxes(ximgproc_Ximgproc_createEdgeBoxes_10(alpha, beta, eta, minScore, maxBoxes, edgeMinMag, edgeMergeThr, clusterMinMag, maxAspectRatio, minBoxArea, gamma, kappa));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+        //javadoc: createEdgeBoxes()
+        public static EdgeBoxes createEdgeBoxes ()
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        EdgeBoxes retVal = new EdgeBoxes(ximgproc_Ximgproc_createEdgeBoxes_11());
         
 #else
             return null;
@@ -610,6 +675,26 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void PeiLinNormalization(Mat I, Mat& T)
+        //
+
+        //javadoc: PeiLinNormalization(I, T)
+        public static void PeiLinNormalization (Mat I, Mat T)
+        {
+            if (I != null) I.ThrowIfDisposed ();
+            if (T != null) T.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_PeiLinNormalization_10(I.nativeObj, T.nativeObj);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
         // C++:  void amFilter(Mat joint, Mat src, Mat& dst, double sigma_s, double sigma_r, bool adjust_outliers = false)
         //
 
@@ -693,6 +778,26 @@ namespace OpenCVForUnity
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         ximgproc_Ximgproc_bilateralTextureFilter_11(src.nativeObj, dst.nativeObj);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void contourSampling(Mat src, Mat& _out, int nbElt)
+        //
+
+        //javadoc: contourSampling(src, _out, nbElt)
+        public static void contourSampling (Mat src, Mat _out, int nbElt)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (_out != null) _out.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_contourSampling_10(src.nativeObj, _out.nativeObj, nbElt);
         
 #else
             return;
@@ -787,6 +892,41 @@ namespace OpenCVForUnity
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         ximgproc_Ximgproc_fastGlobalSmootherFilter_11(guide.nativeObj, src.nativeObj, dst.nativeObj, lambda, sigma_color);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void fourierDescriptor(Mat src, Mat& dst, int nbElt = -1, int nbFD = -1)
+        //
+
+        //javadoc: fourierDescriptor(src, dst, nbElt, nbFD)
+        public static void fourierDescriptor (Mat src, Mat dst, int nbElt, int nbFD)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (dst != null) dst.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_fourierDescriptor_10(src.nativeObj, dst.nativeObj, nbElt, nbFD);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+        //javadoc: fourierDescriptor(src, dst)
+        public static void fourierDescriptor (Mat src, Mat dst)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (dst != null) dst.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_fourierDescriptor_11(src.nativeObj, dst.nativeObj);
         
 #else
             return;
@@ -1025,6 +1165,43 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void transformFD(Mat src, Mat t, Mat& dst, bool fdContour = true)
+        //
+
+        //javadoc: transformFD(src, t, dst, fdContour)
+        public static void transformFD (Mat src, Mat t, Mat dst, bool fdContour)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (t != null) t.ThrowIfDisposed ();
+            if (dst != null) dst.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_transformFD_10(src.nativeObj, t.nativeObj, dst.nativeObj, fdContour);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+        //javadoc: transformFD(src, t, dst)
+        public static void transformFD (Mat src, Mat t, Mat dst)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (t != null) t.ThrowIfDisposed ();
+            if (dst != null) dst.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        ximgproc_Ximgproc_transformFD_11(src.nativeObj, t.nativeObj, dst.nativeObj);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
         // C++:  void weightedMedianFilter(Mat joint, Mat src, Mat& dst, int r, double sigma = 25.5, int weightType = WMF_EXP, Mat mask = Mat())
         //
 
@@ -1092,6 +1269,12 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern IntPtr ximgproc_Ximgproc_createAMFilter_11 (double sigma_s, double sigma_r);
 
+        // C++:  Ptr_ContourFitting createContourFitting(int ctr = 1024, int fd = 16)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr ximgproc_Ximgproc_createContourFitting_10 (int ctr, int fd);
+        [DllImport (LIBNAME)]
+        private static extern IntPtr ximgproc_Ximgproc_createContourFitting_11 ();
+
         // C++:  Ptr_DTFilter createDTFilter(Mat guide, double sigmaSpatial, double sigmaColor, int mode = DTF_NC, int numIters = 3)
         [DllImport (LIBNAME)]
         private static extern IntPtr ximgproc_Ximgproc_createDTFilter_10 (IntPtr guide_nativeObj, double sigmaSpatial, double sigmaColor, int mode, int numIters);
@@ -1105,6 +1288,12 @@ namespace OpenCVForUnity
         // C++:  Ptr_EdgeAwareInterpolator createEdgeAwareInterpolator()
         [DllImport (LIBNAME)]
         private static extern IntPtr ximgproc_Ximgproc_createEdgeAwareInterpolator_10 ();
+
+        // C++:  Ptr_EdgeBoxes createEdgeBoxes(float alpha = 0.65f, float beta = 0.75f, float eta = 1, float minScore = 0.01f, int maxBoxes = 10000, float edgeMinMag = 0.1f, float edgeMergeThr = 0.5f, float clusterMinMag = 0.5f, float maxAspectRatio = 3, float minBoxArea = 1000, float gamma = 2, float kappa = 1.5f)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr ximgproc_Ximgproc_createEdgeBoxes_10 (float alpha, float beta, float eta, float minScore, int maxBoxes, float edgeMinMag, float edgeMergeThr, float clusterMinMag, float maxAspectRatio, float minBoxArea, float gamma, float kappa);
+        [DllImport (LIBNAME)]
+        private static extern IntPtr ximgproc_Ximgproc_createEdgeBoxes_11 ();
 
         // C++:  Ptr_FastGlobalSmootherFilter createFastGlobalSmootherFilter(Mat guide, double lambda, double sigma_color, double lambda_attenuation = 0.25, int num_iter = 3)
         [DllImport (LIBNAME)]
@@ -1196,6 +1385,10 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern IntPtr ximgproc_Ximgproc_createSuperpixelSLIC_11 (IntPtr image_nativeObj);
 
+        // C++:  void PeiLinNormalization(Mat I, Mat& T)
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_PeiLinNormalization_10 (IntPtr I_nativeObj, IntPtr T_nativeObj);
+
         // C++:  void amFilter(Mat joint, Mat src, Mat& dst, double sigma_s, double sigma_r, bool adjust_outliers = false)
         [DllImport (LIBNAME)]
         private static extern void ximgproc_Ximgproc_amFilter_10 (IntPtr joint_nativeObj, IntPtr src_nativeObj, IntPtr dst_nativeObj, double sigma_s, double sigma_r, bool adjust_outliers);
@@ -1212,6 +1405,10 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern void ximgproc_Ximgproc_bilateralTextureFilter_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj);
 
+        // C++:  void contourSampling(Mat src, Mat& _out, int nbElt)
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_contourSampling_10 (IntPtr src_nativeObj, IntPtr _out_nativeObj, int nbElt);
+
         // C++:  void covarianceEstimation(Mat src, Mat& dst, int windowRows, int windowCols)
         [DllImport (LIBNAME)]
         private static extern void ximgproc_Ximgproc_covarianceEstimation_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, int windowRows, int windowCols);
@@ -1227,6 +1424,12 @@ namespace OpenCVForUnity
         private static extern void ximgproc_Ximgproc_fastGlobalSmootherFilter_10 (IntPtr guide_nativeObj, IntPtr src_nativeObj, IntPtr dst_nativeObj, double lambda, double sigma_color, double lambda_attenuation, int num_iter);
         [DllImport (LIBNAME)]
         private static extern void ximgproc_Ximgproc_fastGlobalSmootherFilter_11 (IntPtr guide_nativeObj, IntPtr src_nativeObj, IntPtr dst_nativeObj, double lambda, double sigma_color);
+
+        // C++:  void fourierDescriptor(Mat src, Mat& dst, int nbElt = -1, int nbFD = -1)
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_fourierDescriptor_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, int nbElt, int nbFD);
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_fourierDescriptor_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj);
 
         // C++:  void guidedFilter(Mat guide, Mat src, Mat& dst, int radius, double eps, int dDepth = -1)
         [DllImport (LIBNAME)]
@@ -1265,6 +1468,12 @@ namespace OpenCVForUnity
         private static extern void ximgproc_Ximgproc_thinning_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, int thinningType);
         [DllImport (LIBNAME)]
         private static extern void ximgproc_Ximgproc_thinning_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj);
+
+        // C++:  void transformFD(Mat src, Mat t, Mat& dst, bool fdContour = true)
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_transformFD_10 (IntPtr src_nativeObj, IntPtr t_nativeObj, IntPtr dst_nativeObj, bool fdContour);
+        [DllImport (LIBNAME)]
+        private static extern void ximgproc_Ximgproc_transformFD_11 (IntPtr src_nativeObj, IntPtr t_nativeObj, IntPtr dst_nativeObj);
 
         // C++:  void weightedMedianFilter(Mat joint, Mat src, Mat& dst, int r, double sigma = 25.5, int weightType = WMF_EXP, Mat mask = Mat())
         [DllImport (LIBNAME)]

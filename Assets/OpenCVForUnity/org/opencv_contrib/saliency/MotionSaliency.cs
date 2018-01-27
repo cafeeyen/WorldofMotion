@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MotionSaliency
     //javadoc: MotionSaliency
+
     public class MotionSaliency : Saliency
     {
 

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Optflow
+    //javadoc: Optflow
+
     public class Optflow
     {
 

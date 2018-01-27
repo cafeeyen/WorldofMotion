@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DTFilter
     //javadoc: DTFilter
+
     public class DTFilter : Algorithm
     {
 

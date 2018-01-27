@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FaceRecognizer
     //javadoc: FaceRecognizer
+
     public class FaceRecognizer : Algorithm
     {
 

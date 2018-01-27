@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FastLineDetector
     //javadoc: FastLineDetector
+
     public class FastLineDetector : Algorithm
     {
 

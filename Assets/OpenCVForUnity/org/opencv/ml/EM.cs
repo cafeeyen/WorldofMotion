@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class EM
     //javadoc: EM
+
     public class EM : StatModel
     {
 
@@ -475,6 +476,8 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -496,6 +499,7 @@ namespace OpenCVForUnity
         // C++: static Ptr_EM load(String filepath, String nodeName = String())
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_EM_load_10 (string filepath, string nodeName);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_EM_load_11 (string filepath);
 
@@ -510,24 +514,28 @@ namespace OpenCVForUnity
         // C++:  bool trainE(Mat samples, Mat means0, Mat covs0 = Mat(), Mat weights0 = Mat(), Mat& logLikelihoods = Mat(), Mat& labels = Mat(), Mat& probs = Mat())
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainE_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr means0_nativeObj, IntPtr covs0_nativeObj, IntPtr weights0_nativeObj, IntPtr logLikelihoods_nativeObj, IntPtr labels_nativeObj, IntPtr probs_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainE_11 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr means0_nativeObj);
 
         // C++:  bool trainEM(Mat samples, Mat& logLikelihoods = Mat(), Mat& labels = Mat(), Mat& probs = Mat())
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainEM_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr logLikelihoods_nativeObj, IntPtr labels_nativeObj, IntPtr probs_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainEM_11 (IntPtr nativeObj, IntPtr samples_nativeObj);
 
         // C++:  bool trainM(Mat samples, Mat probs0, Mat& logLikelihoods = Mat(), Mat& labels = Mat(), Mat& probs = Mat())
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainM_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr probs0_nativeObj, IntPtr logLikelihoods_nativeObj, IntPtr labels_nativeObj, IntPtr probs_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern bool ml_EM_trainM_11 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr probs0_nativeObj);
 
         // C++:  float predict(Mat samples, Mat& results = Mat(), int flags = 0)
         [DllImport (LIBNAME)]
         private static extern float ml_EM_predict_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr results_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern float ml_EM_predict_11 (IntPtr nativeObj, IntPtr samples_nativeObj);
 

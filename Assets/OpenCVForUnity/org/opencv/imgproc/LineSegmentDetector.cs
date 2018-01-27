@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LineSegmentDetector
     //javadoc: LineSegmentDetector
+
     public class LineSegmentDetector : Algorithm
     {
 

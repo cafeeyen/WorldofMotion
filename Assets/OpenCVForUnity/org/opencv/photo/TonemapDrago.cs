@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class TonemapDrago
     //javadoc: TonemapDrago
+
     public class TonemapDrago : Tonemap
     {
 

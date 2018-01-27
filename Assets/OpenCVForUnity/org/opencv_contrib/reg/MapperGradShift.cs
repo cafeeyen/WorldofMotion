@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MapperGradShift
     //javadoc: MapperGradShift
+
     public class MapperGradShift : Mapper
     {
 
@@ -45,7 +46,7 @@ namespace OpenCVForUnity
         public MapperGradShift () :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapperGradShift_MapperGradShift_10() )
+        base (reg_MapperGradShift_MapperGradShift_10 ())
         
 #else
             base (IntPtr.Zero)
@@ -121,6 +122,9 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -134,6 +138,7 @@ namespace OpenCVForUnity
         // C++:  Ptr_Map calculate(Mat img1, Mat img2, Ptr_Map init = cv::Ptr<Map>())
         [DllImport (LIBNAME)]
         private static extern IntPtr reg_MapperGradShift_calculate_10 (IntPtr nativeObj, IntPtr img1_nativeObj, IntPtr img2_nativeObj, IntPtr init_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr reg_MapperGradShift_calculate_11 (IntPtr nativeObj, IntPtr img1_nativeObj, IntPtr img2_nativeObj);
 

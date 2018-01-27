@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class TickMeter
     //javadoc: TickMeter
+
     public class TickMeter : DisposableOpenCVObject
     {
 

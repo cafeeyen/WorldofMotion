@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class HistogramCostExtractor
     //javadoc: HistogramCostExtractor
+
     public class HistogramCostExtractor : Algorithm
     {
 

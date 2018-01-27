@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DISOpticalFlow
     //javadoc: DISOpticalFlow
+
     public class DISOpticalFlow : DenseOpticalFlow
     {
 

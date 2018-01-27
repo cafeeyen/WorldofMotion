@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MarrHildrethHash
     //javadoc: MarrHildrethHash
+
     public class MarrHildrethHash : ImgHashBase
     {
 

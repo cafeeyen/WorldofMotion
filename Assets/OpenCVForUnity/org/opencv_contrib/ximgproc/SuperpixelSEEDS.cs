@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SuperpixelSEEDS
     //javadoc: SuperpixelSEEDS
+
     public class SuperpixelSEEDS : Algorithm
     {
 

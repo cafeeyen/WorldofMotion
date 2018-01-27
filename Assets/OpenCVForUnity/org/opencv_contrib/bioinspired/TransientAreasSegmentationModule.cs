@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class TransientAreasSegmentationModule
     //javadoc: TransientAreasSegmentationModule
+
     public class TransientAreasSegmentationModule : Algorithm
     {
 
@@ -32,6 +33,24 @@ base.Dispose (disposing);
         }
 
         protected internal TransientAreasSegmentationModule (IntPtr addr) : base (addr) { }
+
+
+        //
+        // C++: static Ptr_TransientAreasSegmentationModule create(Size inputSize)
+        //
+
+        //javadoc: TransientAreasSegmentationModule::create(inputSize)
+        public static TransientAreasSegmentationModule create (Size inputSize)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        TransientAreasSegmentationModule retVal = new TransientAreasSegmentationModule(bioinspired_TransientAreasSegmentationModule_create_10(inputSize.width, inputSize.height));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
 
 
         //
@@ -207,6 +226,10 @@ Size retVal = new Size (tmpArray);
 #endif
 
 
+
+        // C++: static Ptr_TransientAreasSegmentationModule create(Size inputSize)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr bioinspired_TransientAreasSegmentationModule_create_10 (double inputSize_width, double inputSize_height);
 
         // C++:  Size getSize()
         [DllImport (LIBNAME)]

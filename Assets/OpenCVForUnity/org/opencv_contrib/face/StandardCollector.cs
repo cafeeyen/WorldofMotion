@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StandardCollector
     //javadoc: StandardCollector
+
     public class StandardCollector : PredictCollector
     {
 

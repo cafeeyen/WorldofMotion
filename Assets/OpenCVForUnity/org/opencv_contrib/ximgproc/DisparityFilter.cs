@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DisparityFilter
     //javadoc: DisparityFilter
+
     public class DisparityFilter : Algorithm
     {
 

@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class CascadeClassifier
     //javadoc: CascadeClassifier
+
     public class CascadeClassifier : DisposableOpenCVObject
     {
 

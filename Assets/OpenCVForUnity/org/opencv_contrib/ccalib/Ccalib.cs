@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Ccalib
+    //javadoc: Ccalib
+
     public class Ccalib
     {
 

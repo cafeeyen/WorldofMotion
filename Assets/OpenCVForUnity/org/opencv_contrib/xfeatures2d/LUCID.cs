@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LUCID
     //javadoc: LUCID
+
     public class LUCID : Feature2D
     {
 

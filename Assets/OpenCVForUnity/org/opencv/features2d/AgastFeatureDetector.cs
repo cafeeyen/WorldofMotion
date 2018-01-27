@@ -9,29 +9,33 @@ namespace OpenCVForUnity
 
     // C++: class AgastFeatureDetector
     //javadoc: AgastFeatureDetector
+
     public class AgastFeatureDetector : Feature2D
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-try {
-if (disposing) {
-}
-if (IsEnabledDispose) {
-if (nativeObj != IntPtr.Zero)
-features2d_AgastFeatureDetector_delete(nativeObj);
-nativeObj = IntPtr.Zero;
-}
-} finally {
-base.Dispose (disposing);
-}
+            try {
+                if (disposing) {
+                }
+                if (IsEnabledDispose) {
+                    if (nativeObj != IntPtr.Zero)
+                        features2d_AgastFeatureDetector_delete (nativeObj);
+                    nativeObj = IntPtr.Zero;
+                }
+            } finally {
+                base.Dispose (disposing);
+            }
 #else
             return;
 #endif
         }
 
-        protected internal AgastFeatureDetector (IntPtr addr) : base (addr) { }
+        protected internal AgastFeatureDetector (IntPtr addr)
+            : base (addr)
+        {
+        }
 
 
         public const int AGAST_5_8 = 0;
@@ -49,7 +53,7 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        AgastFeatureDetector retVal = new AgastFeatureDetector(features2d_AgastFeatureDetector_create_10(threshold, nonmaxSuppression, type));
+            AgastFeatureDetector retVal = new AgastFeatureDetector (features2d_AgastFeatureDetector_create_10 (threshold, nonmaxSuppression, type));
         
 #else
             return null;
@@ -62,7 +66,26 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        AgastFeatureDetector retVal = new AgastFeatureDetector(features2d_AgastFeatureDetector_create_11());
+            AgastFeatureDetector retVal = new AgastFeatureDetector (features2d_AgastFeatureDetector_create_11 ());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  String getDefaultName()
+        //
+
+        //javadoc: AgastFeatureDetector::getDefaultName()
+        public override string getDefaultName ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            string retVal = Marshal.PtrToStringAnsi (features2d_AgastFeatureDetector_getDefaultName_10 (nativeObj));
         
 #else
             return null;
@@ -81,7 +104,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        bool retVal = features2d_AgastFeatureDetector_getNonmaxSuppression_10(nativeObj);
+            bool retVal = features2d_AgastFeatureDetector_getNonmaxSuppression_10 (nativeObj);
         
 #else
             return false;
@@ -100,7 +123,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_AgastFeatureDetector_getThreshold_10(nativeObj);
+            int retVal = features2d_AgastFeatureDetector_getThreshold_10 (nativeObj);
         
 #else
             return -1;
@@ -119,7 +142,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_AgastFeatureDetector_getType_10(nativeObj);
+            int retVal = features2d_AgastFeatureDetector_getType_10 (nativeObj);
         
 #else
             return -1;
@@ -138,7 +161,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_AgastFeatureDetector_setNonmaxSuppression_10(nativeObj, f);
+            features2d_AgastFeatureDetector_setNonmaxSuppression_10 (nativeObj, f);
         
 #else
             return;
@@ -157,7 +180,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_AgastFeatureDetector_setThreshold_10(nativeObj, threshold);
+            features2d_AgastFeatureDetector_setThreshold_10 (nativeObj, threshold);
         
 #else
             return;
@@ -176,7 +199,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_AgastFeatureDetector_setType_10(nativeObj, type);
+            features2d_AgastFeatureDetector_setType_10 (nativeObj, type);
         
 #else
             return;
@@ -187,6 +210,7 @@ base.Dispose (disposing);
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -196,8 +220,13 @@ base.Dispose (disposing);
         // C++: static Ptr_AgastFeatureDetector create(int threshold = 10, bool nonmaxSuppression = true, int type = AgastFeatureDetector::OAST_9_16)
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_AgastFeatureDetector_create_10 (int threshold, bool nonmaxSuppression, int type);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_AgastFeatureDetector_create_11 ();
+
+        // C++:  String getDefaultName()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_AgastFeatureDetector_getDefaultName_10 (IntPtr nativeObj);
 
         // C++:  bool getNonmaxSuppression()
         [DllImport (LIBNAME)]

@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class DetectorParameters
     //javadoc: DetectorParameters
+
     public class DetectorParameters : DisposableOpenCVObject
     {
 

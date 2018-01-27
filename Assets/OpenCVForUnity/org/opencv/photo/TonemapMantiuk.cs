@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class TonemapMantiuk
     //javadoc: TonemapMantiuk
+
     public class TonemapMantiuk : Tonemap
     {
 

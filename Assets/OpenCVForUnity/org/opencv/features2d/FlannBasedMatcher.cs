@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FlannBasedMatcher
     //javadoc: FlannBasedMatcher
+
     public class FlannBasedMatcher : DescriptorMatcher
     {
 

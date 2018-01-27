@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Feature2D
     //javadoc: Feature2D
+
     public class Feature2D : Algorithm
     {
 
@@ -38,11 +39,30 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  String getDefaultName()
+        //
+
+        //javadoc: Feature2D::getDefaultName()
+        public override string getDefaultName ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            string retVal = Marshal.PtrToStringAnsi (features2d_Feature2D_getDefaultName_10 (nativeObj));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
         // C++:  bool empty()
         //
 
         //javadoc: Feature2D::empty()
-        public bool empty ()
+        public override bool empty ()
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
@@ -294,6 +314,13 @@ namespace OpenCVForUnity
 
 
         //
+        // C++:  void read(FileNode arg1)
+        //
+
+        // Unknown type 'FileNode' (I), skipping the function
+
+
+        //
         // C++:  void read(String fileName)
         //
 
@@ -310,6 +337,13 @@ namespace OpenCVForUnity
 #endif
             return;
         }
+
+
+        //
+        // C++:  void write(Ptr_FileStorage fs, String name = String())
+        //
+
+        // Unknown type 'Ptr_FileStorage' (I), skipping the function
 
 
         //
@@ -333,11 +367,18 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
 
 
+
+        // C++:  String getDefaultName()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_Feature2D_getDefaultName_10 (IntPtr nativeObj);
 
         // C++:  bool empty()
         [DllImport (LIBNAME)]
@@ -366,18 +407,21 @@ namespace OpenCVForUnity
         // C++:  void detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detect_10 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr keypoints_mat_nativeObj, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detect_11 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr keypoints_mat_nativeObj);
 
         // C++:  void detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector_Mat())
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detect_12 (IntPtr nativeObj, IntPtr images_mat_nativeObj, IntPtr keypoints_mat_nativeObj, IntPtr masks_mat_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detect_13 (IntPtr nativeObj, IntPtr images_mat_nativeObj, IntPtr keypoints_mat_nativeObj);
 
         // C++:  void detectAndCompute(Mat image, Mat mask, vector_KeyPoint& keypoints, Mat& descriptors, bool useProvidedKeypoints = false)
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detectAndCompute_10 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr mask_nativeObj, IntPtr keypoints_mat_nativeObj, IntPtr descriptors_nativeObj, bool useProvidedKeypoints);
+
         [DllImport (LIBNAME)]
         private static extern void features2d_Feature2D_detectAndCompute_11 (IntPtr nativeObj, IntPtr image_nativeObj, IntPtr mask_nativeObj, IntPtr keypoints_mat_nativeObj, IntPtr descriptors_nativeObj);
 

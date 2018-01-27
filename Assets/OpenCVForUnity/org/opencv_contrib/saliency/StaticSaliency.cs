@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StaticSaliency
     //javadoc: StaticSaliency
+
     public class StaticSaliency : Saliency
     {
 

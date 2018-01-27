@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class VGG
     //javadoc: VGG
+
     public class VGG : Feature2D
     {
 
@@ -95,6 +96,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -104,6 +106,7 @@ namespace OpenCVForUnity
         // C++: static Ptr_VGG create(int desc = VGG::VGG_120, float isigma = 1.4f, bool img_normalize = true, bool use_scale_orientation = true, float scale_factor = 6.25f, bool dsc_normalize = false)
         [DllImport (LIBNAME)]
         private static extern IntPtr xfeatures2d_VGG_create_10 (int desc, float isigma, bool img_normalize, bool use_scale_orientation, float scale_factor, bool dsc_normalize);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr xfeatures2d_VGG_create_11 ();
 

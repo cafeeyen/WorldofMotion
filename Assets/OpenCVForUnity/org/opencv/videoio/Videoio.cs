@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Videoio
+    //javadoc: Videoio
+
     public class Videoio
     {
 

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Img_hash
+    //javadoc: Img_hash
+
     public class Img_hash
     {
 

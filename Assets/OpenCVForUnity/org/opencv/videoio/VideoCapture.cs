@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class VideoCapture
     //javadoc: VideoCapture
+
     public class VideoCapture : DisposableOpenCVObject
     {
 

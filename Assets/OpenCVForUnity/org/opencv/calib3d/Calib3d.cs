@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Calib3d
+    //javadoc: Calib3d
+
     public class Calib3d
     {
 
@@ -630,6 +633,13 @@ namespace OpenCVForUnity
 #endif
             return retVal;
         }
+
+
+        //
+        // C++:  bool findCirclesGrid2(Mat image, Size patternSize, Mat& centers, int flags, Ptr_FeatureDetector blobDetector, CirclesGridFinderParameters2 parameters)
+        //
+
+        // Unknown type 'Ptr_FeatureDetector' (I), skipping the function
 
 
         //
@@ -2661,6 +2671,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -2670,56 +2681,68 @@ namespace OpenCVForUnity
         // C++:  Mat estimateAffine2D(Mat from, Mat to, Mat& inliers = Mat(), int method = RANSAC, double ransacReprojThreshold = 3, size_t maxIters = 2000, double confidence = 0.99, size_t refineIters = 10)
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_estimateAffine2D_10 (IntPtr from_nativeObj, IntPtr to_nativeObj, IntPtr inliers_nativeObj, int method, double ransacReprojThreshold, long maxIters, double confidence, long refineIters);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_estimateAffine2D_11 (IntPtr from_nativeObj, IntPtr to_nativeObj);
 
         // C++:  Mat estimateAffinePartial2D(Mat from, Mat to, Mat& inliers = Mat(), int method = RANSAC, double ransacReprojThreshold = 3, size_t maxIters = 2000, double confidence = 0.99, size_t refineIters = 10)
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_estimateAffinePartial2D_10 (IntPtr from_nativeObj, IntPtr to_nativeObj, IntPtr inliers_nativeObj, int method, double ransacReprojThreshold, long maxIters, double confidence, long refineIters);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_estimateAffinePartial2D_11 (IntPtr from_nativeObj, IntPtr to_nativeObj);
 
         // C++:  Mat findEssentialMat(Mat points1, Mat points2, Mat cameraMatrix, int method = RANSAC, double prob = 0.999, double threshold = 1.0, Mat& mask = Mat())
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_10 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, int method, double prob, double threshold, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_11 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, int method, double prob, double threshold);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_12 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj);
 
         // C++:  Mat findEssentialMat(Mat points1, Mat points2, double focal = 1.0, Point2d pp = Point2d(0, 0), int method = RANSAC, double prob = 0.999, double threshold = 1.0, Mat& mask = Mat())
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_13 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, double focal, double pp_x, double pp_y, int method, double prob, double threshold, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_14 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, double focal, double pp_x, double pp_y, int method, double prob, double threshold);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findEssentialMat_15 (IntPtr points1_nativeObj, IntPtr points2_nativeObj);
 
         // C++:  Mat findFundamentalMat(vector_Point2f points1, vector_Point2f points2, int method = FM_RANSAC, double param1 = 3., double param2 = 0.99, Mat& mask = Mat())
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findFundamentalMat_10 (IntPtr points1_mat_nativeObj, IntPtr points2_mat_nativeObj, int method, double param1, double param2, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findFundamentalMat_11 (IntPtr points1_mat_nativeObj, IntPtr points2_mat_nativeObj, int method, double param1, double param2);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findFundamentalMat_12 (IntPtr points1_mat_nativeObj, IntPtr points2_mat_nativeObj);
 
         // C++:  Mat findHomography(vector_Point2f srcPoints, vector_Point2f dstPoints, int method = 0, double ransacReprojThreshold = 3, Mat& mask = Mat(), int maxIters = 2000, double confidence = 0.995)
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findHomography_10 (IntPtr srcPoints_mat_nativeObj, IntPtr dstPoints_mat_nativeObj, int method, double ransacReprojThreshold, IntPtr mask_nativeObj, int maxIters, double confidence);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findHomography_11 (IntPtr srcPoints_mat_nativeObj, IntPtr dstPoints_mat_nativeObj, int method, double ransacReprojThreshold);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_findHomography_12 (IntPtr srcPoints_mat_nativeObj, IntPtr dstPoints_mat_nativeObj);
 
         // C++:  Mat getOptimalNewCameraMatrix(Mat cameraMatrix, Mat distCoeffs, Size imageSize, double alpha, Size newImgSize = Size(), Rect* validPixROI = 0, bool centerPrincipalPoint = false)
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_getOptimalNewCameraMatrix_10 (IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, double imageSize_width, double imageSize_height, double alpha, double newImgSize_width, double newImgSize_height, double[] validPixROI_out, bool centerPrincipalPoint);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_getOptimalNewCameraMatrix_11 (IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, double imageSize_width, double imageSize_height, double alpha);
 
         // C++:  Mat initCameraMatrix2D(vector_vector_Point3f objectPoints, vector_vector_Point2f imagePoints, Size imageSize, double aspectRatio = 1.0)
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_initCameraMatrix2D_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, double aspectRatio);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr calib3d_Calib3d_initCameraMatrix2D_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height);
 
@@ -2730,52 +2753,62 @@ namespace OpenCVForUnity
         // C++:  Vec3d RQDecomp3x3(Mat src, Mat& mtxR, Mat& mtxQ, Mat& Qx = Mat(), Mat& Qy = Mat(), Mat& Qz = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_RQDecomp3x3_10 (IntPtr src_nativeObj, IntPtr mtxR_nativeObj, IntPtr mtxQ_nativeObj, IntPtr Qx_nativeObj, IntPtr Qy_nativeObj, IntPtr Qz_nativeObj, double[] retVal);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_RQDecomp3x3_11 (IntPtr src_nativeObj, IntPtr mtxR_nativeObj, IntPtr mtxQ_nativeObj, double[] retVal);
 
         // C++:  bool findChessboardCorners(Mat image, Size patternSize, vector_Point2f& corners, int flags = CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE)
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_findChessboardCorners_10 (IntPtr image_nativeObj, double patternSize_width, double patternSize_height, IntPtr corners_mat_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_findChessboardCorners_11 (IntPtr image_nativeObj, double patternSize_width, double patternSize_height, IntPtr corners_mat_nativeObj);
 
         // C++:  bool findCirclesGrid(Mat image, Size patternSize, Mat& centers, int flags = CALIB_CB_SYMMETRIC_GRID, Ptr_FeatureDetector blobDetector = SimpleBlobDetector::create())
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_findCirclesGrid_10 (IntPtr image_nativeObj, double patternSize_width, double patternSize_height, IntPtr centers_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_findCirclesGrid_11 (IntPtr image_nativeObj, double patternSize_width, double patternSize_height, IntPtr centers_nativeObj);
 
         // C++:  bool solvePnP(vector_Point3f objectPoints, vector_Point2f imagePoints, Mat cameraMatrix, vector_double distCoeffs, Mat& rvec, Mat& tvec, bool useExtrinsicGuess = false, int flags = SOLVEPNP_ITERATIVE)
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_solvePnP_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, bool useExtrinsicGuess, int flags);
+
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_solvePnP_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj);
 
         // C++:  bool solvePnPRansac(vector_Point3f objectPoints, vector_Point2f imagePoints, Mat cameraMatrix, vector_double distCoeffs, Mat& rvec, Mat& tvec, bool useExtrinsicGuess = false, int iterationsCount = 100, float reprojectionError = 8.0, double confidence = 0.99, Mat& inliers = Mat(), int flags = SOLVEPNP_ITERATIVE)
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_solvePnPRansac_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, bool useExtrinsicGuess, int iterationsCount, float reprojectionError, double confidence, IntPtr inliers_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_solvePnPRansac_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj);
 
         // C++:  bool stereoRectifyUncalibrated(Mat points1, Mat points2, Mat F, Size imgSize, Mat& H1, Mat& H2, double threshold = 5)
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_stereoRectifyUncalibrated_10 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr F_nativeObj, double imgSize_width, double imgSize_height, IntPtr H1_nativeObj, IntPtr H2_nativeObj, double threshold);
+
         [DllImport (LIBNAME)]
         private static extern bool calib3d_Calib3d_stereoRectifyUncalibrated_11 (IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr F_nativeObj, double imgSize_width, double imgSize_height, IntPtr H1_nativeObj, IntPtr H2_nativeObj);
 
         // C++:  double calibrateCamera(vector_Mat objectPoints, vector_Mat imagePoints, Size imageSize, Mat& cameraMatrix, Mat& distCoeffs, vector_Mat& rvecs, vector_Mat& tvecs, Mat& stdDeviationsIntrinsics, Mat& stdDeviationsExtrinsics, Mat& perViewErrors, int flags = 0, TermCriteria criteria = TermCriteria( TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON))
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCameraExtended_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, IntPtr stdDeviationsIntrinsics_nativeObj, IntPtr stdDeviationsExtrinsics_nativeObj, IntPtr perViewErrors_nativeObj, int flags, int criteria_type, int criteria_maxCount, double criteria_epsilon);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCameraExtended_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, IntPtr stdDeviationsIntrinsics_nativeObj, IntPtr stdDeviationsExtrinsics_nativeObj, IntPtr perViewErrors_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCameraExtended_12 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, IntPtr stdDeviationsIntrinsics_nativeObj, IntPtr stdDeviationsExtrinsics_nativeObj, IntPtr perViewErrors_nativeObj);
 
         // C++:  double calibrateCamera(vector_Mat objectPoints, vector_Mat imagePoints, Size imageSize, Mat& cameraMatrix, Mat& distCoeffs, vector_Mat& rvecs, vector_Mat& tvecs, int flags = 0, TermCriteria criteria = TermCriteria( TermCriteria::COUNT + TermCriteria::EPS, 30, DBL_EPSILON))
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCamera_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, int flags, int criteria_type, int criteria_maxCount, double criteria_epsilon);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCamera_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrateCamera_12 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double imageSize_width, double imageSize_height, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj);
 
@@ -2786,24 +2819,30 @@ namespace OpenCVForUnity
         // C++:  double stereoCalibrate(vector_Mat objectPoints, vector_Mat imagePoints1, vector_Mat imagePoints2, Mat& cameraMatrix1, Mat& distCoeffs1, Mat& cameraMatrix2, Mat& distCoeffs2, Size imageSize, Mat& R, Mat& T, Mat& E, Mat& F, int flags = CALIB_FIX_INTRINSIC, TermCriteria criteria = TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 1e-6))
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr cameraMatrix1_nativeObj, IntPtr distCoeffs1_nativeObj, IntPtr cameraMatrix2_nativeObj, IntPtr distCoeffs2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, IntPtr E_nativeObj, IntPtr F_nativeObj, int flags, int criteria_type, int criteria_maxCount, double criteria_epsilon);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr cameraMatrix1_nativeObj, IntPtr distCoeffs1_nativeObj, IntPtr cameraMatrix2_nativeObj, IntPtr distCoeffs2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, IntPtr E_nativeObj, IntPtr F_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_12 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr cameraMatrix1_nativeObj, IntPtr distCoeffs1_nativeObj, IntPtr cameraMatrix2_nativeObj, IntPtr distCoeffs2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, IntPtr E_nativeObj, IntPtr F_nativeObj);
 
         // C++:  double calibrate(vector_Mat objectPoints, vector_Mat imagePoints, Size image_size, Mat& K, Mat& D, vector_Mat& rvecs, vector_Mat& tvecs, int flags = 0, TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON))
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrate_10 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double image_size_width, double image_size_height, IntPtr K_nativeObj, IntPtr D_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, int flags, int criteria_type, int criteria_maxCount, double criteria_epsilon);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrate_11 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double image_size_width, double image_size_height, IntPtr K_nativeObj, IntPtr D_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_calibrate_12 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, double image_size_width, double image_size_height, IntPtr K_nativeObj, IntPtr D_nativeObj, IntPtr rvecs_mat_nativeObj, IntPtr tvecs_mat_nativeObj);
 
         // C++:  double stereoCalibrate(vector_Mat objectPoints, vector_Mat imagePoints1, vector_Mat imagePoints2, Mat& K1, Mat& D1, Mat& K2, Mat& D2, Size imageSize, Mat& R, Mat& T, int flags = fisheye::CALIB_FIX_INTRINSIC, TermCriteria criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON))
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_13 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr K1_nativeObj, IntPtr D1_nativeObj, IntPtr K2_nativeObj, IntPtr D2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, int flags, int criteria_type, int criteria_maxCount, double criteria_epsilon);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_14 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr K1_nativeObj, IntPtr D1_nativeObj, IntPtr K2_nativeObj, IntPtr D2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern double calib3d_Calib3d_stereoCalibrate_15 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints1_mat_nativeObj, IntPtr imagePoints2_mat_nativeObj, IntPtr K1_nativeObj, IntPtr D1_nativeObj, IntPtr K2_nativeObj, IntPtr D2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj);
 
@@ -2818,26 +2857,31 @@ namespace OpenCVForUnity
         // C++:  int estimateAffine3D(Mat src, Mat dst, Mat& _out, Mat& inliers, double ransacThreshold = 3, double confidence = 0.99)
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_estimateAffine3D_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr _out_nativeObj, IntPtr inliers_nativeObj, double ransacThreshold, double confidence);
+
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_estimateAffine3D_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr _out_nativeObj, IntPtr inliers_nativeObj);
 
         // C++:  int recoverPose(Mat E, Mat points1, Mat points2, Mat& R, Mat& t, double focal = 1.0, Point2d pp = Point2d(0, 0), Mat& mask = Mat())
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_10 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj, double focal, double pp_x, double pp_y, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_11 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj, double focal, double pp_x, double pp_y);
+
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_12 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj);
 
         // C++:  int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat& R, Mat& t, Mat& mask = Mat())
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_13 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj, IntPtr mask_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_14 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj);
 
         // C++:  int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat& R, Mat& t, double distanceThresh, Mat& mask = Mat(), Mat& triangulatedPoints = Mat())
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_15 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj, double distanceThresh, IntPtr mask_nativeObj, IntPtr triangulatedPoints_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern int calib3d_Calib3d_recoverPose_16 (IntPtr E_nativeObj, IntPtr points1_nativeObj, IntPtr points2_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr R_nativeObj, IntPtr t_nativeObj, double distanceThresh);
 
@@ -2848,6 +2892,7 @@ namespace OpenCVForUnity
         // C++:  void Rodrigues(Mat src, Mat& dst, Mat& jacobian = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_Rodrigues_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj, IntPtr jacobian_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_Rodrigues_11 (IntPtr src_nativeObj, IntPtr dst_nativeObj);
 
@@ -2858,6 +2903,7 @@ namespace OpenCVForUnity
         // C++:  void composeRT(Mat rvec1, Mat tvec1, Mat rvec2, Mat tvec2, Mat& rvec3, Mat& tvec3, Mat& dr3dr1 = Mat(), Mat& dr3dt1 = Mat(), Mat& dr3dr2 = Mat(), Mat& dr3dt2 = Mat(), Mat& dt3dr1 = Mat(), Mat& dt3dt1 = Mat(), Mat& dt3dr2 = Mat(), Mat& dt3dt2 = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_composeRT_10 (IntPtr rvec1_nativeObj, IntPtr tvec1_nativeObj, IntPtr rvec2_nativeObj, IntPtr tvec2_nativeObj, IntPtr rvec3_nativeObj, IntPtr tvec3_nativeObj, IntPtr dr3dr1_nativeObj, IntPtr dr3dt1_nativeObj, IntPtr dr3dr2_nativeObj, IntPtr dr3dt2_nativeObj, IntPtr dt3dr1_nativeObj, IntPtr dt3dt1_nativeObj, IntPtr dt3dr2_nativeObj, IntPtr dt3dt2_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_composeRT_11 (IntPtr rvec1_nativeObj, IntPtr tvec1_nativeObj, IntPtr rvec2_nativeObj, IntPtr tvec2_nativeObj, IntPtr rvec3_nativeObj, IntPtr tvec3_nativeObj);
 
@@ -2884,6 +2930,7 @@ namespace OpenCVForUnity
         // C++:  void decomposeProjectionMatrix(Mat projMatrix, Mat& cameraMatrix, Mat& rotMatrix, Mat& transVect, Mat& rotMatrixX = Mat(), Mat& rotMatrixY = Mat(), Mat& rotMatrixZ = Mat(), Mat& eulerAngles = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_decomposeProjectionMatrix_10 (IntPtr projMatrix_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr rotMatrix_nativeObj, IntPtr transVect_nativeObj, IntPtr rotMatrixX_nativeObj, IntPtr rotMatrixY_nativeObj, IntPtr rotMatrixZ_nativeObj, IntPtr eulerAngles_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_decomposeProjectionMatrix_11 (IntPtr projMatrix_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr rotMatrix_nativeObj, IntPtr transVect_nativeObj);
 
@@ -2894,6 +2941,7 @@ namespace OpenCVForUnity
         // C++:  void filterSpeckles(Mat& img, double newVal, int maxSpeckleSize, double maxDiff, Mat& buf = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_filterSpeckles_10 (IntPtr img_nativeObj, double newVal, int maxSpeckleSize, double maxDiff, IntPtr buf_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_filterSpeckles_11 (IntPtr img_nativeObj, double newVal, int maxSpeckleSize, double maxDiff);
 
@@ -2904,20 +2952,24 @@ namespace OpenCVForUnity
         // C++:  void projectPoints(vector_Point3f objectPoints, Mat rvec, Mat tvec, Mat cameraMatrix, vector_double distCoeffs, vector_Point2f& imagePoints, Mat& jacobian = Mat(), double aspectRatio = 0)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_projectPoints_10 (IntPtr objectPoints_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr jacobian_nativeObj, double aspectRatio);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_projectPoints_11 (IntPtr objectPoints_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, IntPtr cameraMatrix_nativeObj, IntPtr distCoeffs_mat_nativeObj, IntPtr imagePoints_mat_nativeObj);
 
         // C++:  void reprojectImageTo3D(Mat disparity, Mat& _3dImage, Mat Q, bool handleMissingValues = false, int ddepth = -1)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_reprojectImageTo3D_10 (IntPtr disparity_nativeObj, IntPtr _3dImage_nativeObj, IntPtr Q_nativeObj, bool handleMissingValues, int ddepth);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_reprojectImageTo3D_11 (IntPtr disparity_nativeObj, IntPtr _3dImage_nativeObj, IntPtr Q_nativeObj, bool handleMissingValues);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_reprojectImageTo3D_12 (IntPtr disparity_nativeObj, IntPtr _3dImage_nativeObj, IntPtr Q_nativeObj);
 
         // C++:  void stereoRectify(Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Size imageSize, Mat R, Mat T, Mat& R1, Mat& R2, Mat& P1, Mat& P2, Mat& Q, int flags = CALIB_ZERO_DISPARITY, double alpha = -1, Size newImageSize = Size(), Rect* validPixROI1 = 0, Rect* validPixROI2 = 0)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_stereoRectify_10 (IntPtr cameraMatrix1_nativeObj, IntPtr distCoeffs1_nativeObj, IntPtr cameraMatrix2_nativeObj, IntPtr distCoeffs2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, IntPtr R1_nativeObj, IntPtr R2_nativeObj, IntPtr P1_nativeObj, IntPtr P2_nativeObj, IntPtr Q_nativeObj, int flags, double alpha, double newImageSize_width, double newImageSize_height, double[] validPixROI1_out, double[] validPixROI2_out);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_stereoRectify_11 (IntPtr cameraMatrix1_nativeObj, IntPtr distCoeffs1_nativeObj, IntPtr cameraMatrix2_nativeObj, IntPtr distCoeffs2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr T_nativeObj, IntPtr R1_nativeObj, IntPtr R2_nativeObj, IntPtr P1_nativeObj, IntPtr P2_nativeObj, IntPtr Q_nativeObj);
 
@@ -2928,18 +2980,21 @@ namespace OpenCVForUnity
         // C++:  void validateDisparity(Mat& disparity, Mat cost, int minDisparity, int numberOfDisparities, int disp12MaxDisp = 1)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_validateDisparity_10 (IntPtr disparity_nativeObj, IntPtr cost_nativeObj, int minDisparity, int numberOfDisparities, int disp12MaxDisp);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_validateDisparity_11 (IntPtr disparity_nativeObj, IntPtr cost_nativeObj, int minDisparity, int numberOfDisparities);
 
         // C++:  void distortPoints(Mat undistorted, Mat& distorted, Mat K, Mat D, double alpha = 0)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_distortPoints_10 (IntPtr undistorted_nativeObj, IntPtr distorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj, double alpha);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_distortPoints_11 (IntPtr undistorted_nativeObj, IntPtr distorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj);
 
         // C++:  void estimateNewCameraMatrixForUndistortRectify(Mat K, Mat D, Size image_size, Mat R, Mat& P, double balance = 0.0, Size new_size = Size(), double fov_scale = 1.0)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_estimateNewCameraMatrixForUndistortRectify_10 (IntPtr K_nativeObj, IntPtr D_nativeObj, double image_size_width, double image_size_height, IntPtr R_nativeObj, IntPtr P_nativeObj, double balance, double new_size_width, double new_size_height, double fov_scale);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_estimateNewCameraMatrixForUndistortRectify_11 (IntPtr K_nativeObj, IntPtr D_nativeObj, double image_size_width, double image_size_height, IntPtr R_nativeObj, IntPtr P_nativeObj);
 
@@ -2950,24 +3005,28 @@ namespace OpenCVForUnity
         // C++:  void projectPoints(vector_Point3f objectPoints, vector_Point2f& imagePoints, Mat rvec, Mat tvec, Mat K, Mat D, double alpha = 0, Mat& jacobian = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_projectPoints_12 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj, double alpha, IntPtr jacobian_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_projectPoints_13 (IntPtr objectPoints_mat_nativeObj, IntPtr imagePoints_mat_nativeObj, IntPtr rvec_nativeObj, IntPtr tvec_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj);
 
         // C++:  void stereoRectify(Mat K1, Mat D1, Mat K2, Mat D2, Size imageSize, Mat R, Mat tvec, Mat& R1, Mat& R2, Mat& P1, Mat& P2, Mat& Q, int flags, Size newImageSize = Size(), double balance = 0.0, double fov_scale = 1.0)
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_stereoRectify_12 (IntPtr K1_nativeObj, IntPtr D1_nativeObj, IntPtr K2_nativeObj, IntPtr D2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr tvec_nativeObj, IntPtr R1_nativeObj, IntPtr R2_nativeObj, IntPtr P1_nativeObj, IntPtr P2_nativeObj, IntPtr Q_nativeObj, int flags, double newImageSize_width, double newImageSize_height, double balance, double fov_scale);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_stereoRectify_13 (IntPtr K1_nativeObj, IntPtr D1_nativeObj, IntPtr K2_nativeObj, IntPtr D2_nativeObj, double imageSize_width, double imageSize_height, IntPtr R_nativeObj, IntPtr tvec_nativeObj, IntPtr R1_nativeObj, IntPtr R2_nativeObj, IntPtr P1_nativeObj, IntPtr P2_nativeObj, IntPtr Q_nativeObj, int flags);
 
         // C++:  void undistortImage(Mat distorted, Mat& undistorted, Mat K, Mat D, Mat Knew = cv::Mat(), Size new_size = Size())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_undistortImage_10 (IntPtr distorted_nativeObj, IntPtr undistorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj, IntPtr Knew_nativeObj, double new_size_width, double new_size_height);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_undistortImage_11 (IntPtr distorted_nativeObj, IntPtr undistorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj);
 
         // C++:  void undistortPoints(Mat distorted, Mat& undistorted, Mat K, Mat D, Mat R = Mat(), Mat P = Mat())
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_undistortPoints_10 (IntPtr distorted_nativeObj, IntPtr undistorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj, IntPtr R_nativeObj, IntPtr P_nativeObj);
+
         [DllImport (LIBNAME)]
         private static extern void calib3d_Calib3d_undistortPoints_11 (IntPtr distorted_nativeObj, IntPtr undistorted_nativeObj, IntPtr K_nativeObj, IntPtr D_nativeObj);
 

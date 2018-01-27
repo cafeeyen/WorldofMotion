@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FisherFaceRecognizer
     //javadoc: FisherFaceRecognizer
+
     public class FisherFaceRecognizer : BasicFaceRecognizer
     {
 

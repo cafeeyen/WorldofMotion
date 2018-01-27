@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LogisticRegression
     //javadoc: LogisticRegression
+
     public class LogisticRegression : StatModel
     {
 
@@ -381,6 +382,8 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -398,6 +401,7 @@ namespace OpenCVForUnity
         // C++: static Ptr_LogisticRegression load(String filepath, String nodeName = String())
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_LogisticRegression_load_10 (string filepath, string nodeName);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_LogisticRegression_load_11 (string filepath);
 
@@ -412,6 +416,7 @@ namespace OpenCVForUnity
         // C++:  float predict(Mat samples, Mat& results = Mat(), int flags = 0)
         [DllImport (LIBNAME)]
         private static extern float ml_LogisticRegression_predict_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr results_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern float ml_LogisticRegression_predict_11 (IntPtr nativeObj, IntPtr samples_nativeObj);
 

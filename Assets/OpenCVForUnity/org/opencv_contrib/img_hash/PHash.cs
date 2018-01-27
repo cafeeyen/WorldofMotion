@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class PHash
     //javadoc: PHash
+
     public class PHash : ImgHashBase
     {
 

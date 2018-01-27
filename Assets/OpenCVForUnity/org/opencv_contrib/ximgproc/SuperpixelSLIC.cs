@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SuperpixelSLIC
     //javadoc: SuperpixelSLIC
+
     public class SuperpixelSLIC : Algorithm
     {
 

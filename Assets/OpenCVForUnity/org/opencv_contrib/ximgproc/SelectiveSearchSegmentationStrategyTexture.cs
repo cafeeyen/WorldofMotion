@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SelectiveSearchSegmentationStrategyTexture
     //javadoc: SelectiveSearchSegmentationStrategyTexture
+
     public class SelectiveSearchSegmentationStrategyTexture : SelectiveSearchSegmentationStrategy
     {
 

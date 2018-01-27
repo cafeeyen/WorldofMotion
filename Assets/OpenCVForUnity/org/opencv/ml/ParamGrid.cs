@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class ParamGrid
     //javadoc: ParamGrid
+
     public class ParamGrid : DisposableOpenCVObject
     {
 

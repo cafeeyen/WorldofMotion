@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class VariationalRefinement
     //javadoc: VariationalRefinement
+
     public class VariationalRefinement : DenseOpticalFlow
     {
 

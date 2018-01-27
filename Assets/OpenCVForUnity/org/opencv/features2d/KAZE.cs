@@ -9,29 +9,33 @@ namespace OpenCVForUnity
 
     // C++: class KAZE
     //javadoc: KAZE
+
     public class KAZE : Feature2D
     {
 
         protected override void Dispose (bool disposing)
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-try {
-if (disposing) {
-}
-if (IsEnabledDispose) {
-if (nativeObj != IntPtr.Zero)
-features2d_KAZE_delete(nativeObj);
-nativeObj = IntPtr.Zero;
-}
-} finally {
-base.Dispose (disposing);
-}
+            try {
+                if (disposing) {
+                }
+                if (IsEnabledDispose) {
+                    if (nativeObj != IntPtr.Zero)
+                        features2d_KAZE_delete (nativeObj);
+                    nativeObj = IntPtr.Zero;
+                }
+            } finally {
+                base.Dispose (disposing);
+            }
 #else
             return;
 #endif
         }
 
-        protected internal KAZE (IntPtr addr) : base (addr) { }
+        protected internal KAZE (IntPtr addr)
+            : base (addr)
+        {
+        }
 
 
         public const int DIFF_PM_G1 = 0;
@@ -47,7 +51,7 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        KAZE retVal = new KAZE(features2d_KAZE_create_10(extended, upright, threshold, nOctaves, nOctaveLayers, diffusivity));
+            KAZE retVal = new KAZE (features2d_KAZE_create_10 (extended, upright, threshold, nOctaves, nOctaveLayers, diffusivity));
         
 #else
             return null;
@@ -60,7 +64,26 @@ base.Dispose (disposing);
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        KAZE retVal = new KAZE(features2d_KAZE_create_11());
+            KAZE retVal = new KAZE (features2d_KAZE_create_11 ());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  String getDefaultName()
+        //
+
+        //javadoc: KAZE::getDefaultName()
+        public override string getDefaultName ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            string retVal = Marshal.PtrToStringAnsi (features2d_KAZE_getDefaultName_10 (nativeObj));
         
 #else
             return null;
@@ -79,7 +102,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        bool retVal = features2d_KAZE_getExtended_10(nativeObj);
+            bool retVal = features2d_KAZE_getExtended_10 (nativeObj);
         
 #else
             return false;
@@ -98,7 +121,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        bool retVal = features2d_KAZE_getUpright_10(nativeObj);
+            bool retVal = features2d_KAZE_getUpright_10 (nativeObj);
         
 #else
             return false;
@@ -117,7 +140,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        double retVal = features2d_KAZE_getThreshold_10(nativeObj);
+            double retVal = features2d_KAZE_getThreshold_10 (nativeObj);
         
 #else
             return -1;
@@ -136,7 +159,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_KAZE_getDiffusivity_10(nativeObj);
+            int retVal = features2d_KAZE_getDiffusivity_10 (nativeObj);
         
 #else
             return -1;
@@ -155,7 +178,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_KAZE_getNOctaveLayers_10(nativeObj);
+            int retVal = features2d_KAZE_getNOctaveLayers_10 (nativeObj);
         
 #else
             return -1;
@@ -174,7 +197,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        int retVal = features2d_KAZE_getNOctaves_10(nativeObj);
+            int retVal = features2d_KAZE_getNOctaves_10 (nativeObj);
         
 #else
             return -1;
@@ -193,7 +216,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setDiffusivity_10(nativeObj, diff);
+            features2d_KAZE_setDiffusivity_10 (nativeObj, diff);
         
 #else
             return;
@@ -212,7 +235,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setExtended_10(nativeObj, extended);
+            features2d_KAZE_setExtended_10 (nativeObj, extended);
         
 #else
             return;
@@ -231,7 +254,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setNOctaveLayers_10(nativeObj, octaveLayers);
+            features2d_KAZE_setNOctaveLayers_10 (nativeObj, octaveLayers);
         
 #else
             return;
@@ -250,7 +273,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setNOctaves_10(nativeObj, octaves);
+            features2d_KAZE_setNOctaves_10 (nativeObj, octaves);
         
 #else
             return;
@@ -269,7 +292,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setThreshold_10(nativeObj, threshold);
+            features2d_KAZE_setThreshold_10 (nativeObj, threshold);
         
 #else
             return;
@@ -288,7 +311,7 @@ base.Dispose (disposing);
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        features2d_KAZE_setUpright_10(nativeObj, upright);
+            features2d_KAZE_setUpright_10 (nativeObj, upright);
         
 #else
             return;
@@ -299,6 +322,7 @@ base.Dispose (disposing);
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -308,8 +332,13 @@ base.Dispose (disposing);
         // C++: static Ptr_KAZE create(bool extended = false, bool upright = false, float threshold = 0.001f, int nOctaves = 4, int nOctaveLayers = 4, int diffusivity = KAZE::DIFF_PM_G2)
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_KAZE_create_10 (bool extended, bool upright, float threshold, int nOctaves, int nOctaveLayers, int diffusivity);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr features2d_KAZE_create_11 ();
+
+        // C++:  String getDefaultName()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr features2d_KAZE_getDefaultName_10 (IntPtr nativeObj);
 
         // C++:  bool getExtended()
         [DllImport (LIBNAME)]

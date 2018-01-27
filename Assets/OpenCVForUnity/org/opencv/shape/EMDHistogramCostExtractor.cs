@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class EMDHistogramCostExtractor
     //javadoc: EMDHistogramCostExtractor
+
     public class EMDHistogramCostExtractor : HistogramCostExtractor
     {
 

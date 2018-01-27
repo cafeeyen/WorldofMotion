@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Dictionary
     //javadoc: Dictionary
+
     public class Dictionary : DisposableOpenCVObject
     {
 

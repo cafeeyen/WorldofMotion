@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BIF
     //javadoc: BIF
+
     public class BIF : Algorithm
     {
 

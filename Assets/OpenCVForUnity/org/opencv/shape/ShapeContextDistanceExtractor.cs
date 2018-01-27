@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ShapeContextDistanceExtractor
     //javadoc: ShapeContextDistanceExtractor
+
     public class ShapeContextDistanceExtractor : ShapeDistanceExtractor
     {
 

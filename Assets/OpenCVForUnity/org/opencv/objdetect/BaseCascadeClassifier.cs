@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BaseCascadeClassifier
     //javadoc: BaseCascadeClassifier
+
     public class BaseCascadeClassifier : Algorithm
     {
 

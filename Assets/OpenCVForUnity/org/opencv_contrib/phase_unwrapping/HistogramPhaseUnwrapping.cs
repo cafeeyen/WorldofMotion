@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class HistogramPhaseUnwrapping
     //javadoc: HistogramPhaseUnwrapping
+
     public class HistogramPhaseUnwrapping : PhaseUnwrapping
     {
 

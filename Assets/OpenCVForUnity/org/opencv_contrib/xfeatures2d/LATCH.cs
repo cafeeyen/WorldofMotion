@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LATCH
     //javadoc: LATCH
+
     public class LATCH : Feature2D
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ShapeTransformer
     //javadoc: ShapeTransformer
+
     public class ShapeTransformer : Algorithm
     {
 

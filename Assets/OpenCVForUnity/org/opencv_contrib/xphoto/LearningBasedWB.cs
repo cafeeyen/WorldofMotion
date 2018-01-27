@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class LearningBasedWB
     //javadoc: LearningBasedWB
+
     public class LearningBasedWB : WhiteBalancer
     {
 

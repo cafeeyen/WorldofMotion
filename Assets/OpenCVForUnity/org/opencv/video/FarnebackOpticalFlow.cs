@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class FarnebackOpticalFlow
     //javadoc: FarnebackOpticalFlow
+
     public class FarnebackOpticalFlow : DenseOpticalFlow
     {
 

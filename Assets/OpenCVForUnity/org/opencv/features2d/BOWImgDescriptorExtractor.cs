@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class BOWImgDescriptorExtractor
     //javadoc: BOWImgDescriptorExtractor
+
     public class BOWImgDescriptorExtractor : DisposableOpenCVObject
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GrayCodePattern
     //javadoc: GrayCodePattern
+
     public class GrayCodePattern : StructuredLightPattern
     {
 

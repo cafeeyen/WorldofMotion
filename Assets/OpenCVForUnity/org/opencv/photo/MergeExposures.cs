@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MergeExposures
     //javadoc: MergeExposures
+
     public class MergeExposures : Algorithm
     {
 
@@ -64,6 +65,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif

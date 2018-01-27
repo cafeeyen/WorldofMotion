@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Net
     //javadoc: Net
+
     public class Net : DisposableOpenCVObject
     {
 
@@ -288,21 +289,21 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  vector_Ptr_Layer getLayerInputs(LayerId layerId)
+        // C++:  int64 getPerfProfile(vector_double& timings)
         //
 
-        //javadoc: Net::getLayerInputs(layerId)
-        public List<Layer> getLayerInputs (DictValue layerId)
+        //javadoc: Net::getPerfProfile(timings)
+        public long getPerfProfile (MatOfDouble timings)
         {
             ThrowIfDisposed ();
-            if (layerId != null)
-                layerId.ThrowIfDisposed ();
+            if (timings != null)
+                timings.ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            List<Layer> retVal = new List<Layer> ();
-            Mat retValMat = new Mat (dnn_Net_getLayerInputs_10 (nativeObj, layerId.getNativeObjAddr ()));
-            Converters.Mat_to_vector_Ptr_Layer (retValMat, retVal);
+            Mat timings_mat = timings;
+            long retVal = dnn_Net_getPerfProfile_10 (nativeObj, timings_mat.nativeObj);
+        
 #else
-            return null;
+            return -1;
 #endif
             return retVal;
         }
@@ -406,7 +407,7 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  void forward(vector_Mat outputBlobs, String outputName = String())
+        // C++:  void forward(vector_Mat& outputBlobs, String outputName = String())
         //
 
         //javadoc: Net::forward(outputBlobs, outputName)
@@ -414,9 +415,10 @@ namespace OpenCVForUnity
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat outputBlobs_mat = Converters.vector_Mat_to_Mat (outputBlobs);
+            Mat outputBlobs_mat = new Mat ();
             dnn_Net_forward_12 (nativeObj, outputBlobs_mat.nativeObj, outputName);
-        
+            Converters.Mat_to_vector_Mat (outputBlobs_mat, outputBlobs);
+            outputBlobs_mat.release ();
 #else
             return;
 #endif
@@ -428,9 +430,10 @@ namespace OpenCVForUnity
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat outputBlobs_mat = Converters.vector_Mat_to_Mat (outputBlobs);
+            Mat outputBlobs_mat = new Mat ();
             dnn_Net_forward_13 (nativeObj, outputBlobs_mat.nativeObj);
-        
+            Converters.Mat_to_vector_Mat (outputBlobs_mat, outputBlobs);
+            outputBlobs_mat.release ();
 #else
             return;
 #endif
@@ -439,7 +442,7 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  void forward(vector_Mat outputBlobs, vector_String outBlobNames)
+        // C++:  void forward(vector_Mat& outputBlobs, vector_String outBlobNames)
         //
 
         //javadoc: Net::forward(outputBlobs, outBlobNames)
@@ -447,10 +450,11 @@ namespace OpenCVForUnity
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat outputBlobs_mat = Converters.vector_Mat_to_Mat (outputBlobs);
+            Mat outputBlobs_mat = new Mat ();
             Mat outBlobNames_mat = Converters.vector_String_to_Mat (outBlobNames);
             dnn_Net_forward_14 (nativeObj, outputBlobs_mat.nativeObj, outBlobNames_mat.nativeObj);
-        
+            Converters.Mat_to_vector_Mat (outputBlobs_mat, outputBlobs);
+            outputBlobs_mat.release ();
 #else
             return;
 #endif
@@ -463,50 +467,6 @@ namespace OpenCVForUnity
         //
 
         // Unknown type 'vector_vector_Mat' (I), skipping the function
-
-
-        //
-        // C++:  void getLayerShapes(MatShape netInputShape, int layerId, vector_MatShape* inLayerShapes, vector_MatShape* outLayerShapes)
-        //
-
-        //javadoc: Net::getLayerShapes(netInputShape, layerId, inLayerShapes, outLayerShapes)
-        public void getLayerShapes (MatOfInt netInputShape, int layerId, List<MatOfInt> inLayerShapes, List<MatOfInt> outLayerShapes)
-        {
-            ThrowIfDisposed ();
-            if (netInputShape != null)
-                netInputShape.ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat netInputShape_mat = netInputShape;
-            Mat inLayerShapes_mat = Converters.vector_MatShape_to_Mat (inLayerShapes);
-            Mat outLayerShapes_mat = Converters.vector_MatShape_to_Mat (outLayerShapes);
-            dnn_Net_getLayerShapes_10 (nativeObj, netInputShape_mat.nativeObj, layerId, inLayerShapes_mat.nativeObj, outLayerShapes_mat.nativeObj);
-        
-#else
-            return;
-#endif
-            return;
-        }
-
-
-        //
-        // C++:  void getLayerShapes(vector_MatShape netInputShapes, int layerId, vector_MatShape* inLayerShapes, vector_MatShape* outLayerShapes)
-        //
-
-        //javadoc: Net::getLayerShapes(netInputShapes, layerId, inLayerShapes, outLayerShapes)
-        public void getLayerShapes (List<MatOfInt> netInputShapes, int layerId, List<MatOfInt> inLayerShapes, List<MatOfInt> outLayerShapes)
-        {
-            ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat netInputShapes_mat = Converters.vector_MatShape_to_Mat (netInputShapes);
-            Mat inLayerShapes_mat = Converters.vector_MatShape_to_Mat (inLayerShapes);
-            Mat outLayerShapes_mat = Converters.vector_MatShape_to_Mat (outLayerShapes);
-            dnn_Net_getLayerShapes_11 (nativeObj, netInputShapes_mat.nativeObj, layerId, inLayerShapes_mat.nativeObj, outLayerShapes_mat.nativeObj);
-        
-#else
-            return;
-#endif
-            return;
-        }
 
 
         //
@@ -530,17 +490,17 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  void getLayersShapes(MatShape netInputShape, vector_int* layersIds, vector_vector_MatShape* inLayersShapes, vector_vector_MatShape* outLayersShapes)
+        // C++:  void getLayersShapes(MatShape netInputShape, vector_int& layersIds, vector_vector_MatShape& inLayersShapes, vector_vector_MatShape& outLayersShapes)
         //
 
-        // Unknown type 'vector_vector_MatShape' (I), skipping the function
+        // Unknown type 'vector_vector_MatShape' (O), skipping the function
 
 
         //
-        // C++:  void getLayersShapes(vector_MatShape netInputShapes, vector_int* layersIds, vector_vector_MatShape* inLayersShapes, vector_vector_MatShape* outLayersShapes)
+        // C++:  void getLayersShapes(vector_MatShape netInputShapes, vector_int& layersIds, vector_vector_MatShape& inLayersShapes, vector_vector_MatShape& outLayersShapes)
         //
 
-        // Unknown type 'vector_vector_MatShape' (I), skipping the function
+        // Unknown type 'vector_vector_MatShape' (O), skipping the function
 
 
         //
@@ -570,36 +530,6 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  void getMemoryConsumption(MatShape netInputShape, vector_int& layerIds, vector_size_t& weights, vector_size_t& blobs)
-        //
-
-        //javadoc: Net::getMemoryConsumption(netInputShape, layerIds, weights, blobs)
-        public void getMemoryConsumption (MatOfInt netInputShape, MatOfInt layerIds, MatOfDouble weights, MatOfDouble blobs)
-        {
-            ThrowIfDisposed ();
-            if (netInputShape != null)
-                netInputShape.ThrowIfDisposed ();
-            if (layerIds != null)
-                layerIds.ThrowIfDisposed ();
-            if (weights != null)
-                weights.ThrowIfDisposed ();
-            if (blobs != null)
-                blobs.ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat netInputShape_mat = netInputShape;
-            Mat layerIds_mat = layerIds;
-            Mat weights_mat = weights;
-            Mat blobs_mat = blobs;
-            dnn_Net_getMemoryConsumption_11 (nativeObj, netInputShape_mat.nativeObj, layerIds_mat.nativeObj, weights_mat.nativeObj, blobs_mat.nativeObj);
-        
-#else
-            return;
-#endif
-            return;
-        }
-
-
-        //
         // C++:  void getMemoryConsumption(int layerId, MatShape netInputShape, size_t& weights, size_t& blobs)
         //
 
@@ -613,7 +543,7 @@ namespace OpenCVForUnity
             Mat netInputShape_mat = netInputShape;
             double[] weights_out = new double[1];
             double[] blobs_out = new double[1];
-            dnn_Net_getMemoryConsumption_12 (nativeObj, layerId, netInputShape_mat.nativeObj, weights_out, blobs_out);
+            dnn_Net_getMemoryConsumption_11 (nativeObj, layerId, netInputShape_mat.nativeObj, weights_out, blobs_out);
             if (weights != null)
                 weights [0] = (long)weights_out [0];
             if (blobs != null)
@@ -637,7 +567,7 @@ namespace OpenCVForUnity
             Mat netInputShapes_mat = Converters.vector_MatShape_to_Mat (netInputShapes);
             double[] weights_out = new double[1];
             double[] blobs_out = new double[1];
-            dnn_Net_getMemoryConsumption_13 (nativeObj, layerId, netInputShapes_mat.nativeObj, weights_out, blobs_out);
+            dnn_Net_getMemoryConsumption_12 (nativeObj, layerId, netInputShapes_mat.nativeObj, weights_out, blobs_out);
             if (weights != null)
                 weights [0] = (long)weights_out [0];
             if (blobs != null)
@@ -650,49 +580,16 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  void getMemoryConsumption(vector_MatShape netInputShapes, size_t& weights, size_t& blobs)
+        // C++:  void setHalideScheduler(String scheduler)
         //
 
-        //javadoc: Net::getMemoryConsumption(netInputShapes, weights, blobs)
-        public void getMemoryConsumption (List<MatOfInt> netInputShapes, long[] weights, long[] blobs)
+        //javadoc: Net::setHalideScheduler(scheduler)
+        public void setHalideScheduler (string scheduler)
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat netInputShapes_mat = Converters.vector_MatShape_to_Mat (netInputShapes);
-            double[] weights_out = new double[1];
-            double[] blobs_out = new double[1];
-            dnn_Net_getMemoryConsumption_14 (nativeObj, netInputShapes_mat.nativeObj, weights_out, blobs_out);
-            if (weights != null)
-                weights [0] = (long)weights_out [0];
-            if (blobs != null)
-                blobs [0] = (long)blobs_out [0];
-#else
-            return;
-#endif
-            return;
-        }
-
-
-        //
-        // C++:  void getMemoryConsumption(vector_MatShape netInputShapes, vector_int& layerIds, vector_size_t& weights, vector_size_t& blobs)
-        //
-
-        //javadoc: Net::getMemoryConsumption(netInputShapes, layerIds, weights, blobs)
-        public void getMemoryConsumption (List<MatOfInt> netInputShapes, MatOfInt layerIds, MatOfDouble weights, MatOfDouble blobs)
-        {
-            ThrowIfDisposed ();
-            if (layerIds != null)
-                layerIds.ThrowIfDisposed ();
-            if (weights != null)
-                weights.ThrowIfDisposed ();
-            if (blobs != null)
-                blobs.ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat netInputShapes_mat = Converters.vector_MatShape_to_Mat (netInputShapes);
-            Mat layerIds_mat = layerIds;
-            Mat weights_mat = weights;
-            Mat blobs_mat = blobs;
-            dnn_Net_getMemoryConsumption_15 (nativeObj, netInputShapes_mat.nativeObj, layerIds_mat.nativeObj, weights_mat.nativeObj, blobs_mat.nativeObj);
+        
+            dnn_Net_setHalideScheduler_10 (nativeObj, scheduler);
         
 #else
             return;
@@ -780,9 +677,47 @@ namespace OpenCVForUnity
         }
 
 
+        //
+        // C++:  void setPreferableBackend(int backendId)
+        //
+
+        //javadoc: Net::setPreferableBackend(backendId)
+        public void setPreferableBackend (int backendId)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            dnn_Net_setPreferableBackend_10 (nativeObj, backendId);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
+        // C++:  void setPreferableTarget(int targetId)
+        //
+
+        //javadoc: Net::setPreferableTarget(targetId)
+        public void setPreferableTarget (int targetId)
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            dnn_Net_setPreferableTarget_10 (nativeObj, targetId);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
-        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -839,9 +774,9 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern long dnn_Net_getFLOPS_13 (IntPtr nativeObj, IntPtr netInputShapes_mat_nativeObj);
 
-        // C++:  vector_Ptr_Layer getLayerInputs(LayerId layerId)
+        // C++:  int64 getPerfProfile(vector_double& timings)
         [DllImport (LIBNAME)]
-        private static extern IntPtr dnn_Net_getLayerInputs_10 (IntPtr nativeObj, IntPtr layerId_nativeObj);
+        private static extern long dnn_Net_getPerfProfile_10 (IntPtr nativeObj, IntPtr timings_mat_nativeObj);
 
         // C++:  vector_String getLayerNames()
         [DllImport (LIBNAME)]
@@ -863,24 +798,16 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_enableFusion_10 (IntPtr nativeObj, bool fusion);
 
-        // C++:  void forward(vector_Mat outputBlobs, String outputName = String())
+        // C++:  void forward(vector_Mat& outputBlobs, String outputName = String())
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_forward_12 (IntPtr nativeObj, IntPtr outputBlobs_mat_nativeObj, string outputName);
 
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_forward_13 (IntPtr nativeObj, IntPtr outputBlobs_mat_nativeObj);
 
-        // C++:  void forward(vector_Mat outputBlobs, vector_String outBlobNames)
+        // C++:  void forward(vector_Mat& outputBlobs, vector_String outBlobNames)
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_forward_14 (IntPtr nativeObj, IntPtr outputBlobs_mat_nativeObj, IntPtr outBlobNames_mat_nativeObj);
-
-        // C++:  void getLayerShapes(MatShape netInputShape, int layerId, vector_MatShape* inLayerShapes, vector_MatShape* outLayerShapes)
-        [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getLayerShapes_10 (IntPtr nativeObj, IntPtr netInputShape_mat_nativeObj, int layerId, IntPtr inLayerShapes_mat_nativeObj, IntPtr outLayerShapes_mat_nativeObj);
-
-        // C++:  void getLayerShapes(vector_MatShape netInputShapes, int layerId, vector_MatShape* inLayerShapes, vector_MatShape* outLayerShapes)
-        [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getLayerShapes_11 (IntPtr nativeObj, IntPtr netInputShapes_mat_nativeObj, int layerId, IntPtr inLayerShapes_mat_nativeObj, IntPtr outLayerShapes_mat_nativeObj);
 
         // C++:  void getLayerTypes(vector_String& layersTypes)
         [DllImport (LIBNAME)]
@@ -890,25 +817,17 @@ namespace OpenCVForUnity
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_getMemoryConsumption_10 (IntPtr nativeObj, IntPtr netInputShape_mat_nativeObj, double[] weights_out, double[] blobs_out);
 
-        // C++:  void getMemoryConsumption(MatShape netInputShape, vector_int& layerIds, vector_size_t& weights, vector_size_t& blobs)
-        [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getMemoryConsumption_11 (IntPtr nativeObj, IntPtr netInputShape_mat_nativeObj, IntPtr layerIds_mat_nativeObj, IntPtr weights_mat_nativeObj, IntPtr blobs_mat_nativeObj);
-
         // C++:  void getMemoryConsumption(int layerId, MatShape netInputShape, size_t& weights, size_t& blobs)
         [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getMemoryConsumption_12 (IntPtr nativeObj, int layerId, IntPtr netInputShape_mat_nativeObj, double[] weights_out, double[] blobs_out);
+        private static extern void dnn_Net_getMemoryConsumption_11 (IntPtr nativeObj, int layerId, IntPtr netInputShape_mat_nativeObj, double[] weights_out, double[] blobs_out);
 
         // C++:  void getMemoryConsumption(int layerId, vector_MatShape netInputShapes, size_t& weights, size_t& blobs)
         [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getMemoryConsumption_13 (IntPtr nativeObj, int layerId, IntPtr netInputShapes_mat_nativeObj, double[] weights_out, double[] blobs_out);
+        private static extern void dnn_Net_getMemoryConsumption_12 (IntPtr nativeObj, int layerId, IntPtr netInputShapes_mat_nativeObj, double[] weights_out, double[] blobs_out);
 
-        // C++:  void getMemoryConsumption(vector_MatShape netInputShapes, size_t& weights, size_t& blobs)
+        // C++:  void setHalideScheduler(String scheduler)
         [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getMemoryConsumption_14 (IntPtr nativeObj, IntPtr netInputShapes_mat_nativeObj, double[] weights_out, double[] blobs_out);
-
-        // C++:  void getMemoryConsumption(vector_MatShape netInputShapes, vector_int& layerIds, vector_size_t& weights, vector_size_t& blobs)
-        [DllImport (LIBNAME)]
-        private static extern void dnn_Net_getMemoryConsumption_15 (IntPtr nativeObj, IntPtr netInputShapes_mat_nativeObj, IntPtr layerIds_mat_nativeObj, IntPtr weights_mat_nativeObj, IntPtr blobs_mat_nativeObj);
+        private static extern void dnn_Net_setHalideScheduler_10 (IntPtr nativeObj, string scheduler);
 
         // C++:  void setInput(Mat blob, String name = "")
         [DllImport (LIBNAME)]
@@ -924,6 +843,14 @@ namespace OpenCVForUnity
         // C++:  void setParam(LayerId layer, int numParam, Mat blob)
         [DllImport (LIBNAME)]
         private static extern void dnn_Net_setParam_10 (IntPtr nativeObj, IntPtr layer_nativeObj, int numParam, IntPtr blob_nativeObj);
+
+        // C++:  void setPreferableBackend(int backendId)
+        [DllImport (LIBNAME)]
+        private static extern void dnn_Net_setPreferableBackend_10 (IntPtr nativeObj, int backendId);
+
+        // C++:  void setPreferableTarget(int targetId)
+        [DllImport (LIBNAME)]
+        private static extern void dnn_Net_setPreferableTarget_10 (IntPtr nativeObj, int targetId);
 
         // native support for java finalize()
         [DllImport (LIBNAME)]

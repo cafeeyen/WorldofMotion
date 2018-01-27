@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SuperpixelLSC
     //javadoc: SuperpixelLSC
+
     public class SuperpixelLSC : Algorithm
     {
 

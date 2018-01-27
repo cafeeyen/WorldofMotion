@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StructuredEdgeDetection
     //javadoc: StructuredEdgeDetection
+
     public class StructuredEdgeDetection : Algorithm
     {
 

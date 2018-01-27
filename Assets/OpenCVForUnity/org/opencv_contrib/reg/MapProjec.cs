@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MapProjec
     //javadoc: MapProjec
+
     public class MapProjec : Map
     {
 
@@ -45,7 +46,7 @@ namespace OpenCVForUnity
         public MapProjec (Mat projTr) :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapProjec_MapProjec_10(projTr.nativeObj) )
+        base (reg_MapProjec_MapProjec_10 (projTr.nativeObj))
         
 #else
             base (IntPtr.Zero)
@@ -65,7 +66,7 @@ namespace OpenCVForUnity
         public MapProjec () :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapProjec_MapProjec_11() )
+        base (reg_MapProjec_MapProjec_11 ())
         
 #else
             base (IntPtr.Zero)
@@ -201,6 +202,10 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif

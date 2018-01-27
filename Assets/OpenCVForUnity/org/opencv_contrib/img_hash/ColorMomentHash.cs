@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ColorMomentHash
     //javadoc: ColorMomentHash
+
     public class ColorMomentHash : ImgHashBase
     {
 

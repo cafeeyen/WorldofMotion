@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SinusoidalPattern
     //javadoc: SinusoidalPattern
+
     public class SinusoidalPattern : StructuredLightPattern
     {
 
@@ -32,6 +33,24 @@ base.Dispose (disposing);
         }
 
         protected internal SinusoidalPattern (IntPtr addr) : base (addr) { }
+
+
+        //
+        // C++: static Ptr_SinusoidalPattern create(Ptr_SinusoidalPattern_Params parameters = makePtr<SinusoidalPattern::Params>())
+        //
+
+        //javadoc: SinusoidalPattern::create()
+        public static SinusoidalPattern create ()
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        SinusoidalPattern retVal = new SinusoidalPattern(structured_1light_SinusoidalPattern_create_10());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
 
 
         //
@@ -157,6 +176,10 @@ base.Dispose (disposing);
 #endif
 
 
+
+        // C++: static Ptr_SinusoidalPattern create(Ptr_SinusoidalPattern_Params parameters = makePtr<SinusoidalPattern::Params>())
+        [DllImport (LIBNAME)]
+        private static extern IntPtr structured_1light_SinusoidalPattern_create_10 ();
 
         // C++:  void computeDataModulationTerm(vector_Mat patternImages, Mat& dataModulationTerm, Mat shadowMask)
         [DllImport (LIBNAME)]

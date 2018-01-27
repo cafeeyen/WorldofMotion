@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class BOWTrainer
     //javadoc: BOWTrainer
+
     public class BOWTrainer : DisposableOpenCVObject
     {
 
@@ -161,6 +162,8 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif

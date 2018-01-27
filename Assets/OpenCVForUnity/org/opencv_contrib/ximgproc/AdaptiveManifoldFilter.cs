@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class AdaptiveManifoldFilter
     //javadoc: AdaptiveManifoldFilter
+
     public class AdaptiveManifoldFilter : Algorithm
     {
 

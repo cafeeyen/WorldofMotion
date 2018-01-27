@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MSDDetector
     //javadoc: MSDDetector
+
     public class MSDDetector : Feature2D
     {
 

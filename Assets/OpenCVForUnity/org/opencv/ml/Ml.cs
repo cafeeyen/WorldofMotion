@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Ml
+    //javadoc: Ml
+
     public class Ml
     {
 

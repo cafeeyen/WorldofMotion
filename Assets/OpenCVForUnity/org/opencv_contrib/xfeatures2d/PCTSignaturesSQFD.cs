@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class PCTSignaturesSQFD
     //javadoc: PCTSignaturesSQFD
+
     public class PCTSignaturesSQFD : Algorithm
     {
 

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Features2d
+    //javadoc: Features2d
+
     public class Features2d
     {
 

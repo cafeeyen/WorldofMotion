@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class GPCDetails
     //javadoc: GPCDetails
+
     public class GPCDetails : DisposableOpenCVObject
     {
 

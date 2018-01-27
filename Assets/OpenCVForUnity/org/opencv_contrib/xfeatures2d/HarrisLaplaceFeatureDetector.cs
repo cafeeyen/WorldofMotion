@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class HarrisLaplaceFeatureDetector
     //javadoc: HarrisLaplaceFeatureDetector
+
     public class HarrisLaplaceFeatureDetector : Feature2D
     {
 

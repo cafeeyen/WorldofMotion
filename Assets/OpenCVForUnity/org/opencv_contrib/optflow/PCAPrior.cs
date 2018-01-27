@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class PCAPrior
     //javadoc: PCAPrior
+
     public class PCAPrior : DisposableOpenCVObject
     {
 

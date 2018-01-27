@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MapShift
     //javadoc: MapShift
+
     public class MapShift : Map
     {
 
@@ -45,7 +46,7 @@ namespace OpenCVForUnity
         public MapShift (Mat shift) :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapShift_MapShift_10(shift.nativeObj) )
+        base (reg_MapShift_MapShift_10 (shift.nativeObj))
         
 #else
             base (IntPtr.Zero)
@@ -65,7 +66,7 @@ namespace OpenCVForUnity
         public MapShift () :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapShift_MapShift_11() )
+        base (reg_MapShift_MapShift_11 ())
         
 #else
             base (IntPtr.Zero)
@@ -182,6 +183,10 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SelectiveSearchSegmentationStrategySize
     //javadoc: SelectiveSearchSegmentationStrategySize
+
     public class SelectiveSearchSegmentationStrategySize : SelectiveSearchSegmentationStrategy
     {
 

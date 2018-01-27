@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Shape
+    //javadoc: Shape
+
     public class Shape
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SimpleWB
     //javadoc: SimpleWB
+
     public class SimpleWB : WhiteBalancer
     {
 

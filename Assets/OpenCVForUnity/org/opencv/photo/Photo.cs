@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Photo
+    //javadoc: Photo
+
     public class Photo
     {
 

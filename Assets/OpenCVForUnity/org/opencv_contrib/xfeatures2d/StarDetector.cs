@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StarDetector
     //javadoc: StarDetector
+
     public class StarDetector : Feature2D
     {
 

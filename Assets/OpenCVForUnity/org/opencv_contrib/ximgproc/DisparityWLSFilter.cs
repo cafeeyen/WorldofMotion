@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DisparityWLSFilter
     //javadoc: DisparityWLSFilter
+
     public class DisparityWLSFilter : DisparityFilter
     {
 

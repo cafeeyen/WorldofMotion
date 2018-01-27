@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MapAffine
     //javadoc: MapAffine
+
     public class MapAffine : Map
     {
 
@@ -45,7 +46,7 @@ namespace OpenCVForUnity
         public MapAffine (Mat linTr, Mat shift) :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapAffine_MapAffine_10(linTr.nativeObj, shift.nativeObj) )
+        base (reg_MapAffine_MapAffine_10 (linTr.nativeObj, shift.nativeObj))
         
 #else
             base (IntPtr.Zero)
@@ -65,7 +66,7 @@ namespace OpenCVForUnity
         public MapAffine () :
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        base( reg_MapAffine_MapAffine_11() )
+        base (reg_MapAffine_MapAffine_11 ())
         
 #else
             base (IntPtr.Zero)
@@ -203,6 +204,10 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
+
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif

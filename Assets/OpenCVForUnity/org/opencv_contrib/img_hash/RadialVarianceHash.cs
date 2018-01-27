@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class RadialVarianceHash
     //javadoc: RadialVarianceHash
+
     public class RadialVarianceHash : ImgHashBase
     {
 

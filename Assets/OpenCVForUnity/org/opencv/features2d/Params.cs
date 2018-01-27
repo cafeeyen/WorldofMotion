@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Params
     //javadoc: Params
+
     public class Params : DisposableOpenCVObject
     {
 

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Objdetect
+    //javadoc: Objdetect
+
     public class Objdetect
     {
 

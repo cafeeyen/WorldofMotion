@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Layer
     //javadoc: Layer
+
     public class Layer : Algorithm
     {
 
@@ -71,30 +72,6 @@ namespace OpenCVForUnity
             dnn_Layer_finalize_11 (nativeObj, inputs_mat.nativeObj, outputs_mat.nativeObj);
             Converters.Mat_to_vector_Mat (outputs_mat, outputs);
             outputs_mat.release ();
-#else
-            return;
-#endif
-            return;
-        }
-
-
-        //
-        // C++:  void forward(vector_Mat inputs, vector_Mat& outputs, vector_Mat& internals)
-        //
-
-        //javadoc: Layer::forward(inputs, outputs, internals)
-        public void forward (List<Mat> inputs, List<Mat> outputs, List<Mat> internals)
-        {
-            ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-            Mat inputs_mat = Converters.vector_Mat_to_Mat (inputs);
-            Mat outputs_mat = Converters.vector_Mat_to_Mat (outputs);
-            Mat internals_mat = Converters.vector_Mat_to_Mat (internals);
-            dnn_Layer_forward_10 (nativeObj, inputs_mat.nativeObj, outputs_mat.nativeObj, internals_mat.nativeObj);
-            Converters.Mat_to_vector_Mat (outputs_mat, outputs);
-            outputs_mat.release ();
-            Converters.Mat_to_vector_Mat (internals_mat, internals);
-            internals_mat.release ();
 #else
             return;
 #endif
@@ -202,9 +179,28 @@ namespace OpenCVForUnity
         }
 
 
+        //
+        // C++: int Layer::preferableTarget
+        //
+
+        //javadoc: Layer::get_preferableTarget()
+        public int get_preferableTarget ()
+        {
+            ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+            int retVal = dnn_Layer_get_1preferableTarget_10 (nativeObj);
+        
+#else
+            return -1;
+#endif
+            return retVal;
+        }
+
+
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
-        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -218,10 +214,6 @@ namespace OpenCVForUnity
         // C++:  void finalize(vector_Mat inputs, vector_Mat& outputs)
         [DllImport (LIBNAME)]
         private static extern void dnn_Layer_finalize_11 (IntPtr nativeObj, IntPtr inputs_mat_nativeObj, IntPtr outputs_mat_nativeObj);
-
-        // C++:  void forward(vector_Mat inputs, vector_Mat& outputs, vector_Mat& internals)
-        [DllImport (LIBNAME)]
-        private static extern void dnn_Layer_forward_10 (IntPtr nativeObj, IntPtr inputs_mat_nativeObj, IntPtr outputs_mat_nativeObj, IntPtr internals_mat_nativeObj);
 
         // C++:  void run(vector_Mat inputs, vector_Mat& outputs, vector_Mat& internals)
         [DllImport (LIBNAME)]
@@ -242,6 +234,10 @@ namespace OpenCVForUnity
         // C++: String Layer::type
         [DllImport (LIBNAME)]
         private static extern IntPtr dnn_Layer_get_1type_10 (IntPtr nativeObj);
+
+        // C++: int Layer::preferableTarget
+        [DllImport (LIBNAME)]
+        private static extern int dnn_Layer_get_1preferableTarget_10 (IntPtr nativeObj);
 
         // native support for java finalize()
         [DllImport (LIBNAME)]

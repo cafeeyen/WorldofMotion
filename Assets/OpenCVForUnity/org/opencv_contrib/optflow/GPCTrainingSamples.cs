@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class GPCTrainingSamples
     //javadoc: GPCTrainingSamples
+
     public class GPCTrainingSamples : DisposableOpenCVObject
     {
 

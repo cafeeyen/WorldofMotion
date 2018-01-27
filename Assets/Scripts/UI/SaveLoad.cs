@@ -19,7 +19,7 @@ public class SaveLoad : MonoBehaviour
     // the examples from the web page since they are fully described 
 
     // Set prefebs of each item type
-    public GameObject cube, sphere, saveAlert, saveDeny;
+    public GameObject cube, sphere;
     public GameObject WorldObject;
     public ItemObjectController ItemCon;
     public UIController UICon;
@@ -74,7 +74,7 @@ public class SaveLoad : MonoBehaviour
             if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
             {
                 UICon.playSound("clk");
-                saveAlert.SetActive(true);
+                UICon.setAlert(true);
             }
             else
             {
@@ -85,24 +85,16 @@ public class SaveLoad : MonoBehaviour
         else
         {
             UICon.playSound("deny");
-            saveDeny.SetActive(true);
+            UICon.setDeny(true);
         }
-        
     }
 
     public void answerChk(bool ans)
     {
         if (ans)
-        {
             SaveWorld();
-        }
         UICon.playSound("clk");
-        saveAlert.SetActive(false);
-    }
-
-    public void closeDeny()
-    {
-        saveDeny.SetActive(false);
+        UICon.setAlert(false);
     }
 
     public void LoadWorld()

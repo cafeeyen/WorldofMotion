@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class RFFeatureGetter
     //javadoc: RFFeatureGetter
+
     public class RFFeatureGetter : Algorithm
     {
 

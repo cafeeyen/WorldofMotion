@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BriefDescriptorExtractor
     //javadoc: BriefDescriptorExtractor
+
     public class BriefDescriptorExtractor : Feature2D
     {
 

@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Subdiv2D
     //javadoc: Subdiv2D
+
     public class Subdiv2D : DisposableOpenCVObject
     {
 

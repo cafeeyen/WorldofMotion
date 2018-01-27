@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class NormalBayesClassifier
     //javadoc: NormalBayesClassifier
+
     public class NormalBayesClassifier : StatModel
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class CLAHE
     //javadoc: CLAHE
+
     public class CLAHE : Algorithm
     {
 

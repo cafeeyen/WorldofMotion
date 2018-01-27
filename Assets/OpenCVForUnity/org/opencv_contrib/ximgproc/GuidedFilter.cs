@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GuidedFilter
     //javadoc: GuidedFilter
+
     public class GuidedFilter : Algorithm
     {
 

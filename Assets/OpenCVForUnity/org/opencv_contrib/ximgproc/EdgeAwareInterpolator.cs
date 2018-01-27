@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class EdgeAwareInterpolator
     //javadoc: EdgeAwareInterpolator
+
     public class EdgeAwareInterpolator : SparseMatchInterpolator
     {
 

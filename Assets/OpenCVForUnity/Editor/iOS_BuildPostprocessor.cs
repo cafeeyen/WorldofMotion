@@ -3,6 +3,11 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
+
+#if UNITY_2017_2_OR_NEWER
+using UnityEditor.iOS.Xcode.Extensions;
+#endif
+using System;
 using System.Collections;
 using System.IO;
 
@@ -30,11 +35,31 @@ namespace OpenCVForUnity
                 string target = proj.TargetGuidByName (PBXProject.GetUnityTargetName ());
 #endif
 
-                // Add our framework directory to the framework include path
-                //proj.SetBuildProperty (target, "FRAMEWORK_SEARCH_PATHS", "$(inherited)");
-                proj.AddBuildProperty (target, "FRAMEWORK_SEARCH_PATHS", "$(PROJECT_DIR)/Frameworks/OpenCVForUnity/Plugins/iOS");
+
+#if UNITY_2017_2_OR_NEWER
+                string frameworkPath = "Frameworks/OpenCVForUnity/Plugins/iOS/opencv2.framework";
+                string fileGuid = proj.FindFileGuidByProjectPath(frameworkPath);
+
+                proj.AddFileToBuild(target, fileGuid);
+                proj.AddFileToEmbedFrameworks(target, fileGuid);
+                foreach (var configName in proj.BuildConfigNames()) {
+                    var configGuid = proj.BuildConfigByName(target, configName);
+                    proj.SetBuildPropertyForConfig(configGuid, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
+                }
+#else
+                Debug.LogError ("If the version of Unity is less than 2017.2, you have to set opencv2.framework to Embedded Binaries manually.");
+#endif
 
                 File.WriteAllText (projPath, proj.WriteToString ());
+
+#if UNITY_5_5_OR_NEWER
+                if((int)Convert.ToDecimal(PlayerSettings.iOS.targetOSVersionString) < 8){
+#else
+                if ((int)PlayerSettings.iOS.targetOSVersion < (int)iOSTargetOSVersion.iOS_8_0) {
+#endif
+                    Debug.LogError ("Please set Target minimum iOS Version to 8.0 or higher.");
+                }
+
             }
         }
     }

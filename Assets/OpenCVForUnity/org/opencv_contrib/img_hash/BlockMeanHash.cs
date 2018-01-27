@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BlockMeanHash
     //javadoc: BlockMeanHash
+
     public class BlockMeanHash : ImgHashBase
     {
 

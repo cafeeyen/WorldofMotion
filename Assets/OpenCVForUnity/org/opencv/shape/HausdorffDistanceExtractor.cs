@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class HausdorffDistanceExtractor
     //javadoc: HausdorffDistanceExtractor
+
     public class HausdorffDistanceExtractor : ShapeDistanceExtractor
     {
 

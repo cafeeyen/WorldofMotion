@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class BackgroundSubtractorKNN
     //javadoc: BackgroundSubtractorKNN
+
     public class BackgroundSubtractorKNN : BackgroundSubtractor
     {
 

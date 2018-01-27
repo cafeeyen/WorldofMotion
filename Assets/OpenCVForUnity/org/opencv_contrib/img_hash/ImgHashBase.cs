@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class ImgHashBase
     //javadoc: ImgHashBase
+
     public class ImgHashBase : Algorithm
     {
 

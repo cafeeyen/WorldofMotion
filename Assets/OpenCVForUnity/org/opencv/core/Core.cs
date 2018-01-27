@@ -6,15 +6,18 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Core
+    //javadoc: Core
+
     public class Core
     {
 
         // these constants are wrapped inside functions to prevent inlining
-        private static string getVersion () { return "3.3.0-dev"; }
+        private static string getVersion () { return "3.3.1-dev"; }
         private static string getNativeLibraryName () { return "opencvforunity"; }
         private static int getVersionMajor () { return 3; }
         private static int getVersionMinor () { return 3; }
-        private static int getVersionRevision () { return 0; }
+        private static int getVersionRevision () { return 1; }
         private static string getVersionStatus () { return "-dev"; }
 
         public static readonly string VERSION = getVersion ();
@@ -273,6 +276,24 @@ Scalar retVal = new Scalar (tmpArray);
 
 
         //
+        // C++:  String getIppVersion()
+        //
+
+        //javadoc: getIppVersion()
+        public static string getIppVersion ()
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        string retVal = Marshal.PtrToStringAnsi (core_Core_getIppVersion_10());
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
         // C++:  bool checkRange(Mat a, bool quiet = true,  _hidden_ * pos = 0, double minVal = -DBL_MAX, double maxVal = DBL_MAX)
         //
 
@@ -388,6 +409,24 @@ Scalar retVal = new Scalar (tmpArray);
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         bool retVal = core_Core_useIPP_10();
+        
+#else
+            return false;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++:  bool useIPP_NE()
+        //
+
+        //javadoc: useIPP_NE()
+        public static bool useIPP_NE ()
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        bool retVal = core_Core_useIPP_1NE_10();
         
 #else
             return false;
@@ -1906,6 +1945,27 @@ Scalar retVal = new Scalar (tmpArray);
 
 
         //
+        // C++:  void eigenNonSymmetric(Mat src, Mat& eigenvalues, Mat& eigenvectors)
+        //
+
+        //javadoc: eigenNonSymmetric(src, eigenvalues, eigenvectors)
+        public static void eigenNonSymmetric (Mat src, Mat eigenvalues, Mat eigenvectors)
+        {
+            if (src != null) src.ThrowIfDisposed ();
+            if (eigenvalues != null) eigenvalues.ThrowIfDisposed ();
+            if (eigenvectors != null) eigenvectors.ThrowIfDisposed ();
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        core_Core_eigenNonSymmetric_10(src.nativeObj, eigenvalues.nativeObj, eigenvectors.nativeObj);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
+
+        //
         // C++:  void exp(Mat src, Mat& dst)
         //
 
@@ -3282,6 +3342,24 @@ Scalar retVal = new Scalar (tmpArray);
             return;
         }
 
+
+        //
+        // C++:  void setUseIPP_NE(bool flag)
+        //
+
+        //javadoc: setUseIPP_NE(flag)
+        public static void setUseIPP_NE (bool flag)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        core_Core_setUseIPP_1NE_10(flag);
+        
+#else
+            return;
+#endif
+            return;
+        }
+
         // manual port
         public class MinMaxLocResult
         {
@@ -3374,6 +3452,10 @@ Scalar retVal = new Scalar (tmpArray);
         [DllImport (LIBNAME)]
         private static extern IntPtr core_Core_getBuildInformation_10 ();
 
+        // C++:  String getIppVersion()
+        [DllImport (LIBNAME)]
+        private static extern IntPtr core_Core_getIppVersion_10 ();
+
         // C++:  bool checkRange(Mat a, bool quiet = true,  _hidden_ * pos = 0, double minVal = -DBL_MAX, double maxVal = DBL_MAX)
         [DllImport (LIBNAME)]
         private static extern bool core_Core_checkRange_10 (IntPtr a_nativeObj, bool quiet, double minVal, double maxVal);
@@ -3395,6 +3477,10 @@ Scalar retVal = new Scalar (tmpArray);
         // C++:  bool useIPP()
         [DllImport (LIBNAME)]
         private static extern bool core_Core_useIPP_10 ();
+
+        // C++:  bool useIPP_NE()
+        [DllImport (LIBNAME)]
+        private static extern bool core_Core_useIPP_1NE_10 ();
 
         // C++:  double Mahalanobis(Mat v1, Mat v2, Mat icovar)
         [DllImport (LIBNAME)]
@@ -3660,6 +3746,10 @@ Scalar retVal = new Scalar (tmpArray);
         [DllImport (LIBNAME)]
         private static extern void core_Core_divide_17 (double scale, IntPtr src2_nativeObj, IntPtr dst_nativeObj);
 
+        // C++:  void eigenNonSymmetric(Mat src, Mat& eigenvalues, Mat& eigenvectors)
+        [DllImport (LIBNAME)]
+        private static extern void core_Core_eigenNonSymmetric_10 (IntPtr src_nativeObj, IntPtr eigenvalues_nativeObj, IntPtr eigenvectors_nativeObj);
+
         // C++:  void exp(Mat src, Mat& dst)
         [DllImport (LIBNAME)]
         private static extern void core_Core_exp_10 (IntPtr src_nativeObj, IntPtr dst_nativeObj);
@@ -3907,6 +3997,10 @@ Scalar retVal = new Scalar (tmpArray);
         // C++:  void setUseIPP(bool flag)
         [DllImport (LIBNAME)]
         private static extern void core_Core_setUseIPP_10 (bool flag);
+
+        // C++:  void setUseIPP_NE(bool flag)
+        [DllImport (LIBNAME)]
+        private static extern void core_Core_setUseIPP_1NE_10 (bool flag);
         [DllImport (LIBNAME)]
         private static extern void core_Core_n_1minMaxLocManual (IntPtr src_nativeObj, IntPtr mask_nativeObj, double[] vals);
     }

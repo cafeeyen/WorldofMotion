@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class RTrees
     //javadoc: RTrees
+
     public class RTrees : DTrees
     {
 
@@ -248,6 +249,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -265,6 +267,7 @@ namespace OpenCVForUnity
         // C++: static Ptr_RTrees load(String filepath, String nodeName = String())
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_RTrees_load_10 (string filepath, string nodeName);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_RTrees_load_11 (string filepath);
 

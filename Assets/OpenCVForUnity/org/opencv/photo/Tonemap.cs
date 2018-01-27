@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Tonemap
     //javadoc: Tonemap
+
     public class Tonemap : Algorithm
     {
 

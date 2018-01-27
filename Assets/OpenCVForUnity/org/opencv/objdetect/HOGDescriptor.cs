@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class HOGDescriptor
     //javadoc: HOGDescriptor
+
     public class HOGDescriptor : DisposableOpenCVObject
     {
 

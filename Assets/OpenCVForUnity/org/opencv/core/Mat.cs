@@ -679,7 +679,7 @@ namespace OpenCVForUnity
 
 #endif
         }
-        //  
+        //
         /**
  * <p>Various Mat constructors</p>
  *
@@ -2937,11 +2937,11 @@ namespace OpenCVForUnity
         {
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
             return "Mat [ " +
-                rows () + "*" + cols () + "*" + CvType.typeToString (type ()) +
-                ", isCont=" + isContinuous () + ", isSubmat=" + isSubmatrix () +
-                ", nativeObj=0x" + Convert.ToString (nativeObj) +
-                ", dataAddr=0x" + Convert.ToString (dataAddr ()) +
-                " ]";
+            rows () + "*" + cols () + "*" + CvType.typeToString (type ()) +
+            ", isCont=" + isContinuous () + ", isSubmat=" + isSubmatrix () +
+            ", nativeObj=0x" + Convert.ToString (nativeObj) +
+            ", dataAddr=0x" + Convert.ToString (dataAddr ()) +
+            " ]";
 #else
             return null;
 #endif
@@ -2967,7 +2967,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -2985,7 +2985,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3006,7 +3006,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3027,7 +3027,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3048,7 +3048,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3069,7 +3069,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3090,7 +3090,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3111,7 +3111,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3132,7 +3132,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3153,7 +3153,7 @@ namespace OpenCVForUnity
             int t = type ();
             if (data == null || data.Length % CvType.channels (t) != 0)
                 throw new CvException (
-                "Provided data element number (" +
+                    "Provided data element number (" +
                     (data == null ? 0 : data.Length) +
                     ") should be multiple of the Mat channels count (" +
                     CvType.channels (t) + ")");
@@ -3217,6 +3217,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -3523,206 +3524,245 @@ namespace OpenCVForUnity
         private static extern IntPtr core_Mat_nDump (IntPtr self);
 
         //
+
         #region Operators
 
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         #region Unary
+
         #region +
+
         public static Mat operator + (Mat mat)
         {
             return mat;
         }
+
         #endregion
-        
+
         #region -
+
         public static Mat operator - (Mat mat)
         {
             Mat m = new Mat ();
             Core.multiply (mat, new Scalar (-1, -1, -1, -1), m);
             return m;
         }
+
         #endregion
+
         #endregion
-        
+
         #region Binary
+
         #region +
+
         public static Mat operator + (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.add (a, b, m);
             return m;
         }
+
         public static Mat operator + (Mat a, Scalar s)
         {
             Mat m = new Mat ();
             Core.add (a, s, m);
             return m;
         }
+
         public static Mat operator + (Scalar s, Mat a)
         {
             Mat m = new Mat ();
             Core.add (a, s, m);
             return m;
         }
+
         #endregion
-        
+
         #region -
+
         public static Mat operator - (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.subtract (a, b, m);
             return m;
         }
+
         public static Mat operator - (Mat a, Scalar s)
         {
             Mat m = new Mat ();
             Core.subtract (a, s, m);
             return m;
         }
+
         public static Mat operator - (Scalar s, Mat a)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), s)){
+            using (Mat b = new Mat (a.size (), a.type (), s)) {
                 Core.subtract (b, a, m);
             }
             return m;
         }
+
         #endregion
-        
+
         #region *
+
         public static Mat operator * (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.gemm (a, b, 1, new Mat (), 0, m);
             return m;
         }
+
         public static Mat operator * (Mat a, double s)
         {
             Mat m = new Mat ();
-            Core.multiply (a, new Scalar (s), m);
+            Core.multiply (a, Scalar.all (s), m);
             return m;
         }
+
         public static Mat operator * (double s, Mat a)
         {
             Mat m = new Mat ();
-            Core.multiply (a, new Scalar (s), m);
+            Core.multiply (a, Scalar.all (s), m);
             return m;
         }
+
         #endregion
-        
+
         #region /
+
         public static Mat operator / (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.divide (a, b, m);
             return m;
         }
+
         public static Mat operator / (Mat a, double s)
         {
             Mat m = new Mat ();
-            Core.divide (a, new Scalar (s), m);
+            Core.divide (a, Scalar.all (s), m);
             return m;
         }
+
         public static Mat operator / (double s, Mat a)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), Scalar.all (s))) {
                 Core.divide (b, a, m);
             }
             return m;
         }
+
         #endregion
-        
+
         #region &
+
         public static Mat operator & (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.bitwise_and (a, b, m);
             return m;
         }
+
         public static Mat operator & (Mat a, double s)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_and (a, b, m);
             }
             return m;
         }
+
         public static Mat operator & (double s, Mat a)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_and (b, a, m);
             }
             return m;
         }
+
         #endregion
-        
+
         #region |
+
         public static Mat operator | (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.bitwise_or (a, b, m);
             return m;
         }
+
         public static Mat operator | (Mat a, double s)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_or (a, b, m);
             }
             return m;
         }
+
         public static Mat operator | (double s, Mat a)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_or (b, a, m);
             }
             return m;
         }
+
         #endregion
-        
+
         #region ^
+
         public static Mat operator ^ (Mat a, Mat b)
         {
             Mat m = new Mat ();
             Core.bitwise_xor (a, b, m);
             return m;
         }
+
         public static Mat operator ^ (Mat a, double s)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_xor (a, b, m);
             }
             return m;
         }
+
         public static Mat operator ^ (double s, Mat a)
         {
             Mat m = new Mat ();
-            using(Mat b = new Mat (a.size (), a.type (), new Scalar (s))){
+            using (Mat b = new Mat (a.size (), a.type (), new Scalar (s))) {
                 Core.bitwise_xor (b, a, m);
             }
             return m;
         }
+
         #endregion
-        
+
         #region ~
+
         public static Mat operator ~ (Mat a)
         {
             Mat m = new Mat ();
             Core.bitwise_not (a, m);
             return m;
         }
+
         #endregion
-        
+
         #endregion
-        
+
 #endif
 
         #endregion
+
         //
     }
 }

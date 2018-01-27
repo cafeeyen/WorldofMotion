@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Bgsegm
+    //javadoc: Bgsegm
+
     public class Bgsegm
     {
 

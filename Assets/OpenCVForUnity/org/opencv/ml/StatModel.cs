@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StatModel
     //javadoc: StatModel
+
     public class StatModel : Algorithm
     {
 
@@ -46,7 +47,7 @@ namespace OpenCVForUnity
         //
 
         //javadoc: StatModel::empty()
-        public bool empty ()
+        public override bool empty ()
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
@@ -241,6 +242,8 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
+
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -266,6 +269,7 @@ namespace OpenCVForUnity
         // C++:  bool train(Ptr_TrainData trainData, int flags = 0)
         [DllImport (LIBNAME)]
         private static extern bool ml_StatModel_train_11 (IntPtr nativeObj, IntPtr trainData_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern bool ml_StatModel_train_12 (IntPtr nativeObj, IntPtr trainData_nativeObj);
 
@@ -276,6 +280,7 @@ namespace OpenCVForUnity
         // C++:  float predict(Mat samples, Mat& results = Mat(), int flags = 0)
         [DllImport (LIBNAME)]
         private static extern float ml_StatModel_predict_10 (IntPtr nativeObj, IntPtr samples_nativeObj, IntPtr results_nativeObj, int flags);
+
         [DllImport (LIBNAME)]
         private static extern float ml_StatModel_predict_11 (IntPtr nativeObj, IntPtr samples_nativeObj);
 

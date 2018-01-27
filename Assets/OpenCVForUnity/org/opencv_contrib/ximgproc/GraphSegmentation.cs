@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class GraphSegmentation
     //javadoc: GraphSegmentation
+
     public class GraphSegmentation : Algorithm
     {
 

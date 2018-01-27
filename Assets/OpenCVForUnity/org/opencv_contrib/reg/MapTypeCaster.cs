@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class MapTypeCaster
     //javadoc: MapTypeCaster
+
     public class MapTypeCaster : DisposableOpenCVObject
     {
 

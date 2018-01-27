@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DAISY
     //javadoc: DAISY
+
     public class DAISY : Feature2D
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SVMSGD
     //javadoc: SVMSGD
+
     public class SVMSGD : StatModel
     {
 

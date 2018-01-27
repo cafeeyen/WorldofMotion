@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class Board
     //javadoc: Board
+
     public class Board : DisposableOpenCVObject
     {
 

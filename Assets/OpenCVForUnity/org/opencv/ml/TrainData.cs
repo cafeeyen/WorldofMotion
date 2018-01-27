@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class TrainData
     //javadoc: TrainData
+
     public class TrainData : DisposableOpenCVObject
     {
 

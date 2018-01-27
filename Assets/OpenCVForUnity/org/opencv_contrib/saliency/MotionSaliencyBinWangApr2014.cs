@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class MotionSaliencyBinWangApr2014
     //javadoc: MotionSaliencyBinWangApr2014
+
     public class MotionSaliencyBinWangApr2014 : MotionSaliency
     {
 
@@ -194,6 +195,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif

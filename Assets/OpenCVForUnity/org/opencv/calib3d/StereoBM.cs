@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class StereoBM
     //javadoc: StereoBM
+
     public class StereoBM : StereoMatcher
     {
 

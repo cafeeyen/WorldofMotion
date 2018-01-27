@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Objectness
     //javadoc: Objectness
+
     public class Objectness : Saliency
     {
 

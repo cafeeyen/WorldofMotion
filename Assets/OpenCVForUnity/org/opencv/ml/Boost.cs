@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Boost
     //javadoc: Boost
+
     public class Boost : DTrees
     {
 
@@ -208,6 +209,7 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
@@ -221,6 +223,7 @@ namespace OpenCVForUnity
         // C++: static Ptr_Boost load(String filepath, String nodeName = String())
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_Boost_load_10 (string filepath, string nodeName);
+
         [DllImport (LIBNAME)]
         private static extern IntPtr ml_Boost_load_11 (string filepath);
 

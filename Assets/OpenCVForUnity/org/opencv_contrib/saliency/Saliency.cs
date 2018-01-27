@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Saliency
     //javadoc: Saliency
+
     public class Saliency : Algorithm
     {
 
@@ -38,25 +39,6 @@ namespace OpenCVForUnity
 
 
         //
-        // C++:  String getClassName()
-        //
-
-        //javadoc: Saliency::getClassName()
-        public string getClassName ()
-        {
-            ThrowIfDisposed ();
-#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
-        
-            string retVal = Marshal.PtrToStringAnsi (saliency_Saliency_getClassName_10 (nativeObj));
-        
-#else
-            return null;
-#endif
-            return retVal;
-        }
-
-
-        //
         // C++:  bool computeSaliency(Mat image, Mat& saliencyMap)
         //
 
@@ -81,15 +63,12 @@ namespace OpenCVForUnity
 
 #if (UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR
         const string LIBNAME = "__Internal";
+        
 #else
         const string LIBNAME = "opencvforunity";
 #endif
 
 
-
-        // C++:  String getClassName()
-        [DllImport (LIBNAME)]
-        private static extern IntPtr saliency_Saliency_getClassName_10 (IntPtr nativeObj);
 
         // C++:  bool computeSaliency(Mat image, Mat& saliencyMap)
         [DllImport (LIBNAME)]

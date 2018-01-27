@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class PCTSignatures
     //javadoc: PCTSignatures
+
     public class PCTSignatures : Algorithm
     {
 
@@ -195,16 +196,16 @@ base.Dispose (disposing);
 
 
         //
-        // C++:  float getWeightConstrast()
+        // C++:  float getWeightContrast()
         //
 
-        //javadoc: PCTSignatures::getWeightConstrast()
-        public float getWeightConstrast ()
+        //javadoc: PCTSignatures::getWeightContrast()
+        public float getWeightContrast ()
         {
             ThrowIfDisposed ();
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
-        float retVal = xfeatures2d_PCTSignatures_getWeightConstrast_10(nativeObj);
+        float retVal = xfeatures2d_PCTSignatures_getWeightContrast_10(nativeObj);
         
 #else
             return -1;
@@ -1017,9 +1018,9 @@ base.Dispose (disposing);
         [DllImport (LIBNAME)]
         private static extern float xfeatures2d_PCTSignatures_getWeightB_10 (IntPtr nativeObj);
 
-        // C++:  float getWeightConstrast()
+        // C++:  float getWeightContrast()
         [DllImport (LIBNAME)]
-        private static extern float xfeatures2d_PCTSignatures_getWeightConstrast_10 (IntPtr nativeObj);
+        private static extern float xfeatures2d_PCTSignatures_getWeightContrast_10 (IntPtr nativeObj);
 
         // C++:  float getWeightEntropy()
         [DllImport (LIBNAME)]

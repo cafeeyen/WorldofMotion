@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class EigenFaceRecognizer
     //javadoc: EigenFaceRecognizer
+
     public class EigenFaceRecognizer : BasicFaceRecognizer
     {
 

@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class SparseMatchInterpolator
     //javadoc: SparseMatchInterpolator
+
     public class SparseMatchInterpolator : Algorithm
     {
 

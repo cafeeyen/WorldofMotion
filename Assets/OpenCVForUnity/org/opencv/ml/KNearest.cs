@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class KNearest
     //javadoc: KNearest
+
     public class KNearest : StatModel
     {
 

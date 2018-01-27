@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class DualTVL1OpticalFlow
     //javadoc: DualTVL1OpticalFlow
+
     public class DualTVL1OpticalFlow : DenseOpticalFlow
     {
 

@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace OpenCVForUnity
 {
+    // C++: class Fuzzy
+    //javadoc: Fuzzy
+
     public class Fuzzy
     {
 

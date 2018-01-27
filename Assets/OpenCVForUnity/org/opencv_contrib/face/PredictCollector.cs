@@ -8,6 +8,7 @@ namespace OpenCVForUnity
 {
     // C++: class PredictCollector
     //javadoc: PredictCollector
+
     public class PredictCollector : DisposableOpenCVObject
     {
 

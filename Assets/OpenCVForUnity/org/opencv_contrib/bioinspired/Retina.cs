@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class Retina
     //javadoc: Retina
+
     public class Retina : Algorithm
     {
 
@@ -64,6 +65,55 @@ base.Dispose (disposing);
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
         
         Mat retVal = new Mat(bioinspired_Retina_getParvoRAW_10(nativeObj));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++: static Ptr_Retina create(Size inputSize, bool colorMode, int colorSamplingMethod = RETINA_COLOR_BAYER, bool useRetinaLogSampling = false, float reductionFactor = 1.0f, float samplingStrenght = 10.0f)
+        //
+
+        //javadoc: Retina::create(inputSize, colorMode, colorSamplingMethod, useRetinaLogSampling, reductionFactor, samplingStrenght)
+        public static Retina create (Size inputSize, bool colorMode, int colorSamplingMethod, bool useRetinaLogSampling, float reductionFactor, float samplingStrenght)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        Retina retVal = new Retina(bioinspired_Retina_create_10(inputSize.width, inputSize.height, colorMode, colorSamplingMethod, useRetinaLogSampling, reductionFactor, samplingStrenght));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+        //javadoc: Retina::create(inputSize, colorMode)
+        public static Retina create (Size inputSize, bool colorMode)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        Retina retVal = new Retina(bioinspired_Retina_create_11(inputSize.width, inputSize.height, colorMode));
+        
+#else
+            return null;
+#endif
+            return retVal;
+        }
+
+
+        //
+        // C++: static Ptr_Retina create(Size inputSize)
+        //
+
+        //javadoc: Retina::create(inputSize)
+        public static Retina create (Size inputSize)
+        {
+#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL) && !UNITY_EDITOR) || UNITY_5 || UNITY_5_3_OR_NEWER
+        
+        Retina retVal = new Retina(bioinspired_Retina_create_12(inputSize.width, inputSize.height));
         
 #else
             return null;
@@ -477,6 +527,16 @@ Size retVal = new Size (tmpArray);
         // C++:  Mat getParvoRAW()
         [DllImport (LIBNAME)]
         private static extern IntPtr bioinspired_Retina_getParvoRAW_10 (IntPtr nativeObj);
+
+        // C++: static Ptr_Retina create(Size inputSize, bool colorMode, int colorSamplingMethod = RETINA_COLOR_BAYER, bool useRetinaLogSampling = false, float reductionFactor = 1.0f, float samplingStrenght = 10.0f)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr bioinspired_Retina_create_10 (double inputSize_width, double inputSize_height, bool colorMode, int colorSamplingMethod, bool useRetinaLogSampling, float reductionFactor, float samplingStrenght);
+        [DllImport (LIBNAME)]
+        private static extern IntPtr bioinspired_Retina_create_11 (double inputSize_width, double inputSize_height, bool colorMode);
+
+        // C++: static Ptr_Retina create(Size inputSize)
+        [DllImport (LIBNAME)]
+        private static extern IntPtr bioinspired_Retina_create_12 (double inputSize_width, double inputSize_height);
 
         // C++:  Size getInputSize()
         [DllImport (LIBNAME)]

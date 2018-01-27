@@ -9,6 +9,7 @@ namespace OpenCVForUnity
 
     // C++: class TonemapDurand
     //javadoc: TonemapDurand
+
     public class TonemapDurand : Tonemap
     {
 
