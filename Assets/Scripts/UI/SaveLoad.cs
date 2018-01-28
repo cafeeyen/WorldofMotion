@@ -41,7 +41,7 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
-    public void SaveWorld()
+    void SaveWorld()
     {
         myData._iWorld = new List<UserData.WorldData>();
         foreach (GameObject item in GetComponent<WorldObject>().getItemList())

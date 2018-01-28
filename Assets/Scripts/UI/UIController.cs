@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
 using UnityEngine.UI;
+using Vuforia;
 
 public class UIController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
+    private bool arMode = false;
 
     private void OnEnable()
     {
@@ -65,6 +67,22 @@ public class UIController : MonoBehaviour
                 playSound("deny");
         }
         else if (tapped == "PropButton" || tapped == "PropArrow") displayWindows(prop);
+    }
+
+    private void Update()
+    {
+        if(arMode && state == mode.Play)
+        {
+            // ImageTargetBehaviour cannot disable in Start() or OnEnable() due to Vuforia scripts enable it
+            WorldObject.GetComponent<Vuforia.ImageTargetBehaviour>().enabled = true;
+
+            if (WorldObject.GetComponentInChildren<Collider>().enabled)
+                Time.timeScale = 1;
+            else
+                Time.timeScale = 0;
+        }
+        else
+            WorldObject.GetComponent<Vuforia.ImageTargetBehaviour>().enabled = false;
     }
 
     public void displayWindows(Animator anim, bool cancleSelect = false)
@@ -145,17 +163,58 @@ public class UIController : MonoBehaviour
             if (state == mode.Edit)
             {
                 worldSc.saveState();
-                deleteBtt.SetActive(false);
-                Time.timeScale = 1;
-                state = mode.Play;
                 propWindow.setToggleLock();
+                deleteBtt.SetActive(false);
 
+                if (arMode)
+                {
+                    Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
+                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
+                    Camera.main.clearFlags = CameraClearFlags.Nothing;
+
+                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
+                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
+
+                    // Enable rendering:
+                    foreach (var component in rendererComponents)
+                        component.enabled = false;
+
+                    // Enable colliders:
+                    foreach (var component in colliderComponents)
+                        component.enabled = false;
+                    //-----------------------------------------------------------------------
+                }
+                else
+                    Time.timeScale = 1;
+
+                state = mode.Play;
                 saveBtt.interactable = false;
                 exBtt.interactable = false;
                 undoBtt.interactable = false;
             }
             else
             {
+                if (arMode)
+                {
+                    Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
+                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
+                    Camera.main.clearFlags = CameraClearFlags.Skybox;
+
+                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
+                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
+
+                    // Enable rendering:
+                    foreach (var component in rendererComponents)
+                        component.enabled = true;
+
+                    // Enable colliders:
+                    foreach (var component in colliderComponents)
+                        component.enabled = true;
+                    //-----------------------------------------------------------------------
+                }
+
                 Time.timeScale = 0;
                 state = mode.Edit;
                 deleteBtt.SetActive(true);
@@ -215,5 +274,13 @@ public class UIController : MonoBehaviour
         saveAlert.SetActive(active);
     }
 
-
+    public void setAR()
+    {
+        arMode = !arMode;
+        // Color need to normalize to 0-1
+        if (arMode)
+            undoBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
+        else
+            undoBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
+    }
 }
