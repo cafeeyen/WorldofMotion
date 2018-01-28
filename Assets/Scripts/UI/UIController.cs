@@ -14,8 +14,9 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground;
     public Button saveBtt, exBtt, undoBtt;
+    public Camera ARCamera;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -134,7 +135,7 @@ public class UIController : MonoBehaviour
         if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
         {
             // Spawn at center of screen,  distance 10
-            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 10));
+            Vector3 screenPosition = ARCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, ARCamera.nearClipPlane + 10));
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
@@ -165,13 +166,14 @@ public class UIController : MonoBehaviour
                 if (arMode)
                 {
                     WorldObject.transform.localScale = Vector3.one / 10;
+                    ground.GetComponent<MeshRenderer>().enabled = false;
 
-                    camPos = Camera.main.transform.localPosition;
-                    camRot = Camera.main.transform.localRotation;
+                    camPos = ARCamera.transform.localPosition;
+                    camRot = ARCamera.transform.localRotation;
 
-                    Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
+                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
-                    Camera.main.clearFlags = CameraClearFlags.SolidColor;
+                    ARCamera.clearFlags = CameraClearFlags.SolidColor;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
@@ -199,10 +201,11 @@ public class UIController : MonoBehaviour
                 if (arMode)
                 {
                     WorldObject.transform.localScale = Vector3.one;
+                    ground.GetComponent<MeshRenderer>().enabled = true;
 
-                    Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
+                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
-                    Camera.main.clearFlags = CameraClearFlags.Skybox;
+                    ARCamera.clearFlags = CameraClearFlags.Skybox;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
@@ -216,8 +219,8 @@ public class UIController : MonoBehaviour
                     foreach (var component in colliderComponents)
                         component.enabled = true;
                     //-----------------------------------------------------------------------
-                    Camera.main.transform.localPosition = camPos;
-                    Camera.main.transform.localRotation = camRot;
+                    ARCamera.transform.localPosition = camPos;
+                    ARCamera.transform.localRotation = camRot;
                 }
 
                 Time.timeScale = 0;
