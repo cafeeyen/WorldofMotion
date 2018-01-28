@@ -11,79 +11,74 @@ public class TrackingObject : MonoBehaviour
     // Render Texture from camera that get background only
     public RenderTexture RT;
 
-    FingerColor blue, yellow;
-    Mat BGMat, rgbMat, thresholdMat, hsvMat, outputMat;
-    Texture2D cameraTexture, outputTexture;
-    Color32[] colors;
+    private FingerColor blue, yellow;
+    private Mat BGMat, rgbMat, thresholdMat, hsvMat, outputMat;
+    private Texture2D cameraTexture, outputTexture;
+    private Color32[] colors; // Use to avoid allocating new memory each frame
+    private UnityEngine.Rect rect;
+    private bool useAR = false;
 
     void Start()
     {
         blue = new FingerColor("blue");
         yellow = new FingerColor("yellow");
 
-        BGMat = new Mat(Screen.height, Screen.width, CvType.CV_8UC4);
+        // Set the supplied RenderTexture as the active one
         RT.height = Screen.height;
         RT.width = Screen.width;
-        cameraTexture = new Texture2D(BGMat.cols(), BGMat.rows(), TextureFormat.ARGB32, false);
-        outputTexture = new Texture2D(BGMat.cols(), BGMat.rows(), TextureFormat.ARGB32, false);
+        RenderTexture.active = RT;
+
+        cameraTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);
+        outputTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);
+        rect = new UnityEngine.Rect(0, 0, Screen.width, Screen.height);
         colors = new Color32[outputTexture.width * outputTexture.height];
         MainCamera.orthographicSize = cameraTexture.height / 2;
-        
+
+        // Setup Mat
+        BGMat = new Mat(Screen.height, Screen.width, CvType.CV_8UC4);
         rgbMat = new Mat(cameraTexture.height, cameraTexture.width, CvType.CV_8UC3);
         outputMat = new Mat(cameraTexture.height, cameraTexture.width, CvType.CV_8UC3);
         hsvMat = new Mat();
         thresholdMat = new Mat();
 
-        quad.transform.localScale = new Vector3(cameraTexture.width, cameraTexture.height, quad.transform.localScale.z);
+        // Setup Quad
+        quad.transform.localScale = new Vector3(Screen.width, Screen.height, quad.transform.localScale.z);
         quad.GetComponent<Renderer>().material.mainTexture = outputTexture;
     }
 
     private void OnPostRender()
     {
-        // Get texture from camera
-        UnityEngine.Rect rect = new UnityEngine.Rect(0, 0, cameraTexture.width, cameraTexture.height);
-        cameraTexture.ReadPixels(rect, 0, 0, true);
+        if(useAR) // Prevent from running when not use
+        {
+            // Get texture from camera
+            cameraTexture.ReadPixels(rect, 0, 0, false);
+            Utils.texture2DToMat(cameraTexture, outputMat);
 
-        // Change from Texture(original) to Mat
-        Utils.texture2DToMat(GetRTPixels(RT), BGMat);
-        Utils.texture2DToMat(cameraTexture, outputMat);
+            // Change from Texture(original) to HSV Mat
+            RTtoHSVMat(RT);
 
-        // Convert color space from rgba(source) to rgb(recive)
-        Imgproc.cvtColor(BGMat, rgbMat, Imgproc.COLOR_RGBA2RGB);
+            // Find blue finger
+            Core.inRange(hsvMat, blue.HSVMin, blue.HSVMax, thresholdMat);
+            morphOps(thresholdMat);
+            trackingFinger(blue, thresholdMat);
 
-        // Find blue finger
-        Imgproc.cvtColor(rgbMat, hsvMat, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(hsvMat, blue.HSVMin, blue.HSVMax, thresholdMat);
-        morphOps(thresholdMat);
-        trackingFinger(blue, thresholdMat, hsvMat, rgbMat);
+            // Find yellow finger
+            Core.inRange(hsvMat, yellow.HSVMin, yellow.HSVMax, thresholdMat);
+            morphOps(thresholdMat);
+            trackingFinger(yellow, thresholdMat);
 
-        // Find yellow finger
-        Imgproc.cvtColor(rgbMat, hsvMat, Imgproc.COLOR_RGB2HSV);
-        Core.inRange(hsvMat, yellow.HSVMin, yellow.HSVMax, thresholdMat);
-        morphOps(thresholdMat);
-        trackingFinger(yellow, thresholdMat, hsvMat, rgbMat);
-
-        // Change from Mat(rendered) to Texture
-        Utils.matToTexture2D(outputMat, outputTexture, colors);
+            // Change from Mat(rendered) to Texture
+            Utils.matToTexture2D(outputMat, outputTexture, colors);
+        }
     }
 
-    public Texture2D GetRTPixels(RenderTexture rt)
+    private void RTtoHSVMat(RenderTexture rt)
     {
-        // Remember currently active render texture
-        RenderTexture currentActiveRT = RenderTexture.active;
-
-        // Set the supplied RenderTexture as the active one
-        RenderTexture.active = rt;
-
-        // Create a new Texture2D and read the RenderTexture image into it
-        Texture2D tex = new Texture2D(rt.width, rt.height);
-
-        // Read pixels one by one and add image to texture
-        tex.ReadPixels(new UnityEngine.Rect(0, 0, tex.width, tex.height), 0, 0);
-
-        // Restorie previously active render texture
-        RenderTexture.active = currentActiveRT;
-        return tex;
+        Utils.texture2DToMat(cameraTexture, BGMat);
+        // Convert color space from RGBA(source) to RGB(recive)
+        Imgproc.cvtColor(BGMat, rgbMat, Imgproc.COLOR_RGBA2RGB);
+        // Then convert RGB to HSV for find color range
+        Imgproc.cvtColor(rgbMat, hsvMat, Imgproc.COLOR_RGB2HSV);
     }
 
     private void morphOps(Mat threshold)
@@ -103,7 +98,7 @@ public class TrackingObject : MonoBehaviour
         Imgproc.dilate(threshold, threshold, dilateElement);
     }
 
-    private void trackingFinger(FingerColor fingerColor, Mat threshold, Mat hsv, Mat cameraFeed)
+    private void trackingFinger(FingerColor fingerColor, Mat threshold)
     {
         List<MatOfPoint> contours = new List<MatOfPoint>();
         Mat hierarchy = new Mat();
@@ -142,7 +137,7 @@ public class TrackingObject : MonoBehaviour
                 drawObject(fingerObject, contourIndex, outputMat, contours, hierarchy);
             else
             {
-                /* Do something to fing finger again */
+                /* Do something to find finger again */
             }
         }
     }
@@ -154,11 +149,7 @@ public class TrackingObject : MonoBehaviour
 
         // Draw center of contours(centroid)
         Imgproc.circle(frame, new Point(fingerObject.XPos, fingerObject.YPos), 5, fingerObject.Color);
-
-        // Show postion of centroid
-        Imgproc.putText(frame, fingerObject.XPos + " , " + fingerObject.YPos, new Point(fingerObject.XPos, fingerObject.YPos + 20), 1, 1, fingerObject.Color, 2);
-
-        // Show type(Color) of contour
-        Imgproc.putText(frame, fingerObject.Type, new Point(fingerObject.XPos, fingerObject.YPos - 20), 1, 2, fingerObject.Color, 2);
     }
+
+    public bool UseAR { get { return useAR; }set { useAR = value; } }
 }

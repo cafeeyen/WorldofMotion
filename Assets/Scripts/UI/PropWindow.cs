@@ -27,9 +27,9 @@ public class PropWindow : MonoBehaviour
         sliderY.onValueChanged.AddListener(changeSlideValue);
         sliderZ.onValueChanged.AddListener(changeSlideValue);
 
-        veloX.onValueChanged.AddListener(changeVelocity);
-        veloY.onValueChanged.AddListener(changeVelocity);
-        veloZ.onValueChanged.AddListener(changeVelocity);
+        veloX.onEndEdit.AddListener(changeVelocity);
+        veloY.onEndEdit.AddListener(changeVelocity);
+        veloZ.onEndEdit.AddListener(changeVelocity);
 
         // Set rotate toggle
         r_deg30 = GameObject.Find("30deg").GetComponent<Toggle>();
@@ -156,10 +156,13 @@ public class PropWindow : MonoBehaviour
             if (string.IsNullOrEmpty(veloZ.text))
                 veloZ.text = "0";
 
+            var test = 0;
             try
             {
                 var x = Mathf.Clamp(int.Parse(veloX.text), -30, 30);
+                test++;
                 var y = Mathf.Clamp(int.Parse(veloY.text), -30, 30);
+                test++;
                 var z = Mathf.Clamp(int.Parse(veloZ.text), -30, 30);
 
                 itemObject.GetComponent<ItemObject>().Velocity = new Vector3(x, y, z);
@@ -168,7 +171,16 @@ public class PropWindow : MonoBehaviour
                 veloY.text = y.ToString();
                 veloZ.text = z.ToString();
             }
-            catch { Debug.Log("Power input error."); }
+            catch
+            {
+                Debug.Log("Power input error.");
+                if(test == 0)
+                    veloX.text = "0";
+                else if(test == 1)
+                    veloY.text = "0";
+                else
+                    veloZ.text = "0";
+            }
         }
     }
 
