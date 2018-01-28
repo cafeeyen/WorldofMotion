@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
 using UnityEngine.UI;
-using Vuforia;
 
 public class UIController : MonoBehaviour
 {
@@ -26,6 +25,8 @@ public class UIController : MonoBehaviour
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
     private bool arMode = false;
+    private Vector3 camPos;
+    private Quaternion camRot;
 
     private void OnEnable()
     {
@@ -73,16 +74,11 @@ public class UIController : MonoBehaviour
     {
         if(arMode && state == mode.Play)
         {
-            // ImageTargetBehaviour cannot disable in Start() or OnEnable() due to Vuforia scripts enable it
-            WorldObject.GetComponent<Vuforia.ImageTargetBehaviour>().enabled = true;
-
             if (WorldObject.GetComponentInChildren<Collider>().enabled)
                 Time.timeScale = 1;
             else
                 Time.timeScale = 0;
         }
-        else
-            WorldObject.GetComponent<Vuforia.ImageTargetBehaviour>().enabled = false;
     }
 
     public void displayWindows(Animator anim, bool cancleSelect = false)
@@ -168,9 +164,14 @@ public class UIController : MonoBehaviour
 
                 if (arMode)
                 {
+                    WorldObject.transform.localScale = Vector3.one / 10;
+
+                    camPos = Camera.main.transform.localPosition;
+                    camRot = Camera.main.transform.localRotation;
+
                     Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
-                    Camera.main.clearFlags = CameraClearFlags.Nothing;
+                    Camera.main.clearFlags = CameraClearFlags.SolidColor;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
@@ -197,6 +198,8 @@ public class UIController : MonoBehaviour
             {
                 if (arMode)
                 {
+                    WorldObject.transform.localScale = Vector3.one;
+
                     Camera.main.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     Camera.main.clearFlags = CameraClearFlags.Skybox;
@@ -213,6 +216,8 @@ public class UIController : MonoBehaviour
                     foreach (var component in colliderComponents)
                         component.enabled = true;
                     //-----------------------------------------------------------------------
+                    Camera.main.transform.localPosition = camPos;
+                    Camera.main.transform.localRotation = camRot;
                 }
 
                 Time.timeScale = 0;
