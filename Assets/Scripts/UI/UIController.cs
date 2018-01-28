@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground;
     public Button saveBtt, exBtt, undoBtt;
-    public Camera ARCamera;
+    public Camera ARCamera, OutputCamera;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -43,7 +43,6 @@ public class UIController : MonoBehaviour
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
         bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
         sl = GetComponent<SceneLoader>();
-
         // Check if this open for first time
         if (PlayerPrefs.GetInt("EditorMode") == 0)
         {
@@ -165,7 +164,7 @@ public class UIController : MonoBehaviour
 
                 if (arMode)
                 {
-                    WorldObject.transform.localScale = Vector3.one / 10;
+                    WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = false;
 
                     camPos = ARCamera.transform.localPosition;
@@ -174,6 +173,8 @@ public class UIController : MonoBehaviour
                     ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.SolidColor;
+                    OutputCamera.depth = 2;
+                    ARCamera.GetComponent<TrackingObject>().UseAR = true;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
@@ -206,6 +207,8 @@ public class UIController : MonoBehaviour
                     ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
                     WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
+                    OutputCamera.depth = -10;
+                    ARCamera.GetComponent<TrackingObject>().UseAR = false;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
