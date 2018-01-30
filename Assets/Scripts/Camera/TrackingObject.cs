@@ -10,6 +10,8 @@ public class TrackingObject : MonoBehaviour
     public Camera MainCamera;
     // Render Texture from camera that get background only
     public RenderTexture RT;
+    // Sphere for finger
+    public GameObject finger1, finger2;
 
     private FingerColor blue, yellow;
     private Mat BGMat, rgbMat, thresholdMat, hsvMat, outputMat;
@@ -134,9 +136,28 @@ public class TrackingObject : MonoBehaviour
                 }
             }
             if (contourIndex > -1)
+            {
                 drawObject(fingerObject, contourIndex, outputMat, contours, hierarchy);
+                // Still find goood range
+                float z = 20 * (20 - ((float)maxArea / 30000f));
+                if (fingerColor.Type == "blue")
+                {
+                    //finger1.SetActive(true);
+                    finger1.transform.position = new Vector3(fingerObject.XPos, fingerObject.YPos, (float)maxArea);
+                    
+                }
+                else
+                {
+                    //finger2.SetActive(true);
+                    finger2.transform.position = new Vector3(fingerObject.XPos, fingerObject.YPos, (float)maxArea);
+                }
+            }
             else
             {
+                if (fingerColor.Type == "blue")
+                    finger1.SetActive(false);
+                else
+                    finger2.SetActive(false);
                 /* Do something to find finger again */
             }
         }
@@ -146,7 +167,6 @@ public class TrackingObject : MonoBehaviour
     {
         // Draw contours line
         Imgproc.drawContours(frame, contours, contourIndex, fingerObject.Color, 3, 8, hierarchy, int.MaxValue, new Point());
-
         // Draw center of contours(centroid)
         Imgproc.circle(frame, new Point(fingerObject.XPos, fingerObject.YPos), 5, fingerObject.Color);
     }
