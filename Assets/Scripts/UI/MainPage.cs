@@ -160,6 +160,7 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(1);
                 break;
             case "Load":
+                Time.timeScale = 0;
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
