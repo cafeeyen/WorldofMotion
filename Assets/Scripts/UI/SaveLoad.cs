@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 /*
  * Original Source
@@ -134,6 +135,8 @@ public class SaveLoad : MonoBehaviour
                 itemObject.GetComponent<ItemObject>().ItemType = data.itemType;
                 itemCon.setItemObject(itemObject);
                 itemObject.GetComponent<ItemObject>().setSurType(data.surType);
+                // Cancle select
+                itemCon.setItemObject(itemObject);
             }
             Debug.Log("Loaded");
         }
