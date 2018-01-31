@@ -5,23 +5,25 @@ using System.Linq;
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
     private ItemObjectController ItemCon;
-    private SurfaceType surType;
     private int mass;
-    private bool gravity, overlapping;
+    private bool overlapping;
     private Renderer baseRenderer;
     private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
 
     // Data
-    private Vector3 pos, velocity = Vector3.zero, angularVelocity;
+    private string itemType;
+    private Vector3 pos, scale, velocity = Vector3.zero;
     private Quaternion rot;
+    private bool gravity;
+    private SurfaceType surType;
 
     void Awake()
     {
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
         surType = ItemCon.getFactory().getSurType("Wood");
-        gravity = false;
+        gravity = true;
         overlapping = false;
 
         baseRenderer = transform.GetComponent<Renderer>();
@@ -59,14 +61,14 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         foreach (Collider col in colliders)
         {
             // OverlapBox detect self collider, check transfrom(position and etc.) to make sure this is not itself
-            if (col.CompareTag("ItemObject") && col.transform!=transform)
+            if (col.CompareTag("ItemObject") && col.transform != transform)
             {
                 overlapping = true;
                 ItemCon.changeGrowColor();
                 break;
             }
 
-            if(col == last)
+            if (col == last)
             {
                 overlapping = false;
                 ItemCon.changeGrowColor();
@@ -78,8 +80,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         pos = transform.localPosition;
         rot = transform.localRotation;
-        velocity = rb.velocity;
-        angularVelocity = rb.angularVelocity;
     }
 
     public void returnState()
@@ -87,7 +87,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         transform.localPosition = pos;
         transform.localRotation = rot;
         rb.velocity = velocity;
-        rb.angularVelocity = angularVelocity;
+        rb.angularVelocity = Vector3.zero;
     }
 
     public SurfaceType getSurType() { return surType; }
@@ -98,11 +98,12 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         PhyMat = surType.getPhyMat();
         ItemCon.changeGrowMaterialTexture();
     }
-    public bool IsGravity { get { return gravity; } set { gravity = value; } }
+    public bool IsGravity { get { return gravity; } set { gravity = value; rb.useGravity = value; } }
     public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
     public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
     public float Mass { get { return rb.mass; } }
-    public Vector3 Velocity { get { return velocity; } set { velocity = value; rb.velocity = velocity; } }
+    public Vector3 Velocity { get { return velocity; } set { velocity = value; rb.velocity = value; } }
+    public string ItemType { get { return itemType; } set { itemType = value; } }
 }

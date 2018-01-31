@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt;
-    public GameObject TestFirstTime;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground;
+    public Button saveBtt, exBtt, undoBtt;
+    public Camera ARCamera, OutputCamera;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -23,6 +25,9 @@ public class UIController : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
+    private bool arMode = false;
+    private Vector3 camPos;
+    private Quaternion camRot;
 
     private void OnEnable()
     {
@@ -38,12 +43,10 @@ public class UIController : MonoBehaviour
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
         bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
         sl = GetComponent<SceneLoader>();
-
         // Check if this open for first time
         if (PlayerPrefs.GetInt("EditorMode") == 0)
         {
             /* Tutorial */
-            TestFirstTime.SetActive(true);
             PlayerPrefs.SetInt("EditorMode", 1);
         }
     }
@@ -65,6 +68,17 @@ public class UIController : MonoBehaviour
                 playSound("deny");
         }
         else if (tapped == "PropButton" || tapped == "PropArrow") displayWindows(prop);
+    }
+
+    private void Update()
+    {
+        if(arMode && state == mode.Play)
+        {
+            if (WorldObject.GetComponentInChildren<Collider>().enabled)
+                Time.timeScale = 1;
+            else
+                Time.timeScale = 0;
+        }
     }
 
     public void displayWindows(Animator anim, bool cancleSelect = false)
@@ -120,10 +134,11 @@ public class UIController : MonoBehaviour
         if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
         {
             // Spawn at center of screen,  distance 10
-            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 10));
+            Vector3 screenPosition = ARCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, ARCamera.nearClipPlane + 10));
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
+            newItemObject.GetComponent<ItemObject>().ItemType = prefeb.name;
 
             itemCon.setItemObject(newItemObject);
             playSound("clk");
@@ -144,18 +159,82 @@ public class UIController : MonoBehaviour
             if (state == mode.Edit)
             {
                 worldSc.saveState();
-                deleteBtt.SetActive(false);
-                Time.timeScale = 1;
-                state = mode.Play;
                 propWindow.setToggleLock();
+                deleteBtt.SetActive(false);
+
+                if (arMode)
+                {
+                    WorldObject.transform.localScale = Vector3.one;
+                    ground.GetComponent<MeshRenderer>().enabled = false;
+
+                    camPos = ARCamera.transform.localPosition;
+                    camRot = ARCamera.transform.localRotation;
+
+                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
+                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
+                    ARCamera.clearFlags = CameraClearFlags.SolidColor;
+                    OutputCamera.depth = 2;
+                    ARCamera.GetComponent<TrackingObject>().UseAR = true;
+
+                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
+                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
+
+                    // Enable rendering:
+                    foreach (var component in rendererComponents)
+                        component.enabled = false;
+
+                    // Enable colliders:
+                    foreach (var component in colliderComponents)
+                        component.enabled = false;
+                    //-----------------------------------------------------------------------
+                }
+                else
+                    Time.timeScale = 1;
+
+                state = mode.Play;
+                saveBtt.interactable = false;
+                exBtt.interactable = false;
+                undoBtt.interactable = false;
             }
             else
             {
+                if (arMode)
+                {
+                    WorldObject.transform.localScale = Vector3.one;
+                    ground.GetComponent<MeshRenderer>().enabled = true;
+
+                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
+                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
+                    ARCamera.clearFlags = CameraClearFlags.Skybox;
+                    OutputCamera.depth = -10;
+                    ARCamera.GetComponent<TrackingObject>().UseAR = false;
+
+                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
+                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
+
+                    // Enable rendering:
+                    foreach (var component in rendererComponents)
+                        component.enabled = true;
+
+                    // Enable colliders:
+                    foreach (var component in colliderComponents)
+                        component.enabled = true;
+                    //-----------------------------------------------------------------------
+                    ARCamera.transform.localPosition = camPos;
+                    ARCamera.transform.localRotation = camRot;
+                }
+
                 Time.timeScale = 0;
                 state = mode.Edit;
                 deleteBtt.SetActive(true);
                 worldSc.loadState();
                 propWindow.setToggleLock();
+
+                saveBtt.interactable = true;
+                exBtt.interactable = true;
+                undoBtt.interactable = true;
             }
             playSound("clk");
         }
@@ -194,5 +273,25 @@ public class UIController : MonoBehaviour
             audioSource.PlayOneShot(bttClk, 2f);
         else if (sound == "deny")
             audioSource.PlayOneShot(bttDeny, 0.4f);
+    }
+
+    public void setDeny(bool active)
+    {
+        saveDeny.SetActive(active);
+    }
+
+    public void setAlert(bool active)
+    {
+        saveAlert.SetActive(active);
+    }
+
+    public void setAR()
+    {
+        arMode = !arMode;
+        // Color need to normalize to 0-1
+        if (arMode)
+            undoBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
+        else
+            undoBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
     }
 }

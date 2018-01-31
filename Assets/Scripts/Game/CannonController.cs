@@ -44,7 +44,7 @@ public class CannonController : MonoBehaviour
     {
         step = Time.fixedDeltaTime * 1f;
         ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
-        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 5;
+        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 4;
 
         if (PlayerPrefs.GetInt("CannonShooterMode") != 1 && !modeAR)
         {
@@ -53,7 +53,7 @@ public class CannonController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(!shooted)
         {
@@ -72,7 +72,8 @@ public class CannonController : MonoBehaviour
             heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} m.", System.Math.Round(maxHeight, 2));
             disText.text = string.Format("ระยะทางในแนวราบ {0} m.", System.Math.Round(maxDist, 2));
             timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} s.", System.Math.Round(maxTime, 2));
-            countText.text = string.Format("= {0}", shootCnt);
+            if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+                countText.text = string.Format("= {0}", shootCnt);
 
             if (string.IsNullOrEmpty(powerText.text))
                 power = 0;
@@ -127,7 +128,8 @@ public class CannonController : MonoBehaviour
             cannonBall.GetComponent<Rigidbody>().isKinematic = false;
             cannonBall.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.Impulse);
             shooted = true;
-            trail.SetActive(true);
+            if(!modeAR)
+                trail.SetActive(true);
 
             /* Don't care about air resistance
              * Use G = 9.81 m/s^2
@@ -197,7 +199,9 @@ public class CannonController : MonoBehaviour
         else
             cannonBall.transform.position = cannonPos;
         shooted = false;
-        trail.SetActive(false);
+
+        if (!modeAR)
+            trail.SetActive(false);
     }
 
     private void drawCurve()

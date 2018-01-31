@@ -7,10 +7,12 @@ public class MainPage : MonoBehaviour
     public Sprite[] frameGal;
     public Image[] displayFrame;
     public Button csLv2, csLv3;
+    public GameObject ARmode, loadBtt;
 
     private SceneLoader sceneLoader;
     private AudioSource audioSource;
     private AudioClip bttClk;
+    private int UnlockAR;
 
     private void Awake()
     {
@@ -18,6 +20,10 @@ public class MainPage : MonoBehaviour
         sceneLoader = GetComponent<SceneLoader>();
         audioSource = GetComponent<AudioSource>();
         bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
+
+        /*****************************
+         * Cannon Shooter
+        *****************************/
 
         // Unlock level
         if (PlayerPrefs.GetInt("CSLv2") == 1)
@@ -32,22 +38,39 @@ public class MainPage : MonoBehaviour
             {
                 case 1:
                     displayFrame[i-1].sprite = frameGal[0];
+                    UnlockAR += 1;
                     break;
                 case 2:
                     displayFrame[i-1].sprite = frameGal[1];
+                    UnlockAR += 2;
                     break;
                 case 3:
                     displayFrame[i-1].sprite = frameGal[2];
+                    UnlockAR += 3;
                     break;
             }
         }
 
-        if(PlayerPrefs.GetInt("CSLvSelect") == 1)
+        if(UnlockAR >= 7) // Unlock after get total 7 stars from any level
+        {
+            ARmode.SetActive(true);
+        }
+        UnlockAR = 0; //reset star count
+
+        if (PlayerPrefs.GetInt("CSLvSelect") == 1)
         {
             slidePage("Game");
             slidePage("CannonShooter");
             PlayerPrefs.SetInt("CSLvSelect", 0);
         }
+
+        /*****************************
+         * Experiment
+        *****************************/
+        PlayerPrefs.SetInt("World", 0);
+
+        if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
+            loadBtt.SetActive(true);
     }
 
     void Update()
@@ -132,8 +155,15 @@ public class MainPage : MonoBehaviour
         switch (bttName)
         {
             case "Experiment": slidePage(bttName); break;
-            case "New": sceneLoader.loadNewScene(1); break;
-            case "Load": break;
+            case "New":
+                PlayerPrefs.SetInt("World", 0);
+                sceneLoader.loadNewScene(1);
+                break;
+            case "Load":
+                Time.timeScale = 0;
+                PlayerPrefs.SetInt("World", 1);
+                sceneLoader.loadNewScene(1);
+                break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
             case "BallRoller": sceneLoader.loadNewScene(2); break;
@@ -151,6 +181,10 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(3);
                 break;
             case "Back": slidePage(bttName); break;
+            case "ARmode":
+                PlayerPrefs.SetInt("CannonShooterMode", 4);
+                sceneLoader.loadNewScene(4); break;
+
         }
     }
 }
