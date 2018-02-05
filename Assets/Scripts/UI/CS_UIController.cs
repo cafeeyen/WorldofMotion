@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, ruleOverlay, canyon, ground, rule, cannon, maewnam, cannonball, sparkle;
+    public GameObject bigImage, overlay, ruleOverlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpPanel;
     public RenderTexture sideCamRT, cutCamRT;
+    public GameObject[] RuleImage;
+    public Button Rule;
     public RawImage rawImage, miniRawImage;
     public Animator calTab;
     public SceneLoader sceneLoader;
+    public int countRule = 0;
 
     private void OnEnable()
     {
@@ -17,8 +20,9 @@ public class CS_UIController : MonoBehaviour
                 canyon.SetActive(false);
                 ground.SetActive(true);
 
-                if(!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 3)
-                    openRule();
+                if (!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 3)
+                    tutorialAskPanel.SetActive(true);
+                    //openRule();
                 break;                
             case 5:
                 sideCamRT.width = (int)rawImage.rectTransform.rect.width;
@@ -50,10 +54,25 @@ public class CS_UIController : MonoBehaviour
         sceneLoader.loadNewScene(0);
     }
 
-    public void openRule()
+    public void tutorialAsk(bool tuAns)
     {
-        rule.SetActive(true);
+        if(tuAns)
+        {
+            openRule(false);
+        }
+            tutorialAskPanel.SetActive(false);
+    }
+
+    public void openRule(bool helpClk)
+    {
+        //rule.SetActive(true);
         ruleOverlay.SetActive(true);
+        RuleImage[countRule].SetActive(true);
+        if(helpClk)
+        {
+            helpPanel.SetActive(false);
+            overlay.SetActive(false);
+        }
 
         cannon.SetActive(false);
         maewnam.SetActive(false);
@@ -61,11 +80,27 @@ public class CS_UIController : MonoBehaviour
         sparkle.SetActive(false);
     }
 
+    public void NextRule()
+    {
+        countRule++;
+        if(countRule <= 7)
+        {
+            RuleImage[countRule].SetActive(true);
+            RuleImage[countRule - 1].SetActive(false);
+        }
+        else if(countRule > 7)
+        {
+            RuleImage[countRule-1].SetActive(false);
+            rule.SetActive(false);
+            closeRule();
+        }    
+
+    }
+
     public void closeRule()
     {
-        rule.SetActive(false);
         ruleOverlay.SetActive(false);
-
+        countRule = 0;
         if (!overlay.activeSelf)
         {
             cannon.SetActive(true);
