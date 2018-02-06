@@ -60,13 +60,8 @@ public class HelpButton : MonoBehaviour
                 break;
         }
 
-        if(PlayerPrefs.GetInt("CannonShooterMode") != 4)
-        {
-            maewnam.SetActive(false);
-            cannon.SetActive(false);
-            cannonball.SetActive(false);
-            sparkle.SetActive(false);
-        }
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+            setElement(false);
     }
 
     public void closeCSHelp()
@@ -89,12 +84,7 @@ public class HelpButton : MonoBehaviour
         }
 
         if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
-        {
-            maewnam.SetActive(true);
-            cannon.SetActive(true);
-            cannonball.SetActive(true);
-            sparkle.SetActive(true);
-        }
+            setElement(true);
     }
 
     public void openTable()
@@ -155,5 +145,13 @@ public class HelpButton : MonoBehaviour
         displayImage.sprite = gallery[page];
         dot[oldPage].sprite = blackDot;
         dot[page].sprite = colorDot;  
+    }
+
+    private void setElement(bool active)
+    {
+        cannon.SetActive(active);
+        maewnam.SetActive(active);
+        cannonball.SetActive(active);
+        sparkle.SetActive(active);
     }
 }

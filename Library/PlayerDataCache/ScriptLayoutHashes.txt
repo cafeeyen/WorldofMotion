@@ -135,7 +135,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 479b062389cafdfb2000cdbadf8a31a3 Assembly-CSharp.dll:.TargetDetail
 a2398cab0afec05bd8b6b70c007a516c Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.UI.GradientTexture
-fdf449e7a5c029cc5fe451d1203cac5e Assembly-CSharp.dll:.CS_UIController
+22247893ea089d0a97939ff5300636b6 Assembly-CSharp.dll:.CS_UIController
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.BackgroundPlaneBehaviour
 342c9a27403d4f1a11164f989d99bd3f Vuforia.UnityExtensions.dll:Vuforia.CloudRecoBehaviour
 9519b45b1fe77ca14bbfebb6a5236e2e Vuforia.UnityExtensions.dll:Vuforia.CylinderTargetBehaviour
