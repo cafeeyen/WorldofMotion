@@ -3,14 +3,18 @@ using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, ruleOverlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpPanel;
+    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpPanel;
     public RenderTexture sideCamRT, cutCamRT;
     public GameObject[] RuleImage;
     public Button Rule;
     public RawImage rawImage, miniRawImage;
     public Animator calTab;
     public SceneLoader sceneLoader;
-    public int countRule = 0;
+    public HelpButton helpBtt;
+
+    private int countRule = 0;
+
+    private bool helpChk = false;
 
     private void OnEnable()
     {
@@ -20,9 +24,8 @@ public class CS_UIController : MonoBehaviour
                 canyon.SetActive(false);
                 ground.SetActive(true);
 
-                if (!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 3)
+                if (!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 1)
                     tutorialAskPanel.SetActive(true);
-                    //openRule();
                 break;                
             case 5:
                 sideCamRT.width = (int)rawImage.rectTransform.rect.width;
@@ -57,27 +60,19 @@ public class CS_UIController : MonoBehaviour
     public void tutorialAsk(bool tuAns)
     {
         if(tuAns)
-        {
             openRule(false);
-        }
-            tutorialAskPanel.SetActive(false);
+        tutorialAskPanel.SetActive(false);
     }
 
     public void openRule(bool helpClk)
     {
-        //rule.SetActive(true);
-        ruleOverlay.SetActive(true);
+        helpChk = helpClk;
+        overlay.SetActive(true);
+        rule.SetActive(true);
         RuleImage[countRule].SetActive(true);
-        if(helpClk)
-        {
+        if(helpChk)
             helpPanel.SetActive(false);
-            overlay.SetActive(false);
-        }
-
-        cannon.SetActive(false);
-        maewnam.SetActive(false);
-        cannonball.SetActive(false);
-        sparkle.SetActive(false);
+        setElement(false);
     }
 
     public void NextRule()
@@ -99,15 +94,12 @@ public class CS_UIController : MonoBehaviour
 
     public void closeRule()
     {
-        ruleOverlay.SetActive(false);
+        overlay.SetActive(false);
         countRule = 0;
         if (!overlay.activeSelf)
-        {
-            cannon.SetActive(true);
-            maewnam.SetActive(true);
-            cannonball.SetActive(true);
-            sparkle.SetActive(true);
-        }
+            setElement(true);
+        if (helpChk)
+            helpBtt.openCSHelp();
     }
 
     public void backToSelectLv()
@@ -132,5 +124,13 @@ public class CS_UIController : MonoBehaviour
     {
         miniRawImage.texture = sideCamRT;
         rawImage.texture = sideCamRT;
+    }
+
+    private void setElement(bool active)
+    {
+        cannon.SetActive(active);
+        maewnam.SetActive(active);
+        cannonball.SetActive(active);
+        sparkle.SetActive(active);
     }
 }
