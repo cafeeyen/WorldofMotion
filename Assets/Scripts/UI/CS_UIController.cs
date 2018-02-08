@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpPanel;
+    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpSection;
     public RenderTexture sideCamRT, cutCamRT;
     public GameObject[] RuleImage;
     public Button Rule;
@@ -25,7 +25,12 @@ public class CS_UIController : MonoBehaviour
                 ground.SetActive(true);
 
                 if (!overlay.activeSelf && PlayerPrefs.GetInt("CsLv" + PlayerPrefs.GetInt("CannonShooterMode") + "Star") < 1)
+                {
+                    if (PlayerPrefs.GetInt("CannonShooter1FirstTime") == 0)
+                        helpChk = true;
+                    helpSection.SetActive(false);
                     tutorialAskPanel.SetActive(true);
+                }
                 break;                
             case 5:
                 sideCamRT.width = (int)rawImage.rectTransform.rect.width;
@@ -60,7 +65,7 @@ public class CS_UIController : MonoBehaviour
     public void tutorialAsk(bool tuAns)
     {
         if(tuAns)
-            openRule(false);
+            openRule(false || helpChk);
         tutorialAskPanel.SetActive(false);
     }
 
@@ -71,7 +76,7 @@ public class CS_UIController : MonoBehaviour
         rule.SetActive(true);
         RuleImage[countRule].SetActive(true);
         if(helpChk)
-            helpPanel.SetActive(false);
+            helpSection.SetActive(false);
         setElement(false);
     }
 
@@ -89,7 +94,6 @@ public class CS_UIController : MonoBehaviour
             rule.SetActive(false);
             closeRule();
         }    
-
     }
 
     public void closeRule()
