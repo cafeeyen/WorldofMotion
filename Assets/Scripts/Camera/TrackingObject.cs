@@ -50,7 +50,7 @@ public class TrackingObject : MonoBehaviour
 
     private void OnPostRender()
     {
-        if(useAR) // Prevent from running when not use
+        if(useAR && Time.renderedFrameCount % 3 == 0) // Prevent from running when not use
         {
             // Get texture from camera
             cameraTexture.ReadPixels(rect, 0, 0, false);

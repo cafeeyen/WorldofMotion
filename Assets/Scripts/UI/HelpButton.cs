@@ -3,20 +3,27 @@ using UnityEngine.UI;
 
 public class HelpButton : MonoBehaviour
 {
-    public GameObject overlay, helpSection, maewnam, cannon, cannonball, sparkle, dotLV1, dotLV2, dotLV3, table, nextBtt, prevBtt;
+    public GameObject overlay, dotLV1, dotLV2, dotLV3, table, nextBtt, prevBtt , helpSection;
     public Sprite[] gallery; //store all tutorial image
     public Image[] dot; //store dot that apear on screen
     public Sprite colorDot; //store color dot image
     public Sprite blackDot; //store black dot image
     public Image displayImage; //The current image thats visible
-    private int page, oldPage;
+
+    // CS Mode
+    public GameObject maewnam, cannon, cannonball, sparkle;
+    // ED Mode
+    public GameObject lessonBtt;
+
+    private int page=0, oldPage=0, lesson = -1;
 
     private void OnEnable()
     {
         // Check if this open for first time
-        if (PlayerPrefs.GetInt("CannonShooter" + PlayerPrefs.GetInt("CannonShooterMode") + "FirstTime") == 0)
+        if (PlayerPrefs.GetInt("CannonShooterMode") > 0 &&
+            PlayerPrefs.GetInt("CannonShooter" + PlayerPrefs.GetInt("CannonShooterMode") + "FirstTime") == 0)
         {
-            /* Tutorial */
+            /* Cannon Shooter Tutorial */
             if (PlayerPrefs.GetInt("CannonShooterMode") == 1)
             {
                 page = 0;
@@ -35,43 +42,8 @@ public class HelpButton : MonoBehaviour
                 oldPage = 16;
                 displayImage.sprite = gallery[page];
             }
-
             openCSHelp();
             PlayerPrefs.SetInt("CannonShooter" + PlayerPrefs.GetInt("CannonShooterMode") + "FirstTime", 1);
-        }
-        else
-        {
-            /* Editor */
-            if (PlayerPrefs.GetInt("lesson") == 0)
-            {
-                page = 0;
-                oldPage = 0;
-                displayImage.sprite = gallery[page];
-            }
-            else if (PlayerPrefs.GetInt("lesson") == 1)
-            {
-                page = 1;
-                oldPage = 1;
-                displayImage.sprite = gallery[page];
-            }
-            else if (PlayerPrefs.GetInt("lesson") == 2)
-            {
-                page = 4;
-                oldPage = 4;
-                displayImage.sprite = gallery[page];
-            }
-            else if (PlayerPrefs.GetInt("lesson") == 3)
-            {
-                page = 7;
-                oldPage = 7;
-                displayImage.sprite = gallery[page];
-            }
-            else if (PlayerPrefs.GetInt("lesson") == 4)
-            {
-                page = 10;
-                oldPage = 10;
-                displayImage.sprite = gallery[page];
-            }
         }
     }
 
@@ -98,42 +70,55 @@ public class HelpButton : MonoBehaviour
             setElement(false);
     }
 
-    public void openEditorHelp() //openHelp
+    public void openEditorHelp()
     {
-        overlay.SetActive(true);
         helpSection.SetActive(true);
-        switch (PlayerPrefs.GetInt("lesson"))
+    }
+
+    public void openLesson(int num) //openHelp
+    {
+        lesson = num;
+        overlay.SetActive(true);
+        nextBtt.SetActive(true);
+        prevBtt.SetActive(true);
+        dot[page].sprite = blackDot;
+        switch (lesson)
         {
             case 0: //force
+                page = 0;
+                oldPage = 0;
+                nextBtt.SetActive(false);
+                prevBtt.SetActive(false);
                 break;
             case 1: //friction
-                nextBtt.SetActive(true);
-                prevBtt.SetActive(true);
+                page = 1;
+                oldPage = 1;
                 dotLV1.SetActive(true);
                 break;
             case 2: //gravity
-                nextBtt.SetActive(true);
-                prevBtt.SetActive(true);
+                page = 4;
+                oldPage = 4;
                 dotLV1.SetActive(true);
                 break;
             case 3: //momentum
-                nextBtt.SetActive(true);
-                prevBtt.SetActive(true);
+                page = 7;
+                oldPage = 7;
                 dotLV1.SetActive(true);
                 break;
             case 4: //motion
-                nextBtt.SetActive(true);
-                prevBtt.SetActive(true);
+                page = 10;
+                oldPage = 10;
                 dotLV2.SetActive(true);
                 break;
         }
+        displayImage.sprite = gallery[page];
+        dot[page].sprite = colorDot;
+        lessonBtt.SetActive(false);
     }
 
     public void closeEditorHelp() //closeHelp
     {
-        overlay.SetActive(false);
-        helpSection.SetActive(false);
-        switch (PlayerPrefs.GetInt("lesson"))
+        switch (lesson)
         {
             case 0: //force
                 break;
@@ -157,10 +142,20 @@ public class HelpButton : MonoBehaviour
                 prevBtt.SetActive(false);
                 dotLV2.SetActive(false);
                 break;
+            default: // -1 | close help
+                helpSection.SetActive(false);
+                overlay.SetActive(false);
+                break;
         }
+        if (lesson != -1)
+        {
+            displayImage.sprite = null;
+            lessonBtt.SetActive(true);
+        }
+        lesson = -1;
     }
 
-    public void closeCSHelp() 
+    public void closeCSHelp()
     {
         overlay.SetActive(false);
         helpSection.SetActive(false);
@@ -178,7 +173,6 @@ public class HelpButton : MonoBehaviour
             case 4:
                 break;
         }
-
         if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
             setElement(true);
     }
@@ -225,20 +219,25 @@ public class HelpButton : MonoBehaviour
     {
         oldPage = page;
 
+        // CS Help
         if (PlayerPrefs.GetInt("CannonShooterMode") == 1)
             page = nextPage ? (page + 1) % 12 : page - 1 < 0 ? 11 : page - 1;
         else if (PlayerPrefs.GetInt("CannonShooterMode") == 2)
             page = nextPage ? (page + 1 > 15 ? 12 : page + 1) : (page - 1 < 12 ? 15 : page - 1);
         else if (PlayerPrefs.GetInt("CannonShooterMode") == 3)
             page = nextPage ? (page + 1 > 20 ? 16 : page + 1) : (page - 1 < 16 ? 20 : page - 1);
-        else if (PlayerPrefs.GetInt("lesson") == 1) //friction
+
+        // ED Help
+        else if (lesson == 1) //friction
             page = nextPage ? (page + 1 > 3 ? 1 : page + 1) : (page - 1 < 1 ? 3 : page - 1);
-        else if (PlayerPrefs.GetInt("lesson") == 2) //gravity
+        else if (lesson == 2) //gravity
             page = nextPage ? (page + 1 > 6 ? 4 : page + 1) : (page - 1 < 4 ? 6 : page - 1);
-        else if (PlayerPrefs.GetInt("lesson") == 3) //momentum
+        else if (lesson == 3) //momentum
             page = nextPage ? (page + 1 > 9 ? 7 : page + 1) : (page - 1 < 7 ? 9 : page - 1);
-        else if (PlayerPrefs.GetInt("lesson") == 4) //motion
+        else if (lesson == 4) //motion
             page = nextPage ? (page + 1 > 13 ? 10 : page + 1) : (page - 1 < 10 ? 13 : page - 1);
+
+        // CS Tutorial
         else
             page = nextPage ? (page + 1) % 8 : page - 1 < 0 ? 7 : page - 1;
         changeImage();
@@ -246,20 +245,16 @@ public class HelpButton : MonoBehaviour
 
     private void changeImage()
     {
-            displayImage.sprite = gallery[page];
-            dot[oldPage].sprite = blackDot;
-            dot[page].sprite = colorDot;
+        displayImage.sprite = gallery[page];
+        dot[oldPage].sprite = blackDot;
+        dot[page].sprite = colorDot;
     }
 
     private void setElement(bool active)
     {
-        if(PlayerPrefs.GetInt("lesson") == 5)
-        {
-            cannon.SetActive(active);
-            maewnam.SetActive(active);
-            cannonball.SetActive(active);
-            sparkle.SetActive(active);
-        }
-        
+        cannon.SetActive(active);
+        maewnam.SetActive(active);
+        cannonball.SetActive(active);
+        sparkle.SetActive(active);
     }
 }
