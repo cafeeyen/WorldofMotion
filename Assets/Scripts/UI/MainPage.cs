@@ -157,6 +157,7 @@ public class MainPage : MonoBehaviour
             case "Experiment": slidePage(bttName); break;
             case "New":
                 PlayerPrefs.SetInt("World", 0);
+                PlayerPrefs.SetInt("lesson", 0); //change lesson
                 sceneLoader.loadNewScene(1);
                 break;
             case "Load":
@@ -170,19 +171,23 @@ public class MainPage : MonoBehaviour
             case "CannonShooter": slidePage(bttName); break;
             case "CSLv1":
                 PlayerPrefs.SetInt("CannonShooterMode", 1);
+                PlayerPrefs.SetInt("lesson", 5);
                 sceneLoader.loadNewScene(3);
                 break;
             case "CSLv2":
                 PlayerPrefs.SetInt("CannonShooterMode", 2);
+                PlayerPrefs.SetInt("lesson", 5);
                 sceneLoader.loadNewScene(3);
                 break;
             case "CSLv3":
                 PlayerPrefs.SetInt("CannonShooterMode", 3);
+                PlayerPrefs.SetInt("lesson", 5);
                 sceneLoader.loadNewScene(3);
                 break;
             case "Back": slidePage(bttName); break;
             case "ARmode":
                 PlayerPrefs.SetInt("CannonShooterMode", 4);
+                PlayerPrefs.SetInt("lesson", 5);
                 sceneLoader.loadNewScene(4); break;
 
         }
