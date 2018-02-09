@@ -17,7 +17,7 @@ public class MainPage : MonoBehaviour
     private void Awake()
     {
         // For Debug / Test only, DON'T TOUCH THIS!
-        PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
 
         // --- Set defaut PlayerPrefs here -----------------------------------------
         PlayerPrefs.SetInt("CannonShooterMode", 0);
