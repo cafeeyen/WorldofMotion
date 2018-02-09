@@ -149,7 +149,7 @@ public class HelpButton : MonoBehaviour
         }
         if (lesson != -1)
         {
-            displayImage.sprite = null;
+            displayImage.sprite = gallery[14];
             lessonBtt.SetActive(true);
         }
         lesson = -1;
