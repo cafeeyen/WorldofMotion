@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Vuforia;
 
 public class CS_UIController : MonoBehaviour
 {
@@ -37,8 +38,14 @@ public class CS_UIController : MonoBehaviour
                 sideCamRT.height = (int)rawImage.rectTransform.rect.height;
                 cutCamRT.width = sideCamRT.width;
                 cutCamRT.height = sideCamRT.height;
+                VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
                 break;
         }
+    }
+
+    private void OnVuforiaStarted()
+    {
+        CameraDevice.Instance.Start();
     }
 
     public void clickMini()
@@ -58,6 +65,7 @@ public class CS_UIController : MonoBehaviour
 
     public void backToMainMenu()
     {
+        CameraDevice.Instance.Stop();
         PlayerPrefs.SetInt("CannonShooterMode", 0);
         sceneLoader.loadNewScene(0);
     }

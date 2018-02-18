@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using OpenCVForUnity;
+using Vuforia;
 
 public class TrackingObject : MonoBehaviour
 {
@@ -8,56 +9,56 @@ public class TrackingObject : MonoBehaviour
     public GameObject quad;
     // Camera that show quad
     public Camera MainCamera;
-    // Render Texture from camera that get background only
-    public RenderTexture RT;
     // Sphere for finger
     public GameObject finger1, finger2;
 
-    private FingerColor blue, yellow;
-    private Mat BGMat, rgbMat, thresholdMat, hsvMat, outputMat;
-    private Texture2D cameraTexture, outputTexture;
-    private Color32[] colors; // Use to avoid allocating new memory each frame
     private UnityEngine.Rect rect;
+    private FingerColor blue, yellow;
+    private Mat thresholdMat, hsvMat, outputMat, hierarchy;
+    private Texture2D outputTexture;
     private bool useAR = false;
+    private double maxArea = 0, area;
+    private int contourIndex = -1;
+    private Moments moment;
+    private FingerColor fingerObject;
 
     void Start()
     {
         blue = new FingerColor("blue");
         yellow = new FingerColor("yellow");
 
-        // Set the supplied RenderTexture as the active one
-        RT.height = Screen.height;
-        RT.width = Screen.width;
-        RenderTexture.active = RT;
+        fingerObject = new FingerColor();
 
-        cameraTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);
-        outputTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);
         rect = new UnityEngine.Rect(0, 0, Screen.width, Screen.height);
-        colors = new Color32[outputTexture.width * outputTexture.height];
-        MainCamera.orthographicSize = cameraTexture.height / 2;
-
-        // Setup Mat
-        BGMat = new Mat(Screen.height, Screen.width, CvType.CV_8UC4);
-        rgbMat = new Mat(cameraTexture.height, cameraTexture.width, CvType.CV_8UC3);
-        outputMat = new Mat(cameraTexture.height, cameraTexture.width, CvType.CV_8UC3);
-        hsvMat = new Mat();
+        outputTexture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        outputMat = new Mat(Screen.height, Screen.width, CvType.CV_8UC3);
         thresholdMat = new Mat();
+        hsvMat = new Mat();
+        hierarchy = new Mat();
 
-        // Setup Quad
-        quad.transform.localScale = new Vector3(Screen.width, Screen.height, quad.transform.localScale.z);
         quad.GetComponent<Renderer>().material.mainTexture = outputTexture;
+        quad.transform.localScale = new Vector3(Screen.width, Screen.height, 1);
+        MainCamera.orthographicSize = Screen.height / 2;
+
+        VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
+    }
+
+    private void OnVuforiaStarted()
+    {
+        CameraDevice.Instance.Stop();
     }
 
     private void OnPostRender()
     {
-        if(useAR && Time.renderedFrameCount % 3 == 0) // Prevent from running when not use
+        if (useAR && Time.renderedFrameCount % 3 == 0) // Prevent from running when not use
         {
-            // Get texture from camera
-            cameraTexture.ReadPixels(rect, 0, 0, false);
-            Utils.texture2DToMat(cameraTexture, outputMat);
+            outputTexture.ReadPixels(rect, 0, 0, true);
+            outputTexture.Apply();
+            Utils.texture2DToMat(outputTexture, outputMat);
 
             // Change from Texture(original) to HSV Mat
-            RTtoHSVMat(RT);
+            // Convert color space from RGB(source) to HSV(recive)
+            Imgproc.cvtColor(outputMat, hsvMat, Imgproc.COLOR_RGB2HSV);
 
             // Find blue finger
             Core.inRange(hsvMat, blue.HSVMin, blue.HSVMax, thresholdMat);
@@ -70,17 +71,8 @@ public class TrackingObject : MonoBehaviour
             trackingFinger(yellow, thresholdMat);
 
             // Change from Mat(rendered) to Texture
-            Utils.matToTexture2D(outputMat, outputTexture, colors);
+            Utils.matToTexture2D(outputMat, outputTexture);
         }
-    }
-
-    private void RTtoHSVMat(RenderTexture rt)
-    {
-        Utils.texture2DToMat(cameraTexture, BGMat);
-        // Convert color space from RGBA(source) to RGB(recive)
-        Imgproc.cvtColor(BGMat, rgbMat, Imgproc.COLOR_RGBA2RGB);
-        // Then convert RGB to HSV for find color range
-        Imgproc.cvtColor(rgbMat, hsvMat, Imgproc.COLOR_RGB2HSV);
     }
 
     private void morphOps(Mat threshold)
@@ -103,24 +95,22 @@ public class TrackingObject : MonoBehaviour
     private void trackingFinger(FingerColor fingerColor, Mat threshold)
     {
         List<MatOfPoint> contours = new List<MatOfPoint>();
-        Mat hierarchy = new Mat();
+        hierarchy.release();
 
         /*** See more https://docs.opencv.org/3.3.1/d3/dc0/group__imgproc__shape.html ***/
         // findContours() change input image, we need it to find other finger later so we copy image to temp
-        Mat temp = threshold.clone();
-        Imgproc.findContours(temp, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(threshold, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
-        FingerColor fingerObject = new FingerColor();
-        double maxArea = 0;
-        int contourIndex = -1;
+        maxArea = 0;
+        contourIndex = -1;
 
         if (hierarchy.rows() > 0)
         {
             for (int index = 0; index >= 0; index = (int)hierarchy.get(0, index)[0])
             {
-                Moments moment = Imgproc.moments(contours[index]);
+                moment = Imgproc.moments(contours[index]);
                 // (0, 0) is top-left
-                double area = moment.get_m00();
+                area = moment.get_m00();
 
                 // If the area is less than 40 * 40px then it is probably just noise
                 // Store max area only
@@ -144,7 +134,7 @@ public class TrackingObject : MonoBehaviour
                 {
                     //finger1.SetActive(true);
                     finger1.transform.position = new Vector3(fingerObject.XPos, fingerObject.YPos, (float)maxArea);
-                    
+
                 }
                 else
                 {
@@ -171,5 +161,15 @@ public class TrackingObject : MonoBehaviour
         Imgproc.circle(frame, new Point(fingerObject.XPos, fingerObject.YPos), 5, fingerObject.Color);
     }
 
-    public bool UseAR { get { return useAR; }set { useAR = value; } }
+    public bool UseAR
+    {
+        set
+        {
+            useAR = value;
+            if (useAR)
+                CameraDevice.Instance.Start();
+            else
+                CameraDevice.Instance.Stop();
+        }
+    }
 }
