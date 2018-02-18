@@ -18,7 +18,9 @@ public class MainPage : MonoBehaviour
     {
         // For Debug / Test only, DON'T TOUCH THIS!
         // PlayerPrefs.DeleteAll();
-
+        // PlayerPrefs.SetInt("CsLv1Star", 3);
+        // PlayerPrefs.SetInt("CsLv2Star", 3);
+        // PlayerPrefs.SetInt("CsLv3Star", 3);
         // --- Set defaut PlayerPrefs here -----------------------------------------
         PlayerPrefs.SetInt("CannonShooterMode", 0);
         // -------------------------------------------------------------------------
@@ -148,9 +150,6 @@ public class MainPage : MonoBehaviour
                         title.SetBool("IsMainPage", true);
                         mainPage.SetBool("IsMainPage", true);
                     }
-
-                    //title.SetBool("IsMainPage", true);
-                    //mainPage.SetBool("IsMainPage", true);
                     break;
                 }
         }
@@ -189,7 +188,7 @@ public class MainPage : MonoBehaviour
                 break;
             case "Back": slidePage(bttName); break;
             case "ARmode":
-                PlayerPrefs.SetInt("CannonShooterMode", 4);
+                PlayerPrefs.SetInt("CannonShooterMode", 5);
                 sceneLoader.loadNewScene(4); break;
 
         }

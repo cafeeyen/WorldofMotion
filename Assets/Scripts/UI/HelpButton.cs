@@ -62,11 +62,9 @@ public class HelpButton : MonoBehaviour
             case 3:
                 dotLV3.SetActive(true);
                 break;
-            case 4:
-                break;
         }
 
-        if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
             setElement(false);
     }
 
@@ -170,10 +168,8 @@ public class HelpButton : MonoBehaviour
             case 3:
                 dotLV3.SetActive(false);
                 break;
-            case 4:
-                break;
         }
-        if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
             setElement(true);
     }
 
@@ -191,8 +187,6 @@ public class HelpButton : MonoBehaviour
             case 3:
                 dotLV3.SetActive(false);
                 break;
-            case 4:
-                break;
         }
     }
 
@@ -209,8 +203,6 @@ public class HelpButton : MonoBehaviour
                 break;
             case 3:
                 dotLV3.SetActive(true);
-                break;
-            case 4:
                 break;
         }
     }

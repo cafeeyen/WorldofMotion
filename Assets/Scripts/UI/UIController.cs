@@ -170,8 +170,7 @@ public class UIController : MonoBehaviour
                     camPos = ARCamera.transform.localPosition;
                     camRot = ARCamera.transform.localRotation;
 
-                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
-                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
+                    //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.SolidColor;
                     OutputCamera.depth = 2;
                     ARCamera.GetComponent<TrackingObject>().UseAR = true;
@@ -204,8 +203,7 @@ public class UIController : MonoBehaviour
                     WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = true;
 
-                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
-                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
+                    //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
                     OutputCamera.depth = -10;
                     ARCamera.GetComponent<TrackingObject>().UseAR = false;

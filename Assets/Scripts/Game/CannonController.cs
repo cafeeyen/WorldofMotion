@@ -26,7 +26,7 @@ public class CannonController : MonoBehaviour
      * 1 : Lv1
      * 2 : Lv2
      * 3 : Lv3
-     * 4 : Unlimited
+     * 4 : Unlimited // Cancle(Merge with 1-3)
      * 5 : AR
     */
 
@@ -44,7 +44,7 @@ public class CannonController : MonoBehaviour
     {
         step = Time.fixedDeltaTime * 1f;
         ShootClk = (AudioClip)Resources.Load("Audios/Shooting", typeof(AudioClip));
-        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 4;
+        modeAR = PlayerPrefs.GetInt("CannonShooterMode") == 5;
 
         if (PlayerPrefs.GetInt("CannonShooterMode") != 1 && !modeAR)
         {
@@ -72,7 +72,7 @@ public class CannonController : MonoBehaviour
             heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} m.", System.Math.Round(maxHeight, 2));
             disText.text = string.Format("ระยะทางในแนวราบ {0} m.", System.Math.Round(maxDist, 2));
             timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} s.", System.Math.Round(maxTime, 2));
-            if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+            if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
                 countText.text = string.Format("= {0}", shootCnt);
 
             if (string.IsNullOrEmpty(powerText.text))
@@ -153,8 +153,8 @@ public class CannonController : MonoBehaviour
              * Time of flight = Rise(vy0 / g) + Fall(sqrt( 2Max height / g))
              * Distance = vx0 * time
              * 
-             * vx0 = V0 * Cos(angle)
-             * vy0 = V0 * Sin(angle)
+             * vx0 = V0 * Cos(angle) <- ucos
+             * vy0 = V0 * Sin(angle) <- usin
              * h = height difference between cannon and ground/target
             */
             var rise = power * Mathf.Sin(-angle * Mathf.Deg2Rad) / 9.81f;
