@@ -41,26 +41,26 @@ public class MainPage : MonoBehaviour
             csLv3.interactable = true;
 
         // Change border
-        for(int i=1;i<=3;i++)
+        for (int i = 1; i <= 3; i++)
         {
-            switch(PlayerPrefs.GetInt("CsLv" + i + "Star"))
+            switch (PlayerPrefs.GetInt("CsLv" + i + "Star"))
             {
                 case 1:
-                    displayFrame[i-1].sprite = frameGal[0];
+                    displayFrame[i - 1].sprite = frameGal[0];
                     UnlockAR += 1;
                     break;
                 case 2:
-                    displayFrame[i-1].sprite = frameGal[1];
+                    displayFrame[i - 1].sprite = frameGal[1];
                     UnlockAR += 2;
                     break;
                 case 3:
-                    displayFrame[i-1].sprite = frameGal[2];
+                    displayFrame[i - 1].sprite = frameGal[2];
                     UnlockAR += 3;
                     break;
             }
         }
 
-        if(UnlockAR >= 7) // Unlock after get total 7 stars from any level
+        if (UnlockAR >= 7) // Unlock after get total 7 stars from any level
         {
             ARmode.SetActive(true);
         }
@@ -90,23 +90,24 @@ public class MainPage : MonoBehaviour
 
     private void slidePage(string bttName)
     {
-        switch(bttName)
+        switch (bttName)
         {
             case "Experiment":
                 {
                     mainBG.SetBool("SlideExperiment", true);
                     backBtt.SetBool("SlideExperiment", true);
                     expPage.SetBool("IsExpPage", true);
+
                     title.SetBool("IsMainPage", false);
                     mainPage.SetBool("IsMainPage", false);
                     break;
                 }
-
             case "Game":
                 {
                     mainBG.SetBool("SlideGame", true);
                     backBtt.SetBool("SlideGame", true);
                     gamePage.SetBool("IsGamePage", true);
+
                     title.SetBool("IsMainPage", false);
                     mainPage.SetBool("IsMainPage", false);
                     break;
@@ -114,8 +115,8 @@ public class MainPage : MonoBehaviour
             case "CannonShooter":
                 {
                     mainBG.SetBool("SlideCS", true);
-                    mainBG.SetBool("SlideGame", false);
                     CSPage.SetBool("IsCSPage", true);
+
                     gamePage.SetBool("IsGamePage", false);
                     title.SetBool("IsMainPage", false);
                     mainPage.SetBool("IsMainPage", false);
@@ -124,22 +125,20 @@ public class MainPage : MonoBehaviour
 
             case "Back":
                 {
-                    if(mainBG.GetBool("SlideGame"))
+                    if (mainBG.GetBool("SlideGame") && !mainBG.GetBool("SlideCS"))
                     {
                         mainBG.SetBool("SlideGame", false);
                         backBtt.SetBool("SlideGame", false);
                         gamePage.SetBool("IsGamePage", false);
+
                         title.SetBool("IsMainPage", true);
                         mainPage.SetBool("IsMainPage", true);
                     }
-                    else if(mainBG.GetBool("SlideCS"))
+                    else if (mainBG.GetBool("SlideCS"))
                     {
                         mainBG.SetBool("SlideCS", false);
                         CSPage.SetBool("IsCSPage", false);
-                        backBtt.SetBool("SlideGame", false);
 
-                        mainBG.SetBool("SlideGame", true);
-                        backBtt.SetBool("SlideGame", true);
                         gamePage.SetBool("IsGamePage", true);
                     }
                     else
@@ -147,6 +146,7 @@ public class MainPage : MonoBehaviour
                         mainBG.SetBool("SlideExperiment", false);
                         backBtt.SetBool("SlideExperiment", false);
                         expPage.SetBool("IsExpPage", false);
+
                         title.SetBool("IsMainPage", true);
                         mainPage.SetBool("IsMainPage", true);
                     }
