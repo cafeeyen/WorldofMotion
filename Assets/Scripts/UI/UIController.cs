@@ -31,6 +31,7 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
+        Time.fixedDeltaTime = 0.05f; // 30 FPS
         Time.timeScale = 0;
         state = mode.Edit;
 
