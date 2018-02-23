@@ -21,9 +21,12 @@ public class MainPage : MonoBehaviour
         // PlayerPrefs.SetInt("CsLv1Star", 3);
         // PlayerPrefs.SetInt("CsLv2Star", 3);
         // PlayerPrefs.SetInt("CsLv3Star", 3);
-        // --- Set defaut PlayerPrefs here -----------------------------------------
+
+
+        // ***************************** Set defaut setting here *****************************
+        Time.fixedDeltaTime = 0.02f; // 50 FPS | will change to 30 FPS in Editor mode
         PlayerPrefs.SetInt("CannonShooterMode", 0);
-        // -------------------------------------------------------------------------
+        // ************************************************************************************
 
         Time.timeScale = 1;
         sceneLoader = GetComponent<SceneLoader>();

@@ -43,6 +43,11 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         gesture.Tapped -= Notify;
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         AudioSource.PlayClipAtPoint(surType.getSound(), transform.position, 1f);
@@ -80,6 +85,8 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     {
         pos = transform.localPosition;
         rot = transform.localRotation;
+        rb.velocity = velocity;
+        rb.angularVelocity = Vector3.zero;
     }
 
     public void returnState()
