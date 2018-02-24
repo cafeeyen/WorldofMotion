@@ -5,7 +5,6 @@ using System.Linq;
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
     private ItemObjectController ItemCon;
-    private int mass;
     private bool overlapping;
     private Renderer baseRenderer;
     private Material baseMat;
@@ -110,7 +109,6 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
     public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
     public bool IsOverlap { get { return overlapping; } }
-    public float Mass { get { return rb.mass; } }
     public Vector3 Velocity { get { return velocity; } set { velocity = value; rb.velocity = value; } }
     public string ItemType { get { return itemType; } set { itemType = value; } }
 }
