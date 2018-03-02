@@ -17,6 +17,7 @@ public class UIController : MonoBehaviour
     public GameObject deleteBtt, saveAlert, saveDeny, ground;
     public Button saveBtt, exBtt, undoBtt;
     public Camera ARCamera, OutputCamera;
+    public TrackingObject tracker;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -174,7 +175,7 @@ public class UIController : MonoBehaviour
                     //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.SolidColor;
                     OutputCamera.depth = 2;
-                    ARCamera.GetComponent<TrackingObject>().UseAR = true;
+                    tracker.UseAR = true;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
@@ -207,7 +208,7 @@ public class UIController : MonoBehaviour
                     //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
                     OutputCamera.depth = -10;
-                    ARCamera.GetComponent<TrackingObject>().UseAR = false;
+                    tracker.UseAR = false;
 
                     //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
                     var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);

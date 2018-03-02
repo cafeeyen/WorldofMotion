@@ -8,7 +8,7 @@ public class TrackingObject : MonoBehaviour
     // Quad for recive rendered texture
     public GameObject quad;
     // Camera that show quad
-    public Camera MainCamera;
+    public Camera OutputCamera;
     // Sphere for finger
     public GameObject finger1, finger2;
 
@@ -21,6 +21,9 @@ public class TrackingObject : MonoBehaviour
     private int contourIndex = -1;
     private Moments moment;
     private FingerColor fingerObject;
+
+    private float focalLength = 0, distance = 0;
+    private const float fingerWidth = 0.708f, fingerHeight = 1, baseDistance = 4; // in Inch | width ~ 1.8 cm
 
     void Start()
     {
@@ -36,10 +39,11 @@ public class TrackingObject : MonoBehaviour
         hsvMat = new Mat();
         hierarchy = new Mat();
 
-        quad.GetComponent<Renderer>().material.mainTexture = outputTexture;
-        quad.transform.localScale = new Vector3(Screen.width, Screen.height, 1);
-        MainCamera.orthographicSize = Screen.height / 2;
+        //quad.GetComponent<Renderer>().material.mainTexture = outputTexture;
+        //quad.transform.localScale = new Vector3(Screen.width, Screen.height, 1);
+        //OutputCamera.orthographicSize = Screen.height / 2;
 
+        // This automatically find VuforiaARController in scene
         VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
     }
 
@@ -71,7 +75,7 @@ public class TrackingObject : MonoBehaviour
             trackingFinger(yellow, thresholdMat);
 
             // Change from Mat(rendered) to Texture
-            Utils.matToTexture2D(outputMat, outputTexture);
+            //Utils.matToTexture2D(outputMat, outputTexture);
         }
     }
 
@@ -98,20 +102,15 @@ public class TrackingObject : MonoBehaviour
         hierarchy.release();
 
         /*** See more https://docs.opencv.org/3.3.1/d3/dc0/group__imgproc__shape.html ***/
-        // findContours() change input image, we need it to find other finger later so we copy image to temp
         Imgproc.findContours(threshold, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-
         maxArea = 0;
         contourIndex = -1;
-
         if (hierarchy.rows() > 0)
         {
             for (int index = 0; index >= 0; index = (int)hierarchy.get(0, index)[0])
             {
                 moment = Imgproc.moments(contours[index]);
-                // (0, 0) is top-left
                 area = moment.get_m00();
-
                 // If the area is less than 40 * 40px then it is probably just noise
                 // Store max area only
                 if (area > 40 * 40 && area > maxArea)
@@ -127,19 +126,25 @@ public class TrackingObject : MonoBehaviour
             }
             if (contourIndex > -1)
             {
-                drawObject(fingerObject, contourIndex, outputMat, contours, hierarchy);
+                //drawObject(fingerObject, contourIndex, outputMat, contours, hierarchy);
+                if (focalLength == 0)
+                    focalLength = ((float)maxArea / contours[contourIndex].height()) * baseDistance / fingerHeight;
+                else
+                    // 1 Inch = 0.0254 Meters <<< Not use
+                    // 2 is weight value for first distance at 4 inches
+                    distance = fingerHeight * focalLength / ((float)maxArea / contours[contourIndex].height()) * 2;
+
+
                 // Still find goood range
-                float z = 20 * (20 - ((float)maxArea / 30000f));
                 if (fingerColor.Type == "blue")
                 {
-                    //finger1.SetActive(true);
-                    finger1.transform.position = new Vector3(fingerObject.XPos, fingerObject.YPos, (float)maxArea);
-
+                    finger1.SetActive(true);
+                    finger1.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(fingerObject.XPos, Screen.height - fingerObject.YPos, distance));
                 }
                 else
                 {
-                    //finger2.SetActive(true);
-                    finger2.transform.position = new Vector3(fingerObject.XPos, fingerObject.YPos, (float)maxArea);
+                    finger2.SetActive(true);
+                    finger2.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(fingerObject.XPos, Screen.height - fingerObject.YPos, distance));
                 }
             }
             else
