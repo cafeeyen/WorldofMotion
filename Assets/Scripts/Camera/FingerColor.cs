@@ -10,7 +10,6 @@ public class FingerColor
     public FingerColor()
     {
         Type = "Object";
-        color = new Scalar(0, 0, 0);
     }
 
     public FingerColor(string name)
@@ -18,18 +17,14 @@ public class FingerColor
         if(name == "blue")
         {
             Type = name;
-            HSVMin = new Scalar(92, 124, 123);
+            HSVMin = new Scalar(92, 124, 0);
             HSVMax = new Scalar(124, 256, 256);
-            // RGB
-            Color = new Scalar(0, 0, 255);
         }
         if(name == "yellow")
         {
             Type = name;
-            HSVMin = new Scalar(20, 124, 123);
-            HSVMax = new Scalar(30, 255, 255);
-            // RGB
-            Color = new Scalar(255, 255, 0);
+            HSVMin = new Scalar(20, 124, 124);
+            HSVMax = new Scalar(30, 256, 256);
         }
     }
 

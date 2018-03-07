@@ -509,6 +509,8 @@
     <Compile Include="Assets\Scripts\Game\Timer.cs" />
     <Compile Include="Assets\Scripts\ItemObject\AxisTransition.cs" />
     <Compile Include="Assets\Scripts\ItemObject\DragNDrop.cs" />
+    <Compile Include="Assets\Scripts\ItemObject\Finger\FingerController.cs" />
+    <Compile Include="Assets\Scripts\ItemObject\Finger\YellowFinger.cs" />
     <Compile Include="Assets\Scripts\ItemObject\ItemObject.cs" />
     <Compile Include="Assets\Scripts\ItemObject\ItemObjectController.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\Ice.cs" />

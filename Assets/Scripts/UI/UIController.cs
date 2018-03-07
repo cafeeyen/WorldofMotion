@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground;
     public Button saveBtt, exBtt, undoBtt;
-    public Camera ARCamera, OutputCamera;
+    public Camera ARCamera;
     public TrackingObject tracker;
 
     private TapGesture gesture;
@@ -32,7 +32,7 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Time.fixedDeltaTime = 0.05f; // 30 FPS
+        //Time.fixedDeltaTime = 0.05f; // 30 FPS
         Time.timeScale = 0;
         state = mode.Edit;
 
@@ -168,27 +168,11 @@ public class UIController : MonoBehaviour
                 {
                     WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = false;
-
                     camPos = ARCamera.transform.localPosition;
                     camRot = ARCamera.transform.localRotation;
-
-                    //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.SolidColor;
-                    OutputCamera.depth = 2;
                     tracker.UseAR = true;
-
-                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
-                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
-                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
-
-                    // Enable rendering:
-                    foreach (var component in rendererComponents)
-                        component.enabled = false;
-
-                    // Enable colliders:
-                    foreach (var component in colliderComponents)
-                        component.enabled = false;
-                    //-----------------------------------------------------------------------
+                    showItemInWorld(false);
                 }
                 else
                     Time.timeScale = 1;
@@ -204,26 +188,11 @@ public class UIController : MonoBehaviour
                 {
                     WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = true;
-
-                    //WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
-                    OutputCamera.depth = -10;
                     tracker.UseAR = false;
-
-                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
-                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
-                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
-
-                    // Enable rendering:
-                    foreach (var component in rendererComponents)
-                        component.enabled = true;
-
-                    // Enable colliders:
-                    foreach (var component in colliderComponents)
-                        component.enabled = true;
-                    //-----------------------------------------------------------------------
                     ARCamera.transform.localPosition = camPos;
                     ARCamera.transform.localRotation = camRot;
+                    showItemInWorld(true);
                 }
 
                 Time.timeScale = 0;
@@ -240,6 +209,21 @@ public class UIController : MonoBehaviour
         }
         else
             playSound("deny");
+    }
+
+    private void showItemInWorld(bool state)
+    {
+        //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+        var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(state);
+        var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(state);
+
+        // Enable rendering:
+        foreach (var component in rendererComponents)
+            component.enabled = state;
+
+        // Enable colliders:
+        foreach (var component in colliderComponents)
+            component.enabled = state;
     }
 
     public void pauseButton()

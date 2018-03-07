@@ -5,10 +5,6 @@ using Vuforia;
 
 public class TrackingObject : MonoBehaviour
 {
-    // Quad for recive rendered texture
-    public GameObject quad;
-    // Camera that show quad
-    public Camera OutputCamera;
     // Sphere for finger
     public GameObject finger1, finger2;
 
@@ -22,8 +18,10 @@ public class TrackingObject : MonoBehaviour
     private Moments moment;
     private FingerColor fingerObject;
 
+    private int fIndex = 0;
     private float focalLength = 0, distance = 0;
-    private const float fingerWidth = 0.708f, fingerHeight = 1, baseDistance = 4; // in Inch | width ~ 1.8 cm
+    private float[] focal = new float[30];
+    private const float fingerArea = 28 * 28, baseDistance = 150; // in mm
 
     void Start()
     {
@@ -39,10 +37,6 @@ public class TrackingObject : MonoBehaviour
         hsvMat = new Mat();
         hierarchy = new Mat();
 
-        //quad.GetComponent<Renderer>().material.mainTexture = outputTexture;
-        //quad.transform.localScale = new Vector3(Screen.width, Screen.height, 1);
-        //OutputCamera.orthographicSize = Screen.height / 2;
-
         // This automatically find VuforiaARController in scene
         VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
     }
@@ -54,7 +48,8 @@ public class TrackingObject : MonoBehaviour
 
     private void OnPostRender()
     {
-        if (useAR && Time.renderedFrameCount % 3 == 0) // Prevent from running when not use
+        //Time.renderedFrameCount % 3 == 0
+        if (useAR) // Prevent from running when not use
         {
             outputTexture.ReadPixels(rect, 0, 0, true);
             outputTexture.Apply();
@@ -73,9 +68,6 @@ public class TrackingObject : MonoBehaviour
             Core.inRange(hsvMat, yellow.HSVMin, yellow.HSVMax, thresholdMat);
             morphOps(thresholdMat);
             trackingFinger(yellow, thresholdMat);
-
-            // Change from Mat(rendered) to Texture
-            //Utils.matToTexture2D(outputMat, outputTexture);
         }
     }
 
@@ -111,9 +103,9 @@ public class TrackingObject : MonoBehaviour
             {
                 moment = Imgproc.moments(contours[index]);
                 area = moment.get_m00();
-                // If the area is less than 40 * 40px then it is probably just noise
+                // If the area is less than 30 * 30px then it is probably just noise or non finger
                 // Store max area only
-                if (area > 40 * 40 && area > maxArea)
+                if (area > 30 * 30 && area > maxArea)
                 {
                     /*** See more https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html ***/
                     fingerObject.XPos = (int)(moment.get_m10() / area);
@@ -126,13 +118,24 @@ public class TrackingObject : MonoBehaviour
             }
             if (contourIndex > -1)
             {
-                //drawObject(fingerObject, contourIndex, outputMat, contours, hierarchy);
                 if (focalLength == 0)
-                    focalLength = ((float)maxArea / contours[contourIndex].height()) * baseDistance / fingerHeight;
+                {
+                    if (fIndex < 30)
+                    {
+                        focal[fIndex] = (float)maxArea * baseDistance / fingerArea;
+                        fIndex++;
+                    }
+                    else
+                    {
+                        float sum = 0;
+                        foreach(float f in focal)
+                            sum += f;
+                        focalLength = sum / 30.0f;
+                        Debug.Log(focalLength);
+                    }
+                }
                 else
-                    // 1 Inch = 0.0254 Meters <<< Not use
-                    // 2 is weight value for first distance at 4 inches
-                    distance = fingerHeight * focalLength / ((float)maxArea / contours[contourIndex].height()) * 2;
+                    distance = (fingerArea * focalLength) / (float)maxArea / 20.0f;
 
 
                 // Still find goood range
@@ -153,17 +156,8 @@ public class TrackingObject : MonoBehaviour
                     finger1.SetActive(false);
                 else
                     finger2.SetActive(false);
-                /* Do something to find finger again */
             }
         }
-    }
-
-    private void drawObject(FingerColor fingerObject, int contourIndex, Mat frame, List<MatOfPoint> contours, Mat hierarchy)
-    {
-        // Draw contours line
-        Imgproc.drawContours(frame, contours, contourIndex, fingerObject.Color, 3, 8, hierarchy, int.MaxValue, new Point());
-        // Draw center of contours(centroid)
-        Imgproc.circle(frame, new Point(fingerObject.XPos, fingerObject.YPos), 5, fingerObject.Color);
     }
 
     public bool UseAR
