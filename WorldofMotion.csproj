@@ -521,7 +521,6 @@
     <Compile Include="Assets\Scripts\ItemObject\Type\Wood.cs" />
     <Compile Include="Assets\Scripts\ItemObject\WorldObject.cs" />
     <Compile Include="Assets\Scripts\UI\CS_UIController.cs" />
-    <Compile Include="Assets\Scripts\UI\ED_Tutorial.cs" />
     <Compile Include="Assets\Scripts\UI\HelpButton.cs" />
     <Compile Include="Assets\Scripts\UI\MainPage.cs" />
     <Compile Include="Assets\Scripts\UI\PropWindow.cs" />
