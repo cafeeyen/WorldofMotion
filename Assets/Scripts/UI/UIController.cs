@@ -168,7 +168,6 @@ public class UIController : MonoBehaviour
                 if (arMode)
                 {
                     fingCon.enabled = true;
-                    WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = false;
                     camPos = ARCamera.transform.localPosition;
                     camRot = ARCamera.transform.localRotation;
@@ -189,7 +188,6 @@ public class UIController : MonoBehaviour
                 if (arMode)
                 {
                     fingCon.enabled = false;
-                    WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
                     tracker.UseAR = false;
