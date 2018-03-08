@@ -20,7 +20,7 @@ af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 dec507423062c7ce449c54489e28e63e Assembly-CSharp.dll:.SaveLoad
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Metal
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.LayerManagerInstance
-a198f79b1e9fb0dd4fd44f4caf384b95 Assembly-CSharp.dll:.HelpButton
+c2e050b6090bab7896a9fb3efc459c13 Assembly-CSharp.dll:.HelpButton
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -203,7 +203,6 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 8f8879e93c0bb2352670a62b6f6550e1 Assembly-CSharp.dll:.SetCameraFOV
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Wood
 42bbd8dadc66de980ed7ab69a5fd1258 Assembly-CSharp.dll:TouchScript.Gestures.PressGesture
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ED_Tutorial
 0fd6aafde779927819d0d509e0bdfec9 Assembly-CSharp.dll:TouchScript.Gestures.MetaGesture
 863116437c23b116f44039dc64981061 Assembly-CSharp.dll:.GyroPlayer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.PointerCursor
