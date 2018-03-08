@@ -131,11 +131,10 @@ public class TrackingObject : MonoBehaviour
                         foreach(float f in focal)
                             sum += f;
                         focalLength = sum / 30.0f;
-                        Debug.Log(focalLength);
                     }
                 }
                 else
-                    distance = (fingerArea * focalLength) / (float)maxArea / 1000.0f; // Change to meters
+                    distance = (fingerArea * focalLength) / (float)maxArea / 1000.0f * 2.0f; // Change to meters then scale to world
 
 
                 // Still find goood range
