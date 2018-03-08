@@ -103,9 +103,9 @@ public class TrackingObject : MonoBehaviour
             {
                 moment = Imgproc.moments(contours[index]);
                 area = moment.get_m00();
-                // If the area is less than 30 * 30px then it is probably just noise or non finger
+                // If the area is less than 60 * 60 px, that not finger
                 // Store max area only
-                if (area > 30 * 30 && area > maxArea)
+                if (area > 60 * 60 && area > maxArea)
                 {
                     /*** See more https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html ***/
                     fingerObject.XPos = (int)(moment.get_m10() / area);
@@ -135,7 +135,7 @@ public class TrackingObject : MonoBehaviour
                     }
                 }
                 else
-                    distance = (fingerArea * focalLength) / (float)maxArea / 20.0f;
+                    distance = (fingerArea * focalLength) / (float)maxArea / 1000.0f; // Change to meters
 
 
                 // Still find goood range

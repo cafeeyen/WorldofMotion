@@ -8,7 +8,7 @@ public class YellowFinger : FingerController
         {
             if (curState == state.Cursor)
             {
-
+                itemCon.setItemObject(other.gameObject);
             }
             else if (curState == state.Grab)
             {
