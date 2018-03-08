@@ -95,7 +95,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 93
+  controlID: 50
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 94
+  controlID: 12
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -467,18 +467,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Camera
+    - Assets/Scripts/UI
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Camera
+  - Assets/Scripts/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\IT\WorldofMotion
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 209}
-    m_SelectedIDs: b02d0000
-    m_LastClickedID: 11696
+    scrollPos: {x: 0, y: 257}
+    m_SelectedIDs: 4a300000
+    m_LastClickedID: 12362
     m_ExpandedIDs: 00000000662c0000782c0000a42c0000d22c0000d82c0000ba2d0000c62d0000742e0000062f0000382f0000462f0000742f0000942f0000ac2f0000f02f00004430000098300000fa300000043100003c3100006431000094310000fc3100003832000058320000d6390000d8390000da390000dc390000de390000e0390000e2390000e4390000e6390000e8390000ea390000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -625,7 +625,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: fa03fafffe04faff5a07faffe607faff1608faff1e08faff5608faffa6fbffff0000000048330000e23400007e350000ce350000
+    m_ExpandedIDs: e63dffffec3effff4841ffffd441ffff0442ffff0c42ffff4442ffffdceaffffa6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.17303789, y: -0.6321551, z: 0.14768204, w: -0.74069554}
     speed: 2
-    m_Value: {x: -0.17303771, y: -0.63215446, z: 0.14768188, w: -0.74069476}
+    m_Value: {x: 0.17303789, y: 0.6321551, z: -0.14768204, w: 0.7406955}
   m_Size:
     m_Target: 34.6387
     speed: 2
