@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
     public Button saveBtt, exBtt, undoBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
+    public FingerController fingCon;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -166,6 +167,7 @@ public class UIController : MonoBehaviour
 
                 if (arMode)
                 {
+                    fingCon.enabled = true;
                     WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = false;
                     camPos = ARCamera.transform.localPosition;
@@ -186,6 +188,7 @@ public class UIController : MonoBehaviour
             {
                 if (arMode)
                 {
+                    fingCon.enabled = false;
                     WorldObject.transform.localScale = Vector3.one;
                     ground.GetComponent<MeshRenderer>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;

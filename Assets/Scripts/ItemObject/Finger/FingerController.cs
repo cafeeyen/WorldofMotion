@@ -3,8 +3,8 @@
 public class FingerController : MonoBehaviour
 {
     public GameObject blue, yellow;
-
-    private YellowFinger yellowF;
+    public ItemObjectController itemCon;
+    public YellowFinger yellowF;
 
     protected state curState;
     protected GameObject itemObject;
@@ -15,9 +15,10 @@ public class FingerController : MonoBehaviour
         Grab
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        yellowF = yellow.GetComponent<YellowFinger>();
+        blue.SetActive(false);
+        yellow.SetActive(false);
     }
 
     void Update()
