@@ -17,7 +17,7 @@ public class FingerColor
         if(name == "blue")
         {
             Type = name;
-            HSVMin = new Scalar(92, 50, 0);
+            HSVMin = new Scalar(92, 100, 60);
             HSVMax = new Scalar(124, 256, 256);
         }
         if(name == "yellow")
