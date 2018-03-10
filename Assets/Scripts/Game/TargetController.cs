@@ -15,7 +15,7 @@ public class TargetController : MonoBehaviour
     private void OnEnable()
     {
         HitEffect = (AudioClip)Resources.Load("Audios/TargetHit", typeof(AudioClip));
-        if (PlayerPrefs.GetInt("CannonShooterMode") != 4)
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
         {
             meshRen = GetComponentInChildren<SkinnedMeshRenderer>();
             meshRen.enabled = false;
@@ -28,7 +28,7 @@ public class TargetController : MonoBehaviour
     {
         if (other.tag == "CannonBall")
         {
-            if(PlayerPrefs.GetInt("CannonShooterMode") != 4 && target.Detected)
+            if(PlayerPrefs.GetInt("CannonShooterMode") != 5 && target.Detected)
             {
                 AudioSource.PlayClipAtPoint(HitEffect, Camera.main.transform.position);
                 sparkle.Play();

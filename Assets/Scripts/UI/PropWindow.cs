@@ -109,7 +109,7 @@ public class PropWindow : MonoBehaviour
             st_ice.isOn = selectedType == "Ice";
             st_rubber.isOn = selectedType == "Rubber";
 
-            mass.text = itemObjectSc.Mass.ToString("F3");
+            mass.text = (itemObject.transform.localScale.x * itemObject.transform.localScale.y * itemObject.transform.localScale.z).ToString();
             changeFriction(itemObjectSc.getSurType());
 
             veloX.text = itemObjectSc.Velocity.x.ToString();
@@ -136,12 +136,14 @@ public class PropWindow : MonoBehaviour
             {
                 itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
                 itemObject.GetComponent<ItemObject>().checkCollider();
+                itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
             }
 
             // Change scale text;
             scaleX.text = sliderX.value.ToString();
             scaleY.text = sliderY.value.ToString();
             scaleZ.text = sliderZ.value.ToString();
+            mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
         }
     }
 

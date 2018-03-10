@@ -16,7 +16,9 @@ public class UIController : MonoBehaviour
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground;
     public Button saveBtt, exBtt, undoBtt;
-    public Camera ARCamera, OutputCamera;
+    public Camera ARCamera;
+    public TrackingObject tracker;
+    public FingerController fingCon;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -31,6 +33,7 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
+        //Time.fixedDeltaTime = 0.05f; // 30 FPS
         Time.timeScale = 0;
         state = mode.Edit;
 
@@ -164,30 +167,13 @@ public class UIController : MonoBehaviour
 
                 if (arMode)
                 {
-                    WorldObject.transform.localScale = Vector3.one;
+                    fingCon.enabled = true;
                     ground.GetComponent<MeshRenderer>().enabled = false;
-
                     camPos = ARCamera.transform.localPosition;
                     camRot = ARCamera.transform.localRotation;
-
-                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = true;
-                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = true;
                     ARCamera.clearFlags = CameraClearFlags.SolidColor;
-                    OutputCamera.depth = 2;
-                    ARCamera.GetComponent<TrackingObject>().UseAR = true;
-
-                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
-                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
-                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
-
-                    // Enable rendering:
-                    foreach (var component in rendererComponents)
-                        component.enabled = false;
-
-                    // Enable colliders:
-                    foreach (var component in colliderComponents)
-                        component.enabled = false;
-                    //-----------------------------------------------------------------------
+                    tracker.UseAR = true;
+                    showItemInWorld(false);
                 }
                 else
                     Time.timeScale = 1;
@@ -201,29 +187,13 @@ public class UIController : MonoBehaviour
             {
                 if (arMode)
                 {
-                    WorldObject.transform.localScale = Vector3.one;
+                    fingCon.enabled = false;
                     ground.GetComponent<MeshRenderer>().enabled = true;
-
-                    ARCamera.GetComponent<Vuforia.VuforiaBehaviour>().enabled = false;
-                    WorldObject.GetComponent<DefaultTrackableEventHandler>().enabled = false;
                     ARCamera.clearFlags = CameraClearFlags.Skybox;
-                    OutputCamera.depth = -10;
-                    ARCamera.GetComponent<TrackingObject>().UseAR = false;
-
-                    //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
-                    var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(true);
-                    var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(true);
-
-                    // Enable rendering:
-                    foreach (var component in rendererComponents)
-                        component.enabled = true;
-
-                    // Enable colliders:
-                    foreach (var component in colliderComponents)
-                        component.enabled = true;
-                    //-----------------------------------------------------------------------
+                    tracker.UseAR = false;
                     ARCamera.transform.localPosition = camPos;
                     ARCamera.transform.localRotation = camRot;
+                    showItemInWorld(true);
                 }
 
                 Time.timeScale = 0;
@@ -240,6 +210,21 @@ public class UIController : MonoBehaviour
         }
         else
             playSound("deny");
+    }
+
+    private void showItemInWorld(bool state)
+    {
+        //----------Copy from DefaultTrackableEventHandler (Vuforia)------------
+        var rendererComponents = WorldObject.GetComponentsInChildren<Renderer>(state);
+        var colliderComponents = WorldObject.GetComponentsInChildren<Collider>(state);
+
+        // Enable rendering:
+        foreach (var component in rendererComponents)
+            component.enabled = state;
+
+        // Enable colliders:
+        foreach (var component in colliderComponents)
+            component.enabled = state;
     }
 
     public void pauseButton()

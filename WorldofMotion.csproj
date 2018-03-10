@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -501,7 +499,7 @@
     <Compile Include="Assets\Scripts\Camera\DrawAxisLine.cs" />
     <Compile Include="Assets\Scripts\Camera\FingerColor.cs" />
     <Compile Include="Assets\Scripts\Camera\FocusCamera.cs" />
-    <Compile Include="Assets\Scripts\Camera\SetBGCameraFOV.cs" />
+    <Compile Include="Assets\Scripts\Camera\SetCameraFOV.cs" />
     <Compile Include="Assets\Scripts\Camera\TrackingObject.cs" />
     <Compile Include="Assets\Scripts\Game\CannonController.cs" />
     <Compile Include="Assets\Scripts\Game\GyroPlayer.cs" />
@@ -511,6 +509,8 @@
     <Compile Include="Assets\Scripts\Game\Timer.cs" />
     <Compile Include="Assets\Scripts\ItemObject\AxisTransition.cs" />
     <Compile Include="Assets\Scripts\ItemObject\DragNDrop.cs" />
+    <Compile Include="Assets\Scripts\ItemObject\Finger\FingerController.cs" />
+    <Compile Include="Assets\Scripts\ItemObject\Finger\YellowFinger.cs" />
     <Compile Include="Assets\Scripts\ItemObject\ItemObject.cs" />
     <Compile Include="Assets\Scripts\ItemObject\ItemObjectController.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\Ice.cs" />
