@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HelpButton : MonoBehaviour
 {
-    public GameObject overlay, dotLV1, dotLV2, dotLV3, table, nextBtt, prevBtt, helpSection;
+    public GameObject overlay, dotLV1, dotLV2, dotLV3, table, nextBtt, prevBtt, helpSection, choice;
     public Sprite[] gallery; //store all tutorial image
     public Image[] dot; //store dot that apear on screen
     public Sprite colorDot; //store color dot image
@@ -49,8 +49,22 @@ public class HelpButton : MonoBehaviour
     }
 
     /************* Cannon Shooter Mode *************/
+
+    public void openChoice()
+    {
+        choice.SetActive(true);
+        setElement(false);
+    }
+
+    public void closeChoice()
+    {
+        choice.SetActive(false);
+        setElement(true);
+    }
+
     public void openCSHelp()
     {
+        choice.SetActive(false);
         overlay.SetActive(true);
         helpSection.SetActive(true);
         switch (PlayerPrefs.GetInt("CannonShooterMode"))
