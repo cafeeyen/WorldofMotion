@@ -12,6 +12,8 @@ public class CS_UIController : MonoBehaviour
     public Animator calTab;
     public SceneLoader sceneLoader;
     public HelpButton helpBtt;
+    public Slider powerBar;
+    public InputField powerText;
 
     private int countRule = 0;
 
@@ -41,6 +43,12 @@ public class CS_UIController : MonoBehaviour
                 VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
                 break;
         }
+        powerBar.onValueChanged.AddListener(changeSlideValue);
+    }
+
+    private void changeSlideValue(float value)
+    {
+        powerText.text = powerBar.value.ToString();
     }
 
     private void OnVuforiaStarted()

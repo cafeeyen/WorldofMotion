@@ -11,6 +11,7 @@ public class CannonController : MonoBehaviour
     public Camera sideCam, ballCam;
     public LineRenderer arcLine, groundLine;
     public CS_UIController csCon;
+    public Slider powerBar;
 
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
@@ -85,6 +86,7 @@ public class CannonController : MonoBehaviour
                     var clamp = Mathf.Clamp(int.Parse(powerText.text), 0, 30);
                     powerText.text = clamp.ToString();
                     power = int.Parse(powerText.text);
+                    powerBar.value = power;
                 }
                 catch { Debug.Log("Power input error."); }
             }

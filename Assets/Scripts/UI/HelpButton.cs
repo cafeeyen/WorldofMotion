@@ -146,10 +146,13 @@ public class HelpButton : MonoBehaviour
 
     private void setElement(bool active)
     {
-        cannon.SetActive(active);
-        maewnam.SetActive(active);
-        cannonball.SetActive(active);
-        sparkle.SetActive(active);
+        if(PlayerPrefs.GetInt("CannonShooterMode") != 5)
+        {
+            cannon.SetActive(active);
+            maewnam.SetActive(active);
+            cannonball.SetActive(active);
+            sparkle.SetActive(active);
+        }
     }
 
     /************* Editor Mode *************/
