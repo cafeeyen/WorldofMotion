@@ -20,7 +20,9 @@ public class MainPage : MonoBehaviour
         // PlayerPrefs.DeleteAll();
         // PlayerPrefs.SetInt("CsLv1Star", 3);
         // PlayerPrefs.SetInt("CsLv2Star", 3);
+        // PlayerPrefs.SetInt("CSLv2", 1);
         // PlayerPrefs.SetInt("CsLv3Star", 3);
+        // PlayerPrefs.SetInt("CSLv3", 1);
 
 
         // ***************************** Set defaut setting here *****************************

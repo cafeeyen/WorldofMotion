@@ -48,6 +48,7 @@ public class HelpButton : MonoBehaviour
         }
     }
 
+    /************* Cannon Shooter Mode *************/
     public void openCSHelp()
     {
         overlay.SetActive(true);
@@ -55,88 +56,22 @@ public class HelpButton : MonoBehaviour
         switch (PlayerPrefs.GetInt("CannonShooterMode"))
         {
             case 1:
+                page = 0;
                 dotLV1.SetActive(true);
                 break;
             case 2:
+                page = 12;
                 dotLV2.SetActive(true);
                 break;
             case 3:
+                page = 16;
                 dotLV3.SetActive(true);
                 break;
         }
+        changeImage();
 
         if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
             setElement(false);
-    }
-
-    public void openEditorHelp()
-    {
-        helpSection.SetActive(true);
-    }
-
-    public void openLesson(int num) //openHelp
-    {
-        lesson = num;
-        overlay.SetActive(true);
-        nextBtt.SetActive(true);
-        prevBtt.SetActive(true);
-
-        if (page != 0)
-            dot[page - 1].sprite = blackDot;
-
-        switch (lesson)
-        {
-            case 1: //force
-                nextBtt.SetActive(false);
-                prevBtt.SetActive(false);
-                break;
-            case 2: //friction
-            case 3: //gravity
-            case 4: //momentum
-                dotLV1.SetActive(true);
-                break;
-            case 5: //motion;
-                dotLV2.SetActive(true);
-                break;
-        }
-        page = 1;
-        oldPage = 1;
-        lessonAni.SetInteger("Subject", num);
-        lessonAni.SetInteger("Page", 1);
-        dot[page - 1].sprite = colorDot;
-        lessonBtt.SetActive(false);
-    }
-
-    public void closeEditorHelp() //closeHelp
-    {
-        switch (lesson)
-        {
-            case 1: //force
-                break;
-            case 2: //friction
-            case 3: //gravity
-            case 4: //momentum
-                nextBtt.SetActive(false);
-                prevBtt.SetActive(false);
-                dotLV1.SetActive(false);
-                break;
-            case 5: //motion
-                nextBtt.SetActive(false);
-                prevBtt.SetActive(false);
-                dotLV2.SetActive(false);
-                break;
-            default: // 0 | close help
-                helpSection.SetActive(false);
-                overlay.SetActive(false);
-                break;
-        }
-        if (lesson != 0)
-        {
-            lessonAni.SetInteger("Subject", 0);
-            lessonAni.SetInteger("Page", 0);
-            lessonBtt.SetActive(true);
-        }
-        lesson = 0;
     }
 
     public void closeCSHelp()
@@ -155,6 +90,8 @@ public class HelpButton : MonoBehaviour
                 dotLV3.SetActive(false);
                 break;
         }
+        dot[page].sprite = blackDot;
+
         if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
             setElement(true);
     }
@@ -193,6 +130,88 @@ public class HelpButton : MonoBehaviour
         }
     }
 
+    private void setElement(bool active)
+    {
+        cannon.SetActive(active);
+        maewnam.SetActive(active);
+        cannonball.SetActive(active);
+        sparkle.SetActive(active);
+    }
+
+    /************* Editor Mode *************/
+    public void openEditorHelp()
+    {
+        helpSection.SetActive(true);
+    }
+
+    public void openLesson(int num) //openHelp
+    {
+        lesson = num;
+        overlay.SetActive(true);
+        nextBtt.SetActive(true);
+        prevBtt.SetActive(true);
+
+        switch (lesson)
+        {
+            case 1: //force
+                nextBtt.SetActive(false);
+                prevBtt.SetActive(false);
+                break;
+            case 2: //friction
+            case 3: //gravity
+            case 4: //momentum
+                dot[0].sprite = colorDot;
+                dotLV1.SetActive(true);
+                break;
+            case 5: //motion
+                dot[3].sprite = colorDot;
+                dotLV2.SetActive(true);
+                break;
+        }
+
+        page = 1;
+        oldPage = 1;
+        lessonAni.SetInteger("Subject", num);
+        lessonAni.SetInteger("Page", 1);
+        lessonBtt.SetActive(false);
+    }
+
+    public void closeEditorHelp() //closeHelp
+    {
+        switch (lesson)
+        {
+            case 1: //force
+                break;
+            case 2: //friction
+            case 3: //gravity
+            case 4: //momentum
+                nextBtt.SetActive(false);
+                prevBtt.SetActive(false);
+                dot[page - 1].sprite = blackDot;
+                dotLV1.SetActive(false);
+                break;
+            case 5: //motion
+                nextBtt.SetActive(false);
+                prevBtt.SetActive(false);
+                dot[page + 2].sprite = blackDot;
+                dotLV2.SetActive(false);
+                break;
+            default: // 0 | close help
+                helpSection.SetActive(false);
+                overlay.SetActive(false);
+                break;
+        }
+
+        if (lesson != 0)
+        {
+            lessonAni.SetInteger("Subject", 0);
+            lessonAni.SetInteger("Page", 0);
+            lessonBtt.SetActive(true);
+            lesson = 0;
+        }
+    }
+
+    /************* All Mode *************/
     public void changePage(bool nextPage)
     {
         oldPage = page;
@@ -223,28 +242,23 @@ public class HelpButton : MonoBehaviour
         if (PlayerPrefs.GetInt("CannonShooterMode") == 0)
         {
             lessonAni.SetInteger("Page", page);
+            if (lesson == 5)
+            {
+                // +3 -1 = +2
+                dot[oldPage + 2].sprite = blackDot;
+                dot[page + 2].sprite = colorDot;
+            }
+            else if (lesson != 0)
+            {
+                dot[oldPage - 1].sprite = blackDot;
+                dot[page - 1].sprite = colorDot;
+            }
         }
         else
+        {
+            dot[oldPage].sprite = blackDot;
+            dot[page].sprite = colorDot;
             displayImage.sprite = gallery[page];
-
-        if (lesson == 5)
-        {
-            // +3 -1 = +2
-            dot[oldPage + 2].sprite = blackDot;
-            dot[page + 2].sprite = colorDot;
         }
-        else
-        {
-            dot[oldPage-1].sprite = blackDot;
-            dot[page-1].sprite = colorDot;
-        }
-    }
-
-    private void setElement(bool active)
-    {
-        cannon.SetActive(active);
-        maewnam.SetActive(active);
-        cannonball.SetActive(active);
-        sparkle.SetActive(active);
-    }
+    }    
 }
