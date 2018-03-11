@@ -175,6 +175,10 @@ public class MainPage : MonoBehaviour
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
+            case "lesson":
+                PlayerPrefs.SetInt("Lesson", 1);
+                sceneLoader.loadNewScene(5);
+                break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
             case "BallRoller": sceneLoader.loadNewScene(2); break;

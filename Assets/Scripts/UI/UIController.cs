@@ -14,7 +14,8 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny, ground;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground, ruleLesson;
+    public GameObject[] rulePage;
     public Button saveBtt, exBtt, undoBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
@@ -28,6 +29,7 @@ public class UIController : MonoBehaviour
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
     private bool arMode = false;
+    private int ruleNumber = 0;
     private Vector3 camPos;
     private Quaternion camRot;
 
@@ -52,6 +54,12 @@ public class UIController : MonoBehaviour
             /* Tutorial */
             PlayerPrefs.SetInt("EditorMode", 1);
         }
+        else if(PlayerPrefs.GetInt("Lesson") == 1)
+        {
+            /* Tutorial for each lesson*/
+            openRules();
+        }
+        
     }
 
     private void OnDisable()
@@ -278,5 +286,31 @@ public class UIController : MonoBehaviour
             undoBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
         else
             undoBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
+    }
+
+    public void openRules()
+    {
+        ruleLesson.SetActive(true);
+    }
+
+    public void closeRules()
+    {
+        ruleLesson.SetActive(false);
+    }
+
+    public void nextRule()
+    {
+        if (ruleNumber < rulePage.Length-1)
+        {
+            ruleNumber++;
+            rulePage[ruleNumber - 1].SetActive(false);
+            rulePage[ruleNumber].SetActive(true);
+        }
+        else
+        {  
+            rulePage[ruleNumber].SetActive(false);
+            ruleNumber = 0;
+            closeRules();
+        }
     }
 }
