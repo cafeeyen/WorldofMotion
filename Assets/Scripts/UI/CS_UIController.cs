@@ -99,12 +99,12 @@ public class CS_UIController : MonoBehaviour
     public void NextRule()
     {
         countRule++;
-        if(countRule <= 7)
+        if(countRule <= 6)
         {
             RuleImage[countRule].SetActive(true);
             RuleImage[countRule - 1].SetActive(false);
         }
-        else if(countRule > 7)
+        else if(countRule > 6)
         {
             RuleImage[countRule-1].SetActive(false);
             rule.SetActive(false);
