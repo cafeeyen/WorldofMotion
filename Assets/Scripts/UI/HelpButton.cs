@@ -170,6 +170,11 @@ public class HelpButton : MonoBehaviour
         nextBtt.SetActive(true);
         prevBtt.SetActive(true);
 
+        if(PlayerPrefs.GetInt("Lesson") == 1)
+        {
+            openEditorHelp();
+        }
+
         switch (lesson)
         {
             case 1: //force
@@ -197,6 +202,11 @@ public class HelpButton : MonoBehaviour
 
     public void closeEditorHelp() //closeHelp
     {
+        if (PlayerPrefs.GetInt("Lesson") == 1)
+        {
+            helpSection.SetActive(false);
+            overlay.SetActive(false);
+        }
         switch (lesson)
         {
             case 1: //force
