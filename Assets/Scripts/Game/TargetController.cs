@@ -5,7 +5,7 @@ public class TargetController : MonoBehaviour
 {
     public TargetDetail target;
     public ParticleSystem sparkle;
-    public GameObject cannon, star1, star2, star3, overlay, particle,levelbtt, homebtt;
+    public GameObject cannon, star1, star2, star3, overlay, particle,levelbtt, homebtt, powerBar;
 
     private AudioClip HitEffect;
     private SkinnedMeshRenderer meshRen;
@@ -40,7 +40,9 @@ public class TargetController : MonoBehaviour
                 else
                 {
                     cannon.SetActive(false);
+                    powerBar.SetActive(false);
                     PlayerPrefs.SetInt("CSLv" + (PlayerPrefs.GetInt("CannonShooterMode") + 1), 1);
+
                     var cnt = cannon.GetComponent<CannonController>().getShootCnt();
                     if (cnt == 5)
                     {

@@ -4,7 +4,7 @@ using Vuforia;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpSection;
+    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpSection, powerbarGO;
     public RenderTexture sideCamRT, cutCamRT;
     public GameObject[] RuleImage;
     public Button Rule;
@@ -94,6 +94,7 @@ public class CS_UIController : MonoBehaviour
         if(helpChk)
             helpSection.SetActive(false);
         setElement(false);
+        powerbarGO.SetActive(true);
     }
 
     public void NextRule()
@@ -117,9 +118,14 @@ public class CS_UIController : MonoBehaviour
         overlay.SetActive(false);
         countRule = 0;
         if (!overlay.activeSelf)
+        {
             setElement(true);
+            powerbarGO.SetActive(true);
+        }
+            
         if (helpChk)
             helpBtt.openCSHelp();
+        
     }
 
     public void backToSelectLv()
