@@ -4,7 +4,7 @@ using Vuforia;
 
 public class CS_UIController : MonoBehaviour
 {
-    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpSection;
+    public GameObject bigImage, overlay, tutorialAskPanel, canyon, ground, rule, cannon, maewnam, cannonball, sparkle, helpSection, powerbarGO;
     public RenderTexture sideCamRT, cutCamRT;
     public GameObject[] RuleImage;
     public Button Rule;
@@ -12,6 +12,8 @@ public class CS_UIController : MonoBehaviour
     public Animator calTab;
     public SceneLoader sceneLoader;
     public HelpButton helpBtt;
+    public Slider powerBar;
+    public InputField powerText;
 
     private int countRule = 0;
 
@@ -41,6 +43,12 @@ public class CS_UIController : MonoBehaviour
                 VuforiaARController.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
                 break;
         }
+        powerBar.onValueChanged.AddListener(changeSlideValue);
+    }
+
+    private void changeSlideValue(float value)
+    {
+        powerText.text = powerBar.value.ToString();
     }
 
     private void OnVuforiaStarted()
@@ -86,17 +94,18 @@ public class CS_UIController : MonoBehaviour
         if(helpChk)
             helpSection.SetActive(false);
         setElement(false);
+        powerbarGO.SetActive(true);
     }
 
     public void NextRule()
     {
         countRule++;
-        if(countRule <= 7)
+        if(countRule <= 6)
         {
             RuleImage[countRule].SetActive(true);
             RuleImage[countRule - 1].SetActive(false);
         }
-        else if(countRule > 7)
+        else if(countRule > 6)
         {
             RuleImage[countRule-1].SetActive(false);
             rule.SetActive(false);
@@ -109,9 +118,14 @@ public class CS_UIController : MonoBehaviour
         overlay.SetActive(false);
         countRule = 0;
         if (!overlay.activeSelf)
+        {
             setElement(true);
+            powerbarGO.SetActive(true);
+        }
+            
         if (helpChk)
             helpBtt.openCSHelp();
+        
     }
 
     public void backToSelectLv()

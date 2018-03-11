@@ -11,6 +11,7 @@ public class CannonController : MonoBehaviour
     public Camera sideCam, ballCam;
     public LineRenderer arcLine, groundLine;
     public CS_UIController csCon;
+    public Slider powerBar;
 
     private float maxHeight = 0, maxDist = 0, maxTime = 0;
     private float angle = 0, height = 0, power = 0;
@@ -72,7 +73,7 @@ public class CannonController : MonoBehaviour
             heightText.text = string.Format("ความสูงจากจุดเริ่ม {0} m.", System.Math.Round(maxHeight, 2));
             disText.text = string.Format("ระยะทางในแนวราบ {0} m.", System.Math.Round(maxDist, 2));
             timeText.text = string.Format("เวลาที่ลอยกลางอากาศ {0} s.", System.Math.Round(maxTime, 2));
-            if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
+            if (!modeAR)
                 countText.text = string.Format("= {0}", shootCnt);
 
             if (string.IsNullOrEmpty(powerText.text))
@@ -85,6 +86,7 @@ public class CannonController : MonoBehaviour
                     var clamp = Mathf.Clamp(int.Parse(powerText.text), 0, 30);
                     powerText.text = clamp.ToString();
                     power = int.Parse(powerText.text);
+                    powerBar.value = power;
                 }
                 catch { Debug.Log("Power input error."); }
             }

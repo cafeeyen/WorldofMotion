@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 37f8e07c196463a4a961fb3ab3ada204
-timeCreated: 1517818566
+timeCreated: 1520739250
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -91,10 +91,10 @@ TextureImporter:
       name: rule7_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 14
-        width: 310
-        height: 86
+        x: 0
+        y: 0
+        width: 350
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
