@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class LessonItem : MonoBehaviour
 {
     public Text cntText;
+    public GameObject SuccessWords;
     public InputField veloX, veloY, veloZ;
     public Timer timer;
     public ProblemGenerator problemGenerator;
@@ -115,12 +116,21 @@ public class LessonItem : MonoBehaviour
             {
                 PlayerPrefs.SetInt("LessonMotion", 1);
                 //Open UI
+                SuccessWords.SetActive(true);
             }
         }
         else
             cnt = 0;
         transform.position = startPoint;
     }
+
+    public void Replay()
+    {
+        SuccessWords.SetActive(false);
+        cnt = 0;
+        cntText.text = "Problem Solved : " + cnt;
+    }
+
 
     public void speedUp()
     {
