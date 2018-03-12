@@ -5,10 +5,9 @@ using System.Linq;
 
 public class PropWindow : MonoBehaviour
 {
-    public Text posX, posY, posZ, scaleX, scaleY, scaleZ, mass, staticfic, dynamicfic;
-    public Slider sliderX, sliderY, sliderZ;
+    public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
+    public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
-    public InputField veloX, veloY, veloZ;
 
     private GameObject itemObject;
     private TapGesture gesture;
@@ -23,13 +22,13 @@ public class PropWindow : MonoBehaviour
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
-        sliderX.onValueChanged.AddListener(changeSlideValue);
-        sliderY.onValueChanged.AddListener(changeSlideValue);
-        sliderZ.onValueChanged.AddListener(changeSlideValue);
+        sliderX.onValueChanged.AddListener(changeScaleValue);
+        sliderY.onValueChanged.AddListener(changeScaleValue);
+        sliderZ.onValueChanged.AddListener(changeScaleValue);
 
-        veloX.onEndEdit.AddListener(changeVelocity);
-        veloY.onEndEdit.AddListener(changeVelocity);
-        veloZ.onEndEdit.AddListener(changeVelocity);
+        veloX.onValueChanged.AddListener(changeVeloValue);
+        veloY.onValueChanged.AddListener(changeVeloValue);
+        veloZ.onValueChanged.AddListener(changeVeloValue);
 
         // Set rotate toggle
         r_deg30 = GameObject.Find("30deg").GetComponent<Toggle>();
@@ -112,9 +111,9 @@ public class PropWindow : MonoBehaviour
             mass.text = (itemObject.transform.localScale.x * itemObject.transform.localScale.y * itemObject.transform.localScale.z).ToString();
             changeFriction(itemObjectSc.getSurType());
 
-            veloX.text = itemObjectSc.Velocity.x.ToString();
-            veloY.text = itemObjectSc.Velocity.y.ToString();
-            veloZ.text = itemObjectSc.Velocity.z.ToString();
+            veloX.value = itemObjectSc.Velocity.x;
+            veloY.value = itemObjectSc.Velocity.y;
+            veloZ.value = itemObjectSc.Velocity.z;
 
             e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
             // Finish change, cancel change state
@@ -128,7 +127,7 @@ public class PropWindow : MonoBehaviour
         dynamicfic.text = surType.getDynamicFiction().ToString("F3");
     }
 
-    private void changeSlideValue(float value)
+    private void changeScaleValue(float value)
     {
         if (UICon.state == UIController.mode.Edit)
         {
@@ -147,43 +146,15 @@ public class PropWindow : MonoBehaviour
         }
     }
 
-    private void changeVelocity(string value)
+    private void changeVeloValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit && !changeState)
-        {
-            if (string.IsNullOrEmpty(veloX.text))
-                veloX.text = "0";
-            if (string.IsNullOrEmpty(veloY.text))
-                veloY.text = "0";
-            if (string.IsNullOrEmpty(veloZ.text))
-                veloZ.text = "0";
+        if (!changeState)
+            itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
 
-            var test = 0;
-            try
-            {
-                var x = Mathf.Clamp(int.Parse(veloX.text), -30, 30);
-                test++;
-                var y = Mathf.Clamp(int.Parse(veloY.text), -30, 30);
-                test++;
-                var z = Mathf.Clamp(int.Parse(veloZ.text), -30, 30);
-
-                itemObject.GetComponent<ItemObject>().Velocity = new Vector3(x, y, z);
-
-                veloX.text = x.ToString();
-                veloY.text = y.ToString();
-                veloZ.text = z.ToString();
-            }
-            catch
-            {
-                Debug.Log("Power input error.");
-                if(test == 0)
-                    veloX.text = "0";
-                else if(test == 1)
-                    veloY.text = "0";
-                else
-                    veloZ.text = "0";
-            }
-        }
+        // Change velo text
+        veloXT.text = veloX.value.ToString();
+        veloYT.text = veloY.value.ToString();
+        veloZT.text = veloZ.value.ToString();
     }
 
     // Tapped send state before trigger

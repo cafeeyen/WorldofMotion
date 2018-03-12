@@ -5,7 +5,8 @@ public class LessonItem : MonoBehaviour
 {
     public Text cntText;
     public GameObject SuccessWords;
-    public InputField veloX, veloY, veloZ;
+    public InputField veloZ;
+    public Slider sliderBar;
     public Timer timer;
     public ProblemGenerator problemGenerator;
     public int speed = 2;
@@ -28,52 +29,33 @@ public class LessonItem : MonoBehaviour
         state = State.Stop;
         rb = GetComponent<Rigidbody>();
 
-        veloX.onEndEdit.AddListener(changeVelocity);
-        veloY.onEndEdit.AddListener(changeVelocity);
         veloZ.onEndEdit.AddListener(changeVelocity);
 
-        if(PlayerPrefs.GetInt("Lesson") == 1)
-        {
-            veloX.interactable = false;
-            veloY.interactable = false;
-        }
+        sliderBar.onValueChanged.AddListener(changeSlideValue);
     }
 
     void FixedUpdate(){}
 
+    private void changeSlideValue(float value)
+    {
+        veloZ.text = sliderBar.value.ToString();
+        rb.velocity = new Vector3(0, 0, sliderBar.value);
+    }
+
     private void changeVelocity(string value)
     {
-        if (string.IsNullOrEmpty(veloX.text))
-            veloX.text = "0";
-        if (string.IsNullOrEmpty(veloY.text))
-            veloY.text = "0";
         if (string.IsNullOrEmpty(veloZ.text))
             veloZ.text = "0";
-
-        var test = 0;
         try
         {
-            var x = Mathf.Clamp(float.Parse(veloX.text), -30.0f, 30.0f);
-            test++;
-            var y = Mathf.Clamp(float.Parse(veloY.text), -30.0f, 30.0f);
-            test++;
             var z = Mathf.Clamp(float.Parse(veloZ.text), -30.0f, 30.0f);
-
-            veloX.text = x.ToString();
-            veloY.text = y.ToString();
             veloZ.text = z.ToString();
 
-            rb.velocity = new Vector3(x, y, z);
+            rb.velocity = new Vector3(0, 0, z);
         }
         catch
         {
             Debug.Log("Power input error.");
-            if (test == 0)
-                veloX.text = "0";
-            else if (test == 1)
-                veloY.text = "0";
-            else
-                veloZ.text = "0";
         }
     }
 
@@ -81,14 +63,12 @@ public class LessonItem : MonoBehaviour
     {
         if (state == State.Play && other.name == "CheckPoint")
             check = true;
-        Debug.Log(check);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (state == State.Play && other.name == "CheckPoint")
             check = false;
-        Debug.Log(check);
     }
 
     public void Play()
@@ -109,18 +89,21 @@ public class LessonItem : MonoBehaviour
         if (check)
         {
             cnt++;
-            cntText.text = "Problem Solved : " + cnt;
-            problemGenerator.newProblem();
-
-            if (cnt == 5)
+            if (cnt == 5 && PlayerPrefs.GetInt("LessonMotion") == 0)
             {
                 PlayerPrefs.SetInt("LessonMotion", 1);
                 //Open UI
                 SuccessWords.SetActive(true);
             }
+            else
+                problemGenerator.newProblem();
         }
         else
+        {
+            timer.setTimer(time);
             cnt = 0;
+        }
+        cntText.text = "Problem Solved : " + cnt;
         transform.position = startPoint;
     }
 
@@ -130,7 +113,6 @@ public class LessonItem : MonoBehaviour
         cnt = 0;
         cntText.text = "Problem Solved : " + cnt;
     }
-
 
     public void speedUp()
     {

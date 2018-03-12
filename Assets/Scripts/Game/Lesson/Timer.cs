@@ -4,13 +4,12 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public LessonItem item;
+    public Text timer;
 
-    private Text timer;
     private float probTime, time;
 
     private void OnEnable()
     {
-        timer = GetComponent<Text>();
         probTime = 0;
         time = 0;
     }
@@ -27,7 +26,6 @@ public class Timer : MonoBehaviour
         {
             Time.timeScale = 0;
             item.checkAns();
-            setTimer(probTime);
         }
     }
 

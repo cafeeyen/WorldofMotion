@@ -26,7 +26,6 @@ public class MainPage : MonoBehaviour
 
 
         // ***************************** Set defaut setting here *****************************
-        Time.fixedDeltaTime = 0.02f; // 50 FPS | will change to 30 FPS in Editor mode
         PlayerPrefs.SetInt("CannonShooterMode", 0);
         // ************************************************************************************
 
@@ -167,6 +166,7 @@ public class MainPage : MonoBehaviour
         {
             case "Experiment": slidePage(bttName); break;
             case "New":
+                Time.timeScale = 0;
                 PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 0);
                 sceneLoader.loadNewScene(1);
