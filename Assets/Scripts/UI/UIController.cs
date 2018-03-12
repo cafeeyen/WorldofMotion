@@ -64,6 +64,10 @@ public class UIController : MonoBehaviour
             /* Tutorial for each lesson*/
             openRules();
         }
+        else if (PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 1)
+        {
+            problemGenerator.newProblem();
+        }
     }
 
     private void OnDisable()
