@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     public Camera ARCamera;
     public TrackingObject tracker;
     public FingerController fingCon;
+    public ProblemGenerator problemGenerator;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -39,27 +40,30 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0;
         state = mode.Edit;
 
+        sl = GetComponent<SceneLoader>();
+        bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
+        bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
+        audioSource = GetComponent<AudioSource>();
+
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
-        itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
-        WorldObject = GameObject.Find("WorldObject");
-        audioSource = GetComponent<AudioSource>();
-        bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
-        bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
-        sl = GetComponent<SceneLoader>();
-        // Check if this open for first time
-        if (PlayerPrefs.GetInt("EditorMode") == 0)
+        if (PlayerPrefs.GetInt("Lesson") == 0)
         {
-            /* Tutorial */
-            PlayerPrefs.SetInt("EditorMode", 1);
+            itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
+            WorldObject = GameObject.Find("WorldObject");
+            // Check if this open for first time
+            if (PlayerPrefs.GetInt("EditorMode") == 0)
+            {
+                /* Tutorial */
+                PlayerPrefs.SetInt("EditorMode", 1);
+            }
         }
-        else if(PlayerPrefs.GetInt("Lesson") == 1)
+        else if(PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 0)
         {
             /* Tutorial for each lesson*/
             openRules();
         }
-        
     }
 
     private void OnDisable()
@@ -296,6 +300,7 @@ public class UIController : MonoBehaviour
     public void closeRules()
     {
         ruleLesson.SetActive(false);
+        problemGenerator.newProblem();
     }
 
     public void nextRule()
