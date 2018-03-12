@@ -5,8 +5,7 @@ using TouchScript.Gestures.TransformGestures;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform pivot;
-    public Transform cam;
+    public Transform pivot, cam;
     public ScreenTransformGesture MoveGesture;
     public ScreenTransformGesture MultiTouchGesture;
 
@@ -17,19 +16,24 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         MoveGesture.Transformed += moveHandler;
-        MultiTouchGesture.Transformed += multiTouchHandler;
+        if (PlayerPrefs.GetInt("Lesson") == 0)
+            MultiTouchGesture.Transformed += multiTouchHandler;
     }
 
     private void OnDisable()
     {
         MoveGesture.Transformed -= moveHandler;
-        MultiTouchGesture.Transformed -= multiTouchHandler;
+        if (PlayerPrefs.GetInt("Lesson") == 0)
+            MultiTouchGesture.Transformed -= multiTouchHandler;
     } 
 
     private void moveHandler(object sender, System.EventArgs e)
     {
         // Move camera
-        pivot.localPosition += cam.rotation * MoveGesture.DeltaPosition * -moveSpeed;
+        if (PlayerPrefs.GetInt("Lesson") == 0)
+            pivot.localPosition += cam.rotation * MoveGesture.DeltaPosition * -moveSpeed;
+        else
+            pivot.localPosition += new Vector3(MoveGesture.DeltaPosition.x, 0, MoveGesture.DeltaPosition.y) * -moveSpeed;
     }
 
     private void multiTouchHandler(object sender, System.EventArgs e)

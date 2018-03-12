@@ -167,6 +167,7 @@ public class MainPage : MonoBehaviour
         {
             case "Experiment": slidePage(bttName); break;
             case "New":
+                PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 0);
                 sceneLoader.loadNewScene(1);
                 break;
@@ -181,7 +182,7 @@ public class MainPage : MonoBehaviour
                 break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
-            case "BallRoller": sceneLoader.loadNewScene(2); break;
+            //case "BallRoller": sceneLoader.loadNewScene(2); break;
             case "CannonShooter": slidePage(bttName); break;
             case "CSLv1":
                 PlayerPrefs.SetInt("CannonShooterMode", 1);
