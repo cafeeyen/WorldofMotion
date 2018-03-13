@@ -14,11 +14,13 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny, ground;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground, ruleLesson;
+    public GameObject[] rulePage;
     public Button saveBtt, exBtt, undoBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
     public FingerController fingCon;
+    public ProblemGenerator problemGenerator;
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
@@ -28,6 +30,7 @@ public class UIController : MonoBehaviour
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
     private bool arMode = false;
+    private int ruleNumber = 0;
     private Vector3 camPos;
     private Quaternion camRot;
 
@@ -37,20 +40,33 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0;
         state = mode.Edit;
 
+        sl = GetComponent<SceneLoader>();
+        bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
+        bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
+        audioSource = GetComponent<AudioSource>();
+
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
-        itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
-        WorldObject = GameObject.Find("WorldObject");
-        audioSource = GetComponent<AudioSource>();
-        bttClk = (AudioClip)Resources.Load("Audios/ButtonClick", typeof(AudioClip));
-        bttDeny = (AudioClip)Resources.Load("Audios/ButtonClickDeny", typeof(AudioClip));
-        sl = GetComponent<SceneLoader>();
-        // Check if this open for first time
-        if (PlayerPrefs.GetInt("EditorMode") == 0)
+        if (PlayerPrefs.GetInt("Lesson") == 0)
         {
-            /* Tutorial */
-            PlayerPrefs.SetInt("EditorMode", 1);
+            itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
+            WorldObject = GameObject.Find("WorldObject");
+            // Check if this open for first time
+            if (PlayerPrefs.GetInt("EditorMode") == 0)
+            {
+                /* Tutorial */
+                PlayerPrefs.SetInt("EditorMode", 1);
+            }
+        }
+        else if(PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 0)
+        {
+            /* Tutorial for each lesson*/
+            openRules();
+        }
+        else if (PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 1)
+        {
+            problemGenerator.newProblem();
         }
     }
 
@@ -278,5 +294,32 @@ public class UIController : MonoBehaviour
             undoBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
         else
             undoBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
+    }
+
+    public void openRules()
+    {
+        ruleLesson.SetActive(true);
+    }
+
+    public void closeRules()
+    {
+        ruleLesson.SetActive(false);
+        problemGenerator.newProblem();
+    }
+
+    public void nextRule()
+    {
+        if (ruleNumber < rulePage.Length-1)
+        {
+            ruleNumber++;
+            rulePage[ruleNumber - 1].SetActive(false);
+            rulePage[ruleNumber].SetActive(true);
+        }
+        else
+        {  
+            rulePage[ruleNumber].SetActive(false);
+            ruleNumber = 0;
+            closeRules();
+        }
     }
 }

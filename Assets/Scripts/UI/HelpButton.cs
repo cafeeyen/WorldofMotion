@@ -147,7 +147,7 @@ public class HelpButton : MonoBehaviour
 
     private void setElement(bool active)
     {
-        if(PlayerPrefs.GetInt("CannonShooterMode") != 5)
+        if (PlayerPrefs.GetInt("CannonShooterMode") != 5)
         {
             cannon.SetActive(active);
             maewnam.SetActive(active);
@@ -161,14 +161,23 @@ public class HelpButton : MonoBehaviour
     public void openEditorHelp()
     {
         helpSection.SetActive(true);
+        if (PlayerPrefs.GetInt("Lesson") == 1)
+            openLesson(5);
     }
 
     public void openLesson(int num) //openHelp
     {
+        Debug.Log(num);
         lesson = num;
         overlay.SetActive(true);
         nextBtt.SetActive(true);
         prevBtt.SetActive(true);
+
+        page = 1;
+        oldPage = 1;
+        lessonAni.SetInteger("Subject", num);
+        lessonAni.SetInteger("Page", 1);
+        lessonBtt.SetActive(false);
 
         switch (lesson)
         {
@@ -187,12 +196,6 @@ public class HelpButton : MonoBehaviour
                 dotLV2.SetActive(true);
                 break;
         }
-
-        page = 1;
-        oldPage = 1;
-        lessonAni.SetInteger("Subject", num);
-        lessonAni.SetInteger("Page", 1);
-        lessonBtt.SetActive(false);
     }
 
     public void closeEditorHelp() //closeHelp
@@ -227,6 +230,13 @@ public class HelpButton : MonoBehaviour
             lessonAni.SetInteger("Page", 0);
             lessonBtt.SetActive(true);
             lesson = 0;
+        }
+
+        // Lesson Tutorial
+        if (PlayerPrefs.GetInt("Lesson") == 1)
+        {
+            helpSection.SetActive(false);
+            overlay.SetActive(false);
         }
     }
 
@@ -279,5 +289,5 @@ public class HelpButton : MonoBehaviour
             dot[page].sprite = colorDot;
             displayImage.sprite = gallery[page];
         }
-    }    
+    }
 }
