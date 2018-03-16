@@ -500,9 +500,11 @@
     <Compile Include="Assets\Scripts\Camera\FocusCamera.cs" />
     <Compile Include="Assets\Scripts\Camera\SetCameraFOV.cs" />
     <Compile Include="Assets\Scripts\Camera\TrackingObject.cs" />
+    <Compile Include="Assets\Scripts\CannonShooter\CannonCameraController.cs" />
+    <Compile Include="Assets\Scripts\CannonShooter\CannonGameController.cs" />
+    <Compile Include="Assets\Scripts\CannonShooter\CannonTargetController.cs" />
+    <Compile Include="Assets\Scripts\CannonShooter\CannonUIController.cs" />
     <Compile Include="Assets\Scripts\Game\CannonShooter\CannonController.cs" />
-    <Compile Include="Assets\Scripts\Game\CannonShooter\TargetController.cs" />
-    <Compile Include="Assets\Scripts\Game\CannonShooter\TargetDetail.cs" />
     <Compile Include="Assets\Scripts\Game\Lesson\LessonItem.cs" />
     <Compile Include="Assets\Scripts\Game\Lesson\ProblemGenerator.cs" />
     <Compile Include="Assets\Scripts\Game\Lesson\Timer.cs" />
