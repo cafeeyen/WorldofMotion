@@ -22,15 +22,6 @@ public class CannonController : MonoBehaviour
     private AudioClip ShootClk;
     private bool modeAR;
 
-    /*
-     * CannonShooterMode
-     * 1 : Lv1
-     * 2 : Lv2
-     * 3 : Lv3
-     * 4 : Unlimited // Cancle(Merge with 1-3)
-     * 5 : AR
-    */
-
     private void OnEnable()
     {        
         cannon.Tapped += ShootCannon;
@@ -113,11 +104,6 @@ public class CannonController : MonoBehaviour
                 drawCurve();
             }
         }
-
-        cannonBall.transform.LookAt(-cannonBall.GetComponent<Rigidbody>().velocity);
-        if(cannonBall.transform.position.y < -10)
-            // We don't want ball position to limitbreak~
-            resetBall();
     }
 
     private void ShootCannon(object sender, System.EventArgs e)
@@ -168,7 +154,7 @@ public class CannonController : MonoBehaviour
             {
                 // Reset ball camera depth(cutsceneCam)
                 ballCam.depth = -2;
-
+                /*
                 if (target.GetComponent<TargetDetail>().Detected)
                 {
                     //Swap camera
@@ -183,7 +169,7 @@ public class CannonController : MonoBehaviour
                 {
                     shootedTarget.transform.position = new Vector3(0, 0, -100);
                     drawCurve();
-                }
+                }*/
             }
             else
                 drawCurve();
@@ -192,18 +178,7 @@ public class CannonController : MonoBehaviour
 
     private void resetBall()
     {
-        // Reset current force and position(reuse ball)
-        cannonBall.GetComponent<Rigidbody>().isKinematic = true;
-        cannonBall.transform.localEulerAngles = Vector3.zero;
-        cannonBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        if (PlayerPrefs.GetInt("CannonShooterMode") == 2 || PlayerPrefs.GetInt("CannonShooterMode") == 3)
-            cannonBall.transform.position = canyonPos;
-        else
-            cannonBall.transform.position = cannonPos;
-        shooted = false;
-
-        if (!modeAR)
-            trail.SetActive(false);
+        
     }
 
     private void drawCurve()
