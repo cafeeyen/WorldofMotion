@@ -1,5 +1,8 @@
-# Ignore Asset Store #
-**/OpenCVForUnity
+#  Asset Store 
+Assets/OpenCVForUnity/
 
-# APK Files #
+# Builds #
 *.apk
+
+# Cache #
+Library/PlayerDataCache/
