@@ -46,3 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 WorldofMotion 0.3.3.1.apk
+
+# Ignore floder named 'OpenCVForUnity'
+OpenCVForUnity/
