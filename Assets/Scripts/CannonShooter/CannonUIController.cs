@@ -24,7 +24,7 @@ public class CannonUIController : MonoBehaviour
     /* Game Parameter */
     private int angle = 0, power, shootCnt = 0;
     private float tarDist, tarHeight;
-    private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), canyonPos = new Vector3(0, 27, 5.5f);
+    private Vector3 cannonPos = new Vector3(0, -1.8f, 8), canyonPos = new Vector3(0, 27, 8);
 
     /* UI Parameter / Group */
     public GameObject MenuSection, LessonSection, TableDisplay, TutorialSection, TutorialAsk, Lv1Dot, Lv2Dot, Lv3Dot;
@@ -49,6 +49,7 @@ public class CannonUIController : MonoBehaviour
                 Lv1Dot.SetActive(true);
                 if(PlayerPrefs.GetInt("CannonTutorialLv1") == 0)
                 {
+                    GameController.pauseGame(true);
                     askTutorial();
                     PlayerPrefs.SetInt("CannonTutorialLv1", 1);
                 }
@@ -218,7 +219,10 @@ public class CannonUIController : MonoBehaviour
             tutorialGallery[page].SetActive(true);
         }
         else
+        {
             TutorialSection.SetActive(false);
+            GameController.pauseGame(false);
+        }
         TutorialAsk.SetActive(false);
     }
     public void nextTutorialPage()
@@ -266,7 +270,7 @@ public class CannonUIController : MonoBehaviour
     {
         switch (window)
         {
-            case "MenuSection": MenuSection.SetActive(true); GameController.pauseGame(true); powSlider.enabled = false; break;
+            case "MenuSection": MenuSection.SetActive(true); GameController.pauseGame(true); powSlider.gameObject.SetActive(false); break;
             case "LessonSection": LessonSection.SetActive(true); powSlider.gameObject.SetActive(false); break;
             case "TableDisplay": TableDisplay.SetActive(true); break;
             case "TutorialSection": TutorialSection.SetActive(true); ansTutorial(true); break;
@@ -276,7 +280,7 @@ public class CannonUIController : MonoBehaviour
     {
         switch(window)
         {
-            case "MenuSection": MenuSection.SetActive(false); GameController.pauseGame(false); powSlider.enabled = true; break;
+            case "MenuSection": MenuSection.SetActive(false); GameController.pauseGame(false); powSlider.gameObject.SetActive(true); break;
             case "LessonSection":
                 {
                     LessonSection.SetActive(false);

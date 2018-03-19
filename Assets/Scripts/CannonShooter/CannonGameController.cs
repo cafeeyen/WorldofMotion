@@ -8,7 +8,7 @@ public class CannonGameController : MonoBehaviour
 
     /* Game Parameters */
     private bool isShooting = false;
-    private Vector3 cannonPos = new Vector3(0, -1.8f, 5.5f), canyonPos = new Vector3(0, 27, 5.5f);
+    private Vector3 cannonPos = new Vector3(0, -1.8f, 8), canyonPos = new Vector3(0, 27, 8);
 
     /* Unity Functions */
     private void OnEnable()
