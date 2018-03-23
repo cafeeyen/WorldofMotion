@@ -6,11 +6,10 @@ public class Timer : MonoBehaviour
     public LessonItem item;
     public Text timer;
 
-    private float probTime, time;
+    private float time;
 
     private void OnEnable()
     {
-        probTime = 0;
         time = 0;
     }
 
@@ -32,7 +31,6 @@ public class Timer : MonoBehaviour
     public void setTimer(float second)
     {
         timer.text = "00 : 00 : 000";
-        probTime = second;
         time = second;
         float minutes = time / 60;
         float seconds = time % 60;

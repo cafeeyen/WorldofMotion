@@ -18,15 +18,15 @@ public class MainPage : MonoBehaviour
     {
         // For Debug / Test only, DON'T TOUCH THIS!
         // PlayerPrefs.DeleteAll();
-        // PlayerPrefs.SetInt("CsLv1Star", 3);
-        // PlayerPrefs.SetInt("CsLv2Star", 3);
+        // PlayerPrefs.SetInt("CannonShooterLv1Star", 3);
+        // PlayerPrefs.SetInt("CannonShooterLv2Star", 3);
         // PlayerPrefs.SetInt("CSLv2", 1);
-        // PlayerPrefs.SetInt("CsLv3Star", 3);
+        // PlayerPrefs.SetInt("CannonShooterLv3Star", 3);
         // PlayerPrefs.SetInt("CSLv3", 1);
 
 
         // ***************************** Set defaut setting here *****************************
-        PlayerPrefs.SetInt("CannonShooterMode", 0);
+        PlayerPrefs.SetString("CannonShooterMode", "None");
         // ************************************************************************************
 
         Time.timeScale = 1;
@@ -37,7 +37,6 @@ public class MainPage : MonoBehaviour
         /*****************************
          * Cannon Shooter
         *****************************/
-
         // Unlock level
         if (PlayerPrefs.GetInt("CSLv2") == 1)
             csLv2.interactable = true;
@@ -47,7 +46,7 @@ public class MainPage : MonoBehaviour
         // Change border
         for (int i = 1; i <= 3; i++)
         {
-            switch (PlayerPrefs.GetInt("CsLv" + i + "Star"))
+            switch (PlayerPrefs.GetInt("CannonShooterLv" + i + "Star"))
             {
                 case 1:
                     displayFrame[i - 1].sprite = frameGal[0];
@@ -164,7 +163,12 @@ public class MainPage : MonoBehaviour
         audioSource.PlayOneShot(bttClk);
         switch (bttName)
         {
+            /* Menu */
+            case "CannonShooter": slidePage(bttName); break;
             case "Experiment": slidePage(bttName); break;
+            case "Back": slidePage(bttName); break;
+
+            /* Experiment */
             case "New":
                 Time.timeScale = 0;
                 PlayerPrefs.SetInt("Lesson", 0);
@@ -176,31 +180,29 @@ public class MainPage : MonoBehaviour
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
-            case "lesson":
+            case "Lesson":
                 PlayerPrefs.SetInt("Lesson", 1);
                 sceneLoader.loadNewScene(5);
                 break;
             case "Import": break;
             case "Game": slidePage(bttName); break;
-            //case "BallRoller": sceneLoader.loadNewScene(2); break;
-            case "CannonShooter": slidePage(bttName); break;
+
+            /* CannonShooter*/
             case "CSLv1":
-                PlayerPrefs.SetInt("CannonShooterMode", 1);
+                PlayerPrefs.SetString("CannonShooterMode", "Lv1");
                 sceneLoader.loadNewScene(3);
                 break;
             case "CSLv2":
-                PlayerPrefs.SetInt("CannonShooterMode", 2);
+                PlayerPrefs.SetString("CannonShooterMode", "Lv2");
                 sceneLoader.loadNewScene(3);
                 break;
             case "CSLv3":
-                PlayerPrefs.SetInt("CannonShooterMode", 3);
+                PlayerPrefs.SetString("CannonShooterMode", "Lv3");
                 sceneLoader.loadNewScene(3);
                 break;
-            case "Back": slidePage(bttName); break;
             case "ARmode":
-                PlayerPrefs.SetInt("CannonShooterMode", 5);
+                PlayerPrefs.SetString("CannonShooterMode", "AR");
                 sceneLoader.loadNewScene(4); break;
-
         }
     }
 }
