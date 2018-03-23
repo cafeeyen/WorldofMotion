@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class CannonTargetController : MonoBehaviour
 {
-    public AudioClip hitSound;
-    public ParticleSystem particle;
+    /* Game Object */
+    public GameObject ARTarget;
+    public MeshRenderer targetMesh;
 
     /* Game Parameters */
     private int hitCnt = 0;
+
+    /* Effect */
+    public AudioClip hitSound;
+    public ParticleSystem particle;
 
     /* Scripts */
     public CannonUIController UIController;
@@ -22,14 +27,25 @@ public class CannonTargetController : MonoBehaviour
             StartCoroutine(setNewPosition());
         }
     }
+    private void Update()
+    {
+        if(PlayerPrefs.GetString("CannonShooterMode") == "AR")
+        {
+            if(targetMesh.enabled)
+                UIController.setTargetDetail(ARTarget.transform.position.z - 8, ARTarget.transform.position.y - -1.8f);
+            else
+                UIController.setTargetDetail(-1, -1);
+
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        hitCnt++;
         AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
         particle.Play();
 
         if (PlayerPrefs.GetString("CannonShooterMode") != "AR")
         {
+            hitCnt++;
             GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -37,10 +53,6 @@ public class CannonTargetController : MonoBehaviour
                 UIController.endStage();
             else
                 StartCoroutine(setNewPosition());
-        }
-        else
-        {
-
         }
     }
 
@@ -68,5 +80,12 @@ public class CannonTargetController : MonoBehaviour
             GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
             GetComponent<Collider>().enabled = true;
         }
+    }
+    public void setShootedTargetPosition()
+    {
+        if(targetMesh.enabled)
+            transform.position = ARTarget.transform.position;
+        else
+            transform.position = Vector3.forward * -100;
     }
 }

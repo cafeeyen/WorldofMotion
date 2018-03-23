@@ -11,7 +11,12 @@ public class CannonUIController : MonoBehaviour
 
     /* Output Component */
     public Text angleText, tarDistText, tarHeightText, calDistText, calHeightText, calTimeText, countText;
-    public LineRenderer arcLine;
+    public LineRenderer arcLine, groundLine;
+
+    /* AR Camera Component */
+    public RawImage MiniRawImage, FullScreenRawImage;
+    public Image imageOverlay;
+    public RenderTexture cutsceneCamRT, sideCamRT;
 
     /* Image and Sprite */
     public Image lessonDisplay;
@@ -76,6 +81,7 @@ public class CannonUIController : MonoBehaviour
                 break;
             case "AR":
                 page = 0;
+                Lv1Dot.SetActive(true); // Use same variable
                 if (PlayerPrefs.GetInt("CannonTutorialAR") == 0)
                 {
                     openMenu("LessonSection");
@@ -156,8 +162,11 @@ public class CannonUIController : MonoBehaviour
                 calHeightText.text = "ความสูงจากจุดเริ่ม " + maxHeight.ToString("F2") + " m";
                 calTimeText.text = "เวลาที่ลอยกลางอากาศ " + maxTime.ToString("F2") + " s";
 
-                shootCnt++;
-                countText.text = shootCnt.ToString();
+                if(PlayerPrefs.GetString("CannonShooterMode") != "AR")
+                {
+                    shootCnt++;
+                    countText.text = shootCnt.ToString();
+                }
                 drawCurve(maxTime);
             }
         }
@@ -169,14 +178,14 @@ public class CannonUIController : MonoBehaviour
     private void drawCurve(float maxTime)
     {
         if (PlayerPrefs.GetString("CannonShooterMode") == "AR")
-        {/*
-            if (!csCon.miniRawImage.enabled)
-                csCon.miniRawImage.enabled = true;
+        {
+            if (!MiniRawImage.enabled)
+                MiniRawImage.enabled = true;
 
-            csCon.viewToSideCam();
+            viewToSideCam();
             groundLine.positionCount = 2;
             groundLine.SetPosition(0, new Vector3(0, -1.8f, 0));
-            groundLine.SetPosition(1, new Vector3(0, -1.8f, 100));*/
+            groundLine.SetPosition(1, new Vector3(0, -1.8f, 100));
         }
 
          if (!arcLine.enabled)
@@ -258,11 +267,36 @@ public class CannonUIController : MonoBehaviour
                 page = isNext ? (page + 1 > 20 ? 16 : page + 1) : (page - 1 < 16 ? 20 : page - 1);
                 break;
             case "AR":
-                // wait
+                page = isNext ? (page + 1) % 8 : page - 1 < 0 ? 7 : page - 1;
                 break;
         }
         dots[page].sprite = activeDot;
         lessonDisplay.sprite = lessonGallery[page];
+    }
+
+    /* AR Mode Camera */
+    public void viewToCutCam()
+    {
+        MiniRawImage.texture = cutsceneCamRT;
+        FullScreenRawImage.texture = cutsceneCamRT;
+    }
+    public void viewToSideCam()
+    {
+        MiniRawImage.texture = sideCamRT;
+        FullScreenRawImage.texture = sideCamRT;
+    }
+    public void openFullScreenImage()
+    {
+        if (MiniRawImage.enabled)
+        {
+            FullScreenRawImage.gameObject.SetActive(true);
+            imageOverlay.enabled = true;
+        }
+    }
+    public void closeFullScreenImage()
+    {
+        FullScreenRawImage.gameObject.SetActive(false);
+        imageOverlay.enabled = false;
     }
 
     /* Shared UI - Game Functions */
@@ -301,11 +335,22 @@ public class CannonUIController : MonoBehaviour
     }
     public void setTargetDetail(float dist, float height)
     {
-        tarDist = dist;
-        tarHeight = height;
+        if(dist == -1 && height == -1)
+        {
+            tarDist = 0;
+            tarHeight = -1.8f;
 
-        tarDistText.text = tarDist.ToString("F2") + " m";
-        tarHeightText.text = tarHeight.ToString("F2") + " m";
+            tarDistText.text = "----";
+            tarHeightText.text = "----";
+        }
+        else
+        {
+            tarDist = dist;
+            tarHeight = height;
+
+            tarDistText.text = tarDist.ToString("F2") + " m";
+            tarHeightText.text = tarHeight.ToString("F2") + " m";
+        }
     }
     public void endStage()
     {
