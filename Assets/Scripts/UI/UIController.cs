@@ -68,6 +68,11 @@ public class UIController : MonoBehaviour
         {
             problemGenerator.newProblem();
         }
+        else if (PlayerPrefs.GetInt("Lesson") == 2)
+        {
+            problemGenerator.newProblem();
+            openRules();
+        }
     }
 
     private void OnDisable()
@@ -304,7 +309,7 @@ public class UIController : MonoBehaviour
     public void closeRules()
     {
         ruleLesson.SetActive(false);
-        problemGenerator.newProblem();
+        if (PlayerPrefs.GetInt("Lesson") == 1){ problemGenerator.newProblem(); }
     }
 
     public void nextRule()
