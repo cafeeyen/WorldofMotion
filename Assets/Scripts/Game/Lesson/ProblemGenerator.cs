@@ -42,12 +42,12 @@ public class ProblemGenerator : MonoBehaviour
             {
                 if(i == randomChoice)
                 {
-                    ansText[i].text = answer.ToString();
+                    ansText[i].text = answer.ToString("F2") + " m/s";
                     Debug.Log("this is correct ans at i =" + i);
                 }
                 else
                 {
-                    ansText[i].text = falseAnswer[cntAnswer].ToString();
+                    ansText[i].text = falseAnswer[cntAnswer].ToString("F2")+" m/s";
                     cntAnswer++;
                 }               
             }
