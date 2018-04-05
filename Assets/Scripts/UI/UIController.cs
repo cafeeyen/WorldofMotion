@@ -68,7 +68,7 @@ public class UIController : MonoBehaviour
         {
             problemGenerator.newProblem();
         }
-        else if (PlayerPrefs.GetInt("Lesson") == 2)
+        else if (PlayerPrefs.GetInt("Lesson") > 1) //question lesson.
         {
             problemGenerator.newProblem();
             openRules();

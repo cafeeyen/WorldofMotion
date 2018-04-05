@@ -199,7 +199,7 @@ public class LessonItem : MonoBehaviour
             cnt = 0;
             cntText.text = "Problem Solved : " + cnt;
         }
-        else if (PlayerPrefs.GetInt("Lesson") == 2)
+        else if (PlayerPrefs.GetInt("Lesson") > 1)
         {
             SuccessWords.SetActive(false);
             gold.SetActive(false);
