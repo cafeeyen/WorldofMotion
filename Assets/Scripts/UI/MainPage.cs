@@ -181,7 +181,7 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(1);
                 break;
             case "Lesson":
-                PlayerPrefs.SetInt("Lesson", 4);
+                PlayerPrefs.SetInt("Lesson", 1);
                 sceneLoader.loadNewScene(2);
                 break;
             case "Import": break;

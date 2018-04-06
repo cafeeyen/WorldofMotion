@@ -115,6 +115,7 @@ public class ProblemGenerator : MonoBehaviour
                     vAfter2 = Random.Range(2, 10);
                     answer = ((mass1 * vBefore1) + 0 - (mass2 * vAfter2)) / mass1;
                     QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่ *ตั้งอยู่* จนมีความเร็ว " + vAfter2 + " m/s หลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
+                    QWarningText.text = "";
                     break;
                 case 2:
                     mass1 = Random.Range(5, 100);
@@ -123,12 +124,14 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore2 = Random.Range(1, 11);
                     answer = ((mass1 * vBefore1) + (mass2 * vBefore2)) / (mass1 + mass2);
                     QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่มีความเร็ว " + vBefore2 + " m/s ติดไปด้วยกันหลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
+                    QWarningText.text = "";
                     break;
                 case 3:
                     mass1 = Random.Range(5, 100);
                     vBefore1 = Random.Range(100, 200);
                     answer = vBefore1 / mass1;
                     QuestionText.text = "มีกล่องมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยโมเมนตัม " + vBefore1 + " kg.m/s กล่องจะมีความเร็วเท่าไหร่ ? ";
+                    QWarningText.text = "";
                     break;
             }
         }
@@ -214,21 +217,25 @@ public class ProblemGenerator : MonoBehaviour
                     case 1: //Force
                         switch (randomQuestion)
                         {
-                            case 1:
+                            case 1: // No negative value
+                                falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                                 ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " N";
                                 break;
                             case 2:
                                 ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s2";
                                 break;
-                            case 3:
+                            case 3: // No negative value
+                                falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                                 ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s2";
                                 break;
                         }
                         break;
-                    case 2: // Friction
+                    case 2: // Friction | No negative value all
+                        falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                         ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " N";
                         break;
-                    case 3: // Gravity + Motion
+                    case 3: // Gravity + Motion | No negative value all
+                        falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                         switch (randomQuestion)
                         {
                             case 1:
@@ -243,6 +250,8 @@ public class ProblemGenerator : MonoBehaviour
                         }
                         break;
                     case 4: // Momentum
+                        if(randomQuestion == 3)  // No negative value
+                            falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                         ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s";
                         break;
                 }

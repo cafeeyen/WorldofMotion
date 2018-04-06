@@ -14,8 +14,8 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny, ground, ruleLesson;
-    public GameObject[] rulePage;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
+    public GameObject[] ruleSet;
     public Button saveBtt, exBtt, undoBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
 
     private TapGesture gesture;
     private GameObject itemObject, WorldObject, ExperimentWorld;
+    public Image[] rulePageInSet;
     private ItemObjectController itemCon;
     private WorldObject worldSc;
     private AudioSource audioSource;
@@ -36,7 +37,6 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        //Time.fixedDeltaTime = 0.05f; // 30 FPS
         Time.timeScale = 0;
         state = mode.Edit;
 
@@ -59,16 +59,7 @@ public class UIController : MonoBehaviour
                 PlayerPrefs.SetInt("EditorMode", 1);
             }
         }
-        else if(PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 0)
-        {
-            /* Tutorial for each lesson*/
-            openRules();
-        }
-        else if (PlayerPrefs.GetInt("Lesson") == 1 && PlayerPrefs.GetInt("LessonMotion") == 1)
-        {
-            problemGenerator.newProblem();
-        }
-        else if (PlayerPrefs.GetInt("Lesson") > 1) //question lesson.
+        if (PlayerPrefs.GetInt("Lesson") != 0) //question lesson.
         {
             problemGenerator.newProblem();
             openRules();
@@ -303,26 +294,31 @@ public class UIController : MonoBehaviour
 
     public void openRules()
     {
-        ruleLesson.SetActive(true);
+        overlay.SetActive(true);
+        ruleSet[PlayerPrefs.GetInt("Lesson") - 1].SetActive(true);
+        rulePageInSet = ruleSet[PlayerPrefs.GetInt("Lesson") - 1].GetComponentsInChildren<Image>(true);
+        rulePageInSet[0].gameObject.SetActive(true);
     }
 
     public void closeRules()
     {
-        ruleLesson.SetActive(false);
-        if (PlayerPrefs.GetInt("Lesson") == 1){ problemGenerator.newProblem(); }
+        overlay.SetActive(false);
+        ruleSet[PlayerPrefs.GetInt("Lesson") - 1].SetActive(false);
+        problemGenerator.newProblem();
     }
 
     public void nextRule()
     {
-        if (ruleNumber < rulePage.Length-1)
+        if (ruleNumber < 7)
         {
+            rulePageInSet[ruleNumber].gameObject.SetActive(false);
             ruleNumber++;
-            rulePage[ruleNumber - 1].SetActive(false);
-            rulePage[ruleNumber].SetActive(true);
+            rulePageInSet[ruleNumber].gameObject.SetActive(true);
+
         }
         else
-        {  
-            rulePage[ruleNumber].SetActive(false);
+        {
+            rulePageInSet[ruleNumber].gameObject.SetActive(false);
             ruleNumber = 0;
             closeRules();
         }
