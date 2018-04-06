@@ -24,8 +24,8 @@ public class ProblemGenerator : MonoBehaviour
                 case 1:
                     mass1 = Random.Range(5, 100);
                     vBefore1 = Random.Range(5, 25);
-                    answer = mass1 * vBefore1;
-                    QuestionText.text = "จงหาแรงที่จะทำให้วัตถุหนัก " + mass1 + " N เคลื่อนที่ด้วยความเร็ว " + vBefore1 + " m / s";
+                    answer = (mass1/9.8f) * vBefore1;
+                    QuestionText.text = "จงหาแรงที่จะทำให้วัตถุหนัก " + mass1 + " N เคลื่อนที่ด้วยความเร่ง " + vBefore1 + " m/s2";
                     QWarningText.text = "*อย่าลืมแปลงหน่วยน้ำหนักจากNเป็นกิโลกรัมล่ะ (N / 9.8)";
                     break;
 
@@ -34,7 +34,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore2 = Random.Range(5, 100);
                     acc = Random.Range(2, 25);
                     answer = (vBefore2 / vBefore1) * acc;
-                    QuestionText.text = "วัตถุหนึ่งถูกแรง " + vBefore1 + " N กระทำเกิดควมเร่ง " + acc + " m/s2 ถ้าวัตถุถูกกระทำด้วยแรง " + vBefore2 + " N จะเกิดควมเร่งเท่าใด?";
+                    QuestionText.text = "วัตถุหนึ่งถูกแรง " + vBefore1 + " N กระทำเกิดความเร่ง " + acc + " m/s2 ถ้าวัตถุถูกกระทำด้วยแรง " + vBefore2 + " N จะเกิดความเร่งเท่าใด?";
                     QWarningText.text = "*วัตถุมีน้ำหนักเท่าเดิมและเป็นชิ้นเดิม";
                     break;
                 case 3:
@@ -114,7 +114,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(5, 25);
                     vAfter2 = Random.Range(2, 10);
                     answer = ((mass1 * vBefore1) + 0 - (mass2 * vAfter2)) / mass1;
-                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่ *ตั้งอยู่* จนมีความเร็ว " + vAfter2 + " m / s หลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
+                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่ *ตั้งอยู่* จนมีความเร็ว " + vAfter2 + " m/s หลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
                     break;
                 case 2:
                     mass1 = Random.Range(5, 100);
@@ -122,7 +122,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(10, 25);
                     vBefore2 = Random.Range(1, 11);
                     answer = ((mass1 * vBefore1) + (mass2 * vBefore2)) / (mass1 + mass2);
-                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่มีความเร็ว " + vBefore2 + " m / s ติดไปด้วยกันหลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
+                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่มีความเร็ว " + vBefore2 + " m/s ติดไปด้วยกันหลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
                     break;
                 case 3:
                     mass1 = Random.Range(5, 100);
