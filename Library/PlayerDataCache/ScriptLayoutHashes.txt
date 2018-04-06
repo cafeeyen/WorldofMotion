@@ -20,7 +20,7 @@ af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 dec507423062c7ce449c54489e28e63e Assembly-CSharp.dll:.SaveLoad
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Metal
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.LayerManagerInstance
-cdc15896eedb7cb7ed1339d8bdf5ca2a Assembly-CSharp.dll:.ProblemGenerator
+7ea84e05162e84f7968f6c02973aed4d Assembly-CSharp.dll:.ProblemGenerator
 3d34db78850ae9bf04fdac9f5598b41a Assembly-CSharp.dll:.HelpButton
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -244,12 +244,11 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 5eeacec8e729f2f59963b7cac59021a8 Assembly-CSharp.dll:TouchScript.Layers.FullscreenLayer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 9dc41ecfefe71e0d0e207b5650949483 Assembly-CSharp.dll:TouchScript.Devices.Display.GenericDisplayDevice
-bd3c2045d36704d6ea87f03c6d44971a Assembly-CSharp.dll:.LessonItem
+55476aa686c90adb791da33c861c7c37 Assembly-CSharp.dll:.LessonItem
 257e7db485b6dd0c687101247ab95a1b Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.TouchCursor
 9dc41ecfefe71e0d0e207b5650949483 Assembly-CSharp.dll:TouchScript.Devices.Display.DisplayDevice
 69d7d01d14b2cb1bf7ea22ff94f3abfc Assembly-CSharp.dll:.DefaultSmartTerrainEventHandler
 99fb603e20780b52805fbdf92487e554 Assembly-CSharp.dll:TouchScript.Behaviors.Transformer
-b9d9275b0413e8c41778c8ccb3b6f3f4 Assembly-CSharp.dll:.Timer
 4f52fb13c8876d1fc6a0a4110faf10fc Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.ScreenTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.GestureManagerInstance
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemObject
