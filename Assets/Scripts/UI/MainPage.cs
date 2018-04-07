@@ -171,6 +171,7 @@ public class MainPage : MonoBehaviour
             /* Experiment */
             case "New":
                 Time.timeScale = 0;
+                PlayerPrefs.SetInt("LessonTask", 0);
                 PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 0);
                 sceneLoader.loadNewScene(1);
@@ -181,7 +182,8 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(1);
                 break;
             case "Lesson":
-                PlayerPrefs.SetInt("Lesson", 1);
+                PlayerPrefs.SetInt("LessonTask", 1);
+                PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
             case "Import": break;

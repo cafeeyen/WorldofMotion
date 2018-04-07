@@ -48,7 +48,7 @@ public class UIController : MonoBehaviour
         gesture = GetComponent<TapGesture>();
         gesture.Tapped += tapHandler;
 
-        if (PlayerPrefs.GetInt("Lesson") == 0)
+        if (PlayerPrefs.GetInt("LessonTask") == 0)
         {
             itemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
             WorldObject = GameObject.Find("WorldObject");
@@ -59,7 +59,7 @@ public class UIController : MonoBehaviour
                 PlayerPrefs.SetInt("EditorMode", 1);
             }
         }
-        if (PlayerPrefs.GetInt("Lesson") != 0) //question lesson.
+        else //question lesson.
         {
             problemGenerator.newProblem();
             openRules();
@@ -295,15 +295,15 @@ public class UIController : MonoBehaviour
     public void openRules()
     {
         overlay.SetActive(true);
-        ruleSet[PlayerPrefs.GetInt("Lesson") - 1].SetActive(true);
-        rulePageInSet = ruleSet[PlayerPrefs.GetInt("Lesson") - 1].GetComponentsInChildren<Image>(true);
+        ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(true);
+        rulePageInSet = ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].GetComponentsInChildren<Image>(true);
         rulePageInSet[0].gameObject.SetActive(true);
     }
 
     public void closeRules()
     {
         overlay.SetActive(false);
-        ruleSet[PlayerPrefs.GetInt("Lesson") - 1].SetActive(false);
+        ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(false);
         problemGenerator.newProblem();
     }
 

@@ -17,7 +17,7 @@ public class ProblemGenerator : MonoBehaviour
         randomQuestion = Random.Range(0, 4);
         if (randomQuestion == 0) { randomQuestion = 1; }
 
-        if (PlayerPrefs.GetInt("Lesson") == 1) // Force
+        if (PlayerPrefs.GetInt("LessonTask") == 1) // Force
         {
             switch (randomQuestion)
             {
@@ -48,7 +48,7 @@ public class ProblemGenerator : MonoBehaviour
                     break;
             }
         }
-        else if (PlayerPrefs.GetInt("Lesson") == 2) // Friction
+        else if (PlayerPrefs.GetInt("LessonTask") == 2) // Friction
         {
             switch (randomQuestion)
             {
@@ -76,7 +76,7 @@ public class ProblemGenerator : MonoBehaviour
                     break;
             }
         }
-        else if (PlayerPrefs.GetInt("Lesson") == 3) // Gravity + Motion
+        else if (PlayerPrefs.GetInt("LessonTask") == 3) // Gravity + Motion
         {
             switch (randomQuestion)
             {
@@ -104,7 +104,7 @@ public class ProblemGenerator : MonoBehaviour
                     break;
             }
         }
-        else if (PlayerPrefs.GetInt("Lesson") == 4) // Momentum
+        else if (PlayerPrefs.GetInt("LessonTask") == 4) // Momentum
         {
             switch (randomQuestion)
             {
@@ -166,7 +166,7 @@ public class ProblemGenerator : MonoBehaviour
         {
             if (i == trueAnswer)
             {
-                switch (PlayerPrefs.GetInt("Lesson"))
+                switch (PlayerPrefs.GetInt("LessonTask"))
                 {
                     case 1: //Force
                         switch (randomQuestion)
@@ -212,7 +212,7 @@ public class ProblemGenerator : MonoBehaviour
             }
             else
             {
-                switch (PlayerPrefs.GetInt("Lesson"))
+                switch (PlayerPrefs.GetInt("LessonTask"))
                 {
                     case 1: //Force
                         switch (randomQuestion)
