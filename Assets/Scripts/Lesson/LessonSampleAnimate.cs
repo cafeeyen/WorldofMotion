@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LessonSampleAnimate : MonoBehaviour {
 
-    public GameObject redBox, blueBox;
+    public GameObject redBox, blueBox,slope;
     public ProblemGenerator pg;
     private Rigidbody rbRigid, bbRigid;
     
@@ -28,6 +28,7 @@ public class LessonSampleAnimate : MonoBehaviour {
                         rbRigid.velocity = new Vector3(15, 0, 0);
                         break;
                     case 2:
+                        blueBox.SetActive(false);
                         rbRigid.velocity = new Vector3(10, 0, 0);
                         break;
                     case 3:
@@ -37,8 +38,25 @@ public class LessonSampleAnimate : MonoBehaviour {
 
                 }
                 break;
+
             case 2: // Friction
+                switch (pg.randomQuestion)
+                {
+                    case 1:
+                        blueBox.SetActive(false);
+                        rbRigid.velocity = new Vector3(7, 0, 0);
+                        break;
+                    case 2:
+                        blueBox.SetActive(false);
+                        rbRigid.velocity = new Vector3(12, 0, 0);
+                        break;
+                    case 3:
+                        blueBox.SetActive(false);
+                        slope.SetActive(true);
+                        break;
+                }
                 break;
+
             case 3: // Gravity + Motion
                 switch (pg.randomQuestion)
                 {
@@ -50,12 +68,13 @@ public class LessonSampleAnimate : MonoBehaviour {
                         break;
                     case 3:
                         blueBox.SetActive(false);
-                        rbRigid.velocity = new Vector3(0, 15, 0);
+                        rbRigid.velocity = new Vector3(0, 10, 0);
                         redBox.transform.Rotate(45, 45, 0);
                         break;
 
                 }
                 break;
+
             case 4: // Momentum
                 switch(pg.randomQuestion)
                 {
@@ -79,18 +98,27 @@ public class LessonSampleAnimate : MonoBehaviour {
 
     public void resetSample()
     {
-        if(PlayerPrefs.GetInt("LessonTask") == 3 && pg.randomQuestion < 3)
+        if (PlayerPrefs.GetInt("LessonTask") == 2 && pg.randomQuestion == 3) //slop friction
+        {
+            redBox.transform.position = new Vector3(-1.49f, 2.54f, 6.34f);
+            redBox.transform.Rotate(0, 0, 60);
+        }
+        else if (PlayerPrefs.GetInt("LessonTask") == 3 && pg.randomQuestion < 3) //drop item in gravity
         {   
             redBox.transform.position = new Vector3(-0.85f, 5.5f, 6.34f);
             blueBox.transform.position = new Vector3(1.46f, 5.5f, 6.34f);
         }
+
         else
         {
-            redBox.transform.position = new Vector3(2.85f, 0.5f, 6.34f);
-            blueBox.transform.position = new Vector3(4.46f, 0.5f, 6.34f);
+            redBox.transform.position = new Vector3(-0.85f, 0.5f, 6.34f);
+            blueBox.transform.position = new Vector3(1.46f, 0.5f, 6.34f);
         }
+
+        slope.SetActive(false);
         blueBox.SetActive(true);
         rbRigid.velocity = new Vector3(0, 0, 0);
         bbRigid.velocity = new Vector3(0, 0, 0);
+        redBox.transform.Rotate(0, 0, 0);
     }
 }
