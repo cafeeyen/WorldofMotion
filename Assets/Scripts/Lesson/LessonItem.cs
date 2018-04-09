@@ -6,7 +6,6 @@ public class LessonItem : MonoBehaviour
     public Text cntText, qNoText;
     public GameObject SuccessWords, bronze, silver, gold, fail;
     public ProblemGenerator problemGenerator;
-
     private int cnt = 0, qCnt = 1;
 
     void FixedUpdate() { }
@@ -72,5 +71,7 @@ public class LessonItem : MonoBehaviour
         cntText.text = cnt.ToString();
         qNoText.text = qCnt.ToString();
     }
+
+    
 }
 

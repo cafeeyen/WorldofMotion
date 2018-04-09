@@ -63,6 +63,8 @@ public class UIController : MonoBehaviour
         {
             problemGenerator.newProblem();
             openRules();
+            Time.timeScale = 1;
+
         }
     }
 
