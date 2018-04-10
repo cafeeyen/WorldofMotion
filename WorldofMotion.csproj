@@ -517,6 +517,7 @@
     <Compile Include="Assets\Scripts\ItemObject\Type\SurfaceTypeFactory.cs" />
     <Compile Include="Assets\Scripts\ItemObject\Type\Wood.cs" />
     <Compile Include="Assets\Scripts\ItemObject\WorldObject.cs" />
+    <Compile Include="Assets\Scripts\Lesson\itemCollidStop.cs" />
     <Compile Include="Assets\Scripts\Lesson\LessonItem.cs" />
     <Compile Include="Assets\Scripts\Lesson\LessonSampleAnimate.cs" />
     <Compile Include="Assets\Scripts\Lesson\ProblemGenerator.cs" />

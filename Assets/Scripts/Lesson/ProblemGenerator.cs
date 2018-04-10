@@ -25,7 +25,7 @@ public class ProblemGenerator : MonoBehaviour
                     mass1 = Random.Range(5, 100);
                     vBefore1 = Random.Range(5, 25);
                     answer = (mass1/9.8f) * vBefore1;
-                    QuestionText.text = "จงหาแรงที่จะทำให้วัตถุหนัก " + mass1 + " N เคลื่อนที่ด้วยความเร่ง " + vBefore1 + " m/s2";
+                    QuestionText.text = "จงหาแรงที่จะทำให้วัตถุหนัก " + mass1 + " N เคลื่อนที่ด้วยความเร่ง " + vBefore1 + " m/s^2";
                     QWarningText.text = "*อย่าลืมแปลงหน่วยน้ำหนักจากNเป็นกิโลกรัมล่ะ (N / 9.8)";
                     break;
 
@@ -34,7 +34,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore2 = Random.Range(5, 100);
                     acc = Random.Range(2, 25);
                     answer = (vBefore2 / vBefore1) * acc;
-                    QuestionText.text = "วัตถุหนึ่งถูกแรง " + vBefore1 + " N กระทำเกิดความเร่ง " + acc + " m/s2 ถ้าวัตถุถูกกระทำด้วยแรง " + vBefore2 + " N จะเกิดความเร่งเท่าใด?";
+                    QuestionText.text = "วัตถุหนึ่งถูกแรง " + vBefore1 + " N กระทำเกิดความเร่ง " + acc + " m/s^2 ถ้าวัตถุถูกกระทำด้วยแรง " + vBefore2 + " N จะเกิดความเร่งเท่าใด?";
                     QWarningText.text = "*วัตถุมีน้ำหนักเท่าเดิมและเป็นชิ้นเดิม";
                     break;
                 case 3:
@@ -65,7 +65,7 @@ public class ProblemGenerator : MonoBehaviour
                     mew = Random.Range(0.1f, 1.1f);
                     acc = Random.Range(2, 25);
                     answer = (mass1 * acc) + (mass1 * 9.8f * mew);
-                    QuestionText.text = "วัตถุหนึ่งมีมวล " + mass1 + " กิโลกรัมถูกแรงกระทำเกิดความเร่ง " + acc + " m/s2 และสัมประสิทธิ์แรงเสียดทานระหว่างวัตถุกับพื้นคือ " + mew.ToString("F2") + " จงหาขนาดของแรงที่กระทำกับวัตถุ";
+                    QuestionText.text = "วัตถุหนึ่งมีมวล " + mass1 + " กิโลกรัมถูกแรงกระทำเกิดความเร่ง " + acc + " m/s^2 และสัมประสิทธิ์แรงเสียดทานระหว่างวัตถุกับพื้นคือ " + mew.ToString("F2") + " จงหาขนาดของแรงที่กระทำกับวัตถุ";
                     QWarningText.text = "*อย่าลืมลบแรงเสียดทานจากแรงทั้งหมด(F-แรงเสียดทาน = ma) และ N = mg";
                     break;
                 case 3:
@@ -175,10 +175,10 @@ public class ProblemGenerator : MonoBehaviour
                                 ansText[i].text = answer.ToString("F2") + " N";
                                 break;
                             case 2:
-                                ansText[i].text = answer.ToString("F2") + " m/s2";
+                                ansText[i].text = answer.ToString("F2") + " m/s^2";
                                 break;
                             case 3:
-                                ansText[i].text = answer.ToString("F2") + " m/s2";
+                                ansText[i].text = answer.ToString("F2") + " m/s^2";
                                 break;
                         }
                         break;
@@ -222,11 +222,11 @@ public class ProblemGenerator : MonoBehaviour
                                 ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " N";
                                 break;
                             case 2:
-                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s2";
+                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s^2";
                                 break;
                             case 3: // No negative value
                                 falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
-                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s2";
+                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s^2";
                                 break;
                         }
                         break;
