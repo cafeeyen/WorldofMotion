@@ -6,6 +6,7 @@ public class LessonItem : MonoBehaviour
     public Text cntText, qNoText;
     public GameObject SuccessWords, bronze, silver, gold, fail;
     public ProblemGenerator problemGenerator;
+    public LessonSampleAnimate lsa;
     private int cnt = 0, qCnt = 1;
 
     void FixedUpdate() { }
@@ -57,6 +58,7 @@ public class LessonItem : MonoBehaviour
         {
             problemGenerator.newProblem();
         }
+        lsa.resetSample();
     }
 
     public void Replay()
@@ -70,6 +72,7 @@ public class LessonItem : MonoBehaviour
         qCnt = 1;
         cntText.text = cnt.ToString();
         qNoText.text = qCnt.ToString();
+        lsa.resetSample();
     }
 
     
