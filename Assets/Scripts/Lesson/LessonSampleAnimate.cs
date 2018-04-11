@@ -3,15 +3,13 @@
 public class LessonSampleAnimate : MonoBehaviour
 {
 
-    public GameObject redBox, blueBox, accArrG1, accArrG2, slope, playBtt;
-    public GameObject forceArrow, forceArrow2; //ForceArr in lesson1
-    public GameObject friction, frictionForce; //lesson2
+    public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt;
+    public GameObject forceArrow, forceArrow2, froceText, accText;
     public ProblemGenerator pg;
     public Camera mainCam;
 
-    private Rigidbody redRb, blueRb, forceRb, force2Rb;
+    private Rigidbody redRb, blueRb, forceArrowRb, forceArrow2Rb;
     private float timer = 0;
-    private Vector3 force1Start, force2Start;
 
     void Start()
     {
@@ -21,17 +19,21 @@ public class LessonSampleAnimate : MonoBehaviour
         switch (PlayerPrefs.GetInt("LessonTask"))
         {
             case 1:
-                forceRb = forceArrow.GetComponent<Rigidbody>();
-                force2Rb = forceArrow2.GetComponent<Rigidbody>();
-                force1Start = forceArrow.transform.position;
-                force2Start = forceArrow2.transform.position;
+                forceArrowRb = forceArrow.GetComponent<Rigidbody>();
+                forceArrow2Rb = forceArrow2.GetComponent<Rigidbody>();
 
                 mainCam.transform.position = new Vector3(2, 30, 7.5f);
                 mainCam.transform.localEulerAngles = new Vector3(90, 0, 0);
                 break;
 
             case 2:
-                mainCam.transform.position = new Vector3(3f, 2f, -11f);
+                forceArrowRb = forceArrow.GetComponent<Rigidbody>();
+                froceText.transform.localPosition = new Vector3(0.7f, 0, -2.5f);
+                froceText.transform.localEulerAngles = new Vector3(-90, -90, 0);
+                accText.transform.localPosition = new Vector3(0, -1.4f, -5.5f);
+                accText.transform.localEulerAngles = new Vector3(180, -90, 0);
+
+                mainCam.transform.position = new Vector3(0, 2.8f, -12);
                 mainCam.transform.localEulerAngles = Vector3.zero;
                 break;
             case 3:
@@ -48,39 +50,33 @@ public class LessonSampleAnimate : MonoBehaviour
     public void playSample()
     {
         resetSample();
+        redBox.SetActive(true);
         switch (PlayerPrefs.GetInt("LessonTask"))
         {
             case 1: //Force
                 forceArrow.SetActive(true);
-                redBox.SetActive(true);
                 switch (pg.randomQuestion)
                 {
                     case 1:
                     case 2:
-                        forceArrow.transform.position = force1Start;
-                        forceRb.velocity = new Vector3(3, 0, 0);
+                        forceArrowRb.velocity = new Vector3(3, 0, 0);
                         break;
                     case 3:
                         forceArrow2.SetActive(true);
-                        forceArrow.transform.position = force1Start;
-                        forceArrow2.transform.position = force2Start;
-                        forceRb.velocity = new Vector3(3, 0, 0);
-                        force2Rb.velocity = new Vector3(0, 0, 3);
+                        forceArrowRb.velocity = new Vector3(3, 0, 0);
+                        forceArrow2Rb.velocity = new Vector3(0, 0, 3);
                         break;
                 }
                 break;
 
             case 2: // Friction
-                friction.SetActive(true);
                 switch (pg.randomQuestion)
                 {
                     case 1:
-                        frictionForce.SetActive(true);
-                        redRb.velocity = new Vector3(5, 0, 0);
-                        break;
                     case 2:
-                        frictionForce.SetActive(true);
-                        redRb.velocity = new Vector3(5, 0, 0);
+                        plane.SetActive(true);
+                        forceArrow.SetActive(true);
+                        forceArrowRb.velocity = new Vector3(3, 0, 0);
                         break;
                     case 3:
                         slope.SetActive(true);
@@ -126,40 +122,55 @@ public class LessonSampleAnimate : MonoBehaviour
 
     public void resetSample()
     {
-        forceArrow.SetActive(false);
-        forceArrow2.SetActive(false);
-        accArrG1.SetActive(false);
-        accArrG2.SetActive(false);
-        slope.SetActive(false);
-        blueBox.SetActive(false);
         redBox.SetActive(false);
-
         redRb.isKinematic = false;
         redRb.velocity = Vector3.zero;
-        blueRb.velocity = Vector3.zero;
         redBox.transform.localEulerAngles = Vector3.zero;
-        blueBox.transform.localEulerAngles = Vector3.zero;
 
-        forceArrow.transform.position = force1Start;
-        forceArrow2.transform.position = force2Start;
+        blueBox.SetActive(false);
+        blueRb.velocity = Vector3.zero;
+        blueBox.transform.localEulerAngles = Vector3.zero;
 
         //no velo when start anew
         if (PlayerPrefs.GetInt("LessonTask") == 1)
         {
-            forceRb.velocity = Vector3.zero;
-            forceRb.isKinematic = false;
-            force2Rb.isKinematic = false;
+            forceArrow.SetActive(false);
+            forceArrow2.SetActive(false);
+            accArrG1.SetActive(false);
+            accArrG2.SetActive(false);
+
+            forceArrow.transform.position = new Vector3(-3, 1, 6.5f);
+            forceArrowRb.velocity = Vector3.zero;
+            forceArrowRb.isKinematic = false;
+            
+            forceArrow2.transform.position = new Vector3(0, 1, 3.5f);
+            forceArrow2Rb.velocity = Vector3.zero;
+            forceArrow2Rb.isKinematic = false;
+
             redRb.isKinematic = true;
-            redBox.transform.position = new Vector3(0f, 0.5f, 6.5f);
+            redBox.transform.position = new Vector3(0f, 0.75f, 6.5f);
         }
         else if (PlayerPrefs.GetInt("LessonTask") == 2)
         {
-            frictionForce.SetActive(false);
-            friction.SetActive(false);
-            if (pg.randomQuestion == 3)
+            slope.SetActive(false);
+            plane.SetActive(false);
+            accArrG1.SetActive(false);
+            forceArrow.SetActive(false);
+
+            forceArrow.transform.position = new Vector3(-6, 2.35f, 12);
+            forceArrowRb.velocity = Vector3.zero;
+            forceArrowRb.isKinematic = false;
+
+            if (pg.randomQuestion != 3)
             {
-                slope.SetActive(true);
-                redBox.transform.position = new Vector3(-1.5f, 2.5f, 6.5f);
+                redRb.isKinematic = true;
+                redBox.transform.position = new Vector3(-3, 2.35f, 12);
+                redBox.transform.Rotate(0, 0, 0);
+            }
+            else
+            {
+                redRb.isKinematic = false;
+                redBox.transform.position = new Vector3(-1.35f, 2.8f, 12);
                 redBox.transform.Rotate(0, 0, 60);
             }
         }

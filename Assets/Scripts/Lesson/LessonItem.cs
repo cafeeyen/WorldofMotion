@@ -74,7 +74,5 @@ public class LessonItem : MonoBehaviour
         qNoText.text = qCnt.ToString();
         lsa.resetSample();
     }
-
-    
 }
 
