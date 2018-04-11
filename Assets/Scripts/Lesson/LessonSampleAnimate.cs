@@ -1,35 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LessonSampleAnimate : MonoBehaviour {
+public class LessonSampleAnimate : MonoBehaviour
+{
 
-    public GameObject redBox, blueBox,accArr1,accArr2,accAtext,slope ,playBtt;
-    public GameObject force, force2; //ForceArr in lesson1
+    public GameObject redBox, blueBox, accArrG1, accArrG2, slope, playBtt;
+    public GameObject forceArrow, forceArrow2; //ForceArr in lesson1
     public GameObject friction, frictionForce; //lesson2
     public ProblemGenerator pg;
     public Camera mainCam;
 
-    private Rigidbody rbRigid, bbRigid,forceRigid, force2Rigid;
+    private Rigidbody redRb, blueRb, forceRb, force2Rb;
     private float timer = 0;
-    private Vector3 force1v,force2v;
+    private Vector3 force1Start, force2Start;
 
-    
-    // Use this for initialization
     void Start()
     {
-        rbRigid = redBox.GetComponent<Rigidbody>();
-        bbRigid = blueBox.GetComponent<Rigidbody>();
+        redRb = redBox.GetComponent<Rigidbody>();
+        blueRb = blueBox.GetComponent<Rigidbody>();
 
-        switch(PlayerPrefs.GetInt("LessonTask"))//change camera view
+        switch (PlayerPrefs.GetInt("LessonTask"))
         {
             case 1:
-                forceRigid = force.GetComponent<Rigidbody>();
-                force2Rigid = force2.GetComponent<Rigidbody>();
-                mainCam.transform.position = new Vector3(1.78f, 20.84f, 7.7f);
+                forceRb = forceArrow.GetComponent<Rigidbody>();
+                force2Rb = forceArrow2.GetComponent<Rigidbody>();
+                force1Start = forceArrow.transform.position;
+                force2Start = forceArrow2.transform.position;
+
+                mainCam.transform.position = new Vector3(2, 30, 7.5f);
                 mainCam.transform.localEulerAngles = new Vector3(90, 0, 0);
-                force2v = force2.transform.position;
-                force1v = force.transform.position;
                 break;
 
             case 2:
@@ -44,9 +42,7 @@ public class LessonSampleAnimate : MonoBehaviour {
                 mainCam.transform.position = new Vector3(3.6f, 1.9f, -11.4f);
                 mainCam.transform.localEulerAngles = Vector3.zero;
                 break;
-
         }
-
     }
 
     public void playSample()
@@ -55,22 +51,22 @@ public class LessonSampleAnimate : MonoBehaviour {
         switch (PlayerPrefs.GetInt("LessonTask"))
         {
             case 1: //Force
-                force.SetActive(true);
-                
+                forceArrow.SetActive(true);
+                redBox.SetActive(true);
                 switch (pg.randomQuestion)
                 {
                     case 1:
-                        forceRigid.velocity = new Vector3(3, 0, 0);
-                        break;
                     case 2:
-                        forceRigid.velocity = new Vector3(3, 0, 0);                      
+                        forceArrow.transform.position = force1Start;
+                        forceRb.velocity = new Vector3(3, 0, 0);
                         break;
                     case 3:
-                        force2.SetActive(true);
-                        forceRigid.velocity = new Vector3(3, 0, 0);
-                        force2Rigid.velocity = new Vector3(0, 0, 4);
+                        forceArrow2.SetActive(true);
+                        forceArrow.transform.position = force1Start;
+                        forceArrow2.transform.position = force2Start;
+                        forceRb.velocity = new Vector3(3, 0, 0);
+                        force2Rb.velocity = new Vector3(0, 0, 3);
                         break;
-
                 }
                 break;
 
@@ -80,14 +76,13 @@ public class LessonSampleAnimate : MonoBehaviour {
                 {
                     case 1:
                         frictionForce.SetActive(true);
-                        rbRigid.velocity = new Vector3(5, 0, 0);
+                        redRb.velocity = new Vector3(5, 0, 0);
                         break;
                     case 2:
                         frictionForce.SetActive(true);
-                        rbRigid.velocity = new Vector3(5, 0, 0);
+                        redRb.velocity = new Vector3(5, 0, 0);
                         break;
                     case 3:
-                        
                         slope.SetActive(true);
                         break;
                 }
@@ -103,87 +98,75 @@ public class LessonSampleAnimate : MonoBehaviour {
                         redBox.transform.Rotate(45, 45, 0);
                         break;
                     case 3:
-                        rbRigid.velocity = new Vector3(0, 10, 0);
+                        redRb.velocity = new Vector3(0, 10, 0);
                         redBox.transform.Rotate(45, 45, 0);
                         break;
-
                 }
                 break;
 
             case 4: // Momentum
-                switch(pg.randomQuestion)
+                switch (pg.randomQuestion)
                 {
                     case 1:
                         blueBox.SetActive(true);
-                        rbRigid.velocity = new Vector3(15, 0, 0);
+                        redRb.velocity = new Vector3(15, 0, 0);
                         break;
                     case 2:
                         blueBox.SetActive(true);
-                        rbRigid.velocity = new Vector3(20, 0, 0);
-                        bbRigid.velocity = new Vector3(8, 0, 0);
+                        redRb.velocity = new Vector3(20, 0, 0);
+                        blueRb.velocity = new Vector3(8, 0, 0);
                         break;
                     case 3:
-                        rbRigid.velocity = new Vector3(10, 0, 0);
+                        redRb.velocity = new Vector3(10, 0, 0);
                         break;
-
                 }
                 break;
-
         }
     }
 
     public void resetSample()
     {
-        rbRigid.isKinematic = false;
-        if (PlayerPrefs.GetInt("LessonTask") == 2 && pg.randomQuestion == 3) //slop friction
-        {
-            redBox.transform.position = new Vector3(-1.5f, 2.5f, 6.5f);
-            redBox.transform.Rotate(0, 0, 60);
-        }
-        else if (PlayerPrefs.GetInt("LessonTask") == 3 && pg.randomQuestion < 3) //drop item in gravity
-        {   
-            redBox.transform.position = new Vector3(0f, 5.5f, 6.5f);
-            blueBox.transform.position = new Vector3(3f, 5.5f, 6.5f);
-        }
-        else
-        {
-            redBox.transform.position = new Vector3(0f, 0.5f, 6.5f);
-            blueBox.transform.position = new Vector3(3f, 0.5f, 6.5f);
-        }
-
-        force2.SetActive(false);
-        accArr1.SetActive(false);
-        accArr2.SetActive(false);
-        accAtext.SetActive(false);
+        forceArrow.SetActive(false);
+        forceArrow2.SetActive(false);
+        accArrG1.SetActive(false);
+        accArrG2.SetActive(false);
         slope.SetActive(false);
         blueBox.SetActive(false);
+        redBox.SetActive(false);
+
+        redRb.isKinematic = false;
+        redRb.velocity = Vector3.zero;
+        blueRb.velocity = Vector3.zero;
+        redBox.transform.localEulerAngles = Vector3.zero;
+        blueBox.transform.localEulerAngles = Vector3.zero;
+
+        forceArrow.transform.position = force1Start;
+        forceArrow2.transform.position = force2Start;
 
         //no velo when start anew
         if (PlayerPrefs.GetInt("LessonTask") == 1)
         {
-            forceRigid.velocity = new Vector3(0, 0, 0);
-            forceRigid.isKinematic = false;
-            force2Rigid.isKinematic = false;
-            force.transform.localEulerAngles = Vector3.zero;
-            force2.transform.localEulerAngles = new Vector3(-90, 0, 0);
-            rbRigid.isKinematic = true;
+            forceRb.velocity = Vector3.zero;
+            forceRb.isKinematic = false;
+            force2Rb.isKinematic = false;
+            redRb.isKinematic = true;
+            redBox.transform.position = new Vector3(0f, 0.5f, 6.5f);
         }
         else if (PlayerPrefs.GetInt("LessonTask") == 2)
         {
             frictionForce.SetActive(false);
             friction.SetActive(false);
-            if (pg.randomQuestion == 3) { slope.SetActive(true); }
-            
+            if (pg.randomQuestion == 3)
+            {
+                slope.SetActive(true);
+                redBox.transform.position = new Vector3(-1.5f, 2.5f, 6.5f);
+                redBox.transform.Rotate(0, 0, 60);
+            }
         }
-
-        rbRigid.velocity = new Vector3(0, 0, 0);
-        bbRigid.velocity = new Vector3(0, 0, 0);
-
-        //reset position
-        force.transform.position = force1v;
-        force2.transform.position = force2v;
-
-        redBox.transform.localEulerAngles = Vector3.zero;
-        blueBox.transform.localEulerAngles = Vector3.zero;
+        else if (PlayerPrefs.GetInt("LessonTask") == 3 && pg.randomQuestion < 3) //drop item in gravity
+        {
+            redBox.transform.position = new Vector3(0f, 5.5f, 6.5f);
+            blueBox.transform.position = new Vector3(3f, 5.5f, 6.5f);
+        }
     }
 }
