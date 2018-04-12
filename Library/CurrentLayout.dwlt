@@ -71,7 +71,7 @@ MonoBehaviour:
   m_MinSize: {x: 277, y: 292}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 12
+  controlID: 111
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 11
+  controlID: 110
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 100
+  controlID: 12
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 101
+  controlID: 13
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -469,19 +469,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Lesson
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Scripts/Lesson
+  - Assets
   m_LastFoldersGridSize: 60
-  m_LastProjectPath: E:\IT\WorldofMotion
+  m_LastProjectPath: C:\Users\RuikaLism\Documents\GitHub\WorldofMotion
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 199}
-    m_SelectedIDs: ca2d0000
-    m_LastClickedID: 11722
-    m_ExpandedIDs: 00000000642c0000722c0000a02c0000dc2c0000e62c0000de2d0000ea2d0000a22e0000422f0000722f0000802f0000d82f00004e300000a0300000fa300000643100007e310000b6310000f43100003c320000783200008e320000aa320000e832000010330000d8390000da390000dc390000de390000e0390000e2390000e4390000e6390000e8390000ea390000ec390000ee390000f0390000f2390000ffffff7f
+    scrollPos: {x: 0, y: 95}
+    m_SelectedIDs: 642c0000
+    m_LastClickedID: 11364
+    m_ExpandedIDs: 00000000642c0000722c0000a02c0000dc2c0000e62c0000de2d0000ea2d0000a22e0000442f0000742f0000822f0000da2f000050300000a2300000fc3000006e31000088310000c0310000fe310000463200008232000098320000b4320000f23200001a330000803a0000823a0000843a0000863a0000883a00008a3a00008c3a00008e3a0000903a0000923a0000943a0000963a0000983a00009a3a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -509,7 +509,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000642c0000722c0000a02c0000dc2c0000e62c0000de2d0000ea2d0000a22e0000422f0000722f0000802f0000d82f00004e300000a0300000fa300000643100007e310000b6310000f43100003c320000783200008e320000aa320000e832000010330000d8390000da390000dc390000de390000e0390000e2390000e4390000e6390000e8390000ea390000ec390000ee390000f0390000f2390000
+    m_ExpandedIDs: 00000000642c0000722c0000a02c0000dc2c0000e62c0000de2d0000ea2d0000a22e0000442f0000742f0000822f0000da2f000050300000a2300000fc3000006e31000088310000c0310000fe310000463200008232000098320000b4320000f23200001a330000803a0000823a0000843a0000863a0000883a00008a3a00008c3a00008e3a0000903a0000923a0000943a0000963a0000983a00009a3a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -624,10 +624,10 @@ MonoBehaviour:
     width: 413
     height: 463
   m_TreeViewState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: ca3bffffca3cffff223fffffa83fffffd23fffff3840ffff7040ffffa6fbffff00000000f23400008c3500001437000036370000
+    scrollPos: {x: 0, y: 18}
+    m_SelectedIDs: 00350000
+    m_LastClickedID: 13568
+    m_ExpandedIDs: a6fbffff0000000080340000b2340000ee3500000036000028380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -677,14 +677,14 @@ MonoBehaviour:
     width: 849
     height: 463
   m_SceneLighting: 0
-  lastFramingTime: 4963.690196938272
+  lastFramingTime: 5823.768489596668
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.490135, y: 4.0176916, z: 9.239115}
+    m_Target: {x: -0.76757133, y: 4.2790623, z: 11.012969}
     speed: 2
-    m_Value: {x: -7.490135, y: 4.0176916, z: 9.239115}
+    m_Value: {x: -0.76757133, y: 4.2790623, z: 11.012969}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -699,21 +699,21 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
     zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+    m_Target: {x: -0.5096446, y: 0.10654767, z: -0.06378077, w: -0.85137653}
     speed: 2
-    m_Value: {x: -0.7071068, y: 0, z: -0, w: -0.7071068}
+    m_Value: {x: -0.5096446, y: 0.10654767, z: -0.06378077, w: -0.85137653}
   m_Size:
-    m_Target: 15.202752
+    m_Target: 23.481789
     speed: 2
-    m_Value: 15.202752
+    m_Value: 23.481789
   m_Ortho:
     m_Target: 0
     speed: 2
