@@ -123,7 +123,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(10, 25);
                     vBefore2 = Random.Range(1, 11);
                     answer = ((mass1 * vBefore1) + (mass2 * vBefore2)) / (mass1 + mass2);
-                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่มีความเร็ว " + vBefore2 + " m/s ติดไปด้วยกันหลังกระทบกล่องสีแดงมีความเร็วเท่าไหร่ ? ";
+                    QuestionText.text = "มีกล่องสีแดงและสีฟ้า สีแดงมวล " + mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว " + vBefore1 + " m/s ใส่กล่องสีฟ้ามวล " + mass2 + " กิโลกรัมที่มีความเร็ว " + vBefore2 + " m/s ติดไปด้วยกันหลังกระทบจะมีความเร็วเท่าไหร่ ? ";
                     QWarningText.text = "";
                     break;
                 case 3:
