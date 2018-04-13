@@ -5,7 +5,7 @@ public class LessonSampleAnimate : MonoBehaviour
 
     public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt;
     public GameObject forceArrow, forceArrow2, froceText, accText;
-    public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, ground,wall,table,mass1,mass2 ; //gravity section
+    public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, ground,wall,table,mass1,mass2,mass3 ; //gravity section
     public GameObject V1Arr, V2Arr; //Momentum Section
     public ProblemGenerator pg;
     public Camera mainCam;
@@ -13,6 +13,7 @@ public class LessonSampleAnimate : MonoBehaviour
     private Rigidbody redRb, blueRb, forceArrowRb, forceArrow2Rb, GravityRb,veloRb;
     private float timer = 0;
     private Vector3 gravityA, veloA;
+    private Quaternion rotation;
 
     void Start()
     {
@@ -52,6 +53,16 @@ public class LessonSampleAnimate : MonoBehaviour
                 mainCam.transform.localEulerAngles = Vector3.zero;
                 break;
         }
+    }
+
+    void Awake()
+    {
+        rotation = mass3.transform.rotation;
+    }
+
+    void LateUpdate()
+    {
+        mass3.transform.rotation = rotation;
     }
 
     private void Update()
@@ -145,7 +156,8 @@ public class LessonSampleAnimate : MonoBehaviour
                         wall.SetActive(true);
                         break;
                     case 2:
-                        mass1.SetActive(true);
+                        mass3.SetActive(true);
+                        mass1.SetActive(false);
                         veloDownArr2.SetActive(true);
                         ground.SetActive(true);
                         table.SetActive(true);
@@ -191,9 +203,11 @@ public class LessonSampleAnimate : MonoBehaviour
     public void resetSample()
     {
         redBox.SetActive(false);
-        redRb.isKinematic = false;
+        redRb.isKinematic = true;
         redRb.velocity = Vector3.zero;
         redBox.transform.localEulerAngles = Vector3.zero;
+        redRb.isKinematic = false;
+
 
         blueBox.SetActive(false);
         blueRb.velocity = Vector3.zero;
@@ -266,6 +280,7 @@ public class LessonSampleAnimate : MonoBehaviour
             wall.SetActive(false);
             mass1.SetActive(false);
             mass2.SetActive(false);
+            mass3.SetActive(false);
         }
 
         else if (PlayerPrefs.GetInt("LessonTask") == 4)
