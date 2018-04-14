@@ -10,8 +10,7 @@ public class LessonSampleAnimate : MonoBehaviour
     public ProblemGenerator pg;
     public Camera mainCam;
 
-    private Rigidbody redRb, blueRb, forceArrowRb, forceArrow2Rb, GravityRb,veloRb;
-    private float timer = 0;
+    private Rigidbody redRb, blueRb, forceArrowRb, forceArrow2Rb,veloRb;
     private Vector3 gravityA, veloA;
     private Quaternion rotation;
 
@@ -19,7 +18,6 @@ public class LessonSampleAnimate : MonoBehaviour
     {
         redRb = redBox.GetComponent<Rigidbody>();
         blueRb = blueBox.GetComponent<Rigidbody>();
-        GravityRb = GravityRedArrow2.GetComponent<Rigidbody>();
         veloRb = veloDownArr2.GetComponent<Rigidbody>();
         gravityA = GravityRedArrow2.transform.position;
         veloA = veloDownArr2.transform.position;
@@ -265,8 +263,8 @@ public class LessonSampleAnimate : MonoBehaviour
             }
             else
             {
-                redBox.transform.position = new Vector3(0f, 0.8f, 6.5f);
-                blueBox.transform.position = new Vector3(3f, 0.8f, 6.5f);
+                redBox.transform.position = new Vector3(0f, 1.25f, 6.5f);
+                blueBox.transform.position = new Vector3(3f, 1.25f, 6.5f);
             }
 
             veloRb.isKinematic = false;
@@ -285,8 +283,8 @@ public class LessonSampleAnimate : MonoBehaviour
 
         else if (PlayerPrefs.GetInt("LessonTask") == 4)
         {
-            redBox.transform.position = new Vector3(0f, 0.8f, 6.5f);
-            blueBox.transform.position = new Vector3(5f, 0.8f, 6.5f);
+            redBox.transform.position = new Vector3(0f, 0.75f, 6.5f);
+            blueBox.transform.position = new Vector3(5f, 0.75f, 6.5f);
             V1Arr.SetActive(false);
             V2Arr.SetActive(false);
 
