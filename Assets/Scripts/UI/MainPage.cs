@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MainPage : MonoBehaviour
 {
-    public Animator mainBG, backBtt, title, mainPage, expPage, gamePage, CSPage;
+    public Animator mainBG, backBtt, title, mainPage, expPage, lessonPage, gamePage, CSPage;
     public Sprite[] frameGal;
     public Image[] displayFrame;
     public Button csLv2, csLv3;
@@ -105,6 +105,15 @@ public class MainPage : MonoBehaviour
                     mainPage.SetBool("IsMainPage", false);
                     break;
                 }
+            case "Lesson":
+                {
+                    mainBG.SetBool("SlideLesson", true);
+                    backBtt.SetBool("SlideExperiment", true);
+                    lessonPage.SetBool("IsLessonPage", true);
+
+                    expPage.SetBool("IsExpPage", false);
+                    break;
+                }
             case "Game":
                 {
                     mainBG.SetBool("SlideGame", true);
@@ -144,6 +153,12 @@ public class MainPage : MonoBehaviour
 
                         gamePage.SetBool("IsGamePage", true);
                     }
+                    else if (mainBG.GetBool("SlideExperiment") && mainBG.GetBool("SlideLesson"))
+                    {
+                        expPage.SetBool("IsExpPage", true);
+                        mainBG.SetBool("SlideLesson", false);
+                        lessonPage.SetBool("IsLessonPage", false);
+                    }
                     else
                     {
                         mainBG.SetBool("SlideExperiment", false);
@@ -182,10 +197,29 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(1);
                 break;
             case "Lesson":
+                slidePage(bttName);
+                break;
+            case "Force":
+                PlayerPrefs.SetInt("LessonTask", 1);
+                PlayerPrefs.SetInt("Lesson", 0);
+                sceneLoader.loadNewScene(2);
+                break;
+            case "Friction":
+                PlayerPrefs.SetInt("LessonTask", 2);
+                PlayerPrefs.SetInt("Lesson", 0);
+                sceneLoader.loadNewScene(2);
+                break;
+            case "Gravity":
                 PlayerPrefs.SetInt("LessonTask", 3);
                 PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
+            case "Momentum":
+                PlayerPrefs.SetInt("LessonTask", 4);
+                PlayerPrefs.SetInt("Lesson", 0);
+                sceneLoader.loadNewScene(2);
+                break;
+
             case "Import": break;
             case "Game": slidePage(bttName); break;
 
