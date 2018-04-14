@@ -33,6 +33,7 @@ public class LessonItem : MonoBehaviour
             SuccessWords.SetActive(true);
             gold.SetActive(true);
             gold.GetComponent<Animator>().SetBool("Show", true);
+            PlayerPrefs.SetInt("LessonTask" + PlayerPrefs.GetInt("LessonTask") + "Pass", 1);
         }
         else if (cnt >= 5 && qCnt <= 8)
         {
@@ -40,6 +41,7 @@ public class LessonItem : MonoBehaviour
             SuccessWords.SetActive(true);
             silver.SetActive(true);
             silver.GetComponent<Animator>().SetBool("Show", true);
+            PlayerPrefs.SetInt("LessonTask" + PlayerPrefs.GetInt("LessonTask") + "Pass", 1);
         }
         else if (cnt >= 5 && qCnt <= 11)
         {
@@ -47,6 +49,7 @@ public class LessonItem : MonoBehaviour
             SuccessWords.SetActive(true);
             bronze.SetActive(true);
             bronze.GetComponent<Animator>().SetBool("Show", true);
+            PlayerPrefs.SetInt("LessonTask" + PlayerPrefs.GetInt("LessonTask") + "Pass", 1);
         }
         else if (qCnt > 10)
         {

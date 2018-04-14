@@ -22,7 +22,7 @@ e4959ff7ffd4035633ad535a65ab9924 Assembly-CSharp.dll:.DrawAxisLine
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultInitializationErrorHandler
 daa565a4bc00993781a7c9f74a405633 Assembly-CSharp.dll:TouchScript.Gestures.FlickGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.TouchManagerInstance
-783a98df2a9de2fae0412940062669bd Assembly-CSharp.dll:.MainPage
+a7f5af45dca7789e4f3394b3973072e3 Assembly-CSharp.dll:.MainPage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DragNDrop
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredPinnedTransformGesture
 8fb521876dacf55cac64c8db63926595 Assembly-CSharp.dll:TouchScript.TouchManager

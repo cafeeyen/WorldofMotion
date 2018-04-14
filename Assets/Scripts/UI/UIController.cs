@@ -296,10 +296,13 @@ public class UIController : MonoBehaviour
 
     public void openRules()
     {
-        overlay.SetActive(true);
-        ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(true);
-        rulePageInSet = ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].GetComponentsInChildren<Image>(true);
-        rulePageInSet[0].gameObject.SetActive(true);
+        if(PlayerPrefs.GetInt("LessonTask"+ PlayerPrefs.GetInt("LessonTask") + "Pass") == 0)
+        {
+            overlay.SetActive(true);
+            ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(true);
+            rulePageInSet = ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].GetComponentsInChildren<Image>(true);
+            rulePageInSet[0].gameObject.SetActive(true);
+        }
     }
 
     public void closeRules()
