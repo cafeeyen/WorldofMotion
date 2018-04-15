@@ -71,7 +71,7 @@ MonoBehaviour:
   m_MinSize: {x: 277, y: 292}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 62
+  controlID: 123
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 82
+  controlID: 122
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 83
+  controlID: 76
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 84
+  controlID: 52
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -302,8 +302,8 @@ MonoBehaviour:
     y: 0
     width: 776
     height: 468
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -471,19 +471,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/UI
+    - Assets/Scripts/Lesson
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Scripts/UI
+  - Assets/Scripts/Lesson
   m_LastFoldersGridSize: 60
-  m_LastProjectPath: E:\IT\WorldofMotion
+  m_LastProjectPath: C:\Users\RuikaLism\Documents\GitHub\WorldofMotion
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 183}
-    m_SelectedIDs: 38310000
-    m_LastClickedID: 12600
-    m_ExpandedIDs: 00000000d22c0000e02c0000102d00004c2d0000562d0000522e00005e2e00001e2f0000c22f0000f22f0000003000005c300000d63000002e31000088310000fa310000163200004e32000088320000d23200000e330000243300003e3300007c330000a4330000b6370000b8370000ba370000bc370000be370000c0370000c2370000c4370000c6370000c8370000ca370000cc370000ce370000d0370000ffffff7f
+    scrollPos: {x: 0, y: 231}
+    m_SelectedIDs: 38380000
+    m_LastClickedID: 14392
+    m_ExpandedIDs: 00000000e2360000f0360000203700005a370000643700004c380000563800000c390000a4390000c6390000d4390000283a0000923a0000e63a00003c3b0000a03b0000bc3b0000f03b0000283c0000723c0000a83c0000bc3c0000ce3c0000043d0000223d00001440000016400000184000001a4000001c4000001e40000020400000224000002440000026400000284000002a4000002c4000002e40000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -511,7 +511,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d22c0000e02c0000102d00004c2d0000562d0000522e00005e2e00001e2f0000c22f0000f22f0000003000005c300000d63000002e31000088310000fa310000163200004e32000088320000d23200000e330000243300003e3300007c330000a4330000b6370000b8370000ba370000bc370000be370000c0370000c2370000c4370000c6370000c8370000ca370000cc370000ce370000d0370000
+    m_ExpandedIDs: 00000000e2360000f0360000203700005a370000643700004c380000563800000c390000a4390000c6390000d4390000283a0000923a0000e63a00003c3b0000a03b0000bc3b0000f03b0000283c0000723c0000a83c0000bc3c0000ce3c0000043d0000223d00001440000016400000184000001a4000001c4000001e40000020400000224000002440000026400000284000002a4000002c4000002e400000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -629,26 +629,26 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 98d8ffffb6d9ffff4eddffffd8ddffff66deffffd8deffffe4deffff98fbffff00000000
+    m_ExpandedIDs: 38ebffffa0f0ffff000000004a41000092430000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Rule3
+      m_OriginalName: Rule3
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 17776
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 6}
     m_SearchString: 
   m_ExpandedScenes:
-  - MainPage
+  - Lesson
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -713,9 +713,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.06535029, y: -0.007483759, z: 0.0004901354, w: -0.99783427}
   m_Size:
-    m_Target: 399.64944
+    m_Target: 963.84015
     speed: 2
-    m_Value: 399.64944
+    m_Value: 963.84015
   m_Ortho:
     m_Target: 0
     speed: 2
