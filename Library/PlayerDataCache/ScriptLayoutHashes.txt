@@ -20,7 +20,7 @@ af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 dec507423062c7ce449c54489e28e63e Assembly-CSharp.dll:.SaveLoad
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Metal
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.LayerManagerInstance
-cdc15896eedb7cb7ed1339d8bdf5ca2a Assembly-CSharp.dll:.ProblemGenerator
+7ea84e05162e84f7968f6c02973aed4d Assembly-CSharp.dll:.ProblemGenerator
 3d34db78850ae9bf04fdac9f5598b41a Assembly-CSharp.dll:.HelpButton
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -125,7 +125,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultInitializationErrorHandler
 daa565a4bc00993781a7c9f74a405633 Assembly-CSharp.dll:TouchScript.Gestures.FlickGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.TouchManagerInstance
-783a98df2a9de2fae0412940062669bd Assembly-CSharp.dll:.MainPage
+a7f5af45dca7789e4f3394b3973072e3 Assembly-CSharp.dll:.MainPage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DragNDrop
 ffcb82fccd9242220f3d88cf27f8bfe3 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredPinnedTransformGesture
 8fb521876dacf55cac64c8db63926595 Assembly-CSharp.dll:TouchScript.TouchManager
@@ -166,6 +166,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
+f02b5236d4ed162361bf43f743738223 Assembly-CSharp.dll:.itemCollidStop
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.BackgroundPlaneBehaviour
 342c9a27403d4f1a11164f989d99bd3f Vuforia.UnityExtensions.dll:Vuforia.CloudRecoBehaviour
 9519b45b1fe77ca14bbfebb6a5236e2e Vuforia.UnityExtensions.dll:Vuforia.CylinderTargetBehaviour
@@ -195,6 +196,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
+47616db276ca4b16a4ded741ece6e2fb Assembly-CSharp.dll:.LessonSampleAnimate
 7a9757143a7b635891efe04c59130636 Assembly-CSharp.dll:.CannonUIController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Rubber
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.GestureManager
@@ -226,7 +228,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WorldObject
 0189d52198025e02a31dab4f2f816848 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultTrackableEventHandler
-4e85276697cdf05e6e631f5929afc10e Assembly-CSharp.dll:.UIController
+144dbcd8e553a03da318c2d8c1271d13 Assembly-CSharp.dll:.UIController
 3db50826468913a08c4be516b2aa12f1 Assembly-CSharp.dll:TouchScript.Gestures.LongPressGesture
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 2a56361227def9f56c2cf57a88b32f4d UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -244,12 +246,11 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 5eeacec8e729f2f59963b7cac59021a8 Assembly-CSharp.dll:TouchScript.Layers.FullscreenLayer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 9dc41ecfefe71e0d0e207b5650949483 Assembly-CSharp.dll:TouchScript.Devices.Display.GenericDisplayDevice
-bd3c2045d36704d6ea87f03c6d44971a Assembly-CSharp.dll:.LessonItem
+fe92ed4dfc5ea7d3e3190d71884fa383 Assembly-CSharp.dll:.LessonItem
 257e7db485b6dd0c687101247ab95a1b Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.TouchCursor
 9dc41ecfefe71e0d0e207b5650949483 Assembly-CSharp.dll:TouchScript.Devices.Display.DisplayDevice
 69d7d01d14b2cb1bf7ea22ff94f3abfc Assembly-CSharp.dll:.DefaultSmartTerrainEventHandler
 99fb603e20780b52805fbdf92487e554 Assembly-CSharp.dll:TouchScript.Behaviors.Transformer
-b9d9275b0413e8c41778c8ccb3b6f3f4 Assembly-CSharp.dll:.Timer
 4f52fb13c8876d1fc6a0a4110faf10fc Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.ScreenTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.GestureManagerInstance
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemObject
