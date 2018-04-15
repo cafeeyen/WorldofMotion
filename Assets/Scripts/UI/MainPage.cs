@@ -193,6 +193,8 @@ public class MainPage : MonoBehaviour
                 break;
             case "Load":
                 Time.timeScale = 0;
+                PlayerPrefs.SetInt("LessonTask", 0);
+                PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
