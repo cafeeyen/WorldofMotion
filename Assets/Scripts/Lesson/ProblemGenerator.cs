@@ -140,11 +140,11 @@ public class ProblemGenerator : MonoBehaviour
 
     private void createChoices()
     {
+        answer = Mathf.Round(answer * 100f) / 100f;
         for (int i = 0; i < 3; i++)
         {
-            float ranAns = answer * (float)(Random.Range(-15, 16) / 10.0);
-
-            if (ranAns == answer)
+            float ranAns = Mathf.Round((answer * (float)(Random.Range(-15, 16) / 10.0)) * 100f) / 100f;
+            if (Mathf.Abs(ranAns) == Mathf.Abs(answer))
                 i--;
             else
             {
@@ -152,7 +152,7 @@ public class ProblemGenerator : MonoBehaviour
 
                 for (int j = 0; j < i; j++) // Check for duplicate ans
                 {
-                    if (ranAns == falseAnswer[j])
+                    if (Mathf.Abs(ranAns) == Mathf.Abs(falseAnswer[j]))
                     {
                         i--;
                         break;

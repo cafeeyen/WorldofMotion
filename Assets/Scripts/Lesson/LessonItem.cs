@@ -71,6 +71,7 @@ public class LessonItem : MonoBehaviour
         gold.SetActive(false);
         silver.SetActive(false);
         bronze.SetActive(false);
+        fail.SetActive(false);
         cnt = 0;
         qCnt = 1;
         cntText.text = cnt.ToString();
