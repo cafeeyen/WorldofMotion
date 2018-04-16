@@ -56,7 +56,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(5, 150);
                     mew = Random.Range(0.1f, 1.1f);
                     answer = vBefore1 / mew;
-                    QuestionText.text = "ออกแรง " + vBefore1 + " N ลากวัตถุไปตามพื้นราบถ้าสัมประสิทธิ์แรงเสียดทาน มีค่าเป็น " + mew.ToString("F2") + " วัตถุจะมีน้ำหนัก(N)เท่าไหร่ ?";
+                    QuestionText.text = "ออกแรง " + vBefore1 + " N ลากวัตถุทำให้วัตถุเริ่มขยับ ถ้าสัมประสิทธิ์แรงเสียดทานมีค่าเป็น " + mew.ToString("F2") + " วัตถุจะมีน้ำหนัก(N)เท่าไหร่ ?";
                     QWarningText.text = "";
                     break;
 
@@ -99,7 +99,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(5, 100);
                     time = vBefore1 / 9.8f;
                     answer = (vBefore1 * time) + ((-9.8f * time * time) / 2);
-                    QuestionText.text = "โยนวัตถุหนึ่งขึ้นด้วยความเร็วต้น " + vBefore1 + " m/s วัตถุจะขึ้นไปสูงสุดได้กี่เมตรก่อนตกลงมา?";
+                    QuestionText.text = "บนพื้นผิวโลก โยนวัตถุหนึ่งขึ้นด้วยความเร็วต้น " + vBefore1 + " m/s วัตถุจะขึ้นไปสูงสุดได้กี่เมตรก่อนตกลงมา?";
                     QWarningText.text = "*อย่าลืมหาเวลา ณ จุดสูงสุดก่อนหาระยะทางจากสูตรการเคลื่อนที่ โดยvที่จุดสูงสุดมีค่าเป็น0 และgมีค่าเป็นลบในที่นี้";
                     break;
             }
@@ -140,7 +140,7 @@ public class ProblemGenerator : MonoBehaviour
 
     private void createChoices()
     {
-        answer = Mathf.Round(answer * 100f) / 100f;
+        //answer = Mathf.Round(answer * 100f) / 100f;
         for (int i = 0; i < 3; i++)
         {
             float ranAns = Mathf.Round((answer * (float)(Random.Range(-15, 16) / 10.0)) * 100f) / 100f;

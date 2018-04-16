@@ -4,7 +4,7 @@ public class LessonSampleAnimate : MonoBehaviour
 {
 
     public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt;
-    public GameObject forceArrow, forceArrow2, froceText, accText;
+    public GameObject forceArrow, forceArrow2,forceFrictionArrow, froceText, accText;
     public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, ground,wall,table,mass1,mass2,mass3 ; //gravity section
     public GameObject V1Arr, V2Arr; //Momentum Section
     public ProblemGenerator pg;
@@ -129,6 +129,11 @@ public class LessonSampleAnimate : MonoBehaviour
                 switch (pg.randomQuestion)
                 {
                     case 1:
+                        plane.SetActive(true);
+                        forceFrictionArrow.SetActive(true);
+                        redRb.isKinematic = false;
+                        redRb.velocity = new Vector3(3, 0, 0);
+                        break;
                     case 2:
                         plane.SetActive(true);
                         forceArrow.SetActive(true);
@@ -216,6 +221,7 @@ public class LessonSampleAnimate : MonoBehaviour
         {
             forceArrow.SetActive(false);
             forceArrow2.SetActive(false);
+            forceFrictionArrow.SetActive(false);
             accArrG1.SetActive(false);
             accArrG2.SetActive(false);
 
