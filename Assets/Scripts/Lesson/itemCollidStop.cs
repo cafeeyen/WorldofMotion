@@ -47,7 +47,7 @@ public class itemCollidStop : MonoBehaviour
                 force2Rigid.velocity = new Vector3(0, 0, 0);
                 rbRigid.velocity = new Vector3(4, 0, 2);
             }
-            else if (PlayerPrefs.GetInt("LessonTask") == 2 && pg.randomQuestion != 3)
+            else if (PlayerPrefs.GetInt("LessonTask") == 2 && pg.randomQuestion == 2)
             {
                 accArr.SetActive(true);
 

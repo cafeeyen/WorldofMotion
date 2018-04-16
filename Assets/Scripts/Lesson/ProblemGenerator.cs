@@ -26,7 +26,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(5, 25);
                     answer = (mass1/9.8f) * vBefore1;
                     QuestionText.text = "จงหาแรงที่จะทำให้วัตถุหนัก " + mass1 + " N เคลื่อนที่ด้วยความเร่ง " + vBefore1 + " m/s^2";
-                    QWarningText.text = "*อย่าลืมแปลงหน่วยน้ำหนักจากNเป็นกิโลกรัมล่ะ (N / 9.8)";
+                    QWarningText.text = "*อย่าลืมแปลงหน่วยน้ำหนักจากNเป็นกิโลกรัมล่ะ (W / 9.8)";
                     break;
 
                 case 2:
@@ -56,7 +56,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore1 = Random.Range(5, 150);
                     mew = Random.Range(0.1f, 1.1f);
                     answer = vBefore1 / mew;
-                    QuestionText.text = "ออกแรง " + vBefore1 + " N ลากวัตถุไปตามพื้นราบถ้าสัมประสิทธิ์แรงเสียดทาน มีค่าเป็น " + mew.ToString("F2") + " วัตถุจะมีน้ำหนักเท่าไหร่ ?";
+                    QuestionText.text = "ออกแรง " + vBefore1 + " N ลากวัตถุทำให้วัตถุเริ่มขยับ ถ้าสัมประสิทธิ์แรงเสียดทานมีค่าเป็น " + mew.ToString("F2") + " วัตถุจะมีน้ำหนัก(N)เท่าไหร่ ?";
                     QWarningText.text = "";
                     break;
 
@@ -93,14 +93,14 @@ public class ProblemGenerator : MonoBehaviour
                     time = Random.Range(1.4f, 30.2f);
                     answer = 9.8f * time;
                     QuestionText.text = "วัตถุหนึ่งร่วงลงมาจากโต๊ะกระทบพื้นในเวลา " + time.ToString("F2") + " วินาที จงหาความเร็วของวัตถุขณะกระทบพื้น(g = 9.8 m/s2)";
-                    QWarningText.text = "*คำใบ้ : ความเร็วต้นเป็น0 และ ใช้สูตรการเคลื่อนที่มาช่วย";
+                    QWarningText.text = "*คำใบ้ : ความเร็วต้น(u)เป็น0 และ ใช้สูตรการเคลื่อนที่มาช่วย";
                     break;
                 case 3:
                     vBefore1 = Random.Range(5, 100);
                     time = vBefore1 / 9.8f;
                     answer = (vBefore1 * time) + ((-9.8f * time * time) / 2);
-                    QuestionText.text = "โยนวัตถุหนึ่งขึ้นด้วยความเร็วต้น " + vBefore1 + " m/s วัตถุจะขึ้นไปสูงสุดได้กี่เมตรก่อนตกลงมา?";
-                    QWarningText.text = "*อย่าลืมหาเวลา ณ จุดสูงสุดก่อนหาระยะทางจากสูตรการเคลื่อนที่ และgมีค่าเป็นลบในที่นี้";
+                    QuestionText.text = "บนพื้นผิวโลก โยนวัตถุหนึ่งขึ้นด้วยความเร็วต้น " + vBefore1 + " m/s วัตถุจะขึ้นไปสูงสุดได้กี่เมตรก่อนตกลงมา?";
+                    QWarningText.text = "*อย่าลืมหาเวลา ณ จุดสูงสุดก่อนหาระยะทางจากสูตรการเคลื่อนที่ โดยvที่จุดสูงสุดมีค่าเป็น0 และgมีค่าเป็นลบในที่นี้";
                     break;
             }
         }
@@ -140,7 +140,7 @@ public class ProblemGenerator : MonoBehaviour
 
     private void createChoices()
     {
-        answer = Mathf.Round(answer * 100f) / 100f;
+        //answer = Mathf.Round(answer * 100f) / 100f;
         for (int i = 0; i < 3; i++)
         {
             float ranAns = Mathf.Round((answer * (float)(Random.Range(-15, 16) / 10.0)) * 100f) / 100f;
