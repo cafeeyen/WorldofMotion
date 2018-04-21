@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f4f0ffcdbf26a5439ceb5201e3af63f
-timeCreated: 1510764542
+guid: c5a612c701e6b41499a2ba502373f0f9
+timeCreated: 1524325313
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Car_0
+    21300000: Ball_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -75,17 +75,26 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Car_0
+      name: Ball_0
       rect:
         serializedVersion: 2
-        x: 62
-        y: 32
-        width: 373
-        height: 373
+        x: 0
+        y: 0
+        width: 208
+        height: 226
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

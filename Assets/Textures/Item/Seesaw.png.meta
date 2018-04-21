@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 55e42cc2d40e5f3458a223cfdb2879bf
-timeCreated: 1510764495
+timeCreated: 1524325421
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -82,12 +82,12 @@ TextureImporter:
       name: Seesaw_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 32
-        width: 745
-        height: 323
+        x: 0
+        y: 0
+        width: 252
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

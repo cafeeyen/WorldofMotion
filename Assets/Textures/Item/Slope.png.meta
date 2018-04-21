@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 102339b7ad20e3443b84f952921a63dc
-timeCreated: 1510764803
+guid: 45c92a43b3eadcb408dea6aa3bec306d
+timeCreated: 1524325323
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: cannon_0
+    21300000: Slope_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -75,17 +75,26 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cannon_0
+      name: Slope_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 25
-        width: 383
-        height: 384
+        x: 0
+        y: 0
+        width: 181
+        height: 137
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
