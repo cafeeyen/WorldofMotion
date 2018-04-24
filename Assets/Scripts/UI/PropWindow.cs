@@ -14,7 +14,7 @@ public class PropWindow : MonoBehaviour
     private Toggle r_deg30, r_deg45;
     private ToggleGroup type;
     private string selectedType, currentType;
-    private Toggle st_wood, st_ice, st_metal, st_rubber, e_gravity;
+    private Toggle st_wood, st_ice, st_metal, st_rubber, e_kinematic;
     private bool changeState = false;
 
     private void OnEnable()
@@ -42,8 +42,8 @@ public class PropWindow : MonoBehaviour
         st_rubber = GameObject.Find("Rubber").GetComponent<Toggle>();
 
         // Set effect toggle
-        e_gravity = GameObject.Find("IsGravity").GetComponent<Toggle>();
-        e_gravity.onValueChanged.AddListener(toggleGravity);
+        e_kinematic = GameObject.Find("IsKinematic").GetComponent<Toggle>();
+        e_kinematic.onValueChanged.AddListener(toggleKinematic);
     }
 
     private void OnDisable()
@@ -51,7 +51,7 @@ public class PropWindow : MonoBehaviour
         sliderX.onValueChanged.RemoveAllListeners();
         sliderY.onValueChanged.RemoveAllListeners();
         sliderZ.onValueChanged.RemoveAllListeners();
-        e_gravity.onValueChanged.RemoveAllListeners();
+        e_kinematic.onValueChanged.RemoveAllListeners();
     }
 
     void Update()
@@ -115,7 +115,7 @@ public class PropWindow : MonoBehaviour
             veloY.value = itemObjectSc.Velocity.y;
             veloZ.value = itemObjectSc.Velocity.z;
 
-            e_gravity.isOn = itemObject.GetComponent<ItemObject>().IsGravity;
+            e_kinematic.isOn = !itemObject.GetComponent<ItemObject>().IsKinematic;
             // Finish change, cancel change state
             changeState = false;
         }
@@ -133,15 +133,31 @@ public class PropWindow : MonoBehaviour
         {
             if (!changeState)
             {
-                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
-                itemObject.GetComponent<ItemObject>().checkCollider();
-                itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
+                if (itemObject.GetComponent<ItemObject>().ItemType == "Seesaw")
+                {
+                    itemObject.transform.localScale = new Vector3(value, value, value);
+                    itemObject.GetComponent<ItemObject>().checkCollider();
+                    itemObject.GetComponent<Rigidbody>().mass = Mathf.Pow(value, 3);
+                }
+                else
+                {
+                    itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
+                    itemObject.GetComponent<ItemObject>().checkCollider();
+                    itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
+                }
             }
 
             // Change scale text;
-            scaleX.text = sliderX.value.ToString();
-            scaleY.text = sliderY.value.ToString();
-            scaleZ.text = sliderZ.value.ToString();
+            if(itemObject.GetComponent<ItemObject>().ItemType == "Seesaw")
+            {
+
+            }
+            else
+            {
+                scaleX.text = sliderX.value.ToString();
+                scaleY.text = sliderY.value.ToString();
+                scaleZ.text = sliderZ.value.ToString();
+            }
             mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
         }
     }
@@ -158,10 +174,10 @@ public class PropWindow : MonoBehaviour
     }
 
     // Tapped send state before trigger
-    private void toggleGravity(bool state)
+    private void toggleKinematic(bool state)
     {
         UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsGravity = state;
+        itemObject.GetComponent<ItemObject>().IsKinematic = !state;
     }
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
@@ -182,26 +198,12 @@ public class PropWindow : MonoBehaviour
 
     public void setToggleLock()
     {
-        if (UICon.state == UIController.mode.Edit)
-        {
-
-            r_deg30.enabled = true;
-            r_deg45.enabled = true;
-            st_wood.enabled = true;
-            st_ice.enabled = true;
-            st_metal.enabled = true;
-            st_rubber.enabled = true;
-            e_gravity.enabled = true;
-        }
-        else
-        {
-            r_deg30.enabled = false;
-            r_deg45.enabled = false;
-            st_wood.enabled = false;
-            st_ice.enabled = false;
-            st_metal.enabled = false;
-            st_rubber.enabled = false;
-            e_gravity.enabled = false;
-        }
+        r_deg30.enabled = UICon.state == UIController.mode.Edit;
+        r_deg45.enabled = UICon.state == UIController.mode.Edit;
+        st_wood.enabled = UICon.state == UIController.mode.Edit;
+        st_ice.enabled = UICon.state == UIController.mode.Edit;
+        st_metal.enabled = UICon.state == UIController.mode.Edit;
+        st_rubber.enabled = UICon.state == UIController.mode.Edit;
+        e_kinematic.enabled = UICon.state == UIController.mode.Edit;
     }
 }

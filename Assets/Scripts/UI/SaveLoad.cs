@@ -20,7 +20,7 @@ public class SaveLoad : MonoBehaviour
     // the examples from the web page since they are fully described 
 
     // Set prefebs of each item type
-    public GameObject cube, sphere;
+    public GameObject cube, sphere, triangle, seesaw;
     public GameObject WorldObject;
     public ItemObjectController ItemCon;
     public UIController UICon;
@@ -53,7 +53,7 @@ public class SaveLoad : MonoBehaviour
             data.scale = item.transform.localScale;
             data.rot = item.transform.localRotation;
             data.velocity = item.GetComponent<ItemObject>().Velocity;
-            data.gravity = item.GetComponent<ItemObject>().IsGravity;
+            data.kinemetic = item.GetComponent<ItemObject>().IsKinematic;
             data.surType = item.GetComponent<ItemObject>().getSurType().getName();
             myData._iWorld.Add(data);
         }
@@ -123,6 +123,12 @@ public class SaveLoad : MonoBehaviour
                     case "Sphere":
                         itemObject = (GameObject)Instantiate(sphere, data.pos, data.rot);
                         break;
+                    case "Triangle":
+                        itemObject = (GameObject)Instantiate(triangle, data.pos, data.rot);
+                        break;
+                    case "Seesaw":
+                        itemObject = (GameObject)Instantiate(seesaw, data.pos, data.rot);
+                        break;
                     default :
                         itemObject = new GameObject();
                         Debug.Log("Naniii");
@@ -131,7 +137,7 @@ public class SaveLoad : MonoBehaviour
                 itemObject.transform.parent = WorldObject.transform;
                 itemObject.transform.localScale = data.scale;
                 itemObject.GetComponent<ItemObject>().Velocity = data.velocity;
-                itemObject.GetComponent<ItemObject>().IsGravity = data.gravity;
+                itemObject.GetComponent<ItemObject>().IsKinematic = data.kinemetic;
                 itemObject.GetComponent<ItemObject>().ItemType = data.itemType;
                 itemCon.setItemObject(itemObject);
                 itemObject.GetComponent<ItemObject>().setSurType(data.surType);
@@ -221,7 +227,7 @@ public class UserData
         public Vector3 pos, scale, velocity;
         public Quaternion rot;
         public string itemType;
-        public bool gravity;
+        public bool kinemetic;
         public string surType;
     }
 }

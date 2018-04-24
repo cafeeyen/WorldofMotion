@@ -10,12 +10,18 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
+    4300002: Triangle
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 2100000, guid: 0a278923eb6efeb4dada06a26e4980ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: eae7ca74f91c37d4889ac8d0faa95d8b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -5,29 +5,23 @@ using System.Linq;
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
     private ItemObjectController ItemCon;
-    private bool overlapping;
-    private Renderer baseRenderer;
-    private Material baseMat;
     private TapGesture gesture;
     private Rigidbody rb;
-
-    // Data
-    private string itemType;
     private Vector3 pos, scale, velocity = Vector3.zero;
     private Quaternion rot;
-    private bool gravity;
+    private bool kinematic;
     private SurfaceType surType;
 
     void Awake()
     {
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
-        surType = ItemCon.getFactory().getSurType("Wood");
-        gravity = true;
-        overlapping = false;
+        kinematic = false;
+        IsOverlap = false;
 
-        baseRenderer = transform.GetComponent<Renderer>();
-        baseRenderer.material = surType.getSurMat();
-        baseMat = baseRenderer.material;
+        surType = ItemCon.getFactory().getSurType("Wood");
+        BaseRenderer = transform.GetComponent<Renderer>();
+        BaseRenderer.material = surType.getSurMat();
+        BaseMat = BaseRenderer.material;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -42,7 +36,7 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         gesture.Tapped -= Notify;
     }
 
-    private void FixedUpdate(){}
+    private void FixedUpdate() { }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -64,14 +58,14 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
             // OverlapBox detect self collider, check transfrom(position and etc.) to make sure this is not itself
             if (col.CompareTag("ItemObject") && col.transform != transform)
             {
-                overlapping = true;
+                IsOverlap = true;
                 ItemCon.changeGrowColor();
                 break;
             }
 
             if (col == last)
             {
-                overlapping = false;
+                IsOverlap = false;
                 ItemCon.changeGrowColor();
             }
         }
@@ -101,11 +95,11 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         PhyMat = surType.getPhyMat();
         ItemCon.changeGrowMaterialTexture();
     }
-    public bool IsGravity { get { return gravity; } set { gravity = value; rb.useGravity = value; } }
-    public Material BaseMat { get { return baseMat; } set { baseMat = value; } }
+    public bool IsKinematic { get { return kinematic; } set { kinematic = value; rb.isKinematic = value; } }
+    public Material BaseMat { get; set; }
     public PhysicMaterial PhyMat { get { return GetComponent<Collider>().material; } set { GetComponent<Collider>().material = value; } }
-    public Renderer BaseRenderer { get { return baseRenderer; } set { baseRenderer = value; } }
-    public bool IsOverlap { get { return overlapping; } }
+    public Renderer BaseRenderer { get; set; }
+    public bool IsOverlap { get; private set; }
     public Vector3 Velocity { get { return velocity; } set { velocity = value; rb.velocity = value; } }
-    public string ItemType { get { return itemType; } set { itemType = value; } }
+    public string ItemType { get; set; }
 }
