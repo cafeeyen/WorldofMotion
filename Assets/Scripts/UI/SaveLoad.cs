@@ -20,7 +20,7 @@ public class SaveLoad : MonoBehaviour
     // the examples from the web page since they are fully described 
 
     // Set prefebs of each item type
-    public GameObject cube, sphere, triangle, seesaw;
+    public GameObject cube, sphere, triangle, cylinder;
     public GameObject WorldObject;
     public ItemObjectController ItemCon;
     public UIController UICon;
@@ -126,8 +126,8 @@ public class SaveLoad : MonoBehaviour
                     case "Triangle":
                         itemObject = (GameObject)Instantiate(triangle, data.pos, data.rot);
                         break;
-                    case "Seesaw":
-                        itemObject = (GameObject)Instantiate(seesaw, data.pos, data.rot);
+                    case "Cylinder":
+                        itemObject = (GameObject)Instantiate(cylinder, data.pos, data.rot);
                         break;
                     default :
                         itemObject = new GameObject();

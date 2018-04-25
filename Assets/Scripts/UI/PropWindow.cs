@@ -133,31 +133,16 @@ public class PropWindow : MonoBehaviour
         {
             if (!changeState)
             {
-                if (itemObject.GetComponent<ItemObject>().ItemType == "Seesaw")
-                {
-                    itemObject.transform.localScale = new Vector3(value, value, value);
-                    itemObject.GetComponent<ItemObject>().checkCollider();
-                    itemObject.GetComponent<Rigidbody>().mass = Mathf.Pow(value, 3);
-                }
-                else
-                {
-                    itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
-                    itemObject.GetComponent<ItemObject>().checkCollider();
-                    itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
-                }
+
+                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
+                itemObject.GetComponent<ItemObject>().checkCollider();
+                itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
             }
 
             // Change scale text;
-            if(itemObject.GetComponent<ItemObject>().ItemType == "Seesaw")
-            {
-
-            }
-            else
-            {
-                scaleX.text = sliderX.value.ToString();
-                scaleY.text = sliderY.value.ToString();
-                scaleZ.text = sliderZ.value.ToString();
-            }
+            scaleX.text = sliderX.value.ToString();
+            scaleY.text = sliderY.value.ToString();
+            scaleZ.text = sliderZ.value.ToString();
             mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
         }
     }
