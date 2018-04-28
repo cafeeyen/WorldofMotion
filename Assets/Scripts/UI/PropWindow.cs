@@ -123,8 +123,11 @@ public class PropWindow : MonoBehaviour
 
     private void changeFriction(SurfaceType surType)
     {
-        staticfic.text = surType.getStaticFiction().ToString("F3");
-        dynamicfic.text = surType.getDynamicFiction().ToString("F3");
+        if (UICon.state == UIController.mode.Edit)
+        {
+            staticfic.text = surType.getStaticFiction().ToString("F3");
+            dynamicfic.text = surType.getDynamicFiction().ToString("F3");
+        }
     }
 
     private void changeScaleValue(float value)
@@ -149,20 +152,27 @@ public class PropWindow : MonoBehaviour
 
     private void changeVeloValue(float value)
     {
-        if (!changeState)
-            itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
+        if (UICon.state == UIController.mode.Edit)
+        {
+            if (!changeState)
+                itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
 
-        // Change velo text
-        veloXT.text = veloX.value.ToString();
-        veloYT.text = veloY.value.ToString();
-        veloZT.text = veloZ.value.ToString();
+            // Change velo text
+            veloXT.text = veloX.value.ToString();
+            veloYT.text = veloY.value.ToString();
+            veloZT.text = veloZ.value.ToString();
+        }
     }
 
     // Tapped send state before trigger
     private void toggleKinematic(bool state)
     {
-        UICon.playSound("clk");
-        itemObject.GetComponent<ItemObject>().IsKinematic = !state;
+        if (UICon.state == UIController.mode.Edit)
+        {
+            UICon.playSound("clk");
+            itemObject.GetComponent<ItemObject>().IsKinematic = !state;
+        }
+            
     }
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)

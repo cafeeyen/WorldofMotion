@@ -135,16 +135,16 @@ public class ProblemGenerator : MonoBehaviour
                     break;
             }
         }
+        //answer = Mathf.Round(answer * 100f) / 100f;
         createChoices();
     }
 
     private void createChoices()
     {
-        //answer = Mathf.Round(answer * 100f) / 100f;
         for (int i = 0; i < 3; i++)
         {
             float ranAns = Mathf.Round((answer * (float)(Random.Range(-15, 16) / 10.0)) * 100f) / 100f;
-            if (Mathf.Abs(ranAns) == Mathf.Abs(answer))
+            if (Mathf.Abs(ranAns) == Mathf.Abs(Mathf.Round(answer * 100f) / 100f))
                 i--;
             else
             {
