@@ -259,6 +259,14 @@ public class UIController : MonoBehaviour
         sl.loadNewScene(0);
     }
 
+    public void BackToSelectButton()
+    {
+        PlayerPrefs.SetInt("LessonTask", 0);
+        PlayerPrefs.SetInt("Lesson", 0);
+        PlayerPrefs.SetInt("LessonSelect", 1);
+        sl.loadNewScene(0);
+    }
+
     public void setWorld(WorldObject worldScript)
     {
         worldSc = worldScript;
