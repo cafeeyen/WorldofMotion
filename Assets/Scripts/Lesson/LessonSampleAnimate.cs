@@ -242,6 +242,7 @@ public class LessonSampleAnimate : MonoBehaviour
             plane.SetActive(false);
             accArrG1.SetActive(false);
             forceArrow.SetActive(false);
+            forceFrictionArrow.SetActive(false);
 
             forceArrow.transform.position = new Vector3(-6, 2.35f, 12);
             forceArrowRb.velocity = Vector3.zero;

@@ -76,11 +76,17 @@ public class MainPage : MonoBehaviour
             PlayerPrefs.SetInt("CSLvSelect", 0);
         }
 
+        if (PlayerPrefs.GetInt("LessonSelect") == 1)
+        {
+            slidePage("Experiment");
+            slidePage("Lesson");
+            PlayerPrefs.SetInt("LessonSelect", 0);
+        }
+
         /*****************************
          * Experiment
         *****************************/
         PlayerPrefs.SetInt("World", 0);
-
         if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
             loadBtt.SetActive(true);
     }
@@ -198,9 +204,11 @@ public class MainPage : MonoBehaviour
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
+
             case "Lesson":
                 slidePage(bttName);
                 break;
+                /* Lessom*/
             case "Force":
                 PlayerPrefs.SetInt("LessonTask", 1);
                 PlayerPrefs.SetInt("Lesson", 0);
@@ -222,9 +230,7 @@ public class MainPage : MonoBehaviour
                 sceneLoader.loadNewScene(2);
                 break;
 
-            case "Import": break;
             case "Game": slidePage(bttName); break;
-
             /* CannonShooter*/
             case "CSLv1":
                 PlayerPrefs.SetString("CannonShooterMode", "Lv1");

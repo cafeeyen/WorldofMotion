@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
     public GameObject[] ruleSet;
-    public Button saveBtt, exBtt, undoBtt;
+    public Button saveBtt, arBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
     public FingerController fingCon;
@@ -37,7 +37,6 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Time.timeScale = 0;
         state = mode.Edit;
 
         sl = GetComponent<SceneLoader>();
@@ -155,6 +154,7 @@ public class UIController : MonoBehaviour
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
+            Debug.Log(prefeb.name);
             newItemObject.GetComponent<ItemObject>().ItemType = prefeb.name;
 
             itemCon.setItemObject(newItemObject);
@@ -194,8 +194,7 @@ public class UIController : MonoBehaviour
 
                 state = mode.Play;
                 saveBtt.interactable = false;
-                exBtt.interactable = false;
-                undoBtt.interactable = false;
+                arBtt.interactable = false;
             }
             else
             {
@@ -217,8 +216,7 @@ public class UIController : MonoBehaviour
                 propWindow.setToggleLock();
 
                 saveBtt.interactable = true;
-                exBtt.interactable = true;
-                undoBtt.interactable = true;
+                arBtt.interactable = true;
             }
             playSound("clk");
         }
@@ -261,6 +259,14 @@ public class UIController : MonoBehaviour
         sl.loadNewScene(0);
     }
 
+    public void BackToSelectButton()
+    {
+        PlayerPrefs.SetInt("LessonTask", 0);
+        PlayerPrefs.SetInt("Lesson", 0);
+        PlayerPrefs.SetInt("LessonSelect", 1);
+        sl.loadNewScene(0);
+    }
+
     public void setWorld(WorldObject worldScript)
     {
         worldSc = worldScript;
@@ -289,9 +295,9 @@ public class UIController : MonoBehaviour
         arMode = !arMode;
         // Color need to normalize to 0-1
         if (arMode)
-            undoBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
+            arBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
         else
-            undoBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
+            arBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
     }
 
     public void openRules()

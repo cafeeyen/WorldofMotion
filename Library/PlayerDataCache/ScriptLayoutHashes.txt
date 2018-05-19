@@ -17,7 +17,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-dec507423062c7ce449c54489e28e63e Assembly-CSharp.dll:.SaveLoad
+f7fafbb748d858a81cd5480292c28bdf Assembly-CSharp.dll:.SaveLoad
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Metal
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.LayerManagerInstance
 7ea84e05162e84f7968f6c02973aed4d Assembly-CSharp.dll:.ProblemGenerator
@@ -196,7 +196,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
-47616db276ca4b16a4ded741ece6e2fb Assembly-CSharp.dll:.LessonSampleAnimate
+0910e23cf541e8f1f998a36aa7a3b689 Assembly-CSharp.dll:.LessonSampleAnimate
 7a9757143a7b635891efe04c59130636 Assembly-CSharp.dll:.CannonUIController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Rubber
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.GestureManager
@@ -228,7 +228,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WorldObject
 0189d52198025e02a31dab4f2f816848 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultTrackableEventHandler
-144dbcd8e553a03da318c2d8c1271d13 Assembly-CSharp.dll:.UIController
+5eff1a59ed5851d6365e5d86fb916ebc Assembly-CSharp.dll:.UIController
 3db50826468913a08c4be516b2aa12f1 Assembly-CSharp.dll:TouchScript.Gestures.LongPressGesture
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 2a56361227def9f56c2cf57a88b32f4d UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
