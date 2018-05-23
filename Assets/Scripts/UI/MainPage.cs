@@ -84,7 +84,7 @@ public class MainPage : MonoBehaviour
         }
 
         /*****************************
-         * Experiment
+                   Experiment
         *****************************/
         PlayerPrefs.SetInt("World", 0);
         if (PlayerPrefs.GetInt("HaveWorldSaved") == 1)
@@ -193,14 +193,12 @@ public class MainPage : MonoBehaviour
             case "New":
                 Time.timeScale = 0;
                 PlayerPrefs.SetInt("LessonTask", 0);
-                PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 0);
                 sceneLoader.loadNewScene(1);
                 break;
             case "Load":
                 Time.timeScale = 0;
                 PlayerPrefs.SetInt("LessonTask", 0);
-                PlayerPrefs.SetInt("Lesson", 0);
                 PlayerPrefs.SetInt("World", 1);
                 sceneLoader.loadNewScene(1);
                 break;
@@ -208,25 +206,21 @@ public class MainPage : MonoBehaviour
             case "Lesson":
                 slidePage(bttName);
                 break;
-                /* Lessom*/
+                /* Lesson */
             case "Force":
                 PlayerPrefs.SetInt("LessonTask", 1);
-                PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
             case "Friction":
                 PlayerPrefs.SetInt("LessonTask", 2);
-                PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
             case "Gravity":
                 PlayerPrefs.SetInt("LessonTask", 3);
-                PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
             case "Momentum":
                 PlayerPrefs.SetInt("LessonTask", 4);
-                PlayerPrefs.SetInt("Lesson", 0);
                 sceneLoader.loadNewScene(2);
                 break;
 

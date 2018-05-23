@@ -15,7 +15,6 @@ public class UIController : MonoBehaviour
     public Animator menu, item, prop;
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
-    public GameObject[] ruleSet;
     public Button saveBtt, arBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
@@ -61,9 +60,7 @@ public class UIController : MonoBehaviour
         else //question lesson.
         {
             problemGenerator.newProblem();
-            openRules();
             Time.timeScale = 1;
-
         }
     }
 
@@ -256,6 +253,7 @@ public class UIController : MonoBehaviour
 
     public void MainMenuButton()
     {
+        PlayerPrefs.SetInt("Lesson", 0);
         sl.loadNewScene(0);
     }
 
@@ -298,40 +296,5 @@ public class UIController : MonoBehaviour
             arBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
         else
             arBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
-    }
-
-    public void openRules()
-    {
-        if(PlayerPrefs.GetInt("LessonTask"+ PlayerPrefs.GetInt("LessonTask") + "Pass") == 0)
-        {
-            overlay.SetActive(true);
-            ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(true);
-            rulePageInSet = ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].GetComponentsInChildren<Image>(true);
-            rulePageInSet[0].gameObject.SetActive(true);
-        }
-    }
-
-    public void closeRules()
-    {
-        overlay.SetActive(false);
-        ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(false);
-        problemGenerator.newProblem();
-    }
-
-    public void nextRule()
-    {
-        if (ruleNumber < 7)
-        {
-            rulePageInSet[ruleNumber].gameObject.SetActive(false);
-            ruleNumber++;
-            rulePageInSet[ruleNumber].gameObject.SetActive(true);
-
-        }
-        else
-        {
-            rulePageInSet[ruleNumber].gameObject.SetActive(false);
-            ruleNumber = 0;
-            closeRules();
-        }
     }
 }

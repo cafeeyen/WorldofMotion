@@ -11,7 +11,10 @@ public class CannonUIController : MonoBehaviour
 
     /* Output Component */
     public Text angleText, tarDistText, tarHeightText, calDistText, calHeightText, calTimeText, countText;
-    public LineRenderer arcLine, groundLine;
+    public TextMesh[] infoText;
+    public LineRenderer[] arcLine;
+    public LineRenderer groundLine;
+    private int line = 0;
 
     /* AR Camera Component */
     public RawImage MiniRawImage, FullScreenRawImage;
@@ -188,11 +191,11 @@ public class CannonUIController : MonoBehaviour
             groundLine.SetPosition(1, new Vector3(0, -1.8f, 100));
         }
 
-         if (!arcLine.enabled)
-            arcLine.enabled = true;
+         if (!arcLine[line].enabled)
+            arcLine[line].enabled = true;
 
         int maxIndex = Mathf.RoundToInt(maxTime / Time.fixedDeltaTime);
-        arcLine.positionCount = maxIndex;
+        arcLine[line].positionCount = maxIndex;
 
         Vector3 curPos;
         if (PlayerPrefs.GetString("CannonShooterMode") == "Lv2" || PlayerPrefs.GetString("CannonShooterMode") == "Lv3")
@@ -200,15 +203,19 @@ public class CannonUIController : MonoBehaviour
         else
             curPos = cannonPos;
 
-        Vector3 curVel = GameController.getCannonForward() * power;
+        var originPos = curPos;
+        var frameTime = Time.fixedDeltaTime;
 
         for (int i = 0; i < maxIndex; i++)
         {
-            arcLine.SetPosition(i, curPos);
-
-            curVel += Physics.gravity * Time.fixedDeltaTime;
-            curPos += curVel * Time.fixedDeltaTime;
+            arcLine[line].SetPosition(i, curPos);
+            curPos.z = originPos.z + power * frameTime * Mathf.Cos(-angle * Mathf.Deg2Rad);
+            curPos.y = originPos.y + (power * frameTime * Mathf.Sin(-angle * Mathf.Deg2Rad)) - (0.5f * -Physics.gravity.y * Mathf.Pow(frameTime, 2));
+            frameTime += Time.fixedDeltaTime;
         }
+        infoText[line].text = -angle + " ํ | " + power + "N";
+        infoText[line].transform.position = arcLine[line].GetPosition(maxIndex - 1) + Vector3.down * (2 + (line * 3));
+        line = line == 2 ? 0 : line + 1;
     }
 
     /* Game Tutorial */
