@@ -23,6 +23,7 @@ public class MainPage : MonoBehaviour
         // PlayerPrefs.SetInt("CSLv2", 1);
         // PlayerPrefs.SetInt("CannonShooterLv3Star", 3);
         // PlayerPrefs.SetInt("CSLv3", 1);
+        // PlayerPrefs.SetInt("CannonTutorial", 0);
 
 
         // ***************************** Set defaut setting here *****************************

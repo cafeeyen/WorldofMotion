@@ -187,7 +187,7 @@ public class UIController : MonoBehaviour
                     showItemInWorld(false);
                 }
                 else
-                    Time.timeScale = 1;
+                    Time.timeScale = 0.5f;
 
                 state = mode.Play;
                 saveBtt.interactable = false;

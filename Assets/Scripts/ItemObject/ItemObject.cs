@@ -12,6 +12,9 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private bool kinematic;
     private SurfaceType surType;
 
+    public float acc, spd, movetime, dist, disp;
+    private Vector3 lastvelo, lastpos;
+
     void Awake()
     {
         ItemCon = GameObject.Find("ItemObjectController").GetComponent<ItemObjectController>();
@@ -36,7 +39,30 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         gesture.Tapped -= Notify;
     }
 
-    private void FixedUpdate() { }
+    private void FixedUpdate()
+    {
+        acc = (rb.velocity.magnitude - lastvelo.magnitude) / Time.fixedDeltaTime;
+        /*
+         * A = F / M
+         * Fst = Ust * Fn (Static force)
+         * Fsl = Usl * Fn (Dymanic force)
+         * F = Fapp - Ffr --> Fapp = -Ffr - F
+         * acc = (Fapp - Usl * MG) / m
+         */
+         /*
+        var Fst = surType.getStaticFiction() * velocity.magnitude;
+        var Fsl = surType.getDynamicFiction() * velocity.magnitude;
+        */
+
+        spd = rb.velocity.magnitude;
+        if(spd > 0)
+            movetime += Time.fixedDeltaTime;
+        dist += Vector3.Distance(transform.position, lastpos);
+        disp = Vector3.Distance(pos, transform.localPosition);
+
+        lastvelo = rb.velocity;
+        lastpos = transform.position;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -77,6 +103,9 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         rot = transform.localRotation;
         rb.velocity = velocity;
         rb.angularVelocity = Vector3.zero;
+
+        lastvelo = velocity;
+        lastpos = pos;
     }
 
     public void returnState()
@@ -85,6 +114,12 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         transform.localRotation = rot;
         rb.velocity = velocity;
         rb.angularVelocity = Vector3.zero;
+
+        acc = 0;
+        spd = 0;
+        movetime = 0;
+        dist = 0;
+        disp = 0;
     }
 
     public SurfaceType getSurType() { return surType; }

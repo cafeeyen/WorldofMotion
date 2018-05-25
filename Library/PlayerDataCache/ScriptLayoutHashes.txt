@@ -89,7 +89,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 7987626dc4c82a0f09e4deff3ece21bf Assembly-CSharp.dll:.YellowFinger
 dac154b38532fd5a92a95b0a9a386115 Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.ObjectCursor
 6168f0a1662093d30e8f1b36ae6da430 Assembly-CSharp.dll:.CannonCameraController
-f577735e9d70d5e6b6543de1d41d0178 Assembly-CSharp.dll:.PropWindow
+5110a7377a70ea3fb2485413a619549f Assembly-CSharp.dll:.PropWindow
 e4959ff7ffd4035633ad535a65ab9924 Assembly-CSharp.dll:.DrawAxisLine
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -197,7 +197,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 0910e23cf541e8f1f998a36aa7a3b689 Assembly-CSharp.dll:.LessonSampleAnimate
-ea9844d25e4f220c05910bcfca7ee82a Assembly-CSharp.dll:.CannonUIController
+63736c64e9831b904c5a194339aad3b6 Assembly-CSharp.dll:.CannonUIController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Rubber
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.GestureManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.DebuggableMonoBehaviour
@@ -253,7 +253,7 @@ fe92ed4dfc5ea7d3e3190d71884fa383 Assembly-CSharp.dll:.LessonItem
 99fb603e20780b52805fbdf92487e554 Assembly-CSharp.dll:TouchScript.Behaviors.Transformer
 4f52fb13c8876d1fc6a0a4110faf10fc Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.ScreenTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Core.GestureManagerInstance
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ItemObject
+7d272dbc82a8002531468ad793db33ee Assembly-CSharp.dll:.ItemObject
 6ec273a5fcd8b0a1a1b85b7bebb4a14a Assembly-CSharp.dll:TouchScript.Layers.UI.TouchScriptInputModule
 25cb51b79761cf69e146997ca3f33ce1 Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.MouseCursor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TouchScript.Behaviors.UI.OverHelper

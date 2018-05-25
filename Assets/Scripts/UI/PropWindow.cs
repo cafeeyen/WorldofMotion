@@ -6,6 +6,7 @@ using System.Linq;
 public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
+    public Text accV, spdV, moveV, distV, dispV;
     public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
 
@@ -78,6 +79,18 @@ public class PropWindow : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (UICon.state == UIController.mode.Play)
+        {
+            accV.text = itemObject.GetComponent<ItemObject>().acc.ToString("F2");
+            spdV.text = itemObject.GetComponent<ItemObject>().spd.ToString("F2");
+            moveV.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2");
+            dispV.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2");
+            distV.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2");
+        }
+    }
+
     private void tapHandler(object sender, System.EventArgs e)
     {
         if (gesture.GetScreenPositionHitData().Target != null)
@@ -132,36 +145,29 @@ public class PropWindow : MonoBehaviour
 
     private void changeScaleValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && !changeState)
         {
-            if (!changeState)
-            {
 
-                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
-                itemObject.GetComponent<ItemObject>().checkCollider();
-                itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
-            }
+            itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
+            itemObject.GetComponent<ItemObject>().checkCollider();
+            itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
 
-            // Change scale text;
-            scaleX.text = sliderX.value.ToString();
-            scaleY.text = sliderY.value.ToString();
-            scaleZ.text = sliderZ.value.ToString();
-            mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
         }
+        // Change scale text;
+        scaleX.text = sliderX.value.ToString();
+        scaleY.text = sliderY.value.ToString();
+        scaleZ.text = sliderZ.value.ToString();
+        mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
     }
 
     private void changeVeloValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit)
-        {
-            if (!changeState)
-                itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
-
-            // Change velo text
-            veloXT.text = veloX.value.ToString();
-            veloYT.text = veloY.value.ToString();
-            veloZT.text = veloZ.value.ToString();
-        }
+        if (UICon.state == UIController.mode.Edit && !changeState)
+            itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
+        // Change velo text
+        veloXT.text = veloX.value.ToString();
+        veloYT.text = veloY.value.ToString();
+        veloZT.text = veloZ.value.ToString();
     }
 
     // Tapped send state before trigger
@@ -172,7 +178,7 @@ public class PropWindow : MonoBehaviour
             UICon.playSound("clk");
             itemObject.GetComponent<ItemObject>().IsKinematic = !state;
         }
-            
+
     }
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)

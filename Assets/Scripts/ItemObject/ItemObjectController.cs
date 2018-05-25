@@ -21,7 +21,7 @@ public class ItemObjectController : MonoBehaviour
 
     private void Awake()
     {
-        propWin = GameObject.Find("PropWindow").GetComponent<PropWindow>();
+        propWin = GameObject.Find("PropSettingWindow").GetComponent<PropWindow>();
         UICon = GameObject.Find("Canvas").GetComponent<UIController>();
         growMat = (Material)Resources.Load("Materials/GrowMat", typeof(Material));
     }
