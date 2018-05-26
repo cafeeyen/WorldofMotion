@@ -89,7 +89,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 7987626dc4c82a0f09e4deff3ece21bf Assembly-CSharp.dll:.YellowFinger
 dac154b38532fd5a92a95b0a9a386115 Assembly-CSharp.dll:TouchScript.Behaviors.Cursors.ObjectCursor
 6168f0a1662093d30e8f1b36ae6da430 Assembly-CSharp.dll:.CannonCameraController
-5110a7377a70ea3fb2485413a619549f Assembly-CSharp.dll:.PropWindow
+75453426cd885cb3f0f25a42cca2137c Assembly-CSharp.dll:.PropWindow
 e4959ff7ffd4035633ad535a65ab9924 Assembly-CSharp.dll:.DrawAxisLine
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -228,7 +228,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WorldObject
 0189d52198025e02a31dab4f2f816848 Assembly-CSharp.dll:TouchScript.Gestures.TransformGestures.Clustered.ClusteredTransformGesture
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DefaultTrackableEventHandler
-487a4a4a4250288ae9587f481916fa0b Assembly-CSharp.dll:.UIController
+82ae27058e502e1b7c20933ecfaa79e1 Assembly-CSharp.dll:.UIController
 3db50826468913a08c4be516b2aa12f1 Assembly-CSharp.dll:TouchScript.Gestures.LongPressGesture
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 2a56361227def9f56c2cf57a88b32f4d UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController

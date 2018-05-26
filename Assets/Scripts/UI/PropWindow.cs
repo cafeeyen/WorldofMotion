@@ -6,7 +6,7 @@ using System.Linq;
 public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
-    public Text accV, spdV, moveV, distV, dispV;
+    public Text acc, avgAcc, spd, avgSpd, move, dist, disp;
     public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
 
@@ -81,13 +81,24 @@ public class PropWindow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (UICon.state == UIController.mode.Play)
+        if (UICon.state == UIController.mode.Play && itemObject != null)
         {
-            accV.text = itemObject.GetComponent<ItemObject>().acc.ToString("F2");
-            spdV.text = itemObject.GetComponent<ItemObject>().spd.ToString("F2");
-            moveV.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2");
-            dispV.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2");
-            distV.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2");
+            acc.text = itemObject.GetComponent<ItemObject>().acc.ToString("F2") + " m/s^2";
+            spd.text = itemObject.GetComponent<ItemObject>().spd.ToString("F2") + " m/s";
+            move.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2") + " s";
+            disp.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2") + " m";
+            dist.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2") + " m";
+
+            if(itemObject.GetComponent<ItemObject>().movetime < 0)
+            {
+                avgAcc.text = (itemObject.GetComponent<ItemObject>().acc / itemObject.GetComponent<ItemObject>().movetime).ToString("F2") + " m/s^2";
+                avgSpd.text = (itemObject.GetComponent<ItemObject>().spd / itemObject.GetComponent<ItemObject>().movetime).ToString("F2") + " m/s";
+            }
+            else
+            {
+                avgAcc.text = "- m/s^2";
+                avgSpd.text = "- m/s";
+            }
         }
     }
 
@@ -105,9 +116,9 @@ public class PropWindow : MonoBehaviour
 
     public void setPropValue(GameObject selectedItemObject)
     {
-        itemObject = selectedItemObject;
-        if (itemObject != null)
+        if (itemObject != selectedItemObject)
         {
+            itemObject = selectedItemObject;
             // Start change state so slider won't change itemObject scale while set value from new itemObject
             changeState = true;
             sliderX.value = itemObject.transform.localScale.x;
@@ -136,7 +147,7 @@ public class PropWindow : MonoBehaviour
 
     private void changeFriction(SurfaceType surType)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && itemObject != null)
         {
             staticfic.text = surType.getStaticFiction().ToString("F3");
             dynamicfic.text = surType.getDynamicFiction().ToString("F3");
@@ -145,7 +156,7 @@ public class PropWindow : MonoBehaviour
 
     private void changeScaleValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit && !changeState)
+        if (UICon.state == UIController.mode.Edit && !changeState && itemObject != null)
         {
 
             itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
@@ -183,7 +194,7 @@ public class PropWindow : MonoBehaviour
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && itemObject != null)
         {
             // 1 is Left, -1 is Right
             if (r_deg30.isOn)

@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     public Animator menu, item, prop;
     public PropWindow propWindow;
     public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
+    public RectTransform statWin, setWin;
     public Button saveBtt, arBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
@@ -94,45 +95,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void displayWindows(Animator anim, bool cancleSelect = false)
+    public void displayWindows(Animator anim)
     {
-        // If opened, close it
-        if (anim.GetBool("IsDisplayed") == true)
-        {
-            anim.SetBool("IsDisplayed", false);
-            playSound("clk");
-        }
-        // PropBar can open when some ItemObject has selected
-        else if (anim.name != "PropBar" || itemObject != null)
-        {
-            anim.SetBool("IsDisplayed", true);
-            changeState(anim);
-        }
-        // Block deny sound play when unselect item while prop bar didn't open
-        else if(!cancleSelect)
-        {
-            playSound("deny");
-        }
-    }
-
-    private void changeState(Animator anim)
-    {
-        // Can open one window at the same time
-        if (anim == menu)
-        {
-            item.SetBool("IsDisplayed", false);
-            prop.SetBool("IsDisplayed", false);
-        }
-        else if (anim == item)
-        {
-            menu.SetBool("IsDisplayed", false);
-            prop.SetBool("IsDisplayed", false);
-        }
-        else // anim == prop
-        {
-            menu.SetBool("IsDisplayed", false);
-            item.SetBool("IsDisplayed", false);
-        }
+        anim.SetBool("IsDisplayed", !anim.GetBool("IsDisplayed"));
         playSound("clk");
     }
 
@@ -192,6 +157,7 @@ public class UIController : MonoBehaviour
                 state = mode.Play;
                 saveBtt.interactable = false;
                 arBtt.interactable = false;
+                swapWindow();
             }
             else
             {
@@ -214,11 +180,19 @@ public class UIController : MonoBehaviour
 
                 saveBtt.interactable = true;
                 arBtt.interactable = true;
+                swapWindow();
             }
             playSound("clk");
         }
         else
             playSound("deny");
+    }
+
+    private void swapWindow()
+    {
+        var x = setWin.anchoredPosition.x;
+        setWin.anchoredPosition = new Vector3(statWin.anchoredPosition.x, 0, 0);
+        statWin.anchoredPosition = new Vector3(x, 0, 0);
     }
 
     private void showItemInWorld(bool state)

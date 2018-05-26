@@ -117,7 +117,6 @@ public class ItemObjectController : MonoBehaviour
                 changeGrowMaterialTexture();
                 changeGrowColor();
                 itemObjectSc.BaseRenderer.material = growMat;
-                UICon.displayWindows(propBar);
             }
             else // Just cancle
             {
@@ -145,7 +144,6 @@ public class ItemObjectController : MonoBehaviour
         axisTransition.SetActive(false);
         veloArrow.SetActive(false);
         UICon.setItemObject(null);
-        UICon.displayWindows(propBar, true);
     }
 
     public SurfaceTypeFactory getFactory()
