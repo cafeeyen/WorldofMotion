@@ -143,6 +143,7 @@ public class ItemObjectController : MonoBehaviour
         itemObject.GetComponent<DragNDrop>().enabled = false;
         axisTransition.SetActive(false);
         veloArrow.SetActive(false);
+        propWin.setPropValue(null);
         UICon.setItemObject(null);
     }
 

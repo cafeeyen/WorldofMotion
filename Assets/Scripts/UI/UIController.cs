@@ -116,7 +116,6 @@ public class UIController : MonoBehaviour
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
-            Debug.Log(prefeb.name);
             newItemObject.GetComponent<ItemObject>().ItemType = prefeb.name;
 
             itemCon.setItemObject(newItemObject);
@@ -131,10 +130,6 @@ public class UIController : MonoBehaviour
     {
         if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
         {
-            // Cancle select item
-            if (itemObject != null)
-                itemCon.setItemObject(itemObject);
-
             if (state == mode.Edit)
             {
                 worldSc.saveState();
@@ -152,12 +147,11 @@ public class UIController : MonoBehaviour
                     showItemInWorld(false);
                 }
                 else
-                    Time.timeScale = 0.5f;
+                    Time.timeScale = 1;
 
                 state = mode.Play;
                 saveBtt.interactable = false;
                 arBtt.interactable = false;
-                swapWindow();
             }
             else
             {
@@ -180,7 +174,6 @@ public class UIController : MonoBehaviour
 
                 saveBtt.interactable = true;
                 arBtt.interactable = true;
-                swapWindow();
             }
             playSound("clk");
         }
@@ -188,10 +181,10 @@ public class UIController : MonoBehaviour
             playSound("deny");
     }
 
-    private void swapWindow()
+    public void swapWindow()
     {
         var x = setWin.anchoredPosition.x;
-        setWin.anchoredPosition = new Vector3(statWin.anchoredPosition.x, 0, 0);
+        setWin.anchoredPosition = new Vector3(statWin.anchoredPosition.x, setWin.anchoredPosition.y, 0);
         statWin.anchoredPosition = new Vector3(x, 0, 0);
     }
 

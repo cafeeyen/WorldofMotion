@@ -6,7 +6,7 @@ using System.Linq;
 public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
-    public Text acc, avgAcc, spd, avgSpd, move, dist, disp;
+    public Text acc, spd, move, dist, disp;
     public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
 
@@ -88,17 +88,6 @@ public class PropWindow : MonoBehaviour
             move.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2") + " s";
             disp.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2") + " m";
             dist.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2") + " m";
-
-            if(itemObject.GetComponent<ItemObject>().movetime < 0)
-            {
-                avgAcc.text = (itemObject.GetComponent<ItemObject>().acc / itemObject.GetComponent<ItemObject>().movetime).ToString("F2") + " m/s^2";
-                avgSpd.text = (itemObject.GetComponent<ItemObject>().spd / itemObject.GetComponent<ItemObject>().movetime).ToString("F2") + " m/s";
-            }
-            else
-            {
-                avgAcc.text = "- m/s^2";
-                avgSpd.text = "- m/s";
-            }
         }
     }
 
@@ -116,9 +105,9 @@ public class PropWindow : MonoBehaviour
 
     public void setPropValue(GameObject selectedItemObject)
     {
-        if (itemObject != selectedItemObject)
+        itemObject = selectedItemObject;
+        if (selectedItemObject != null && itemObject != selectedItemObject)
         {
-            itemObject = selectedItemObject;
             // Start change state so slider won't change itemObject scale while set value from new itemObject
             changeState = true;
             sliderX.value = itemObject.transform.localScale.x;
@@ -156,35 +145,41 @@ public class PropWindow : MonoBehaviour
 
     private void changeScaleValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit && !changeState && itemObject != null)
+        if(itemObject != null)
         {
+            if (UICon.state == UIController.mode.Edit && !changeState)
+            {
 
-            itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
-            itemObject.GetComponent<ItemObject>().checkCollider();
-            itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
+                itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
+                itemObject.GetComponent<ItemObject>().checkCollider();
+                itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
 
+            }
+            // Change scale text;
+            scaleX.text = sliderX.value.ToString();
+            scaleY.text = sliderY.value.ToString();
+            scaleZ.text = sliderZ.value.ToString();
+            mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
         }
-        // Change scale text;
-        scaleX.text = sliderX.value.ToString();
-        scaleY.text = sliderY.value.ToString();
-        scaleZ.text = sliderZ.value.ToString();
-        mass.text = itemObject.GetComponent<Rigidbody>().mass.ToString();
     }
 
     private void changeVeloValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit && !changeState)
-            itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
-        // Change velo text
-        veloXT.text = veloX.value.ToString();
-        veloYT.text = veloY.value.ToString();
-        veloZT.text = veloZ.value.ToString();
+        if (itemObject != null)
+        {
+            if (UICon.state == UIController.mode.Edit && !changeState)
+                itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
+            // Change velo text
+            veloXT.text = veloX.value.ToString();
+            veloYT.text = veloY.value.ToString();
+            veloZT.text = veloZ.value.ToString();
+        }
     }
 
     // Tapped send state before trigger
     private void toggleKinematic(bool state)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && itemObject != null)
         {
             UICon.playSound("clk");
             itemObject.GetComponent<ItemObject>().IsKinematic = !state;
