@@ -13,7 +13,7 @@ public class CannonGameController : MonoBehaviour
     /* Unity Functions */
     private void OnEnable()
     {
-        if (PlayerPrefs.GetString("CannonShooterMode") == "Lv2" || PlayerPrefs.GetString("CannonShooterMode") == "Lv3")
+        if ((PlayerPrefs.GetString("CannonShooterMode") == "Lv2" || PlayerPrefs.GetString("CannonShooterMode") == "Lv3") && !isShooting)
         {
             cannon.transform.position = canyonPos;
             ball.transform.position = canyonPos;
