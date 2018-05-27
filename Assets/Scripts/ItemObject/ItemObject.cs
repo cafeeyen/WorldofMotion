@@ -10,10 +10,11 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private Vector3 pos, scale, velocity = Vector3.zero;
     private Quaternion rot;
     private bool kinematic;
-    private SurfaceType surType;
+    public SurfaceType surType;
 
-    public float acc, spd, movetime, dist, disp;
+    public float acc, spd, movetime, dist, disp,Fst,Fsl;
     private Vector3 lastvelo, lastpos;
+    private float mass;
 
     void Awake()
     {
@@ -67,6 +68,16 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private void OnCollisionEnter(Collision collision)
     {
         AudioSource.PlayClipAtPoint(surType.getSound(), transform.position, 1f);
+        /*
+         * Using f = u * m * 9.81f
+         * F static = surType.getStaticFiction() * mass * 9.81f; 
+         * F static use u of item that is below.
+         * F slidding = surType.getDynamicFiction() * mass * 9.81f;
+         * F slidding use u of item that is moving.
+         */
+        mass = gameObject.GetComponent<Rigidbody>().mass;
+        Fst = surType.getStaticFiction()*mass*9.81f; //currently using only u of itself to cal.
+        Fsl = surType.getDynamicFiction()* mass * 9.81f;//currently using only u of itself to cal.
     }
 
     public void Notify(object sender, System.EventArgs e)

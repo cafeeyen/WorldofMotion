@@ -6,7 +6,7 @@ using System.Linq;
 public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
-    public Text acc, spd, move, dist, disp;
+    public Text acc, spd, move, dist, disp,sFriction,dFriction;
     public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
 
@@ -88,6 +88,9 @@ public class PropWindow : MonoBehaviour
             move.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2") + " s";
             disp.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2") + " m";
             dist.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2") + " m";
+            //calculate is in ItemObject.cs cal when touch another surface.
+            sFriction.text = itemObject.GetComponent<ItemObject>().Fst.ToString("F2") + " N";
+            dFriction.text = itemObject.GetComponent<ItemObject>().Fsl.ToString("F2") + " N";
         }
     }
 
