@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TouchScript.Gestures;
 using System.Linq;
+using System.Collections.Generic;
 
 public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 {
@@ -10,9 +11,10 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
     private Vector3 pos, scale, velocity = Vector3.zero;
     private Quaternion rot;
     private bool kinematic;
+    private List<Collider> collidedObjects;
     public SurfaceType surType;
 
-    public float acc, spd, movetime, dist, disp,Fst,Fsl;
+    public float acc, spd, movetime, dist, disp, Fst, Fsl;
     private Vector3 lastvelo, lastpos;
     private float mass;
 
@@ -27,6 +29,8 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
         BaseRenderer.material = surType.getSurMat();
         BaseMat = BaseRenderer.material;
         rb = GetComponent<Rigidbody>();
+
+        collidedObjects = new List<Collider>();
     }
 
     private void OnEnable()
@@ -50,13 +54,13 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
          * F = Fapp - Ffr --> Fapp = -Ffr - F
          * acc = (Fapp - Usl * MG) / m
          */
-         /*
-        var Fst = surType.getStaticFiction() * velocity.magnitude;
-        var Fsl = surType.getDynamicFiction() * velocity.magnitude;
-        */
+        /*
+       var Fst = surType.getStaticFiction() * velocity.magnitude;
+       var Fsl = surType.getDynamicFiction() * velocity.magnitude;
+       */
 
         spd = rb.velocity.magnitude;
-        if(spd > 0)
+        if (spd > 0)
             movetime += Time.fixedDeltaTime;
         dist += Vector3.Distance(transform.position, lastpos);
         disp = Vector3.Distance(pos, transform.localPosition);
@@ -67,17 +71,39 @@ public class ItemObject : MonoBehaviour // Subject for ItemObjectController
 
     private void OnCollisionEnter(Collision collision)
     {
-        AudioSource.PlayClipAtPoint(surType.getSound(), transform.position, 1f);
         /*
          * Using f = u * m * 9.81f
+         * 
          * F static = surType.getStaticFiction() * mass * 9.81f; 
          * F static use u of item that is below.
+         * 
          * F slidding = surType.getDynamicFiction() * mass * 9.81f;
          * F slidding use u of item that is moving.
          */
-        mass = gameObject.GetComponent<Rigidbody>().mass;
-        Fst = surType.getStaticFiction()*mass*9.81f; //currently using only u of itself to cal.
-        Fsl = surType.getDynamicFiction()* mass * 9.81f;//currently using only u of itself to cal.
+        if (!collidedObjects.Contains(collision.collider) && collision.gameObject.tag == "ItemObject")
+        {
+            AudioSource.PlayClipAtPoint(surType.getSound(), transform.position, 1f);
+            mass = gameObject.GetComponent<Rigidbody>().mass;
+            if(collision.gameObject.transform.localPosition.y < transform.localPosition.y)
+                Fst = collision.gameObject.GetComponent<Collider>().material.staticFriction * mass * 9.81f;
+            Fsl = surType.getDynamicFiction() * mass * 9.81f;//currently using only u of itself to cal.
+            collidedObjects.Add(collision.collider);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        OnCollisionEnter(collision);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        collidedObjects.Remove(collision.collider);
+        if(collidedObjects.Count == 0)
+        {
+            Fst = 0;
+            Fsl = 0;
+        }
     }
 
     public void Notify(object sender, System.EventArgs e)

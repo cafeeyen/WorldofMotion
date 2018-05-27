@@ -31,7 +31,6 @@ public class UIController : MonoBehaviour
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
     private bool arMode = false;
-    private int ruleNumber = 0;
     private Vector3 camPos;
     private Quaternion camRot;
 
@@ -74,13 +73,7 @@ public class UIController : MonoBehaviour
     {
         string tapped = gesture.GetScreenPositionHitData().Target.name;
         if (tapped == "MenuButton" || tapped == "MenuArrow") displayWindows(menu);
-        else if (tapped == "ItemButton" || tapped == "ItemArrow")
-        {
-            if (state == mode.Edit)
-                displayWindows(item);
-            else
-                playSound("deny");
-        }
+        else if (tapped == "ItemButton" || tapped == "ItemArrow") displayWindows(item);
         else if (tapped == "PropButton" || tapped == "PropArrow") displayWindows(prop);
     }
 
@@ -109,7 +102,7 @@ public class UIController : MonoBehaviour
     public void createItemObject(GameObject prefeb)
     {
         // Can't create new one while current one is overlapping
-        if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
+        if (state == mode.Edit && (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap))
         {
             // Spawn at center of screen,  distance 10
             Vector3 screenPosition = ARCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, ARCamera.nearClipPlane + 10));
@@ -132,6 +125,13 @@ public class UIController : MonoBehaviour
         {
             if (state == mode.Edit)
             {
+                if (itemObject != null)
+                    itemCon.showAxis();
+
+                state = mode.Play;
+                saveBtt.interactable = false;
+                arBtt.interactable = false;
+
                 worldSc.saveState();
                 propWindow.setToggleLock();
                 deleteBtt.SetActive(false);
@@ -148,10 +148,6 @@ public class UIController : MonoBehaviour
                 }
                 else
                     Time.timeScale = 1;
-
-                state = mode.Play;
-                saveBtt.interactable = false;
-                arBtt.interactable = false;
             }
             else
             {
@@ -171,6 +167,9 @@ public class UIController : MonoBehaviour
                 deleteBtt.SetActive(true);
                 worldSc.loadState();
                 propWindow.setToggleLock();
+
+                if (itemObject != null)
+                    itemCon.showAxis();
 
                 saveBtt.interactable = true;
                 arBtt.interactable = true;

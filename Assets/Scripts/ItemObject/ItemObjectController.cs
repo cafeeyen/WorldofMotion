@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class ItemObjectController : MonoBehaviour
 {
-    public GameObject axisTransition, veloArrow;
+    public GameObject axisTransition;
     public Animator propBar;
-    public TextMesh veloText;
 
     // We control only one ItemObject at the same time
     // Share with PropWindow, UIController and AxisTransition
@@ -34,20 +33,6 @@ public class ItemObjectController : MonoBehaviour
             emission = Mathf.PingPong(Time.unscaledTime, 1.0f);
             finalColor = growColor * emission;
             growMat.SetColor("_EmissionColor", finalColor);
-            if(veloArrow.activeSelf)
-            {
-                /*
-                var maxValue = Mathf.Max(Mathf.Abs(itemObjectSc.Velocity.x), Mathf.Abs(itemObjectSc.Velocity.y), Mathf.Abs(itemObjectSc.Velocity.z));
-                if (maxValue != 0)
-                {
-                    veloArrow.transform.position = itemObject.transform.position;
-                    var veloVec = new Vector3(itemObjectSc.Velocity.x / maxValue, itemObjectSc.Velocity.y / maxValue, itemObjectSc.Velocity.z / maxValue);
-                    veloArrow.transform.LookAt(veloVec * 5);
-                }
-                else
-                    veloArrow.transform.position = new Vector3(0, -100, 0);
-                */
-            }
         }
     }
 
@@ -106,7 +91,6 @@ public class ItemObjectController : MonoBehaviour
                     // Set active and update axis position
                     axisTransition.SetActive(true);
                     axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
-                    veloArrow.SetActive(true);
                 }
 
                 // Trigger change state in PropWindow
@@ -142,9 +126,15 @@ public class ItemObjectController : MonoBehaviour
         itemObjectSc.BaseRenderer.material = itemObjectSc.BaseMat;
         itemObject.GetComponent<DragNDrop>().enabled = false;
         axisTransition.SetActive(false);
-        veloArrow.SetActive(false);
         propWin.setPropValue(null);
         UICon.setItemObject(null);
+    }
+
+    public void showAxis()
+    {
+        itemObject.GetComponent<DragNDrop>().enabled = !axisTransition.activeSelf;
+        axisTransition.GetComponent<AxisTransition>().setItemObject(itemObject);
+        axisTransition.SetActive(!axisTransition.activeSelf);
     }
 
     public SurfaceTypeFactory getFactory()

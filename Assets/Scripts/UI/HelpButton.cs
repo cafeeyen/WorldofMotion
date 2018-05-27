@@ -12,7 +12,7 @@ public class HelpButton : MonoBehaviour
     public Animator lessonAni;
     public Text pageNumber;
 
-    private int page = 0, oldPage = 0, lesson = 0;
+    private int page = 0, lesson = 0;
 
     private void OnEnable()
     {
@@ -33,7 +33,6 @@ public class HelpButton : MonoBehaviour
         prevBtt.SetActive(true);
 
         page = 1;
-        oldPage = 1;
         lessonAni.SetInteger("Subject", lesson);
         lessonAni.SetInteger("Page", 1);
 
@@ -51,13 +50,10 @@ public class HelpButton : MonoBehaviour
 
     public void changePage(bool nextPage)
     {
-        oldPage = page;
-
         if (lesson == 2 || lesson == 4) //friction | momentum
             page = nextPage ? (page + 1 > 3 ? 1 : page + 1) : (page - 1 < 1 ? 3 : page - 1);
         else if (lesson == 3) //motion
             page = nextPage ? (page + 1 > 7 ? 1 : page + 1) : (page - 1 < 1 ? 7 : page - 1);
-
         changeImage();
     }
 
