@@ -48,10 +48,11 @@ public class ProblemGenerator : MonoBehaviour
                     break;
                 case 4:
                     mass1 = Random.Range(2, 15);
-                    vBefore1 = Random.Range(10, 100);
-                    answer = (vBefore1 - (mass1 * 9.81f))/mass1;
-                    QuestionText.text = "กล่องมีมวล "+ mass1 + " กิโลกรัม ถูกดึงด้วยแรง "+ vBefore1 + " N ในแนวดิ่ง จงคำนวณความเร่งของมวลนี้";
-                    QWarningText.text = "*แรงทิศขึ้น น้ำหนักทิศลง ดังนั้นอย่าลืมลบ f ด้วย mg ก่อนคำนวณล่ะ";
+                    mass2 = Random.Range(2, 15);
+                    acc = Random.Range(10, 100);
+                    answer = (mass1+mass2)*acc;
+                    QuestionText.text = "วัตถุสองชิ้นมวล "+ mass1 + " กิโลกรัมและ "+ mass2 + " กิโลกรัมวางติดกันบนพื้นที่ไม่มีแรงเสียดทาน ถูกแรงทำให้เกิดความเร่ง "+ acc + " m/s^2 แรงดังกล่าวมีขนาดเท่าไหร่?";
+                    QWarningText.text = "*วัตถุอยุ่ติดกันดังนั้นให้นำน้ำหนักมารวมกันก่อนคำนวณ";
                     break;
                 case 5:
                     mass1 = Random.Range(2, 30);
@@ -187,7 +188,7 @@ public class ProblemGenerator : MonoBehaviour
                     vBefore2 = Random.Range(2, 30);
                     answer = Mathf.Sqrt(((vBefore1*mass1)*(vBefore1 * mass1)) + ((vBefore2*mass1)*(vBefore2 * mass1)));
                     QuestionText.text = "วัตถุมวล "+ mass1 + " กิโลเคลื่อนที่ไปทางขวาด้วยความเร็ว "+ vBefore1 + " m/s ก่อนมีแรงกระทำทำให้วัตถุเคลื่อนที่ไปด้านบนด้วยความเร็ว "+ vBefore2 + " m/s จงหาโมเมนตัมที่เปลี่ยนไปของวัตถุนี้";
-                    QWarningText.text = "*ลองคำนวณโมเมนตัมและทำการรวมเวกเตอร์ลัพธ์";
+                    QWarningText.text = "*ลองคำนวณโมเมนตัมและทำการรวมเวกเตอร์ลัพธ์ มุมที่เปลี่ยนไปไม่ต้องนำมาคำนวณ";
                     break;
                 case 5:
                     mass1 = Random.Range(5, 100);
@@ -247,7 +248,7 @@ public class ProblemGenerator : MonoBehaviour
                                 ansText[i].text = answer.ToString("F2") + " m/s^2";
                                 break;
                             case 4:
-                                ansText[i].text = answer.ToString("F2") + " m/s^2";
+                                ansText[i].text = answer.ToString("F2") + " N";
                                 break;
                             case 5:
                                 ansText[i].text = answer.ToString("F2") + " m/s^2";
@@ -311,7 +312,7 @@ public class ProblemGenerator : MonoBehaviour
                                 break;
                             case 4: // No negative value
                                 falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
-                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s^2";
+                                ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " N";
                                 break;
                             case 5: // No negative value
                                 falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
