@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldofMotion", "WorldofMotion.csproj", "{94B2711B-D417-FE91-4DD3-622B4904BBEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldofMotion.Editor", "WorldofMotion.Editor.csproj", "{9A2E3194-3E89-F686-1487-102E225D2787}"

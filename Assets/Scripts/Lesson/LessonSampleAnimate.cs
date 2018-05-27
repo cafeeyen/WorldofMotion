@@ -4,9 +4,9 @@ public class LessonSampleAnimate : MonoBehaviour
 {
 
     public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt;
-    public GameObject forceArrow, forceArrow2,forceFrictionArrow, froceText, accText;
-    public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, ground,wall,table,mass1,mass2,mass3 ; //gravity section
-    public GameObject V1Arr, V2Arr; //Momentum Section
+    public GameObject forceArrow, forceArrow2, forceArrow3, forceArrow4, forceFrictionArrow, forceFrictionArrow2, forceFrictionArrow3, froceText, accText;
+    public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, veloRightArr, accRightArr, ground,wall,table,mass1,mass2,mass3 ; //gravity section
+    public GameObject V1Arr, V2Arr, V3Arr, V4Arr, V5Arr; //Momentum Section
     public ProblemGenerator pg;
     public Camera mainCam;
 
@@ -101,6 +101,20 @@ public class LessonSampleAnimate : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+        else if (PlayerPrefs.GetInt("LessonTask") == 4 && pg.randomQuestion == 4)
+        {
+            if (redRb.transform.position.x > 6f && redRb.transform.position.x < 6.1f)
+            {
+                redRb.velocity = new Vector3(0, 0, 0);
+                V1Arr.SetActive(false);
+                V5Arr.SetActive(true);
+                redRb.velocity = new Vector3(0, 5f, 0);
+            }
+            if (redRb.transform.position.y > 3f && redRb.transform.position.y < 3.1f)
+            {
+                redRb.isKinematic = true;
+            }
+        }
     }
 
     public void playSample()
@@ -122,6 +136,18 @@ public class LessonSampleAnimate : MonoBehaviour
                         forceArrowRb.velocity = new Vector3(3, 0, 0);
                         forceArrow2Rb.velocity = new Vector3(0, 0, 3);
                         break;
+                    case 4:
+                        forceArrow3.SetActive(true);
+                        forceArrow.SetActive(false);
+                        redRb.isKinematic = false;
+                        redRb.velocity = new Vector3(0, 0, 3);
+                        break;
+                    case 5:
+                        forceArrow4.SetActive(true);
+                        forceArrow.SetActive(false);
+                        redRb.isKinematic = false;
+                        redRb.velocity = new Vector3(5, 0, 0);
+                        break;
                 }
                 break;
 
@@ -141,6 +167,18 @@ public class LessonSampleAnimate : MonoBehaviour
                         break;
                     case 3:
                         slope.SetActive(true);
+                        break;
+                    case 4:
+                        plane.SetActive(true);
+                        forceFrictionArrow2.SetActive(true);
+                        redRb.isKinematic = false;
+                        redRb.velocity = new Vector3(3, 0, 0);
+                        break;
+                    case 5:
+                        plane.SetActive(true);
+                        forceFrictionArrow3.SetActive(true);
+                        redRb.isKinematic = false;
+                        redRb.velocity = new Vector3(3, 0, 0);
                         break;
                 }
                 break;
@@ -172,6 +210,19 @@ public class LessonSampleAnimate : MonoBehaviour
                         veloUpArr.SetActive(true);
                         ground.SetActive(true);
                         break;
+                    case 4:
+                        redRb.velocity = new Vector3(7, 0, 0);
+                        mass1.SetActive(true);
+                        veloRightArr.SetActive(true);
+                        ground.SetActive(true);
+                        break;
+                    case 5:
+                        redRb.velocity = new Vector3(7, 0, 0);
+                        mass1.SetActive(true);
+                        veloRightArr.SetActive(true);
+                        accRightArr.SetActive(true);
+                        ground.SetActive(true);
+                        break;
                 }
                 break;
 
@@ -198,6 +249,19 @@ public class LessonSampleAnimate : MonoBehaviour
                         V1Arr.SetActive(true);
                         redRb.velocity = new Vector3(7, 0, 0);
                         break;
+                    case 4:
+                        V1Arr.SetActive(true);
+                        redRb.velocity = new Vector3(7, 0, 0);
+                        break;
+                    case 5:
+                        redRb.drag = 0.3f;
+                        blueRb.drag = 0.3f;
+                        V3Arr.SetActive(true);
+                        V4Arr.SetActive(true);
+                        blueBox.SetActive(true);
+                        redRb.velocity = new Vector3(10, 0, 0);
+                        blueRb.velocity = new Vector3(-7, 0, 0);
+                        break;
                 }
                 break;
         }
@@ -221,6 +285,8 @@ public class LessonSampleAnimate : MonoBehaviour
         {
             forceArrow.SetActive(false);
             forceArrow2.SetActive(false);
+            forceArrow3.SetActive(false);
+            forceArrow4.SetActive(false);
             forceFrictionArrow.SetActive(false);
             accArrG1.SetActive(false);
             accArrG2.SetActive(false);
@@ -234,7 +300,10 @@ public class LessonSampleAnimate : MonoBehaviour
             forceArrow2Rb.isKinematic = false;
 
             redRb.isKinematic = true;
-            redBox.transform.position = new Vector3(0f, 0.75f, 6.5f);
+            if(pg.randomQuestion != 4)
+                redBox.transform.position = new Vector3(0f, 0.75f, 6.5f);
+            else
+                redBox.transform.position = new Vector3(0f, 0.75f, 5.2f);
         }
         else if (PlayerPrefs.GetInt("LessonTask") == 2)
         {
@@ -243,6 +312,8 @@ public class LessonSampleAnimate : MonoBehaviour
             accArrG1.SetActive(false);
             forceArrow.SetActive(false);
             forceFrictionArrow.SetActive(false);
+            forceFrictionArrow2.SetActive(false);
+            forceFrictionArrow3.SetActive(false);
 
             forceArrow.transform.position = new Vector3(-6, 2.35f, 12);
             forceArrowRb.velocity = Vector3.zero;
@@ -282,6 +353,8 @@ public class LessonSampleAnimate : MonoBehaviour
             GravityRedArrow2.transform.position = gravityA;
             veloDownArr2.transform.position = veloA;
             veloDownArr2.SetActive(false);
+            veloRightArr.SetActive(false);
+            accRightArr.SetActive(false);
             wall.SetActive(false);
             mass1.SetActive(false);
             mass2.SetActive(false);
@@ -291,10 +364,19 @@ public class LessonSampleAnimate : MonoBehaviour
         else if (PlayerPrefs.GetInt("LessonTask") == 4)
         {
             redBox.transform.position = new Vector3(0f, 0.75f, 6.5f);
-            blueBox.transform.position = new Vector3(5f, 0.75f, 6.5f);
+            if(pg.randomQuestion == 5)//blue box run from another direction.
+            {
+                blueBox.transform.position = new Vector3(10f, 0.75f, 6.5f);
+            }
+            else
+            {
+                blueBox.transform.position = new Vector3(5f, 0.75f, 6.5f);
+            }
             V1Arr.SetActive(false);
             V2Arr.SetActive(false);
-
+            V3Arr.SetActive(false);
+            V4Arr.SetActive(false);
+            V5Arr.SetActive(false);
         }
             Time.timeScale = 1;
             redRb.drag = 0;
