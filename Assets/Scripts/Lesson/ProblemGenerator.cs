@@ -14,7 +14,8 @@ public class ProblemGenerator : MonoBehaviour
 
     public void newProblem()
     {
-        randomQuestion = Random.Range(1, 11);
+        randomQuestion = 10;
+        //randomQuestion = Random.Range(1, 11);
         if (randomQuestion == 0) { randomQuestion = 1; }
 
         if (PlayerPrefs.GetInt("LessonTask") == 1) // Force
@@ -68,7 +69,7 @@ public class ProblemGenerator : MonoBehaviour
                     acc = Random.Range(10, 100);
                     vBefore1 = mass1 * acc;
                     answer = vBefore1 / mass2;
-                    QuestionText.text = "วัตถุมวล "+ mass1 + " กิโลกรัมถูกแรงกระทำเกิดความเร่ง "+ acc + " m/s^2 ถ้าวัตถุมีน้ำหนัก "+ mass2 + " กิโลกรัมถูกแรงกระทำความเร่งจะเป็นเท่าใด?";
+                    QuestionText.text = "วัตถุมวล "+ mass1 + " กิโลกรัมถูกแรงกระทำเกิดความเร่ง "+ acc + " m/s^2 ถ้าวัตถุมีน้ำหนัก "+ mass2 + " กิโลกรัมถูกแรงเดียวกันกระทำความเร่งจะเป็นเท่าใด?";
                     QWarningText.text = "*แรงเป็นแรงเดิมและมีขนาดเท่าเดิม";
                     break;
                 case 7:
@@ -96,8 +97,9 @@ public class ProblemGenerator : MonoBehaviour
                     break;
                 case 10:
                     acc = Random.Range(2, 15);
-                    vBefore1 = Random.Range(10, 100);
-                    vBefore2 = Random.Range(10, 100);
+                    vBefore1 = Random.Range(40, 100);
+                    vBefore2 = Random.Range(10, 80);
+                    while(vBefore2 >= vBefore1){vBefore2 = Random.Range(10, 100);}
                     answer = (vBefore1 - vBefore2) / acc;
                     QuestionText.text = "กล่องมีแรงที่1ขนาด " + vBefore1 + " N ดึงไปข้างหน้าและแรงที่2ขนาด " + vBefore2 + " N ดึงไปข้างหลัง มีความเร่ง "+ acc + " m/s^2 วัตถุมีมวลเท่าไหร่?";
                     QWarningText.text = "*ทั้ง 2 แรงที่มีทิศตรงข้ามกัน อย่าลืมนำแรงมาลบกันเพื่อหาแรงรวมก่อนล่ะ";
@@ -174,7 +176,7 @@ public class ProblemGenerator : MonoBehaviour
                     mew = Random.Range(0.1f, 1.1f);
                     Nforce = (mass1 * 9.81f) - (vBefore1 / 2);
                     answer = vBefore2 / Nforce;
-                    QuestionText.text = "ดึงวัตถุมวล " + mass1 + " กิโลกรัมไปข้างหน้าด้วยแรง " + vBefore1 + " Nทำมุม 30 องศากับพื้น เกิดแรงเสียดทาน "+" N สัมประสิทธิ์แรงเสียดทานต้องมีขนาดเท่าไหร่?";
+                    QuestionText.text = "ดึงวัตถุมวล " + mass1 + " กิโลกรัมไปข้างหน้าด้วยแรง " + vBefore1 + " Nทำมุม 30 องศากับพื้น เกิดแรงเสียดทาน "+ vBefore2 + " N สัมประสิทธิ์แรงเสียดทานต้องมีขนาดเท่าไหร่?";
                     QWarningText.text = "*ทำการแตกแรงที่ทำมุมก่อน แรงที่ไปทางเดียวกันนำมาบวกเข้าด้วยกันในสมการ";
                     break;
                 case 10:
@@ -245,7 +247,7 @@ public class ProblemGenerator : MonoBehaviour
                 case 8:
                     vAfter2 = Random.Range(5, 100);
                     distance = Random.Range(5, 100);
-                    answer = Mathf.Sqrt((vAfter2* vAfter2) + (2 * acc * distance));
+                    answer = Mathf.Sqrt((vAfter2* vAfter2) + (2 * 9.81f * distance));
                     QuestionText.text = "เด็กขว้างวัตถุขึ้นไปในแนวดิ่ง เมื่อขึ้นไปได้สูง "+ distance + " เมตรอัตราเร็วของวัตถุเป็น "+ vAfter2 + " m/s อันตราเร็วเริ่มต้นมีค่าเท่าใด?";
                     QWarningText.text = "*gมีค่าติดลบเพราะสวนทางกับวัตถุที่โยนขึ้นไป";
                     break;
@@ -321,11 +323,11 @@ public class ProblemGenerator : MonoBehaviour
                     QWarningText.text = "";
                     break;
                 case 7:
-                    mass1 = Random.Range(5, 100);
-                    mass2 = Random.Range(5, 100);
-                    vBefore1 = Random.Range(10, 25);
-                    vBefore2 = Random.Range(1, 11);
-                    vAfter2 = Random.Range(1, 11);
+                    mass1 = Random.Range(5, 20);
+                    mass2 = Random.Range(5, 20);
+                    vBefore1 = Random.Range(11, 30);
+                    vBefore2 = Random.Range(1, 10);
+                    vAfter2 = Random.Range(15, 50);
                     answer = ((mass1 * vBefore2) + (mass2 * vAfter2)) / (mass1 * mass2 * vBefore1);
                     QuestionText.text = "มีกล่องสีแดงมวล "+ mass1 + " กิโลกรัมพุ่งมาด้วยความเร็ว "+ vBefore1 + " m/s ใส่กล่องสีฟ้ามวล "+ mass2 + " กิโลกรัม หลังชนกล่องสีแดงมีความเร็ว "+ vBefore2 + " m/sและกล่องสีฟ้ามีความเร็ว "+ vAfter2 + " m/s ก่อนชนกล่องสีฟ้ามีความเร็วเท่าไหร่?";
                     QWarningText.text = "";
@@ -334,7 +336,7 @@ public class ProblemGenerator : MonoBehaviour
                     mass1 = Random.Range(5, 100);
                     mass2 = Random.Range(5, 100);
                     vBefore2 = Random.Range(1, 11);
-                    vAfter2 = Random.Range(1, 11);
+                    vAfter2 = Random.Range(11, 20);
                     answer = (((mass1+mass2) * vAfter2) - (mass2 * vBefore2)) / mass1;
                     QuestionText.text = "กล่องสีแดงมวล "+ mass1 + " กิโลกรัมพุ่งชนกล่องสีฟ้ามวล "+ mass2 + " กิโลกรัมที่มีความเร็ว "+ vBefore2 + " m/sแล้วติดกันไป หลังชนมีความเร็ว "+ vAfter2 + " m/sกล่องสีแดงมีความเร็วก่อนชนเท่าไหร่?";
                     QWarningText.text = "";
@@ -577,7 +579,7 @@ public class ProblemGenerator : MonoBehaviour
                         }
                         break;
                     case 4: // Momentum
-                        if(randomQuestion == 3 || randomQuestion == 9)  // No negative value
+                        if(randomQuestion == 3 || randomQuestion >= 7)  // No negative value
                             falseAnswer[cntAnswer] = Mathf.Abs(falseAnswer[cntAnswer]);
                         if (randomQuestion != 4 && randomQuestion != 6 && randomQuestion != 9) { ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " m/s"; }
                         else if (randomQuestion == 9) { ansText[i].text = falseAnswer[cntAnswer].ToString("F2") + " กิโลกรัม"; }

@@ -3,7 +3,7 @@
 public class LessonSampleAnimate : MonoBehaviour
 {
 
-    public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt;
+    public GameObject redBox, blueBox, accArrG1, accArrG2, slope, plane, playBtt ,mass2box;
     public GameObject forceArrow, forceArrow2, forceArrow3, forceArrow4, forceArrow5, forceArrow6, forceArrow7, forceFrictionArrow, forceFrictionArrow2, forceFrictionArrow3, froceText, accText;
     public GameObject GravityRedArrow, GravityRedArrow2, GravityBlueRedArrow, veloUpArr, veloDownArr, veloDownArr2, veloRightArr, accRightArr, ground,wall,table,mass1,mass2,mass3 ; //gravity section
     public GameObject V1Arr, V2Arr, V3Arr, V4Arr, V5Arr,V6Arr,boom; //Momentum Section
@@ -195,6 +195,7 @@ public class LessonSampleAnimate : MonoBehaviour
                         break;
                     case 4:
                         blueBox.SetActive(true);
+                        mass2box.SetActive(true);
                         redRb.isKinematic = false;
                         blueRb.isKinematic = false;
                         forceArrow.SetActive(false);
@@ -221,6 +222,7 @@ public class LessonSampleAnimate : MonoBehaviour
                         break;
                     case 9:
                         blueBox.SetActive(true);
+                        mass2box.SetActive(true);
                         redRb.isKinematic = false;
                         blueRb.isKinematic = false;
                         forceArrow.SetActive(false);
@@ -464,6 +466,7 @@ public class LessonSampleAnimate : MonoBehaviour
         //no velo when start anew
         if (PlayerPrefs.GetInt("LessonTask") == 1)
         {
+            mass2box.SetActive(false);
             forceArrow.SetActive(false);
             forceArrow2.SetActive(false);
             forceArrow3.SetActive(false);
