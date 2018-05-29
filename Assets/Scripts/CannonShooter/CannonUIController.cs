@@ -206,7 +206,7 @@ public class CannonUIController : MonoBehaviour
         
         if(PlayerPrefs.GetString("CannonShooterMode") != "AR")
         {
-            infoText[line].text = -angle + " ํ | " + power + "N";
+            infoText[line].text = -angle + " ํ | " + power + " m/s";
             infoText[line].transform.position = arcLine[line].GetPosition(maxIndex - 1) + Vector3.down * (2 + (line * 3));
             line = line == 2 ? 0 : line + 1;
         }

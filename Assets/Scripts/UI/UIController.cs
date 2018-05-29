@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay, tip1;
     public RectTransform statWin, setWin;
     public Button saveBtt, arBtt;
     public Camera ARCamera;
@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
-    private bool arMode = false;
+    private bool arMode = false, tip = true;
     private Vector3 camPos;
     private Quaternion camRot;
 
@@ -185,6 +185,20 @@ public class UIController : MonoBehaviour
         var x = setWin.anchoredPosition.x;
         setWin.anchoredPosition = new Vector3(statWin.anchoredPosition.x, setWin.anchoredPosition.y, 0);
         statWin.anchoredPosition = new Vector3(x, 0, 0);
+    }
+
+    public void frictionTip()
+    {
+        if (tip)
+        {
+            tip1.SetActive(true);
+            tip = false;
+        }
+        else
+        {
+            tip1.SetActive(false);
+            tip = true;
+        }
     }
 
     private void showItemInWorld(bool state)
