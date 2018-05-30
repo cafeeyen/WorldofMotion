@@ -11,7 +11,11 @@ public class CannonUIController : MonoBehaviour
 
     /* Output Component */
     public Text angleText, tarDistText, tarHeightText, calDistText, calHeightText, calTimeText, countText;
-    public LineRenderer arcLine, groundLine;
+    public TextMesh[] infoText;
+    public GameObject arcLineGroup;
+    public LineRenderer[] arcLine;
+    public LineRenderer groundLine;
+    private int line = 0;
 
     /* AR Camera Component */
     public RawImage MiniRawImage, FullScreenRawImage;
@@ -28,13 +32,14 @@ public class CannonUIController : MonoBehaviour
 
     /* Game Parameter */
     private int angle = 0, power, shootCnt = 0;
-    private float tarDist, tarHeight;
+    private float tarDist = 0, tarHeight = 0;
     private Vector3 cannonPos = new Vector3(0, -1.8f, 8), canyonPos = new Vector3(0, 27, 8);
 
     /* UI Parameter / Group */
     public GameObject MenuSection, LessonSection, TableDisplay, TutorialSection, TutorialAsk, Lv1Dot, Lv2Dot, Lv3Dot;
     public Animator CalculateTab;
     private int page, tempPage;
+    private bool IsMainMenuOpen = false;
 
     /* Script */
     public CannonGameController GameController;
@@ -52,32 +57,20 @@ public class CannonUIController : MonoBehaviour
                 canyon.SetActive(false);
                 ground.SetActive(true);
                 Lv1Dot.SetActive(true);
-                if(PlayerPrefs.GetInt("CannonTutorialLv1") == 0)
-                {
-                    GameController.pauseGame(true);
-                    askTutorial();
-                    PlayerPrefs.SetInt("CannonTutorialLv1", 1);
-                }
+                GameController.pauseGame(true);
+                openMenu("LessonSection");
                 break;
             case "Lv2":
                 page = 12;
                 Lv2Dot.SetActive(true);
-                if (PlayerPrefs.GetInt("CannonTutorialLv2") == 0)
-                {
-                    GameController.pauseGame(true);
-                    openMenu("LessonSection");
-                    PlayerPrefs.SetInt("CannonTutorialLv2", 1);
-                }
-                    break;
+                GameController.pauseGame(true);
+                openMenu("LessonSection");
+                break;
             case "Lv3":
                 page = 16;
                 Lv3Dot.SetActive(true);
-                if (PlayerPrefs.GetInt("CannonTutorialLv3") == 0)
-                {
-                    GameController.pauseGame(true);
-                    openMenu("LessonSection");
-                    PlayerPrefs.SetInt("CannonTutorialLv3", 1);
-                }
+                GameController.pauseGame(true);
+                openMenu("LessonSection");
                 break;
             case "AR":
                 page = 0;
@@ -188,11 +181,11 @@ public class CannonUIController : MonoBehaviour
             groundLine.SetPosition(1, new Vector3(0, -1.8f, 100));
         }
 
-         if (!arcLine.enabled)
-            arcLine.enabled = true;
+         if (!arcLine[line].enabled)
+            arcLine[line].enabled = true;
 
         int maxIndex = Mathf.RoundToInt(maxTime / Time.fixedDeltaTime);
-        arcLine.positionCount = maxIndex;
+        arcLine[line].positionCount = maxIndex;
 
         Vector3 curPos;
         if (PlayerPrefs.GetString("CannonShooterMode") == "Lv2" || PlayerPrefs.GetString("CannonShooterMode") == "Lv3")
@@ -200,14 +193,22 @@ public class CannonUIController : MonoBehaviour
         else
             curPos = cannonPos;
 
-        Vector3 curVel = GameController.getCannonForward() * power;
+        var originPos = curPos;
+        var frameTime = Time.fixedDeltaTime;
 
         for (int i = 0; i < maxIndex; i++)
         {
-            arcLine.SetPosition(i, curPos);
-
-            curVel += Physics.gravity * Time.fixedDeltaTime;
-            curPos += curVel * Time.fixedDeltaTime;
+            arcLine[line].SetPosition(i, curPos);
+            curPos.z = originPos.z + power * frameTime * Mathf.Cos(-angle * Mathf.Deg2Rad);
+            curPos.y = originPos.y + (power * frameTime * Mathf.Sin(-angle * Mathf.Deg2Rad)) - (0.5f * -Physics.gravity.y * Mathf.Pow(frameTime, 2));
+            frameTime += Time.fixedDeltaTime;
+        }
+        
+        if(PlayerPrefs.GetString("CannonShooterMode") != "AR")
+        {
+            infoText[line].text = -angle + " ํ | " + power + " m/s";
+            infoText[line].transform.position = arcLine[line].GetPosition(maxIndex - 1) + Vector3.down * (2 + (line * 3));
+            line = line == 2 ? 0 : line + 1;
         }
     }
 
@@ -221,8 +222,12 @@ public class CannonUIController : MonoBehaviour
         if(ans)
         {
             powSlider.gameObject.SetActive(true);
-            MenuSection.SetActive(false);
             LessonSection.SetActive(false);
+            if (IsMainMenuOpen)
+            {
+                MenuSection.SetActive(false);
+                IsMainMenuOpen = true;
+            }
             tempPage = page;
             page = 0;
             tutorialGallery[page].SetActive(true);
@@ -230,7 +235,9 @@ public class CannonUIController : MonoBehaviour
         else
         {
             TutorialSection.SetActive(false);
-            GameController.pauseGame(false);
+            LessonSection.SetActive(IsMainMenuOpen);
+            powSlider.gameObject.SetActive(!IsMainMenuOpen);
+            GameController.pauseGame(IsMainMenuOpen);
         }
         TutorialAsk.SetActive(false);
     }
@@ -243,10 +250,12 @@ public class CannonUIController : MonoBehaviour
             tutorialGallery[page].SetActive(true);
         else
         {
-            LessonSection.SetActive(true);
+            PlayerPrefs.SetInt("CannonTutorial", 1);
             TutorialSection.SetActive(false);
-            powSlider.gameObject.SetActive(false);
-            GameController.pauseGame(true);
+            MenuSection.SetActive(IsMainMenuOpen);
+            LessonSection.SetActive(IsMainMenuOpen);
+            powSlider.gameObject.SetActive(!IsMainMenuOpen);
+            GameController.pauseGame(IsMainMenuOpen);
             page = tempPage;
         }
     }
@@ -304,7 +313,10 @@ public class CannonUIController : MonoBehaviour
     {
         switch (window)
         {
-            case "MenuSection": MenuSection.SetActive(true); GameController.pauseGame(true); powSlider.gameObject.SetActive(false); break;
+            case "MenuSection": MenuSection.SetActive(true); GameController.pauseGame(true); powSlider.gameObject.SetActive(false); IsMainMenuOpen = true;
+                if (PlayerPrefs.GetString("CannonShooterMode") != "AR")
+                    arcLineGroup.SetActive(false);
+                break;
             case "LessonSection": LessonSection.SetActive(true); powSlider.gameObject.SetActive(false); break;
             case "TableDisplay": TableDisplay.SetActive(true); break;
             case "TutorialSection": TutorialSection.SetActive(true); ansTutorial(true); break;
@@ -314,13 +326,25 @@ public class CannonUIController : MonoBehaviour
     {
         switch(window)
         {
-            case "MenuSection": MenuSection.SetActive(false); GameController.pauseGame(false); powSlider.gameObject.SetActive(true); break;
+            case "MenuSection": MenuSection.SetActive(false); GameController.pauseGame(false); powSlider.gameObject.SetActive(true); IsMainMenuOpen = false;
+                if (PlayerPrefs.GetString("CannonShooterMode") != "AR")
+                    arcLineGroup.SetActive(true);
+                break;
             case "LessonSection":
                 {
                     LessonSection.SetActive(false);
-                    if (MenuSection.activeSelf == false)
-                        GameController.pauseGame(false);
-                    powSlider.gameObject.SetActive(true);
+                    powSlider.gameObject.SetActive(!IsMainMenuOpen);
+                    if (!IsMainMenuOpen)
+                    {
+                        if (PlayerPrefs.GetInt("CannonTutorial") == 0)
+                            askTutorial();
+                        else
+                        {
+                            GameController.pauseGame(false);
+                            if (PlayerPrefs.GetString("CannonShooterMode") != "AR")
+                                arcLineGroup.SetActive(true);
+                        }
+                    }
                     break;
                 }
             case "TableDisplay": TableDisplay.SetActive(false); break;
@@ -338,7 +362,7 @@ public class CannonUIController : MonoBehaviour
         if(dist == -1 && height == -1)
         {
             tarDist = 0;
-            tarHeight = -1.8f;
+            tarHeight = 0;
 
             tarDistText.text = "----";
             tarHeightText.text = "----";

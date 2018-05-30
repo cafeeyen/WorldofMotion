@@ -6,6 +6,7 @@ using System.Linq;
 public class PropWindow : MonoBehaviour
 {
     public Text posX, posY, posZ, scaleX, scaleY, scaleZ, veloXT, veloYT, veloZT, mass, staticfic, dynamicfic;
+    public Text acc, spd, move, dist, disp, sFriction, dFriction;
     public Slider sliderX, sliderY, sliderZ, veloX, veloY, veloZ;
     public UIController UICon;
 
@@ -76,6 +77,25 @@ public class PropWindow : MonoBehaviour
                 }
             }
         }
+        if (UICon.state != UIController.mode.Edit && itemObject != null)
+        {
+            acc.text = itemObject.GetComponent<ItemObject>().acc.ToString("F2") + " m/s^2";
+            spd.text = itemObject.GetComponent<ItemObject>().spd.ToString("F2") + " m/s";
+            move.text = itemObject.GetComponent<ItemObject>().movetime.ToString("F2") + " s";
+            disp.text = itemObject.GetComponent<ItemObject>().disp.ToString("F2") + " m";
+            dist.text = itemObject.GetComponent<ItemObject>().dist.ToString("F2") + " m";
+
+            //calculate is in ItemObject.cs cal when touch another surface.
+            if (itemObject.GetComponent<ItemObject>().Fst == 0)
+                sFriction.text = "- N";
+            else
+                sFriction.text = itemObject.GetComponent<ItemObject>().Fst.ToString("F2") + " N";
+
+            if (itemObject.GetComponent<ItemObject>().Fsl == 0)
+                dFriction.text = "- N";
+            else
+                dFriction.text = itemObject.GetComponent<ItemObject>().Fsl.ToString("F2") + " N";
+        }
     }
 
     private void tapHandler(object sender, System.EventArgs e)
@@ -92,38 +112,40 @@ public class PropWindow : MonoBehaviour
 
     public void setPropValue(GameObject selectedItemObject)
     {
-        itemObject = selectedItemObject;
-        if (itemObject != null)
+        if (selectedItemObject != null && itemObject != selectedItemObject)
         {
+            itemObject = selectedItemObject;
             // Start change state so slider won't change itemObject scale while set value from new itemObject
             changeState = true;
-            sliderX.value = itemObject.transform.localScale.x;
-            sliderY.value = itemObject.transform.localScale.y;
-            sliderZ.value = itemObject.transform.localScale.z;
+            sliderX.value = selectedItemObject.transform.localScale.x;
+            sliderY.value = selectedItemObject.transform.localScale.y;
+            sliderZ.value = selectedItemObject.transform.localScale.z;
 
-            ItemObject itemObjectSc = itemObject.GetComponent<ItemObject>();
+            ItemObject itemObjectSc = selectedItemObject.GetComponent<ItemObject>();
             selectedType = itemObjectSc.getSurType().getName();
             st_wood.isOn = selectedType == "Wood";
             st_metal.isOn = selectedType == "Metal";
             st_ice.isOn = selectedType == "Ice";
             st_rubber.isOn = selectedType == "Rubber";
 
-            mass.text = (itemObject.transform.localScale.x * itemObject.transform.localScale.y * itemObject.transform.localScale.z).ToString();
+            mass.text = (selectedItemObject.transform.localScale.x * selectedItemObject.transform.localScale.y * selectedItemObject.transform.localScale.z).ToString();
             changeFriction(itemObjectSc.getSurType());
 
             veloX.value = itemObjectSc.Velocity.x;
             veloY.value = itemObjectSc.Velocity.y;
             veloZ.value = itemObjectSc.Velocity.z;
 
-            e_kinematic.isOn = !itemObject.GetComponent<ItemObject>().IsKinematic;
+            e_kinematic.isOn = !selectedItemObject.GetComponent<ItemObject>().IsKinematic;
             // Finish change, cancel change state
             changeState = false;
         }
+        else
+            itemObject = null;
     }
 
     private void changeFriction(SurfaceType surType)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (itemObject != null)
         {
             staticfic.text = surType.getStaticFiction().ToString("F3");
             dynamicfic.text = surType.getDynamicFiction().ToString("F3");
@@ -132,16 +154,16 @@ public class PropWindow : MonoBehaviour
 
     private void changeScaleValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (itemObject != null)
         {
-            if (!changeState)
+            if (UICon.state == UIController.mode.Edit && !changeState)
             {
 
                 itemObject.transform.localScale = new Vector3(sliderX.value, sliderY.value, sliderZ.value);
                 itemObject.GetComponent<ItemObject>().checkCollider();
                 itemObject.GetComponent<Rigidbody>().mass = sliderX.value * sliderY.value * sliderZ.value;
-            }
 
+            }
             // Change scale text;
             scaleX.text = sliderX.value.ToString();
             scaleY.text = sliderY.value.ToString();
@@ -152,11 +174,10 @@ public class PropWindow : MonoBehaviour
 
     private void changeVeloValue(float value)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (itemObject != null)
         {
-            if (!changeState)
+            if (UICon.state == UIController.mode.Edit && !changeState)
                 itemObject.GetComponent<ItemObject>().Velocity = new Vector3(veloX.value, veloY.value, veloZ.value);
-
             // Change velo text
             veloXT.text = veloX.value.ToString();
             veloYT.text = veloY.value.ToString();
@@ -167,17 +188,18 @@ public class PropWindow : MonoBehaviour
     // Tapped send state before trigger
     private void toggleKinematic(bool state)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && itemObject != null && !changeState)
         {
+            Debug.Log("change");
             UICon.playSound("clk");
             itemObject.GetComponent<ItemObject>().IsKinematic = !state;
         }
-            
+
     }
     // Call from OnClick() in Unity inspector
     public void rotate(int dir)
     {
-        if (UICon.state == UIController.mode.Edit)
+        if (UICon.state == UIController.mode.Edit && itemObject != null)
         {
             // 1 is Left, -1 is Right
             if (r_deg30.isOn)
@@ -193,12 +215,18 @@ public class PropWindow : MonoBehaviour
 
     public void setToggleLock()
     {
-        r_deg30.enabled = UICon.state == UIController.mode.Edit;
-        r_deg45.enabled = UICon.state == UIController.mode.Edit;
-        st_wood.enabled = UICon.state == UIController.mode.Edit;
-        st_ice.enabled = UICon.state == UIController.mode.Edit;
-        st_metal.enabled = UICon.state == UIController.mode.Edit;
-        st_rubber.enabled = UICon.state == UIController.mode.Edit;
-        e_kinematic.enabled = UICon.state == UIController.mode.Edit;
+        sliderX.interactable = UICon.state == UIController.mode.Edit;
+        sliderY.interactable = UICon.state == UIController.mode.Edit;
+        sliderZ.interactable = UICon.state == UIController.mode.Edit;
+        veloX.interactable = UICon.state == UIController.mode.Edit;
+        veloY.interactable = UICon.state == UIController.mode.Edit;
+        veloZ.interactable = UICon.state == UIController.mode.Edit;
+        r_deg30.interactable = UICon.state == UIController.mode.Edit;
+        r_deg45.interactable = UICon.state == UIController.mode.Edit;
+        st_wood.interactable = UICon.state == UIController.mode.Edit;
+        st_ice.interactable = UICon.state == UIController.mode.Edit;
+        st_metal.interactable = UICon.state == UIController.mode.Edit;
+        st_rubber.interactable = UICon.state == UIController.mode.Edit;
+        e_kinematic.interactable = UICon.state == UIController.mode.Edit;
     }
 }

@@ -14,8 +14,8 @@ public class UIController : MonoBehaviour
 
     public Animator menu, item, prop;
     public PropWindow propWindow;
-    public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay;
-    public GameObject[] ruleSet;
+    public GameObject deleteBtt, saveAlert, saveDeny, ground, overlay, tip1;
+    public RectTransform statWin, setWin;
     public Button saveBtt, arBtt;
     public Camera ARCamera;
     public TrackingObject tracker;
@@ -30,8 +30,7 @@ public class UIController : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip bttClk, bttDeny;
     private SceneLoader sl;
-    private bool arMode = false;
-    private int ruleNumber = 0;
+    private bool arMode = false, tip = true;
     private Vector3 camPos;
     private Quaternion camRot;
 
@@ -61,9 +60,7 @@ public class UIController : MonoBehaviour
         else //question lesson.
         {
             problemGenerator.newProblem();
-            openRules();
             Time.timeScale = 1;
-
         }
     }
 
@@ -76,13 +73,7 @@ public class UIController : MonoBehaviour
     {
         string tapped = gesture.GetScreenPositionHitData().Target.name;
         if (tapped == "MenuButton" || tapped == "MenuArrow") displayWindows(menu);
-        else if (tapped == "ItemButton" || tapped == "ItemArrow")
-        {
-            if (state == mode.Edit)
-                displayWindows(item);
-            else
-                playSound("deny");
-        }
+        else if (tapped == "ItemButton" || tapped == "ItemArrow") displayWindows(item);
         else if (tapped == "PropButton" || tapped == "PropArrow") displayWindows(prop);
     }
 
@@ -97,45 +88,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void displayWindows(Animator anim, bool cancleSelect = false)
+    public void displayWindows(Animator anim)
     {
-        // If opened, close it
-        if (anim.GetBool("IsDisplayed") == true)
-        {
-            anim.SetBool("IsDisplayed", false);
-            playSound("clk");
-        }
-        // PropBar can open when some ItemObject has selected
-        else if (anim.name != "PropBar" || itemObject != null)
-        {
-            anim.SetBool("IsDisplayed", true);
-            changeState(anim);
-        }
-        // Block deny sound play when unselect item while prop bar didn't open
-        else if(!cancleSelect)
-        {
-            playSound("deny");
-        }
-    }
-
-    private void changeState(Animator anim)
-    {
-        // Can open one window at the same time
-        if (anim == menu)
-        {
-            item.SetBool("IsDisplayed", false);
-            prop.SetBool("IsDisplayed", false);
-        }
-        else if (anim == item)
-        {
-            menu.SetBool("IsDisplayed", false);
-            prop.SetBool("IsDisplayed", false);
-        }
-        else // anim == prop
-        {
-            menu.SetBool("IsDisplayed", false);
-            item.SetBool("IsDisplayed", false);
-        }
+        anim.SetBool("IsDisplayed", !anim.GetBool("IsDisplayed"));
         playSound("clk");
     }
 
@@ -147,14 +102,13 @@ public class UIController : MonoBehaviour
     public void createItemObject(GameObject prefeb)
     {
         // Can't create new one while current one is overlapping
-        if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
+        if (state == mode.Edit && (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap))
         {
             // Spawn at center of screen,  distance 10
             Vector3 screenPosition = ARCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, ARCamera.nearClipPlane + 10));
             Vector3 refinePosition = new Vector3(Mathf.Round(screenPosition.x), Mathf.Round(screenPosition.y), Mathf.Round(screenPosition.z));
             GameObject newItemObject = (GameObject)Instantiate(prefeb, refinePosition, Quaternion.identity);
             newItemObject.transform.parent = WorldObject.transform;
-            Debug.Log(prefeb.name);
             newItemObject.GetComponent<ItemObject>().ItemType = prefeb.name;
 
             itemCon.setItemObject(newItemObject);
@@ -169,12 +123,15 @@ public class UIController : MonoBehaviour
     {
         if (itemObject == null || !itemObject.GetComponent<ItemObject>().IsOverlap)
         {
-            // Cancle select item
-            if (itemObject != null)
-                itemCon.setItemObject(itemObject);
-
             if (state == mode.Edit)
             {
+                if (itemObject != null)
+                    itemCon.showAxis();
+
+                state = mode.Play;
+                saveBtt.interactable = false;
+                arBtt.interactable = false;
+
                 worldSc.saveState();
                 propWindow.setToggleLock();
                 deleteBtt.SetActive(false);
@@ -191,10 +148,6 @@ public class UIController : MonoBehaviour
                 }
                 else
                     Time.timeScale = 1;
-
-                state = mode.Play;
-                saveBtt.interactable = false;
-                arBtt.interactable = false;
             }
             else
             {
@@ -215,6 +168,9 @@ public class UIController : MonoBehaviour
                 worldSc.loadState();
                 propWindow.setToggleLock();
 
+                if (itemObject != null)
+                    itemCon.showAxis();
+
                 saveBtt.interactable = true;
                 arBtt.interactable = true;
             }
@@ -222,6 +178,27 @@ public class UIController : MonoBehaviour
         }
         else
             playSound("deny");
+    }
+
+    public void swapWindow()
+    {
+        var x = setWin.anchoredPosition.x;
+        setWin.anchoredPosition = new Vector3(statWin.anchoredPosition.x, setWin.anchoredPosition.y, 0);
+        statWin.anchoredPosition = new Vector3(x, 0, 0);
+    }
+
+    public void frictionTip()
+    {
+        if (tip)
+        {
+            tip1.SetActive(true);
+            tip = false;
+        }
+        else
+        {
+            tip1.SetActive(false);
+            tip = true;
+        }
     }
 
     private void showItemInWorld(bool state)
@@ -256,6 +233,7 @@ public class UIController : MonoBehaviour
 
     public void MainMenuButton()
     {
+        PlayerPrefs.SetInt("Lesson", 0);
         sl.loadNewScene(0);
     }
 
@@ -298,40 +276,5 @@ public class UIController : MonoBehaviour
             arBtt.image.color = new Color(0, 1, 0.13f, 0.78f);
         else
             arBtt.image.color = new Color(0.5f, 1 ,1, 0.68f);
-    }
-
-    public void openRules()
-    {
-        if(PlayerPrefs.GetInt("LessonTask"+ PlayerPrefs.GetInt("LessonTask") + "Pass") == 0)
-        {
-            overlay.SetActive(true);
-            ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(true);
-            rulePageInSet = ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].GetComponentsInChildren<Image>(true);
-            rulePageInSet[0].gameObject.SetActive(true);
-        }
-    }
-
-    public void closeRules()
-    {
-        overlay.SetActive(false);
-        ruleSet[PlayerPrefs.GetInt("LessonTask") - 1].SetActive(false);
-        problemGenerator.newProblem();
-    }
-
-    public void nextRule()
-    {
-        if (ruleNumber < 7)
-        {
-            rulePageInSet[ruleNumber].gameObject.SetActive(false);
-            ruleNumber++;
-            rulePageInSet[ruleNumber].gameObject.SetActive(true);
-
-        }
-        else
-        {
-            rulePageInSet[ruleNumber].gameObject.SetActive(false);
-            ruleNumber = 0;
-            closeRules();
-        }
     }
 }
